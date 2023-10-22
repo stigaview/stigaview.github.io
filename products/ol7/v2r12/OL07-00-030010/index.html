@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-030010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must shut down upon audit processing failure, unless availability is an overriding concern. If availability is a concern, the system must alert the designated staff (System Administrator [SA] and Information System Security Officer [ISSO] at a minimum) in the event of an audit processing failure.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-030010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000139&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000046-GPOS-00022">SRG-OS-000046-GPOS-00022</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is critical for the appropriate personnel to be aware if a system is at risk of failing to process audit logs as required. Without this notification, the security personnel may be unaware of an impending failure of the audit capability, and system operation may be adversely affected.<br /><br />Audit processing failures include software/hardware errors, failures in the audit capturing mechanisms, and audit storage capacity being reached or exceeded.<br /><br />This requirement applies to each audit data storage repository (i.e., distinct information system component where audit records are stored), the centralized audit storage capacity of organizations (i.e., all audit data storage repositories combined), or both.<br /><br />Satisfies: SRG-OS-000046-GPOS-00022, SRG-OS-000047-GPOS-00023
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Confirm the audit configuration regarding how auditing processing failures are handled.<br /><br />Check to see what level "auditctl" is set to with following command: <br /><br />     # auditctl -s | grep -i "fail"<br /><br />     failure 2<br /><br />Note: If the value of "failure" is set to "2", the system is configured to panic (shut down) in the event of an auditing failure. If the value of "failure" is set to "1", the system will not shut down and instead will record the audit failure in the kernel log. If the system is configured per requirement OL07-00-031000, the kernel log will be sent to a log aggregation server and generate an alert.<br /><br />If the "failure" setting is set to any value other than "1" or "2", this is a finding.<br /><br />If the "failure" setting is not set, this must be upgraded to a CAT I finding.<br /><br />If the "failure" setting is set to "1" but the availability concern is not documented or there is no monitoring of the kernel log, this must be downgraded to a CAT III finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to shut down in the event of an audit processing failure.<br /><br />Add or correct the option to shut down the operating system with the following command:<br /><br />     # auditctl -f 2<br /><br />Edit the "/etc/audit/rules.d/audit.rules" file and add the following line:<br /><br />     -f 2<br /><br />If availability has been determined to be more important, and this decision is documented with the ISSO, configure the operating system to notify system administration staff and ISSO staff in the event of an audit processing failure with the following command:<br /><br />     # auditctl -f 1<br /><br />Edit the "/etc/audit/rules.d/audit.rules" file and add the following line:<br /><br />     -f 1<br /><br />Kernel log monitoring must also be configured to properly alert designated staff.<br /><br />The audit daemon must be restarted for the changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

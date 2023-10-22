@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-010360 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The RHEL 8 file integrity tool must notify the system administrator when changes to the baseline configuration or anomalies in the operation of any security functions are discovered within an organizationally defined frequency.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-010360 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001744&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000363-GPOS-00150">SRG-OS-000363-GPOS-00150</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Unauthorized changes to the baseline configuration could make the system vulnerable to various attacks or allow unauthorized access to the operating system. Changes to operating system configurations can have unintended side effects, some of which may be relevant to security.<br /><br />Detecting such changes and providing an automated response can help avoid unintended, negative consequences that could ultimately affect the security state of the operating system. The operating system's Information Management Officer (IMO)/Information System Security Officer (ISSO) and System Administrators (SAs) must be notified via email and/or monitoring system trap when there is an unauthorized modification of a configuration item.<br /><br />Notifications provided by information systems include messages to local computer consoles, and/or hardware indications, such as lights.<br /><br />This capability must take into account operational requirements for availability for selecting an appropriate response. The organization may choose to shut down or restart the information system upon security function anomaly detection.<br /><br />RHEL 8 comes with many optional software packages. A file integrity tool called Advanced Intrusion Detection Environment (AIDE) is one of those optional packages. This requirement assumes the use of AIDE; however, a different tool may be used if the requirements are met. Note that AIDE does not have a configuration that will send a notification, so a cron job is recommended that uses the mail application on the system to email the results of the file integrity check.<br /><br />Satisfies: SRG-OS-000363-GPOS-00150, SRG-OS-000446-GPOS-00200, SRG-OS-000447-GPOS-00201
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system routinely checks the baseline configuration for unauthorized changes and notifies the system administrator when anomalies in the operation of any security functions are discovered.<br /><br />Check to see if AIDE is installed on the system with the following command:<br /><br />$ sudo yum list installed aide<br /><br />If AIDE is not installed, ask the System Administrator how file integrity checks are performed on the system.<br /><br />Check that RHEL 8 routinely executes a file integrity scan for changes to the system baseline. The command used in the example will use a daily occurrence.<br /><br />Check the cron directories for scripts controlling the execution and notification of results of the file integrity application. For example, if AIDE is installed on the system, use the following commands:<br /><br />$ sudo ls -al /etc/cron.* | grep aide<br /><br />-rwxr-xr-x 1 root root 29 Nov 22 2015 aide<br /><br />$ sudo grep aide /etc/crontab /var/spool/cron/root<br /><br />/etc/crontab: 30 04 * * * root /usr/sbin/aide<br />/var/spool/cron/root: 30 04 * * * root /usr/sbin/aide<br /><br />$ sudo more /etc/cron.daily/aide<br /><br />#!/bin/bash<br />/usr/sbin/aide --check | /bin/mail -s "$HOSTNAME - Daily aide integrity check run" root@sysname.mil<br /><br />If the file integrity application does not exist, or a script file controlling the execution of the file integrity application does not exist, or the file integrity application does not notify designated personnel of changes, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the file integrity tool to run automatically on the system at least weekly and to notify designated personnel if baseline configurations are changed in an unauthorized manner. The AIDE tool can be configured to email designated personnel with the use of the cron system.<br /><br />The following example output is generic. It will set cron to run AIDE daily and to send email at the completion of the analysis. <br /><br />$ sudo more /etc/cron.daily/aide<br /><br />#!/bin/bash<br /><br />/usr/sbin/aide --check | /bin/mail -s "$HOSTNAME - Daily aide integrity check run" root@sysname.mil
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

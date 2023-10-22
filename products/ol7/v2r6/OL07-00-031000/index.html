@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-031000 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must send rsyslog output to a log aggregation server.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-031000 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Sending rsyslog output to another system ensures that the logs cannot be removed or modified in the event that the system is compromised or has a hardware failure.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify "rsyslog" is configured to send all messages to a log aggregation server.<br /><br />Check the configuration of "rsyslog" with the following command:<br /><br />Note: If another logging package is used, substitute the utility configuration file for "/etc/rsyslog.conf".<br /><br /># grep @ /etc/rsyslog.conf /etc/rsyslog.d/*.conf<br />*.* @@logagg.site.mil<br /><br />If there are no lines in the "/etc/rsyslog.conf" or "/etc/rsyslog.d/*.conf" files that contain the "@" or "@@" symbol(s), and the lines with the correct symbol(s) to send output to another system do not cover all "rsyslog" output, ask the System Administrator to indicate how the audit logs are off-loaded to a different system or media. <br /><br />If the lines are commented out or there is no evidence that the audit logs are being sent to another system, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Modify the "/etc/rsyslog.conf" or an "/etc/rsyslog.d/*.conf" file to contain a configuration line to send all "rsyslog" output to a log aggregation system:<br />*.* @@<log aggregation system name>
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

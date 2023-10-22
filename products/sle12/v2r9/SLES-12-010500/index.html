@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-010500 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Advanced Intrusion Detection Environment (AIDE) must verify the baseline SUSE operating system configuration at least weekly.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-010500 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002696&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000363-GPOS-00150">SRG-OS-000363-GPOS-00150</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Unauthorized changes to the baseline configuration could make the system vulnerable to various attacks or allow unauthorized access to the SUSE operating system. Changes to SUSE operating system configurations can have unintended side effects, some of which may be relevant to security.<br /><br />Detecting such changes and providing an automated response can help avoid unintended, negative consequences that could ultimately affect the security state of the SUSE operating system. The SUSE operating system's Information System Security Manager (ISSM)/Information System Security Officer (ISSO) and System Administrator (SAs) must be notified via email and/or monitoring system trap when there is an unauthorized modification of a configuration item.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system checks the baseline configuration for unauthorized changes at least once weekly.<br /><br />Note: A file integrity tool other than Advanced Intrusion Detection Environment (AIDE) may be used, but the tool must be executed at least once per week.<br /><br />Check for a "crontab" that controls the execution of the file integrity application. For example, if AIDE is installed on the system, use the following command:<br /><br />     # sudo crontab -l<br />     0 0 * * 6 /usr/bin/aide --check | /var/spool/mail -s "aide integrity check run for <system name>" root@notareal.email<br /><br />If the file integrity application does not exist, or a "crontab" entry does not exist, check the cron directories for a script that runs the file integrity application:<br /><br />     # ls -al /etc/cron.daily /etc/cron.weekly<br /><br />Inspect the file and ensure that the file integrity tool is being executed.<br /><br />If a file integrity tool is not configured in the crontab or in a script that runs at least weekly, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to check the baseline configuration for unauthorized changes at least once weekly.<br /><br />Configure the file integrity tool to automatically run on the system at least weekly. <br /><br />The following example output is generic. It will set cron to run AIDE weekly, but other file integrity tools may be used:<br /><br />     # sudo crontab -l<br /><br />     0 0 * * 6 /usr/sbin/aide --check | /var/spool/mail -s "aide integrity check run for <system name>" root@notareal.email
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-041001 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must have the required packages for multifactor authentication installed.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-041001 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001948&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000375-GPOS-00160">SRG-OS-000375-GPOS-00160</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Using an authentication device, such as a CAC or token that is separate from the information system, ensures that even if the information system is compromised, that compromise will not affect credentials stored on the authentication device.<br /><br />Multifactor solutions that require devices separate from information systems gaining access include, for example, hardware tokens providing time-based or challenge-response authenticators and smart cards such as the U.S. Government Personal Identity Verification card and the DoD Common Access Card.<br /><br />A privileged account is defined as an information system account with authorizations of a privileged user.<br /><br />Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.<br /><br />This requirement only applies to components where this is specific to the function of the device or has the concept of an organizational user (e.g., VPN, proxy capability). This does not apply to authentication for the purpose of configuring the device itself (management).<br /><br />Satisfies: SRG-OS-000375-GPOS-00160, SRG-OS-000375-GPOS-00161, SRG-OS-000375-GPOS-00162
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system has the packages required for multifactor authentication installed.<br /><br />Check for the presence of the packages required to support multifactor authentication with the following commands:<br /><br /># yum list installed pam_pkcs11<br />pam_pkcs11-0.6.2-14.el7.noarch.rpm<br /><br />If the "pam_pkcs11" package is not installed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to implement multifactor authentication by installing the required packages.<br /><br />Install the pam_pkcs11 package with the following command:<br /><br /># yum install pam_pkcs11
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

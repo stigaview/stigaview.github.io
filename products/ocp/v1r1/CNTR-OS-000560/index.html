@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000560 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must prevent unauthorized and unintended information transfer via shared system resources and enable page poisoning.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000560 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001090&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000243-CTR-000600">SRG-APP-000243-CTR-000600</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Enabling page poisoning in OpenShift improves memory safety, mitigates memory corruption vulnerabilities, aids in fault isolation, assists with debugging. It enhances the overall security and stability of the platform, reducing the risk of memory-related exploits and improving the resilience of applications running on OpenShift.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Check the current CoreOS boot loader configuration has page poisoning enabled by executing the following:<br /><br />for node in $(oc get node -oname); do oc debug $node -- chroot /host /bin/bash -c 'echo -n "$HOSTNAME ";  grep page_poison /boot/loader/entries/*.conf|| echo "not found"' 2>/dev/null; done<br /><br />If "page_poison" is not set to "1" or returns "not found", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Apply the machine config to enable page poisoning by executing the following:<br /><br />for mcpool in $(oc get mcp -oname | sed "s:.*/::" ); do<br />echo "apiVersion: machineconfiguration.openshift.io/v1<br />kind: MachineConfig<br />metadata:<br />  name: 05-kernelarg-page-poison-$mcpool<br />  labels:<br />    machineconfiguration.openshift.io/role: $mcpool<br />spec:<br />  config:<br />    ignition:<br />      version: 3.1.0<br />  kernelArguments:<br />  - page_poison=1<br />" | oc apply -f -<br />done
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

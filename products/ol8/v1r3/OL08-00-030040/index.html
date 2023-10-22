@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL08-00-030040 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The OL 8 System must take appropriate action when an audit processing failure occurs.</h2>
+  <p>
+  <b>STIG ID:</b> OL08-00-030040 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000140&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000047-GPOS-00023">SRG-OS-000047-GPOS-00023</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is critical for the appropriate personnel to be aware if a system is at risk of failing to process audit logs as required. Without this notification, the security personnel may be unaware of an impending failure of the audit capability, and system operation may be adversely affected. <br /> <br />Audit processing failures include software/hardware errors, failures in the audit capturing mechanisms, and audit storage capacity being reached or exceeded. <br /> <br />This requirement applies to each audit data storage repository (i.e., distinct information system component where audit records are stored), the centralized audit storage capacity of organizations (i.e., all audit data storage repositories combined), or both.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify OL 8 takes the appropriate action when an audit processing failure occurs with the following command: <br /> <br />$ sudo grep disk_error_action /etc/audit/auditd.conf <br /> <br />disk_error_action = HALT <br /> <br />If the value of the "disk_error_action" option is not "SYSLOG", "SINGLE", or "HALT", or the line is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure OL 8 to shut down by default upon audit failure (unless availability is an overriding concern). <br /> <br />Add or update the following line ("disk_error_action" can be set to "SYSLOG" or "SINGLE" depending on configuration) in the "/etc/audit/auditd.conf" file: <br /> <br />disk_error_action = HALT <br /> <br />If availability has been determined to be more important, and this decision is documented with the ISSO, configure OL 8 to notify system administration staff and ISSO staff in the event of an audit processing failure by setting the "disk_error_action" to "SYSLOG".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

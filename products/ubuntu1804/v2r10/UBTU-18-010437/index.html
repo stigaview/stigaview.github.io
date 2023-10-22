@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-18-010437 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Pam_Apparmor must be configured to allow system administrators to pass information to any other Ubuntu operating system administrator or user, change security attributes, and to confine all non-privileged users from executing functions to include disabling, circumventing, or altering implemented security safeguards/countermeasures.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-18-010437 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002165&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000312-GPOS-00122">SRG-OS-000312-GPOS-00122</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       When discretionary access control policies are implemented, subjects are not constrained with regard to what actions they can take with information for which they have already been granted access. Thus, subjects that have been granted access to information are not prevented from passing (i.e., the subjects have the discretion to pass) the information to other subjects or objects. A subject that is constrained in its operation by Mandatory Access Control policies is still able to operate under the less rigorous constraints of this requirement. Thus, while Mandatory Access Control imposes constraints preventing a subject from passing information to another subject operating at a different sensitivity level, this requirement permits the subject to pass the information to any subject at the same sensitivity level. The policy is bounded by the information system boundary. Once the information is passed outside the control of the information system, additional means may be required to ensure the constraints remain in effect. While the older, more traditional definitions of discretionary access control require identity-based access control, that limitation is not required for this use of discretionary access control.<br /><br />Satisfies: SRG-OS-000312-GPOS-00122, SRG-OS-000312-GPOS-00123, SRG-OS-000312-GPOS-00124, SRG-OS-000324-GPOS-0012
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that the Ubuntu operating system is configured to allow system administrators to pass information to any other Ubuntu operating system administrator or user.<br /><br />Check that "Pam_Apparmor" is installed on the system with the following command:<br /><br /># dpkg -l | grep -i apparmor<br /><br />ii libpam-apparmor 2.10.95-0Ubuntu2.6 <br /><br />If the "Pam_Apparmor" package is not installed, this is a finding.<br /><br />Check that the "AppArmor" daemon is running with the following command:<br /><br /># systemctl status apparmor.service | grep -i active<br /><br />If something other than "Active: active" is returned, this is a finding.<br /><br />Note: Pam_Apparmor must have properly configured profiles. All configurations will be based on the actual system setup and organization. See the "Pam_Apparmor" documentation for more information on configuring profiles.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Ubuntu operating system to allow system administrators to pass information to any other Ubuntu operating system administrator or user.<br /><br />Install "Pam_Apparmor" (if it is not installed) with the following command:<br /><br /># sudo apt-get install libpam-apparmor<br /><br />Enable/Activate "Apparmor" (if it is not already active) with the following command:<br /><br /># sudo systemctl enable apparmor.service<br /><br />Start "Apparmor" with the following command:<br /><br /># sudo systemctl start apparmor.service<br /><br />Note: Pam_Apparmor must have properly configured profiles. All configurations will be based on the actual system setup and organization. See the "Pam_Apparmor" documentation for more information on configuring profiles.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

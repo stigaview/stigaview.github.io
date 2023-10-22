@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-020019 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must have a host-based intrusion detection tool installed.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-020019 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001233&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000191-GPOS-00080">SRG-OS-000191-GPOS-00080</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Adding host-based intrusion detection tools can provide the capability to take actions automatically in response to malicious behavior, which can provide additional agility in reacting to network threats. These tools often include a reporting capability to provide network awareness of the system, which may not otherwise exist in an organization's systems management regime.<br /><br />Satisfies: SRG-OS-000191-GPOS-00080, SRG-OS-000196
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Consult with the SA or ISSO to determine if a host-based intrusion detection application is loaded on the system. Per OPORD 16-0080, the preferred intrusion detection system is McAfee HBSS available through the U.S. Cyber Command (USCYBERCOM).<br /><br />If another host-based intrusion detection application is in use, such as SELinux, this must be documented and approved by the local Authorizing Official.<br /><br />Procedure:<br />Examine the system to determine if the Host Intrusion Prevention System (HIPS) is installed:<br /><br /># rpm -qa | grep MFEhiplsm<br /><br />Verify the McAfee HIPS module is active on the system:<br /><br /># ps -ef | grep -i "hipclient" <br /><br />If the MFEhiplsm package is not installed, check for another intrusion detection system:<br /><br /># find / -name <daemon name><br /><br />Where <daemon name> is the name of the primary application daemon to determine if the application is loaded on the system.<br /><br />Determine if the application is active on the system:<br /><br /># ps -ef | grep -i <daemon name><br /><br />If the MFEhiplsm package is not installed and an alternate host-based intrusion detection application has not been documented for use, this is a finding.<br /><br />If no host-based intrusion detection system is installed and running on the system, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install and enable the latest McAfee HIPS package, available from USCYBERCOM.<br /><br />Note: If the system does not support the McAfee HIPS package, install and enable a supported intrusion detection system application and document its use with the Authorizing Official.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000380 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must contain only container images for those capabilities being offered by the container platform.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000380 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000141-CTR-000320">SRG-APP-000141-CTR-000320</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Allowing container images to reside within the container platform registry that are not essential to the capabilities being offered by the container platform becomes a potential security risk. By allowing these nonessential container images to exist, the possibility for accidental instantiation exists. The images may be unpatched, not supported, or offer nonapproved capabilities. Those images for customer services are considered essential capabilities.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       To review the container images within the container platform registry, execute the following:<br /><br />oc get images<br /><br />Review the container platform container images to validate that only container images necessary for the functionality of the information system are present. If unnecessary container images exist, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Remove any images from the container registry that are not required for the functionality of the system by executing the following:<br /><br />oc delete image <IMAGE_NAME> -n <IMAGE_NAMESPACE>
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

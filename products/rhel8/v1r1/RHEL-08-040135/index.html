@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-040135 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The RHEL 8 fapolicy module must be configured to employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-040135 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001764&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000368-GPOS-00154">SRG-OS-000368-GPOS-00154</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The organization must identify authorized software programs and permit execution of authorized software. The process used to identify software programs that are authorized to execute on organizational information systems is commonly referred to as whitelisting.<br /><br />Utilizing a whitelist provides a configuration management method for allowing the execution of only authorized software. Using only authorized software decreases risk by limiting the number of potential vulnerabilities. Verification of whitelisted software occurs prior to execution or at system startup.<br /><br />User home directories/folders may contain information of a sensitive nature. Non-privileged users should coordinate any sharing of information with an SA through shared resources.<br /><br />RHEL 8 ships with many optional packages. One such package is a file access policy daemon called "fapolicyd". "fapolicyd" is a userspace daemon that determines access rights to files based on attributes of the process and file. It can be used to either blacklist or whitelist processes or file access.<br /><br />Proceed with caution with enforcing the use of this daemon. Improper configuration may render the system non-functional.<br /><br />Satisfies: SRG-OS-000368-GPOS-00154, SRG-OS-000370-GPOS-00155, SRG-OS-000480-GPOS-00232
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the RHEL 8 "fapolicyd" is enabled and employs a deny-all, permit-by-exception policy.<br /><br />Check that "fapolicyd" is installed, running, and in enforcing mode with the following commands:<br /><br />$ sudo yum list installed fapolicyd<br /><br />Installed Packages<br />fapolicyd.x86_64<br /><br />$ sudo systemctl status fapolicyd.service<br /><br />fapolicyd.service - File Access Policy Daemon<br />Loaded: loaded (/usr/lib/systemd/system/fapolicyd.service; enabled; vendor preset: disabled)<br />Active: active (running)<br /><br />$ sudo grep permissive /etc/fapolicyd/fapolicyd.conf<br /><br />permissive = 0<br /><br />Check that fapolicyd employs a deny-all policy on system mounts with the following commands:<br /><br />$ sudo tail /etc/fapolicyd/fapolicyd.rules<br /><br />allow exe=/usr/bin/python3.4 dir=execdirs ftype=text/x-pyton<br />deny_audit pattern ld_so all<br />deny all all<br /><br />$ sudo cat /etc/fapolicyd/fapolicyd.mounts<br /><br />/dev/shm<br />/run<br />/sys/fs/cgroup<br />/<br />/home<br />/boot<br />/run/user/42<br />/run/user/1000<br /><br />If fapolicyd is not running in enforcement mode on all system mounts with a deny-all, permit-by-exception policy, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure RHEL 8 to employ a deny-all, permit-by-exception application whitelisting policy with "fapolicyd" using the following commands:<br /><br />Install and enable "fapolicyd":<br /><br />$ sudo yum install fapolicyd.x86_64<br /><br />$ sudo mount | egrep '^tmpfs| ext4| ext3| xfs' | awk '{ printf "%s\n", $3 }' >> /etc/fapolicyd/fapolicyd.mounts<br /><br />$ sudo systemctl enable --now fapolicyd<br /><br />With the "fapolicyd" installed and enabled, configure the daemon to function in permissive mode until the whitelist is built correctly to avoid system lockout. Do this by editing the "/etc/fapolicyd/fapolicyd.conf" file with the following line:<br /><br />permissive = 1<br /><br />Build the whitelist in the "/etc/fapolicyd/fapolicyd.rules" file ensuring the last rule is "deny all all".<br /><br />Once it is determined the whitelist is built correctly, set the fapolicyd to enforcing mode by editing the "permissive" line in the /etc/fapolicyd/fapolicyd.conf file.<br /><br />permissive = 0
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

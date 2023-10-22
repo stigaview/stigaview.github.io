@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL08-00-020041 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OL 8 must ensure session control is automatically started at shell initialization.</h2>
+  <p>
+  <b>STIG ID:</b> OL08-00-020041 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000056&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000028-GPOS-00009">SRG-OS-000028-GPOS-00009</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not want to log out because of the temporary nature of the absence.<br /><br />The session lock is implemented at the point where session activity can be determined. Rather than be forced to wait for a period of time to expire before the user session can be locked, OL 8 needs to provide users with the ability to manually invoke a session lock so users can secure their session if it is necessary to temporarily vacate the immediate physical vicinity.<br /><br />Tmux is a terminal multiplexer that enables a number of terminals to be created, accessed, and controlled from a single screen.<br /><br />Satisfies: SRG-OS-000028-GPOS-00009, SRG-OS-000030-GPOS-00011
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system shell initialization file is configured to start each shell with the tmux terminal multiplexer with the following commands:<br /><br />Determine if tmux is currently running:<br /><br />     $ sudo ps all | grep tmux | grep -v grep<br /><br />If the command does not produce output, this is a finding.<br /> <br />Determine the location of the tmux script:<br /><br />     $ sudo grep tmux /etc/profile.d/*<br />     /etc/profile.d/tmux.sh:  case "$name" in (sshd|login) tmux ;; esac<br /><br />Review the tmux script by using the following example:<br />     $ sudo cat /etc/profile.d/tmux.sh<br /><br />if [ "$PS1" ]; then<br />	parent=$(ps -o ppid= -p $$)<br />	name=$(ps -o comm= -p $parent)<br />	case "$name" in (sshd|login) tmux ;; esac<br />fi<br /><br />If "tmux" is not configured as the example above, is commented out or missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to initialize the tmux terminal multiplexer as each shell is called by adding the following lines to a custom.sh shell script in the /etc/profile.d/ directory:<br /><br />if [ "$PS1" ]; then<br />	parent=$(ps -o ppid= -p $$)<br />	name=$(ps -o comm= -p $parent)<br />	case "$name" in (sshd|login) tmux ;; esac<br />fi<br /><br />This setting will take effect at next logon.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

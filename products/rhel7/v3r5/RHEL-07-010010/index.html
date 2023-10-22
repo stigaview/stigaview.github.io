@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-010010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must be configured so that the file permissions, ownership, and group membership of system files and commands match the vendor values.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-010010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001494&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000257-GPOS-00098">SRG-OS-000257-GPOS-00098</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Discretionary access control is weakened if a user or group has access permissions to system files and directories greater than the default.<br /><br />Satisfies: SRG-OS-000257-GPOS-00098, SRG-OS-000278-GPOS-00108
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the file permissions, ownership, and group membership of system files and commands match the vendor values.<br /><br />Check the default file permissions, ownership, and group membership of system files and commands with the following command:<br /><br /># for i in `rpm -Va | egrep '^.{1}M|^.{5}U|^.{6}G' | cut -d " " -f 4,5`;do for j in `rpm -qf $i`;do rpm -ql $j --dump | cut -d " " -f 1,5,6,7 | grep $i;done;done<br /><br />/var/log/gdm 040755 root root<br />/etc/audisp/audisp-remote.conf 0100640 root root<br />/usr/bin/passwd 0104755 root root<br /><br />For each file returned, verify the current permissions, ownership, and group membership:<br /># ls -la <filename><br /><br />-rw-------. 1 root root 133 Jan 11 13:25 /etc/audisp/audisp-remote.conf<br /><br />If the file is more permissive than the default permissions, this is a finding.<br /><br />If the file is not owned by the default owner and is not documented with the Information System Security Officer (ISSO), this is a finding.<br /><br />If the file is not a member of the default group and is not documented with the Information System Security Officer (ISSO), this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Run the following command to determine which package owns the file:<br /><br /># rpm -qf <filename><br /><br />Reset the user and group ownership of files within a package with the following command:<br /><br /># rpm --setugids <packagename><br /><br /><br />Reset the permissions of files within a package with the following command:<br /><br /># rpm --setperms <packagename>
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

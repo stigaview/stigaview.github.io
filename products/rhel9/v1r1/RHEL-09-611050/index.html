@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-611050 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 password-auth must be configured to use a sufficient number of hashing rounds.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-611050 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000196&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000073-GPOS-00041">SRG-OS-000073-GPOS-00041</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised. Passwords that are encrypted with a weak algorithm are no more protected than if they are kept in plain text.<br /><br />Using more hashing rounds makes password cracking attacks more difficult.<br /><br />Satisfies: SRG-OS-000073-GPOS-00041, SRG-OS-000120-GPOS-00061
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the number of rounds for the password hashing algorithm is configured with the following command:<br /><br />$ sudo grep rounds /etc/pam.d/password-auth<br /><br />password sufficient pam_unix.so sha512 rounds=5000<br /><br />If a matching line is not returned or "rounds" is less than "5000", this a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure Red Hat Enterprise Linux 9 to use 5000 hashing rounds for hashing passwords.<br /><br />Add or modify the following line in "/etc/pam.d/password-auth" and set "rounds" to "5000".<br /><br />password sufficient pam_unix.so sha512 rounds=5000
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-020022 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must not allow privileged accounts to utilize SSH.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-020022 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002165&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000324-GPOS-00125">SRG-OS-000324-GPOS-00125</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Preventing non-privileged users from executing privileged functions mitigates the risk that unauthorized individuals or processes may gain unnecessary access to information or privileges.<br /><br />Privileged functions include, for example, establishing accounts, performing system integrity checks, or administering cryptographic key management activities. Non-privileged users are individuals who do not possess appropriate authorizations. Circumventing intrusion detection and prevention mechanisms or malicious code protection mechanisms are examples of privileged functions that require protection from non-privileged users.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: Per OPORD 16-0080, the preferred endpoint security tool is Endpoint Security for Linux (ENSL) in conjunction with SELinux.<br /><br />Verify the operating system prevents privileged accounts from utilizing SSH.<br />Check the SELinux ssh_sysadm_login boolean with the following command:<br /><br />$ sudo getsebool ssh_sysadm_login<br />ssh_sysadm_login --> off<br /><br />If the "ssh_sysadm_login" boolean is not "off" and is not documented with the ISSO as an operational requirement, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to prevent privileged accounts from utilizing SSH.<br />Use the following command to set the "ssh_sysadm_login" boolean to "off":<br /><br />$ sudo setsebool -P ssh_sysadm_login off<br /><br />Note: SELinux confined users mapped to sysadm_u are not allowed to login to the system over SSH, by default. If this is a required function, it can be configured by setting the ssh_sysadm_login SELinux boolean to "on" with the following command:<br />$ sudo setsebool -P ssh_sysadm_login on<br />This must be documented with the ISSO as an operational requirement.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

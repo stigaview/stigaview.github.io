@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-653075 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 audit system must audit local events.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-653075 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000169&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000062-GPOS-00031">SRG-OS-000062-GPOS-00031</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without establishing what type of events occurred, the source of events, where events occurred, and the outcome of events, it would be difficult to establish, correlate, and investigate the events leading up to an outage or attack.<br /><br />If option "local_events" isn't set to "yes" only events from network will be aggregated.<br /><br />Satisfies: SRG-OS-000062-GPOS-00031, SRG-OS-000480-GPOS-00227
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that the RHEL 9 audit system is configured to audit local events with the following command:<br /><br />$ sudo grep local_events /etc/audit/auditd.conf <br /><br />local_events = yes <br /><br />If "local_events" isn't set to "yes", if the command does not return a line, or the line is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure RHEL 9 to generate audit records for local events by adding or updating the following line in "/etc/audit/auditd.conf":<br /><br />local_events = yes <br /><br />The audit daemon must be restarted for the changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

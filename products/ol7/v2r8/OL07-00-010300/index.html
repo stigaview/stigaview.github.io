@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-010300 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must be configured so that the SSH daemon does not allow authentication using an empty password.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-010300 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000766&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000106-GPOS-00053">SRG-OS-000106-GPOS-00053</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Configuring this setting for the SSH daemon provides additional assurance that remote logon via SSH will require a password, even in the event of misconfiguration elsewhere.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       To determine how the SSH daemon's "PermitEmptyPasswords" option is set, run the following command:<br /><br /># grep -i PermitEmptyPasswords /etc/ssh/sshd_config<br />PermitEmptyPasswords no<br /><br />If no line, a commented line, or a line indicating the value "no" is returned, the required value is set.<br /><br />If the required value is not set, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       To explicitly disallow remote logon from accounts with empty passwords, add or correct the following line in "/etc/ssh/sshd_config":<br /><br />PermitEmptyPasswords no<br /><br />The SSH service must be restarted for changes to take effect. Any accounts with empty passwords should be disabled immediately, and PAM configuration should prevent users from being able to assign themselves empty passwords.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

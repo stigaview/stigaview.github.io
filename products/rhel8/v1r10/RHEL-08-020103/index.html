@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-020103 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 8 systems below version 8.4 must ensure the password complexity module in the password-auth file is configured for three retries or less.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-020103 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Use of a complex password helps to increase the time and resources required to compromise the password. Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. "pwquality" enforces complex password construction configuration and has the ability to limit brute-force attacks on the system.<br /><br />RHEL 8 uses "pwquality" as a mechanism to enforce password complexity. This is set in both:<br />/etc/pam.d/password-auth<br />/etc/pam.d/system-auth<br /><br />By limiting the number of attempts to meet the pwquality module complexity requirements before returning with an error, the system will audit abnormal attempts at password changes.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: This requirement applies to RHEL versions 8.0 through 8.3. If the system is RHEL version 8.4 or newer, this requirement is not applicable.<br /><br />Verify the operating system is configured to limit the "pwquality" retry option to 3. <br /><br />Check for the use of the "pwquality" retry option in the password-auth file with the following command:<br /><br />     $ sudo cat /etc/pam.d/password-auth | grep pam_pwquality<br /><br />     password requisite pam_pwquality.so retry=3<br /><br />If the value of "retry" is set to "0" or greater than "3", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to limit the "pwquality" retry option to 3.<br /><br />Add the following line to the "/etc/pam.d/password-auth" file (or modify the line to have the required value):<br /><br />     password requisite pam_pwquality.so retry=3
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

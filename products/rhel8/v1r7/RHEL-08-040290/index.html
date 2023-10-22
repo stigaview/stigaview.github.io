@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-040290 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 8 must be configured to prevent unrestricted mail relaying.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-040290 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If unrestricted mail relaying is permitted, unauthorized senders could use this host as a mail relay for the purpose of sending spam or other unauthorized activity.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the system is configured to prevent unrestricted mail relaying.<br /><br />Determine if "postfix" is installed with the following commands:<br /><br />$ sudo yum list installed postfix<br /><br />postfix.x86_64  2:3.3.1-9.el8 <br /><br />If postfix is not installed, this is Not Applicable.<br /><br />If postfix is installed, determine if it is configured to reject connections from unknown or untrusted networks with the following command:<br /><br />$ sudo postconf -n smtpd_client_restrictions<br /><br />smtpd_client_restrictions = permit_mynetworks, reject<br /><br />If the "smtpd_client_restrictions" parameter contains any entries other than "permit_mynetworks" and "reject", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       If "postfix" is installed, modify the "/etc/postfix/main.cf" file to restrict client connections to the local network with the following command:<br /><br />$ sudo postconf -e 'smtpd_client_restrictions = permit_mynetworks,reject'
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-15-030230 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must generate audit records for all uses of the fsetxattr system call.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-15-030230 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000130&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000037-GPOS-00015">SRG-OS-000037-GPOS-00015</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without generating audit records specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.<br /><br />Audit records can be generated from various components within the information system (e.g., module or policy filter).<br /><br />Satisfies: SRG-OS-000037-GPOS-00015, SRG-OS-000062-GPOS-00031, SRG-OS-000064-GPOS-00033, SRG-OS-000392-GPOS-00172, SRG-OS-000462-GPOS-00206, SRG-OS-000471-GPOS-00215
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system generates an audit record for all uses of the "fsetxattr" system call.<br /><br />Check that the system call is being audited by performing the following command:<br /><br />> sudo auditctl -l | grep -w 'fsetxattr'<br /><br />-a always,exit -F arch=b32 -S fsetxattr -F auid>=1000 -F auid!=-1 -k perm_mod<br />-a always,exit -F arch=b64 -S fsetxattr -F auid>=1000 -F auid!=-1 -k perm_mod<br /><br />If both the "b32" and "b64" audit rules are not defined for the "fsetxattr" syscall, this is a finding.<br /><br />Note:<br />The "-k" allows for specifying an arbitrary identifier. The string following "-k" does not need to match the example output above.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to generate an audit record for all uses of the "fsetxattr" system call. <br /><br />Add or update the following rules to "/etc/audit/rules.d/audit.rules":<br /><br />-a always,exit -F arch=b32 -S fsetxattr -F auid>=1000 -F auid!=4294967295 -k perm_mod<br />-a always,exit -F arch=b64 -S fsetxattr -F auid>=1000 -F auid!=4294967295 -k perm_mod<br /><br />To reload the rules file, restart the audit daemon<br /><br />> sudo systemctl restart auditd.service<br /><br />or issue the following command:<br /><br />> sudo augenrules --load
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

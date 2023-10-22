@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000020 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must use TLS 1.2 or greater for secure communication.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000020 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000068&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000014-CTR-000040">SRG-APP-000014-CTR-000040</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The authenticity and integrity of the container platform and communication between nodes and components must be secure. If an insecure protocol is used during transmission of data, the data can be intercepted and manipulated. The manipulation of data can be used to inject status changes of the container platform, causing the execution of containers or reporting an incorrect healthcheck. To thwart the manipulation of the data during transmission, a secure protocol (TLS 1.2 or newer) must be used. Further guidance on secure transport protocols can be found in NIST SP 800-52.<br /><br />Satisfies: SRG-APP-000014-CTR-000040, SRG-APP-000560-CTR-001340
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the TLS Security Profile is not set to a profile that does not enforce TLS 1.2 or above. <br /><br />View the TLS security profile for the ingress controllers by executing the following:<br /><br />oc get --all-namespaces ingresscontrollers.operator.openshift.io -ocustom-columns="NAME":.metadata.name,"NAMESPACE":.metadata.namespace,"TLS PROFILE":.spec.tlsSecurityProfile<br /><br />View the TLS security profile for the control plane by executing the following:<br /><br />oc get APIServer cluster -ocustom-columns="TLS PROFILE":.spec.tlsSecurityProfile<br /><br />View the TLS profile for the Kubelet by executing the following:<br /><br />oc get kubeletconfigs -ocustom-columns="NAME":.metadata.name,"TLS PROFILE":.spec.tlsSecurityProfile<br /><br />If any of the above returns a TLS profile of "Old", this is a finding.<br /><br />If any of the above returns a TLS profile of "Custom" and the minTLSVersion is not set to "VersionTLS12" or greater, this is a finding.<br /><br />If the above returns "<none>" TLS profile, this is not a finding as the TLS profile defaults to "Intermediate".<br /><br />If the kubelet TLS profile check does not return any kubeletconfigs, this is not a finding as the default OCP installation uses defaults only.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Edit each resource and set the TLS Security Profile to Intermediate by executing the following:<br /><br />oc edit ingresscontroller <NAME> -n <NAMESPACE><br /><br />Add the following to the file:<br /><br />apiVersion: config.openshift.io/v1<br />kind: IngressController<br /> ...<br />spec:<br />  tlsSecurityProfile:<br />    intermediate: {}<br />    type: Intermediate<br /><br />Edit API Server by executing the following:<br /><br />oc edit APIServer<br /><br />Add the following to the file:<br /><br />apiVersion: config.openshift.io/v1<br />kind: APIServer<br /> ...<br />spec:<br />  tlsSecurityProfile:<br />    intermediate: {}<br />    type: Intermediate<br /><br />Edit Kubelet by executing the following:<br /><br />oc edit KubeletConfig <NAME><br /><br />Set to the following:<br /><br />apiVersion: config.openshift.io/v1<br />kind: KubeletConfig<br /> ...<br />spec:<br />  tlsSecurityProfile:<br />    intermediate: {}<br />    type: Intermediate
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

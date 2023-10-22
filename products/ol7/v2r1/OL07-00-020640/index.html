@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-020640 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must be configured so that all local interactive user home directories are owned by their respective users.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-020640 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If a local interactive user does not own their home directory, unauthorized users could access or modify the user's files, and the users may not be able to access their own files.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the assigned home directory of all local interactive users on the system exists.<br /><br />Check the home directory assignment for all local interactive users on the system with the following command:<br /><br /># ls -ld $(egrep ':[0-9]{4}' /etc/passwd | cut -d: -f6)<br /><br />-rwxr-x--- 1 smithj users 18 Mar 5 17:06 /home/smithj<br /><br />If any home directories referenced in "/etc/passwd" are not owned by the interactive user, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Change the owner of a local interactive user's home directories to that owner. To change the owner of a local interactive user's home directory, use the following command:<br /><br />Note: The example will be for the user smithj, who has a home directory of "/home/smithj".<br /><br /># chown smithj /home/smithj
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

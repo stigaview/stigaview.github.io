@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-030900 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must audit all uses of the rmdir syscall.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-030900 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000172&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000466-GPOS-00210">SRG-OS-000466-GPOS-00210</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If the system is not configured to audit certain activities and write them to an audit log, it is more difficult to detect and track system compromises and damages incurred during a system compromise.<br /><br />When a user logs on, the auid is set to the uid of the account that is being authenticated. Daemons are not user sessions and have the loginuid set to -1. The auid representation is an unsigned 32-bit integer, which equals 4294967295. The audit system interprets -1, 4294967295, and "unset" in the same way.<br /><br />Satisfies: SRG-OS-000466-GPOS-00210, SRG-OS-000467-GPOS-00211, SRG-OS-000468-GPOS-00212, SRG-OS-000392-GPOS-00172
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system generates audit records when successful/unsuccessful attempts to use the "rmdir" syscall occur.<br /><br />Check the file system rules in "/etc/audit/audit.rules" with the following commands:<br /><br /># grep -iw rmdir /etc/audit/audit.rules<br /><br />-a always,exit -F arch=b32 -S rmdir -F auid>=1000 -F auid!=unset -k delete<br /><br />-a always,exit -F arch=b64 -S rmdir -F auid>=1000 -F auid!=unset -k delete<br /><br />If both the "b32" and "b64" audit rules are not defined for the "rmdir" syscall, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to generate audit records when successful/unsuccessful attempts to use the "rmdir" syscall occur.<br /><br />Add the following rules in "/etc/audit/rules.d/audit.rules":<br /><br />-a always,exit -F arch=b32 -S rmdir -F auid>=1000 -F auid!=unset -k delete<br /><br />-a always,exit -F arch=b64 -S rmdir -F auid>=1000 -F auid!=unset -k delete<br /><br />The audit daemon must be restarted for the changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

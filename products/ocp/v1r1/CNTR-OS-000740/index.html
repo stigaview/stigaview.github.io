@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000740 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must prevent the installation of patches, service packs, device drivers, or operating system components without verification they have been digitally signed using a certificate that is recognized and approved by the organization.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000740 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001764&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000384-CTR-000915">SRG-APP-000384-CTR-000915</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Integrity of the OpenShift platform is handled by the cluster version operator. The cluster version operator will by default GPG verify the integrity of the release image before applying it. The release image contains a sha256 digest of machine-os-content which is used by the machine config operators for updates. On the host, the container runtime (podman) verifies the integrity of that sha256 when pulling the image before the machine config operator reads its content. Hence, there is end-to-end GPG-verified integrity for the operating system updates (as well as the rest of the cluster components which run as regular containers).
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       To verify integrity of the cluster version, execute the following:<br /><br />oc get clusterversion version <br /><br />If the Cluster Version Operator is not installed or the AVAILABLE is not set to True, this is a finding. <br /><br />Run the following command to retrieve the Cluster Version objects in the system: <br /><br />oc get clusterversion version -o yaml<br /><br />If "verified: true", under status history for each item is not present, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       By default, the integrity of RH CoreOS is checked by cluster version operator on OpenShift platform. If the integrity is not verified, reinstall of the cluster is necessary.<br /><br />Refer to instructions:<br />https://docs.openshift.com/container-platform/4.10/installing/index.html
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

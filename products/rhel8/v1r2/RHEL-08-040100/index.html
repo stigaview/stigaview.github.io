@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-040100 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>A firewall must be installed on RHEL 8.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-040100 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002314&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000297-GPOS-00115">SRG-OS-000297-GPOS-00115</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       "Firewalld" provides an easy and effective way to block/limit remote access to the system via ports, services, and protocols.<br /><br />Remote access services, such as those providing remote access to network devices and information systems, which lack automated control capabilities, increase risk and make remote user access management difficult at best.<br /><br />Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.<br /><br />RHEL 8 functionality (e.g., RDP) must be capable of taking enforcement action if the audit reveals unauthorized activity. Automated control of remote access sessions allows organizations to ensure ongoing compliance with remote access policies by enforcing connection rules of remote access applications on a variety of information system components (e.g., servers, workstations, notebook computers, smartphones, and tablets).
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that "firewalld" is installed and active with the following commands:<br /><br />$ sudo yum list installed firewalld<br /><br />firewalld.noarch     0.7.0-5.el8<br /><br />$ sudo systemctl is-active firewalld<br /><br />active<br /><br />If the "firewalld" package is not installed and "active", ask the System Administrator if another firewall is installed. If no firewall is installed and active this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install "firewalld" and enable with the following commands:<br /><br />$ sudo yum install firewalld.noarch<br /><br />$ sudo systemctl enable firewalld
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

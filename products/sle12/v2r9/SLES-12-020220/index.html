@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-020220 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/shadow.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-020220 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001403&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000004-GPOS-00004">SRG-OS-000004-GPOS-00004</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Once an attacker establishes initial access to a system, the attacker often attempts to create a persistent method of reestablishing access. One way to accomplish this is for the attacker to simply create a new account. Auditing of account creation mitigates this risk.<br /><br />To address access requirements, many SUSE operating systems may be integrated with enterprise-level authentication/access/auditing mechanisms that meet or exceed access control policy requirements.<br /><br />Satisfies: SRG-OS-000004-GPOS-00004, SRG-OS-000239-GPOS-00089, SRG-OS-000240-GPOS-00090, SRG-OS-000241-GPOS-00091, SRG-OS-000303-GPOS-00120, SRG-OS-000476-GPOS-00221
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system generates an audit record when modifications occur to the "/etc/shadow" file.<br /><br />Check that the following file is being watched by performing the following command on the system rules in "/etc/audit/audit.rules":<br /><br /># sudo grep /etc/shadow /etc/audit/audit.rules<br /><br />-w /etc/shadow -p wa -k account_mod<br /><br />If the command does not return a line, or the line is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to generate an audit record when all modifications to the "/etc/shadow" file occur.<br /><br />Add or update the following rule to "/etc/audit/rules.d/audit.rules":<br /><br />-w /etc/shadow -p wa -k account_mod<br /><br />The audit daemon must be restarted for any changes to take effect.   <br /><br /># sudo systemctl restart auditd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

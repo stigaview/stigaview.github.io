@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-010339 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must specify the default "include" directory for the /etc/sudoers file.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-010339 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The "sudo" command allows authorized users to run programs (including shells) as other users, system users, and root. The "/etc/sudoers" file is used to configure authorized "sudo" users as well as the programs they are allowed to run. Some configuration options in the "/etc/sudoers" file allow configured users to run programs without re-authenticating. Use of these configuration options makes it easier for one compromised account to be used to compromise other accounts.<br /><br />It is possible to include other sudoers files from within the sudoers file currently being parsed using the #include and #includedir directives. When sudo reaches this line it will suspend processing of the current file (/etc/sudoers) and switch to the specified file/directory. Once the end of the included file(s) is reached, the rest of /etc/sudoers will be processed. Files that are included may themselves include other files. A hard limit of 128 nested include files is enforced to prevent include file loops.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: If the "include" and "includedir" directives are not present in the /etc/sudoers file, this requirement is not applicable.<br /><br />Verify the operating system specifies only the default "include" directory for the /etc/sudoers file with the following command:<br /><br />$ sudo grep include /etc/sudoers<br /><br />#includedir /etc/sudoers.d<br /><br />If the results are not "/etc/sudoers.d" or additional files or directories are specified, this is a finding.<br /><br />Verify the operating system does not have nested "include" files or directories within the /etc/sudoers.d directory with the following command:<br /><br />$ sudo grep -r include /etc/sudoers.d<br /><br />If results are returned, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the /etc/sudoers file to only include the /etc/sudoers.d directory.<br /><br />Edit the /etc/sudoers file with the following command:<br /><br />$ sudo visudo<br /><br />Add or modify the following line:<br />#includedir /etc/sudoers.d
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

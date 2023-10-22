@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APAS-AT-000093 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Automation Controller must compare internal application server clocks at least every 24 hours with an authoritative time source.</h2>
+  <p>
+  <b>STIG ID:</b> APAS-AT-000093 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001891&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000371-AS-000077">SRG-APP-000371-AS-000077</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       When conducting forensic analysis and investigating system events, it is critical that timestamps accurately reflect the time of application events. If timestamps are not deemed to be accurate, the integrity of the forensic analysis and the associated determinations are at stake. This leaves the organization and the system vulnerable to intrusions.<br /><br />Satisfies: SRG-APP-000371-AS-000077, SRG-APP-000372-AS-000212
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a system administrator for each Automation Controller host, ensure the NTP client is configured to synchronize to an organizationally defined NTP server:<br /><br />chronyc sources<br /><br />If the Automation Controller host is not configured to use an organizationally defined NTP server, this is a finding.<br /><br />Ensure the NTP time synchronization is operational:<br /><br />chronyc activity | head -n 1 | grep "200 OK" >/dev/null || echo "FAILED"<br />sudo systemctl is-active chrony > /dev/null|| echo "FAILED"<br /><br />If "FAILED" is displayed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a system administrator, for each Automation Controller host, configure the NTP client to synchronize to an organizationally defined NTP server:<br /><br />vi /etc/chrony.conf<br /><br />Restart the Automation Controller host:<br /><br />$ shutdown -r
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

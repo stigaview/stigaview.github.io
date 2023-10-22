@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000440 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must use FIPS-validated SHA-1 or higher hash function to provide replay-resistant authentication mechanisms for network access to privileged accounts.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000440 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001941&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000156-CTR-000380">SRG-APP-000156-CTR-000380</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A replay attack may enable an unauthorized user to gain access to the application. Authentication sessions between the authenticator and the application validating the user credentials must not be vulnerable to a replay attack.<br /><br />Anti-replay is a cryptographically based mechanism; thus, it must use FIPS-approved algorithms. An authentication process resists replay attacks if it is impractical to achieve a successful authentication by recording and replaying a previous authentication message. Note that the anti-replay service is implicit when data contains monotonically increasing sequence numbers and data integrity is assured. Use of DOD PKI is inherently compliant with this requirement for user and device access. Use of Transport Layer Security (TLS), including application protocols such as HTTPS and DNSSEC, that use TLS/SSL as the underlying security protocol is also complaint.<br /><br />Configure the information system to use the hash message authentication code (HMAC) algorithm for authentication services to Kerberos, SSH, web management tool, and any other access method.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the authentication operator is configured to use a secure transport to an OpenIDConnect provider:<br /><br />oc get oauth cluster -o jsonpath="{.spec.identityProviders[*]}{'\n'}"<br /><br />If the transport is not secure (ex. HTTPS), this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure OpenShift to use an OpenIDConnect Identity Provider. Note: This STIG was written for OIC; do not use HTPasswd. Only use an approved identity provider.<br /><br />Steps to configure OpenID provider:<br /><br />1. Create Secret for Client Secret by executing the following:<br /> <br />oc create secret generic idp-secret --from-literal=clientSecret=<secret> -n openshift-config<br /> <br />2. Create config map for OpenID Trust CA by executing the following:<br /> <br />oc create configmap ca-config-map --from-file=ca.crt=/path/to/ca -n openshift-config<br /><br />3. Create OpenID Auth Config Resource YAML.<br />Using the preferred text editor, create a file named oidcidp.yaml using the example content (replacing config values as appropriate).<br /><br />apiVersion: config.openshift.io/v1<br />kind: OAuth<br />metadata:<br />  name: cluster<br />spec:<br />  identityProviders:<br />  - name: oidcidp <br />    mappingMethod: claim <br />    type: OpenID<br />    openID:<br />      clientID: ... <br />      clientSecret: <br />        name: idp-secret<br />      claims: <br />        preferredUsername:<br />        - preferred_username<br />        name:<br />        - name<br />        email:<br />        - email<br />      issuer: https://www.idp-issuer.com <br /> <br />4. Apply OpenID config to cluster by executing the following:<br /> <br />oc apply -f ldapidp.yaml<br /> <br />Note: For more information on configuring an OpenID provider, refer to https://docs.openshift.com/container-platform/4.8/authentication/identity_providers/configuring-oidc-identity-provider.html.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-214030 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 must be configured so that the cryptographic hashes of system files match vendor values.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-214030 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The hashes of important files like system executables should match the information given by the RPM database. Executables with erroneous hashes could be a sign of nefarious activity on the system.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       The following command will list which files on the system have file hashes different from what is expected by the RPM database:<br /><br /> $ rpm -Va --noconfig | awk '$1 ~ /..5/ && $2 != "c"' <br /><br />If there is output, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Given output from the check command, identify the package that provides the output and reinstall it. The following trimmed example output shows a package that has failed verification, been identified, and been reinstalled:<br /><br />$ rpm -Va --noconfig | awk '$1 ~ /..5/ && $2 != "c"'<br />S.5....T.    /usr/bin/znew<br />$ sudo dnf provides /usr/bin/znew<br />[...]<br />gzip-1.10-8.el9.x86_64 : The GNU data compression program<br />[...]<br />$ sudo dnf reinstall gzip<br />[...]<br />$ rpm -Va --noconfig | awk '$1 ~ /..5/ && $2 != "c"'<br />[no output]
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

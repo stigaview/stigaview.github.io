@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000090 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift RBAC access controls must be enforced.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000090 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000213&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000033-CTR-000090">SRG-APP-000033-CTR-000090</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Controlling and limiting users access to system services and resources is key to securing the platform and limiting the intentional or unintentional compromising of the system and its services. OpenShift provides a robust RBAC policy system that allows for authorization policies to be as detailed as needed. Additionally, there are two layers of RBAC policies. The first is Cluster RBAC policies which administrators can control who has what access to cluster level services. The other is Local RBAC policies, which allow project developers/administrators to control what level of access users have to a given project or namespace.<br /><br />OpenShift provides a set of default roles out of the box, and additional roles may be added as needed. Each role has a set of rules controlling what access that role may have, and users and/or groups may be bound to one or more roles. The cluster-admin cluster level RBAC role has complete super admin privileges and it is a required role for select cluster administrators to have.<br /><br />The OpenShift Container Platform includes a built-in image registry. The primary purpose is to allow users to create, import, and generally manage images running in the cluster. This registry is integrated with the authentication and authorization (RBAC) services on the cluster.<br /><br />Restricting access permissions and providing access only to the necessary components and resources within the OpenShift environment reduces the potential impact of security breaches and unauthorized activities.<br /><br />Satisfies: SRG-APP-000033-CTR-000090, SRG-APP-000033-CTR-000095, SRG-APP-000033-CTR-000100, SRG-APP-000133-CTR-000290, SRG-APP-000133-CTR-000295, SRG-APP-000133-CTR-000300, SRG-APP-000133-CTR-000305, SRG-APP-000133-CTR-000310, SRG-APP-000148-CTR-000350, SRG-APP-000153-CTR-000375, SRG-APP-000340-CTR-000770, SRG-APP-000378-CTR-000880, SRG-APP-000378-CTR-000885, SRG-APP-000378-CTR-000890, SRG-APP-000380-CTR-000900, SRG-APP-000386-CTR-000920
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       The administrator must verify that OpenShift is configured with the necessary RBAC access controls.<br /><br />Review the RBAC configuration.<br /><br />As the cluster-admin, view the cluster roles and their associated rule sets by executing the following:<br /><br />oc describe clusterrole.rbac<br /><br />Now, view the current set of cluster role bindings, which shows the users and groups that are bound to various roles by executing the following:<br /><br />oc describe clusterrolebinding.rbac<br /><br />Local roles and bindings can be determined by executing the following:<br /><br />oc describe rolebinding.rbac<br /><br />If these results show users with privileged access that do not require that access, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       If users or groups exist that are bound to roles they must not have, modify the user or group permissions using the following cluster and local role binding commands:<br /><br />Remove a user from a Cluster RBAC role by executing the following:<br /><br />oc adm policy remove-cluster-role-from-user <role> <username><br /><br />Remove a group from a Cluster RBAC role by executing the following:<br /><br />oc adm policy remove-cluster-role-from-group <role> <groupname><br /><br />Remove a user from a Local RBAC role by executing the following:<br /><br />oc adm policy remove-role-from-user <role> <username><br /><br />Remove a group from a Local RBAC role by executing the following:<br /><br />oc adm policy remove-role-from-group <role> <groupname><br /> <br />Note: For additional information, refer to https://docs.openshift.com/container-platform/4.8/authentication/using-rbac.html.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

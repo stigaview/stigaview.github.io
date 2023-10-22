@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-021620 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must use a file integrity tool that is configured to use FIPS 140-2 approved cryptographic hashes for validating file contents and directories.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-021620 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       File integrity tools use cryptographic hashes for verifying file contents and directories have not been altered. These hashes must be FIPS 140-2 approved cryptographic hashes.<br />The Oracle Linux operating system installation media ships with an optional file integrity tool called Advanced Intrusion Detection Environment (AIDE). AIDE is highly configurable at install time. This requirement assumes the "aide.conf" file is under the "/etc" directory.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the file integrity tool is configured to use FIPS 140-2 approved cryptographic hashes for validating file contents and directories.<br /><br />Check to see if AIDE is installed on the system with the following command:<br /><br /># yum list installed aide<br /><br />If AIDE is not installed, ask the System Administrator how file integrity checks are performed on the system. <br /><br />If there is no application installed to perform file integrity checks, this is a finding.<br /><br />Note: AIDE is highly configurable at install time. These commands assume the "aide.conf" file is under the "/etc" directory. <br /><br />Use the following command to determine if the file is in another location:<br /><br /># find / -name aide.conf<br /><br />Check the "aide.conf" file to determine if the "sha512" rule has been added to the rule list being applied to the files and directories selection lists.<br /><br />An example rule that includes the "sha512" rule follows:<br /><br />All=p+i+n+u+g+s+m+S+sha512+acl+xattrs+selinux<br />/bin All # apply the custom rule to the files in bin <br />/sbin All # apply the same custom rule to the files in sbin <br /><br />If the "sha512" rule is not being used on all uncommented selection lines in the "/etc/aide.conf" file, or another file integrity tool is not using FIPS 140-2 approved cryptographic hashes for validating file contents and directories, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the file integrity tool to use FIPS 140-2 cryptographic hashes for validating file and directory contents. <br /><br />If AIDE is installed, ensure the "sha512" rule is present on all uncommented file and directory selection lists.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

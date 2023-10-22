@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APAS-AT-000010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Automation Controller must limit the number of concurrent sessions to an organization-defined number for all accounts and/or account types.</h2>
+  <p>
+  <b>STIG ID:</b> APAS-AT-000010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000054&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000001-AS-000001">SRG-APP-000001-AS-000001</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Application management includes the ability to control the number of sessions that utilize an application by all accounts and/or account types. Limiting the number of allowed sessions is helpful in limiting risks related to denial-of-service attacks.<br /><br />Automation Controllers host and expose business logic and application processes.<br /><br />Automation Controller limits the maximum number of concurrent sessions in a manner that affects the entire application server or on an individual application basis.<br /><br />The settings must follow DOD-recommended values, but the settings should be configurable to allow for future DOD direction.<br /><br />While the DOD will specify recommended values, the values can be adjusted to accommodate the operational requirement of a given system.<br /><br />Satisfies: SRG-APP-000001-AS-000001, SRG-APP-000295-AS-000263
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a System Administrator for each Automation Controller host, navigate to the Automation Controller web administrator console:<br />Settings >> System >> Miscellaneous Authentication settings.<br /><br />Verify the "Maximum Number of simultaneous logged in sessions" field is set according to policy.<br /><br />If this configuration setting does not match the organizationally defined maximum, or is set to -1 (negative one), this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a System Administrator for each Automation Controller host, navigate to the Automation Controller web administrator console:<br />Settings >> System >> Miscellaneous Authentication settings.<br /><br />Click "Edit".<br /><br />Change "Maximum Number of simultaneous logged in sessions" to match the organizationally defined maximum or greater than 0.<br /><br />Click "Save".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

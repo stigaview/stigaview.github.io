@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000610 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Automation Controller NGINX web server must limit the character set used for data entry.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000610 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001310&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000251-WSR-000157">SRG-APP-000251-WSR-000157</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is important that Automation Controller NGINX web server limit the character set used for data entry and disallow Unicode use in hosted applications to avoid application compromise. Definition of the available character set for data entry can trap efforts to bypass security checks. The presence of nonstandard characters may cause the browser to interpret the content using a different character set than the defined one, because the system may interpret the content using a different CHARSET. Nonstandard encodings like UTF-7 can be used to bypass the application's defensive filters.<br /><br />If character sets for data entry are not defined, it leaves open the door for attackers to bypass security checks and make the server vulnerable to malicious attack.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a System Administrator for each Automation Controller NGINX web server, verify the configuration requires a charset is mandatory.<br /><br />NGINXCONF=`nginx -V 2>&1 | tr ' ' '\n' | sed -ne '/conf-path/{s/.*conf-path=\(.*\)/\1/;p}' ` ; grep 'charset_required' $NGINXCONF || echo "FAILED"<br /><br />If "FAILED" is displayed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a System Administrator for each Automation Controller NGINX web server, verify the NGINX web server configuration file in use is located at '/etc/nginx/nginx.conf'<br /><br />NGINXCONF=`nginx -V 2>&1 | tr ' ' '\n' | sed -ne '/conf-path/{s/.*conf-path=\(.*\)/\1/;p}' ` ; <br /><br />Add the directive to the NGINX configuration to force a required charset.<br /><br />sed -i  '/location/i charset_required; ' $NGINXCONF<br /><br />Reload the NGINX server configurations for all NGINX processes.<br /><br />$ pkill -HUP nginx
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

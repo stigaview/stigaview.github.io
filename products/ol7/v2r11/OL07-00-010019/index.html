@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-010019 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must ensure cryptographic verification of vendor software packages.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-010019 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001749&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000366-GPOS-00153">SRG-OS-000366-GPOS-00153</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Cryptographic verification of vendor software packages ensures that all software packages are obtained from a valid source and protects against spoofing that could lead to installation of malware on the system. Oracle cryptographically signs all software packages, which includes updates, with a GPG key to verify that they are valid.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Confirm Oracle package-signing key is installed on the system and verify its fingerprint matches vendor value.<br /><br />Note: The GPG key is defined in key file "/etc/pki/rpm-gpg/RPM-GPG-KEY-oracle" by default.<br /><br />List Oracle GPG keys installed on the system:<br /><br />     $ sudo rpm -q --queryformat "%{SUMMARY}\n" gpg-pubkey | grep -i "oracle"<br /><br />     gpg(Oracle OSS group (Open Source Software group) <build@oss.oracle.com>)<br /><br />If Oracle GPG key is not installed, this is a finding.<br /><br />List key fingerprint of installed Oracle GPG key:<br /><br />     $ sudo gpg -q --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-oracle<br /><br />If key file "/etc/pki/rpm-gpg/RPM-GPG-KEY-oracle" is missing, this is a finding.<br /><br />Example output:<br /><br />     pub  2048R/EC551F03 2010-07-01 Oracle OSS group (Open Source Software group) <build@oss.oracle.com><br />           Key fingerprint = 4214 4123 FECF C55B 9086  313D 72F9 7B74 EC55 1F03<br />	   <br />Compare key fingerprint of installed Oracle GPG key with fingerprint listed for OL 7 on Oracle verification webpage at https://linux.oracle.com/security/gpg/#gpg.<br /><br />If key fingerprint does not match, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install Oracle package-signing key on the system and verify its fingerprint matches vendor value.<br /><br />Insert OL 7 installation disc or attach OL 7 installation image to the system. Mount the disc or image to make the contents accessible inside the system.<br /><br />Assuming the mounted location is "/media/cdrom", use the following command to copy Oracle GPG key file onto the system:<br /><br />     $ sudo cp /media/cdrom/RPM-GPG-KEY-oracle /etc/pki/rpm-gpg/<br />	 <br />Import Oracle GPG keys from key file into system keyring:<br /><br />     $ sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-oracle<br />	 <br />Using the steps listed in the Check Text, confirm the newly imported key shows as installed on the system and verify its fingerprint matches vendor value.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

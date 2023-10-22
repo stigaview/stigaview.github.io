@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-010000 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 8 must be a vendor-supported release.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-010000 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       An operating system release is considered "supported" if the vendor continues to provide security patches for the product. With an unsupported release, it will not be possible to resolve security issues discovered in the system software.<br /><br />Red Hat offers the Extended Update Support (EUS) add-on to a Red Hat Enterprise Linux subscription, for a fee, for those customers who wish to standardize on a specific minor release for an extended period. The RHEL 8 minor releases eligible for EUS are 8.1, 8.2, 8.4, 8.6, and 8.8. Each RHEL 8 EUS stream is available for 24 months from the availability of the minor release. RHEL 8.10 will be the final minor release overall. For more details on the Red Hat Enterprise Linux Life Cycle  visit https://access.redhat.com/support/policy/updates/errata/.<br />Note: The life-cycle time spans and dates are subject to adjustment.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the version of the operating system is vendor supported.<br /><br />Note: The lifecycle time spans and dates are subject to adjustment.<br /><br />Check the version of the operating system with the following command:<br /><br />$ sudo cat /etc/redhat-release<br /><br />Red Hat Enterprise Linux Server release 8.6 (Ootpa)<br /><br />Current End of Extended Update Support for RHEL 8.1 is 30 November 2021.<br /><br />Current End of Extended Update Support for RHEL 8.2 is 30 April 2022.<br /><br />Current End of Extended Update Support for RHEL 8.4 is 31 May 2023.<br /><br />Current End of Maintenance Support for RHEL 8.5 is 31 May 2022.<br /><br />Current End of Extended Update Support for RHEL 8.6 is 31 May 2024.<br /><br />Current End of Maintenance Support for RHEL 8.7 is 31 May 2023.<br /><br />Current End of Extended Update Support for RHEL 8.8 is 31 May 2025.<br /><br />Current End of Maintenance Support for RHEL 8.9 is 31 May 2024.<br /><br />Current End of Maintenance Support for RHEL 8.10 is 31 May 2029.<br /><br />If the release is not supported by the vendor, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Upgrade to a supported version of RHEL 8.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

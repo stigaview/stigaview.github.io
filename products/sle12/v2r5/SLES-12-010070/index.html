@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-010070 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must utilize vlock to allow for session locking.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-010070 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000056&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000028-GPOS-00009">SRG-OS-000028-GPOS-00009</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not want to log out because of the temporary nature of the absence.<br /><br />The session lock is implemented at the point where session activity can be determined.<br /><br />Regardless of where the session lock is determined and implemented, once invoked, the session lock must remain in place until the user reauthenticates. No other activity aside from reauthentication must unlock the system.<br /><br />Satisfies: SRG-OS-000028-GPOS-00009, SRG-OS-000030-GPOS-00011, SRG-OS-000031-GPOS-00012
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Check that the SUSE operating system has the "vlock" package installed by running the following command: <br /><br /># zypper se -i --provides vlock <br /><br />If the command outputs "no matching items found", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Allow users to lock the console by installing the "kbd" package using zypper:<br /><br /># sudo zypper install kbd
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

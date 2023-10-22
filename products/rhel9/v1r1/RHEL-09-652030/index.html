@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-652030 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All RHEL 9 remote access methods must be monitored.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-652030 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000067&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000032-GPOS-00013">SRG-OS-000032-GPOS-00013</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Logging remote access methods can be used to trace the decrease in the risks associated with remote user access management. It can also be used to spot cyberattacks and ensure ongoing compliance with organizational policies surrounding the use of remote access methods.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that RHEL 9 monitors all remote access methods.<br /><br />Check that remote access methods are being logged by running the following command:<br /><br />$ grep -rE '(auth.\*|authpriv.\*|daemon.\*)' /etc/rsyslog.conf<br /><br />/etc/rsyslog.conf:authpriv.*<br /> <br />If "auth.*", "authpriv.*" or "daemon.*" are not configured to be logged, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Add or update the following lines to the "/etc/rsyslog.conf" file:<br /><br />auth.*;authpriv.*;daemon.* /var/log/secure<br /><br />The "rsyslog" service must be restarted for the changes to take effect with the following command:<br /><br />$ sudo systemctl restart rsyslog.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

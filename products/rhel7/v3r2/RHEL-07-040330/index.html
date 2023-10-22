@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-040330 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must be configured so that the SSH daemon does not allow authentication using RSA rhosts authentication.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-040330 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Configuring this setting for the SSH daemon provides additional assurance that remote logon via SSH will require a password, even in the event of misconfiguration elsewhere.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Check the version of the operating system with the following command:<br /><br /># cat /etc/redhat-release<br /><br />If the release is 7.4 or newer this requirement is Not Applicable.<br /><br />Verify the SSH daemon does not allow authentication using RSA rhosts authentication.<br /><br />To determine how the SSH daemon's "RhostsRSAAuthentication" option is set, run the following command:<br /><br /># grep RhostsRSAAuthentication /etc/ssh/sshd_config<br />RhostsRSAAuthentication no<br /><br />If the value is returned as "yes", the returned line is commented out, or no output is returned, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SSH daemon to not allow authentication using RSA rhosts authentication.<br /><br />Add the following line in "/etc/ssh/sshd_config", or uncomment the line and set the value to "no":<br /><br />RhostsRSAAuthentication no<br /><br />The SSH service must be restarted for changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

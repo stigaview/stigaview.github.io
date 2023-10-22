@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APAS-AT-000047 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Automation Controller must be configured to use an enterprise user management system.</h2>
+  <p>
+  <b>STIG ID:</b> APAS-AT-000047 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000187&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000148-AS-000101">SRG-APP-000148-AS-000101</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Unauthenticated application servers render the organization subject to exploitation. Therefore, application servers must be uniquely identified and authenticated to prevent unauthorized access.<br /><br />Satisfies: SRG-APP-000148-AS-000101, SRG-APP-000149-AS-000102, SRG-APP-000151-AS-000103, SRG-APP-000177-AS-000126, SRG-APP-000389-AS-000253, SRG-APP-000390-AS-000254, SRG-APP-000391-AS-000239, SRG-APP-000392-AS-000240, SRG-APP-000400-AS-000246, SRG-APP-000401-AS-000243, SRG-APP-000402-AS-000247, SRG-APP-000403-AS-000248, SRG-APP-000404-AS-000249, SRG-APP-000405-AS-000250
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       The Administrator must check the Automation Controller web administrator console and verify the appropriate authentication provider is configured and the associated fields are complete and accurate.<br /><br />Log in to Automation Controller as an administrator and navigate to Settings >> Authentication.<br /><br />If the organization-defined identity provider is not configured, or any associated fields are incomplete or inaccurate, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Log in to Automation Controller as an administrator and navigate to Settings >> Authentication.<br /><br />Configure the appropriate authentication provider and associated fields for the organization-defined identity provider:<br /><br />Click on LDAP settings.<br /><br />Click "Edit".<br /><br />Configure/complete the fields.<br /><br />Click "Save".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

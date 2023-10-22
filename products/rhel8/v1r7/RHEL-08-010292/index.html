@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-010292 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 8 must ensure the SSH server uses strong entropy.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-010292 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The most important characteristic of a random number generator is its randomness, namely its ability to deliver random numbers that are impossible to predict.  Entropy in computer security is associated with the unpredictability of a source of randomness.  The random source with high entropy tends to achieve a uniform distribution of random values.  Random number generators are one of the most important building blocks of cryptosystems.<br /><br />The SSH implementation in RHEL8 uses the OPENSSL library, which does not use high-entropy sources by default.  By using the SSH_USE_STRONG_RNG environment variable the OPENSSL random generator is reseeded from /dev/random.  This setting is not recommended on computers without the hardware random generator because insufficient entropy causes the connection to be blocked until enough entropy is available.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system SSH server uses strong entropy with the following command:<br /><br />Note: If the operating system is RHEL versions 8.0 or 8.1, this requirement is not applicable.<br /><br />$ sudo grep -i ssh_use_strong_rng /etc/sysconfig/sshd<br /><br />SSH_USE_STRONG_RNG=32<br /><br />If the "SSH_USE_STRONG_RNG" line does not equal "32", is commented out or missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system SSH server to use strong entropy.<br /><br />Add or modify the following line in the "/etc/sysconfig/sshd" file.<br /><br />SSH_USE_STRONG_RNG=32<br /><br />The SSH service must be restarted for changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

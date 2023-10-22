@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-215015 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 must not have a File Transfer Protocol (FTP) server package installed.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-215015 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000197&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000074-GPOS-00042">SRG-OS-000074-GPOS-00042</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The FTP service provides an unencrypted remote access that does not provide for the confidentiality and integrity of user passwords or the remote session. If a privileged user were to log on using this service, the privileged user password could be compromised. SSH or other encrypted file transfer methods must be used in place of this service.<br /><br />Removing the "vsftpd" package decreases the risk of accidental activation.<br /><br />Satisfies: SRG-OS-000074-GPOS-00042, SRG-OS-000095-GPOS-00049, SRG-OS-000480-GPOS-00227
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that RHEL 9 does not have a File Transfer Protocol (FTP) server package installed with the following command:<br /><br />$ sudo dnf list --installed | grep ftp <br /><br />If the "ftp" package is installed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       The ftp package can be removed with the following command (using vsftpd as an example):<br /><br />$ sudo dnf remove vsftpd
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

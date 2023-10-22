@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-020180 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 8 passwords must have a 24 hours/1 day minimum password lifetime restriction in /etc/shadow.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-020180 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000198&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000075-GPOS-00043">SRG-OS-000075-GPOS-00043</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Enforcing a minimum password lifetime helps to prevent repeated password changes to defeat the password reuse or history enforcement requirement. If users are allowed to immediately and continually change their password, the password could be repeatedly changed in a short period of time to defeat the organization's policy regarding password reuse.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Check whether the minimum time period between password changes for each user account is one day or greater.<br /><br />$ sudo awk -F: '$4 < 1 {print $1 " " $4}' /etc/shadow<br /><br />If any results are returned that are not associated with a system account, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure non-compliant accounts to enforce a 24 hours/1 day minimum password lifetime:<br /><br />$ sudo chage -m 1 [user]
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

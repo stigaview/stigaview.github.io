@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-010600 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system Apparmor tool must be configured to control whitelisted applications and user home directory access control.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-010600 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001774&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000312-GPOS-00122">SRG-OS-000312-GPOS-00122</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Using a whitelist provides a configuration management method for allowing the execution of only authorized software. Using only authorized software decreases risk by limiting the number of potential vulnerabilities.<br /><br />The organization must identify authorized software programs and permit execution of authorized software by adding each authorized program to the "pam_apparmor" exception policy. The process used to identify software programs that are authorized to execute on organizational information systems is commonly referred to as whitelisting.<br /><br />Verification of whitelisted software occurs prior to execution or at system startup.<br /><br />Users' home directories/folders may contain information of a sensitive nature. Nonprivileged users should coordinate any sharing of information with a System Administrator (SA) through shared resources.<br /><br />Apparmor can confine users to their home directory, not allowing them to make any changes outside of their own home directories. Confining users to their home directory will minimize the risk of sharing information.<br /><br />Satisfies: SRG-OS-000312-GPOS-00122, SRG-OS-000312-GPOS-00123SRG-OS-000312-GPOS-00124, SRG-OS-000324-GPOS-00125, SRG-OS-000326-GPOS-00126, SRG-OS-000370-GPOS-00155, SRG-OS-000480-GPOS-00230
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that the SUSE operating system Apparmor tool is configured to control whitelisted applications and user home directory access control.<br /><br />Check that "pam_apparmor" is installed on the system with the following command:<br /><br />> zypper info pam_apparmor | grep "Installed"<br /><br />If the package "pam_apparmor" is not installed on the system, this is a finding.<br /><br />Check that the "apparmor" daemon is running with the following command:<br /><br />> systemctl status apparmor.service | grep -i active<br /><br />Active: active (exited) since Fri 2017-01-13 01:01:01 GMT; 1day 1h ago<br /><br />If something other than "Active: active" is returned, this is a finding.<br /><br />Note: "pam_apparmor" must have properly configured profiles. All configurations will be based on the actual system setup and organization. See the "pam_apparmor" documentation for more information on configuring profiles.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to blacklist all applications by default and permit by whitelist.<br /><br />Install "pam_apparmor" (if it is not installed) with the following command:<br /><br />> sudo zypper in pam_apparmor<br /><br />Enable/activate "Apparmor" (if it is not already active) with the following command:<br /><br />> sudo systemctl enable apparmor.service<br /><br />Start "Apparmor" with the following command:<br /><br />> sudo systemctl start apparmor.service<br /><br />Note: "pam_apparmor" must have properly configured profiles. All configurations will be based on the actual system setup and organization. See the "pam_apparmor" documentation for more information on configuring profiles.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

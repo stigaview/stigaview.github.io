@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000340 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must use FIPS-validated cryptographic mechanisms to protect the integrity of log information.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000340 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001350&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000126-CTR-000275">SRG-APP-000126-CTR-000275</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       To fully investigate an incident and to have trust in the audit data that is generated, it is important to put in place data protections. Without integrity protections, unauthorized changes may be made to the audit files and reliable forensic analysis and discovery of the source of malicious system activity may be degraded. Although digital signatures are one example of protecting integrity, this control is not intended to cause a new cryptographic hash to be generated every time a record is added to a log file. <br /><br />Integrity protections can also be implemented by using cryptographic techniques for security function isolation and file system protections to protect against unauthorized changes.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the Cluster Log Forwarder is using an encrypted transport by executing the following:<br /><br />oc get clusterlogforwarder -n openshift-logging<br /><br />For each Cluster Log Forwarder, run the following command to display the configuration.<br /><br />oc describe clusterlogforwarder <name> -n openshift-logging<br /><br />Review the configuration and determine if the transport is secure, such as tls:// or https://. If there are any transports configured that are not secured by TLS, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Edit the Cluster Log Forwarder configuration to configure TLS on the transport by executing the following:<br /><br />oc edit clusterlogforwarder <name> -n openshift-logging<br /><br />For any output->url value that is not using a secure transport, edit the url to use a secure (https:// or tls://) transport.<br /><br />For detailed information regarding configuration of the Cluster Log Forwarder, refer to https://docs.openshift.com/container-platform/4.8/logging/cluster-logging-external.html.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

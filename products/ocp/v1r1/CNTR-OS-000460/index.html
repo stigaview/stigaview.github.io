@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000460 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must use FIPS validated LDAP or OpenIDConnect.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000460 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000016&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000172-CTR-000440">SRG-APP-000172-CTR-000440</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Passwords need to be protected on entry, in transmission, during authentication, and when stored. If compromised at any of these security points, a nefarious user can use the password along with stolen user account information to gain access or to escalate privileges. The container platform may require account authentication during container platform tasks and before accessing container platform components (e.g., runtime, registry, and keystore).<br /><br />During any user authentication, the container platform must use FIPS-validated SHA-2 or later protocol to protect the integrity of the password authentication process.<br /><br />Satisfies: SRG-APP-000172-CTR-000440, SRG-APP-000024-CTR-000060, SRG-APP-000025-CTR-000065, SRG-APP-000065-CTR-000115, SRG-APP-000151-CTR-000365, SRG-APP-000152-CTR-000370, SRG-APP-000157-CTR-000385, SRG-APP-000163-CTR-000395, SRG-APP-000164-CTR-000400, SRG-APP-000165-CTR-000405, SRG-APP-000166-CTR-000410, SRG-APP-000167-CTR-000415, SRG-APP-000168-CTR-000420, SRG-APP-000169-CTR-000425, SRG-APP-000170-CTR-000430, SRG-APP-000171-CTR-000435, SRG-APP-000173-CTR-000445, SRG-APP-000174-CTR-000450, SRG-APP-000177-CTR-000465, SRG-APP-000317-CTR-000735, SRG-APP-000318-CTR-000740, SRG-APP-000345-CTR-000785, SRG-APP-000391-CTR-000935, SRG-APP-000397-CTR-000955, SRG-APP-000401-CTR-000965, SRG-APP-000402-CTR-000970
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the authentication operator is configured to use either an LDAP or a OpenIDConnect provider by executing the following:<br /><br />oc get oauth cluster -o jsonpath="{.spec.identityProviders[*].type}{'\n'}"<br /><br />If the output lists any other type besides LDAP or OpenID, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure OpenShift to use an appropriate Identity Provider. Do not use HTPasswd. Use either LDAP(AD), OpenIDConnect or an approved identity provider.<br /><br />To configure LDAP provider:<br /><br />1. Create Secret for BIND DN password by executing the following:<br /><br />oc create secret generic ldap-secret --from-literal=bindPassword=<secret> -n openshift-config <br /><br />2. Create config map for LDAP Trust CA by executing the following:<br /> <br />oc create configmap ca-config-map --from-file=ca.crt=/path/to/ca -n openshift-config<br /><br />3. Create LDAP Auth Config Resource YAML:<br />Using the preferred text editor, create a file named ldapidp.yaml using the example content (replacing config values as appropriate).<br /> <br />apiVersion: config.openshift.io/v1<br />kind: OAuth<br />metadata:<br />  name: cluster<br />spec:<br />  identityProviders:<br />  - name: ldapidp <br />    mappingMethod: claim <br />    type: LDAP<br />    ldap:<br />      attributes:<br />        id: <br />        - dn<br />        email: <br />        - mail<br />        name: <br />        - cn<br />        preferredUsername: <br />        - uid<br />      bindDN: <"bindDN"><br />      bindPassword: <br />        name: ldap-secret<br />      ca: <br />        name: ca-config-map<br />      insecure: false <br />      url: <URL> <br /><br />4. Apply LDAP config to cluster by executing the following:<br /> <br />oc apply -f ldapidp.yaml<br /> <br />Note: For more information on configuring an LDAP provider, refer to https://docs.openshift.com/container-platform/4.8/authentication/identity_providers/configuring-ldap-identity-provider.html.<br /> <br />To configure OpenID provider:<br /> <br />1. Create Secret for Client Secret by executing the following:<br /> <br />oc create secret generic idp-secret --from-literal=clientSecret=<secret> -n openshift-config<br /> <br />2. Create config map for OpenID Trust CA by executing the following:<br /> <br />oc create configmap ca-config-map --from-file=ca.crt=/path/to/ca -n openshift-config<br /><br />3. Create OpenID Auth Config Resource YAML.<br />Using your preferred text editor, create a file named oidcidp.yaml using the example content (replacing config values as appropriate).<br /><br />apiVersion: config.openshift.io/v1<br />kind: OAuth<br />metadata:<br />  name: cluster<br />spec:<br />  identityProviders:<br />  - name: oidcidp<br />    mappingMethod: claim<br />    type: OpenID<br />    openID:<br />      clientID: <clientID><br />      clientSecret:<br />        name: oidc-idp-secret<br />      claims:<br />        preferredUsername:<br />        - preferred_username<br />        name:<br />        - name<br />        email:<br />        - email<br />      ca:<br />        name: ca-config-map<br />      issuer: <URL><br /> <br />4. Apply OpenID config to cluster by executing the following:<br /> <br />oc apply -f ldapidp.yaml<br /> <br />Note: For more information on configuring an OpenID provider, refer to https://docs.openshift.com/container-platform/4.8/authentication/identity_providers/configuring-oidc-identity-provider.html.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

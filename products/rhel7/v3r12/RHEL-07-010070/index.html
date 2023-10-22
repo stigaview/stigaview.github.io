@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-010070 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must initiate a screensaver after a 15-minute period of inactivity for graphical user interfaces.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-010070 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000057&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000029-GPOS-00010">SRG-OS-000029-GPOS-00010</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.<br /><br />The session lock is implemented at the point where session activity can be determined and/or controlled.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system initiates a screensaver after a 15-minute period of inactivity for graphical user interfaces.<br /><br />Note: If the system does not have GNOME installed, this requirement is Not Applicable.<br /><br />Check to see if GNOME is configured to display a screensaver after a 15 minute delay with the following command:<br /><br />     # grep -i idle-delay /etc/dconf/db/local.d/*<br />     idle-delay=uint32 900<br /><br />If the "idle-delay" setting is missing or is not set to "900" or less, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to initiate a screensaver after a 15-minute period of inactivity for graphical user interfaces.<br /><br />Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command:<br /><br />     # touch /etc/dconf/db/local.d/00-screensaver<br /><br />Edit /etc/dconf/db/local.d/00-screensaver and add or update the following lines:<br /><br />     [org/gnome/desktop/session]<br />     # Set the lock time out to 900 seconds before the session is considered idle<br />     idle-delay=uint32 900<br /><br />You must include the "uint32" along with the integer key values as shown.<br /><br />Update the system databases:<br /><br />     # dconf update<br /><br />Users must log out and back in again before the system-wide settings take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

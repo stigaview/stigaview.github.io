@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-431010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 must use a Linux Security Module configured to enforce limits on system services.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-431010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001084&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000445-GPOS-00199">SRG-OS-000445-GPOS-00199</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without verification of the security functions, security functions may not operate correctly and the failure may go unnoticed. Security function is defined as the hardware, software, and/or firmware of the information system responsible for enforcing the system security policy and supporting the isolation of code and data on which the protection is based. Security functionality includes, but is not limited to, establishing system accounts, configuring access authorizations (i.e., permissions, privileges), setting events to be audited, and setting intrusion detection parameters.<br /><br />This requirement applies to operating systems performing security function verification/testing and/or systems and environments that require this functionality.<br /><br />Satisfies: SRG-OS-000445-GPOS-00199, SRG-OS-000134-GPOS-00068
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Ensure that RHEL 9 verifies correct operation of security functions through the use of SELinux with the following command:<br /><br />$ getenforce<br /><br />Enforcing<br /><br />If SELINUX is not set to "Enforcing", this is a finding.<br /><br />Verify that SELinux is configured to be enforcing at boot.<br /><br />grep "SELINUX=" /etc/selinux/config<br /># SELINUX= can take one of these three values:<br /># NOTE: In earlier Fedora kernel builds, SELINUX=disabled would also<br />SELINUX=enforcing<br /><br />If SELINUX line is missing, commented out, or not set to "enforcing", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure RHEL 9 to verify correct operation of security functions.<br /><br />Edit the file "/etc/selinux/config" and add or modify the following line:<br /><br /> SELINUX=enforcing <br /><br />A reboot is required for the changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

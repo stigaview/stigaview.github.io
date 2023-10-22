@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000830 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Automation Controller NGINX web server must be protected from being stopped by a nonprivileged user.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000830 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002385&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000435-WSR-000147">SRG-APP-000435-WSR-000147</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       An attacker has at least two reasons to stop an Automation Controller NGINX web server. The first is to cause a DoS, and the second is to put in place changes the attacker made to an Automation Controller NGINX web server configuration.<br /><br />To prohibit an attacker from stopping the Automation Controller NGINX web server, the process ID (PID) of the web server and the utilities used to start/stop the web server must be protected from access by nonprivileged users. By knowing the PID and having access to the Automation Controller NGINX web server utilities, a nonprivileged user has a greater capability of stopping the server, whether intentionally or unintentionally.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a System Administrator for each Automation Controller NGINX web server host, verify required service definition is protected from unprivileged users:<br /><br />stat -c "%a %U %G" /usr/lib/systemd/system/automation-controller.service | grep -q "644 root root" || echo "FAILED"<br />stat -c "%a %U %G" /usr/lib/systemd/system/supervisord.service | grep -q "644 root root" || echo "FAILED"<br />stat -c "%a %U %G"  /usr/lib/systemd/system/nginx.service | grep -q "644 root root" || echo "FAILED"<br /><br />If "FAILED" is displayed, this is a finding.<br /><br />Verify the required services are enabled:<br /><br />systemctl is-enabled automation-controller.service >/dev/null || echo FAILED<br />systemctl is-enabled supervisord.service >/dev/null || echo FAILED<br />systemctl is-enabled nginx.service >/dev/null || echo FAILED<br /><br />If "FAILED" is displayed, this is a finding.<br /><br />Verify application services are correctly managed by supervisord. Verify protection of and capture supervisord configuration.<br /><br />stat -c "%a %U %G" /etc/supervisord.d/*.ini | grep -q "644 root root" || echo "FAILED"<br />cat  /etc/supervisord.d/*.ini | sed -n -E "/^\[.*\]/{s/\[(.*)\]/\1/;h;n;};/^[a-zA-Z]/{s/#.*//;G;s/([^ ]*) *= *(.*)\n(.*)/\3_\1='\2'/;p;}" > /tmp/supervisord.parsed.conf<br /><br />Verify specific start and restart properties for application services:<br /><br />application_services=(program:awx-dispatcher_autostart program:awx-dispatcher_autorestart program:awx-wsbroadcast_autostart program:awx-wsbroadcast_autorestart program:awx-uwsgi_autostart program:awx-uwsgi_autorestart program:awx-daphne_autostart program:awx-daphne_autorestart program:awx-rsyslogd_autostart program:awx-rsyslogd_autorestart) <br />for SUPERVISOR_CHECK in ${application_services[@]}; do grep $SUPERVISOR_CHECK /tmp/supervisord.parsed.conf | grep -q true || echo "FAILED" ; done<br />rm /tmp/supervisord.parsed.conf<br /><br />If "FAILED" is displayed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a System Administrator for each Automation Controller NGINX web server host, set the permissions correctly on the nginx service file:<br /><br />sudo chown root:root /usr/lib/systemd/system/nginx.service<br />sudo chmod 644 /usr/lib/systemd/system/nginx.service<br /><br />Reset the Ansible Automation Platform configuration to the defaults, which meet the requirements for the supervisord and automation-controller services.<br /><br />Locate the inventory file used to install Ansible Automation Platform (usually in the installer directory).<br /><br />Run the setup.sh command in the installer directory to reconfigure the controller to use the new setting:<br /><br />sudo ./setup.sh
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-040400 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must be configured so that the SSH daemon is configured to only use Message Authentication Codes (MACs) employing FIPS 140-2 approved cryptographic hash algorithms.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-040400 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001453&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000250-GPOS-00093">SRG-OS-000250-GPOS-00093</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       DoD information systems are required to use FIPS 140-2 approved cryptographic hash functions. The only SSHv2 hash algorithm meeting this requirement is SHA.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SSH daemon is configured to only use MACs employing FIPS 140-2-approved ciphers.<br /><br />Note: If OL07-00-021350 is a finding, this is automatically a finding, as the system cannot implement FIPS 140-2-approved cryptographic algorithms and hashes.<br /><br />Check that the SSH daemon is configured to only use MACs employing FIPS 140-2-approved ciphers with the following command:<br /><br /># grep -i macs /etc/ssh/sshd_config<br />MACs hmac-sha2-256,hmac-sha2-512<br /><br />If any ciphers other than "hmac-sha2-256" or "hmac-sha2-512" are listed or the returned line is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Edit the "/etc/ssh/sshd_config" file to uncomment or add the line for the "MACs" keyword and set its value to "hmac-sha2-256" and/or "hmac-sha2-512" (this file may be named differently or be in a different location if using a version of SSH that is provided by a third-party vendor):<br /><br />MACs hmac-sha2-256,hmac-sha2-512<br /><br />The SSH service must be restarted for changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

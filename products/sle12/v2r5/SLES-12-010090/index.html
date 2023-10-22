@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-010090 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must initiate a session lock after a 15-minute period of inactivity.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-010090 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000057&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000029-GPOS-00010">SRG-OS-000029-GPOS-00010</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. <br /><br />Rather than relying on the users to manually lock their SUSE operating system session prior to vacating the vicinity, the SUSE operating system needs to be able to identify when a user's session has idled and take action to initiate the session lock.<br /><br />The session lock is implemented at the point where session activity can be determined and/or controlled.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system must initiate a session logout after a 15-minute period of inactivity for all connection types. <br /><br />Check the proper script exists to kill an idle session after a 15-minute period of inactivity with the following command:<br /><br /># cat /etc/profile.d/autologout.sh<br />TMOUT=900<br />readonly TMOUT<br />export TMOUT<br /><br />If the file "/etc/profile.d/autologout.sh" does not exist or the output from the function call is not the same, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to initiate a session lock after a 15-minute period of inactivity by modifying or creating (if it does not already exist) the "/etc/profile.d/autologout.sh" file and add the following lines to it:<br /><br />TMOUT=900<br />readonly TMOUT<br />export TMOUT<br /><br />Set the proper permissions for the "/etc/profile.d/autologout.sh" file with the following command:<br /><br /># sudo chmod +x /etc/profile.d/autologout.sh
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

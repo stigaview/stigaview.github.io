@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-020550 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must generate audit records for all uses of the passwd command.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-020550 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000130&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000037-GPOS-00015">SRG-OS-000037-GPOS-00015</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Reconstruction of harmful events or forensic analysis is not possible if audit records do not contain enough information.<br /><br />At a minimum, the organization must audit the full-text recording of privileged commands. The organization must maintain audit trails in sufficient detail to reconstruct events to determine the cause and impact of compromise.<br /><br />Satisfies: SRG-OS-000037-GPOS-00015, SRG-OS-000062-GPOS-00031, SRG-OS-000392-GPOS-00172, SRG-OS-000462-GPOS-00206, SRG-OS-000471-GPOS-00215
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system generates an audit record for all uses of the "passwd" command.<br /><br />Check that the following command call is being audited by performing the following command on the system rules in "/etc/audit/audit.rules":<br /><br /># sudo grep -i /usr/bin/passwd /etc/audit/audit.rules<br /><br />-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-passwd<br /><br />If the command does not return any output or the returned line is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to generate an audit record for all uses the "passwd" command.<br /><br />Add or update the following rules in the "/etc/audit/rules.d/audit.rules" file:<br /><br />-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged-passwd<br /><br />The audit daemon must be restarted for the changes to take effect.<br /><br /># sudo systemctl restart auditd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

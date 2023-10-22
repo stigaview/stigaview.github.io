@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000220 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift components must provide the ability to send audit logs to a central enterprise repository for review and analysis.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000220 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000154&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000111-CTR-000220">SRG-APP-000111-CTR-000220</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Sending audit logs to a central enterprise repository allows for centralized log management. Instead of scattered logs across multiple OpenShift components, having a centralized repository simplifies log storage, retention, and retrieval. It provides a single source of truth for audit logs, making it easier to manage and analyze log data.<br /><br />Centralized audit logs are crucial for incident response and forensic investigations. When a security incident occurs, having audit logs in a central repository allows security teams to quickly access relevant log data for analysis. It facilitates incident reconstruction, root cause analysis, and the identification of the scope and impact of the incident. This is vital for effective incident response and minimizing the impact of security breaches.<br /><br />Satisfies: SRG-APP-000111-CTR-000220, SRG-APP-000092-CTR-000165, SRG-APP-000358-CTR-000805
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Determine if cluster log forwarding is configured.<br /><br />1. Verify the cluster-logging operator is installed by executing the following:<br /><br />oc get subscription/cluster-logging -n openshift-logging<br />(Example Output:<br />NAME              PACKAGE           SOURCE             CHANNEL<br />cluster-logging   cluster-logging   redhat-operators   stable<br />)<br /><br />If the cluster-logging operator is not present, this is a finding.<br /><br />2. List the cluster log forwarders defined by executing the following:<br /><br />oc get clusterlogforwarder -n openshift-logging<br /><br />If there are no clusterlogforwarders defined, this is a finding.<br /><br />3. For each cluster log forwarder listed above, view the configuration details by executing the following:<br /> <br />oc describe clusterlogforwarder/<CLF_NAME> -n openshift-logging<br /><br />Review the details of the cluster log forwarder.<br /><br />If the configuration is not set to forward logs the organization's centralized logging service, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       To configure log forwarding, the OpenShift Cluster Logging operator first must be installed, and then the Cluster Log Forwarder is configured to forward logs to a centralized log aggregation service.<br /><br />To install the OpenShift Cluster Logging operator, execute the following command to apply the subscription manifests to the cluster:<br /><br />oc apply -f - << 'EOF'<br />---<br />apiVersion: project.openshift.io/v1<br />kind: Project<br />metadata:<br />  labels:<br />    kubernetes.io/metadata.name: openshift-logging<br />    openshift.io/cluster-monitoring: "true"<br />  name: openshift-logging<br />spec: {}<br />...<br />---<br />apiVersion: operators.coreos.com/v1<br />kind: OperatorGroup<br />metadata:<br />  name: openshift-logging<br />  namespace: openshift-logging<br />spec:<br />  targetNamespaces:<br />  - openshift-logging<br />...<br />---<br />apiVersion: operators.coreos.com/v1alpha1<br />kind: Subscription<br />metadata:<br />  labels:<br />    operators.coreos.com/cluster-logging.openshift-logging: ""<br />  name: cluster-logging<br />  namespace: openshift-logging<br />spec:<br />  channel: stable<br />  installPlanApproval: Automatic<br />  name: cluster-logging<br />  source: redhat-operators<br />  sourceNamespace: openshift-marketplace<br />...<br />EOF<br /><br />After the OpenShift Logging operator has finished installing, a ClusterLogForwarder instance can be created to forward cluster logs to a log aggregator. A basic configuration that would forward OpenShift audit, application, and infrastructure logs to an rsyslog server that is managed separately and is configured for mTLS authentication over TCP when sending audit logs, but traditional UDP access for other types of logs, can be provided by editing the appropriate values in the Secret resource below and changing the "url" parameters in the "outputs" section of the "spec" below, then running the command to apply (Example):<br /><br />oc apply -f - << 'EOF'<br />---<br />apiVersion: v1<br />kind: Secret<br />metadata:<br />  name: rsyslog-tls-secret<br />  namespace: openshift-logging<br />data:<br />  tls.crt: <base64 encoded client certificate><br />  tls.key: <base64 encoded client key><br />  ca-bundle.crt: <base64 encoded CA bundle that signed the certificate of your rsyslog server><br />...<br />---<br />apiVersion: logging.openshift.io/v1<br />kind: ClusterLogForwarder<br />metadata:<br />  name: instance<br />  namespace: openshift-logging<br />spec:<br />  outputs:<br />   - name: rsyslog-audit<br />     type: syslog<br />     syslog:<br />       facility: security<br />       rfc: RFC5424<br />       severity: Informational<br />       appName: openshift<br />       msgID: audit<br />       procID: audit<br />     url: 'tls://rsyslogserver.example.com:514'<br />     secret:<br />       name: rsyslog-tls-secret<br />   - name: rsyslog-apps<br />     type: syslog<br />     syslog:<br />       facility: user<br />       rfc: RFC5424<br />       severity: Informational<br />       appName: openshift<br />       msgID: apps<br />       procID: apps<br />     url: 'udp://rsyslogserver.example.com:514'<br />   - name: rsyslog-infra<br />     type: syslog<br />     syslog:<br />       facility: local0<br />       rfc: RFC5424<br />       severity: Informational<br />       appName: openshift<br />       msgID: infra<br />       procID: infra<br />     url: 'udp://rsyslogserver.example.com:514'<br />  pipelines:<br />   - name: audit-logs<br />     inputRefs:<br />      - audit<br />     outputRefs:<br />      - rsyslog-audit<br />   - name: apps-logs<br />     inputRefs:<br />      - application<br />     outputRefs:<br />      - rsyslog-apps<br />   - name: infrastructure-logs<br />     inputRefs:<br />      - infrastructure<br />     outputRefs:<br />      - rsyslog-infra<br />...<br />EOF<br /><br />Note that many log forwarding destinations are supported, and the fix does not require that users forward audit logs to rsyslog over mTLS. To better understand how to configure the ClusterLogForwarder, consult the OpenShift Logging documentation:<br />https://docs.openshift.com/container-platform/4.8/logging/cluster-logging-external.html
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

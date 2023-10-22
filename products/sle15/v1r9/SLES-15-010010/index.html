@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-15-010010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Vendor-packaged SUSE operating system security patches and updates must be installed and up to date.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-15-010010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001227&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Timely patching is critical for maintaining the operational availability, confidentiality, and integrity of information technology (IT) systems. However, failure to keep SUSE operating system and application software patched is a common mistake made by IT professionals. New patches are released frequently, and it is often difficult for even experienced System Administrators (SAs) to keep abreast of all the new patches. When new weaknesses in a SUSE operating system exist, patches are usually made available by the vendor to resolve the problems. If the most recent security patches and updates are not installed, unauthorized users may take advantage of weaknesses in the unpatched software. The lack of prompt attention to patching could result in a system compromise.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system security patches and updates are installed and up to date.<br /><br />Note: Updates are required to be applied with a frequency determined by the site or Program Management Office (PMO).<br /><br />Check for required SUSE operating system patches and updates with the following command:<br /><br />> sudo zypper patch-check<br /><br />0 patches needed (0 security patches)<br /><br />If the patch repository data is corrupt, check that the available package security updates have been installed on the system with the following command:<br /><br />> cut -d "|" -f 1-4 -s --output-delimiter " | " /var/log/zypp/history | grep -v " radd "<br /><br />2016-12-14 11:59:36 | install | libapparmor1-32bit | 2.8.0-2.4.1<br />2016-12-14 11:59:36 | install | pam_apparmor | 2.8.0-2.4.1<br />2016-12-14 11:59:36 | install | pam_apparmor-32bit | 2.8.0-2.4.1<br /><br />If the SUSE operating system has not been patched within the site or PMO frequency, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install the applicable SUSE operating system patches available from SUSE by running the following command:<br /><br />> sudo zypper patch
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

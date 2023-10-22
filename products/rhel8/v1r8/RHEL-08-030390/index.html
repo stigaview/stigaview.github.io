@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-030390 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Successful/unsuccessful uses of the delete_module command in RHEL 8 must generate an audit record.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-030390 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000169&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000062-GPOS-00031">SRG-OS-000062-GPOS-00031</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.<br /><br />Audit records can be generated from various components within the information system (e.g., module or policy filter). The "delete_module" command is used to unload a kernel module.<br /><br />When a user logs on, the AUID is set to the UID of the account that is being authenticated. Daemons are not user sessions and have the loginuid set to "-1". The AUID representation is an unsigned 32-bit integer, which equals "4294967295". The audit system interprets "-1", "4294967295", and "unset" in the same way.<br /><br />Satisfies: SRG-OS-000062-GPOS-00031, SRG-OS-000037-GPOS-00015, SRG-OS-000042-GPOS-00020, SRG-OS-000062-GPOS-00031, SRG-OS-000392-GPOS-00172, SRG-OS-000462-GPOS-00206, SRG-OS-000471-GPOS-00215
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify RHEL 8 generates an audit record when successful/unsuccessful attempts to use the "delete_module" command by performing the following command to check the file system rules in "/etc/audit/audit.rules":<br /><br />$ sudo grep -w "delete_module" /etc/audit/audit.rules<br /><br />-a always,exit -F arch=b32 -S delete_module -F auid>=1000 -F auid!=unset -k module_chng<br />-a always,exit -F arch=b64 -S delete_module -F auid>=1000 -F auid!=unset -k module_chng<br /><br />If the command does not return a line, or the line is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the audit system to generate an audit event for any successful/unsuccessful use of the "delete_module" command by adding or updating the following rules in the "/etc/audit/rules.d/audit.rules" file:<br /><br />-a always,exit -F arch=b32 -S delete_module -F auid>=1000 -F auid!=unset -k module_chng<br />-a always,exit -F arch=b64 -S delete_module -F auid>=1000 -F auid!=unset -k module_chng<br /><br />The audit daemon must be restarted for the changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

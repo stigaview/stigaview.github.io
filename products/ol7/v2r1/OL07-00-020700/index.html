@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-020700 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must be configured so that all local initialization files for local interactive users are be group-owned by the users primary group or root.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-020700 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Local initialization files for interactive users are used to configure the user's shell environment upon logon. Malicious modification of these files could compromise accounts upon logon.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the local initialization files of all local interactive users are group-owned by that user's primary Group Identifier (GID).<br /><br />Check the home directory assignment for all non-privileged users on the system with the following command:<br /><br />Note: The example will be for the smithj user, who has a home directory of "/home/smithj" and a primary group of "users".<br /><br /># cut -d: -f 1,4,6 /etc/passwd | egrep ":[1-4][0-9]{3}"<br />smithj:1000:/home/smithj<br /><br /># grep 1000 /etc/group<br />users:x:1000:smithj,jonesj,jacksons <br /><br />Note: This may miss interactive users that have been assigned a privileged User Identifier (UID). Evidence of interactive use may be obtained from a number of log files containing system logon information.<br /><br />Check the group owner of all local interactive user's initialization files with the following command:<br /><br /># ls -al /home/smithj/.[^.]* | more<br />-rwxr-xr-x 1 smithj users 896 Mar 10 2011 .profile<br />-rwxr-xr-x 1 smithj users 497 Jan 6 2007 .login<br />-rwxr-xr-x 1 smithj users 886 Jan 6 2007 .something<br /><br />If all local interactive user's initialization files are not group-owned by that user's primary GID, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Change the group owner of a local interactive user's files to the group found in "/etc/passwd" for the user. To change the group owner of a local interactive user's home directory, use the following command:<br /><br />Note: The example will be for the user smithj, who has a home directory of "/home/smithj", and has a primary group of users.<br /><br /># chgrp users /home/smithj/.[^.]*
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

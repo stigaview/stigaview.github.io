@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000910 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Compliance Operator must be configured.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000910 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002696&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000472-CTR-001170">SRG-APP-000472-CTR-001170</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The Compliance Operator enables continuous compliance monitoring within OpenShift. It regularly assesses the environment against defined compliance policies and automatically detects and reports any deviations. This helps organizations maintain a proactive stance towards compliance, identify potential issues in real-time, and take corrective actions promptly.<br /><br />The Compliance Operator assesses compliance of both the Kubernetes API resources of OpenShift Container Platform, as well as the nodes running the cluster. <br /><br />The Compliance Operator uses OpenSCAP, a NIST-certified tool, to scan and enforce security policies provided by the content. This allows an organization to define organizational policy to align with the SSP, combine it with standardized vendor-provided content, and periodically scan the platform in accordance with organization-defined policy.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If Red Hat OpenShift Compliance Operator is not used, this check is Not Applicable.<br />Note: If Red Hat OpenShift Compliance Operator is not used, run the checks manually.<br /><br />Review the cluster configuration to validate that all required security functions are being validated with the Compliance Operator.<br /><br />To determine if any scans have been applied to the cluster and the status of the scans, execute the following:<br /><br />oc get compliancescan -n openshift-compliance<br /><br />Example output:<br />NAME PHASE RESULT<br />ocp4-cis DONE NON-COMPLIANT<br />ocp4-cis-manual DONE NON-COMPLIANT<br />ocp4-cis-node-master DONE NON-COMPLIANT<br />ocp4-cis-node-master-manual DONE NON-COMPLIANT<br />ocp4-cis-node-worker DONE NON-COMPLIANT<br />ocp4-cis-node-worker-manual DONE NON-COMPLIANT<br />ocp4-moderate DONE NON-COMPLIANT<br />ocp4-moderate-manual DONE NON-COMPLIANT<br />rhcos4-moderate-master DONE NON-COMPLIANT<br />rhcos4-moderate-master-manual DONE NON-COMPLIANT<br />rhcos4-moderate-worker DONE NON-COMPLIANT<br />rhcos4-moderate-worker-manual DONE NON-COMPLIANT<br /><br />If no ComplianceScan names return, the scans do not align to the organizationally-defined appropriate security functions, the command returns with an error, or any of the results show "NON-COMPLIANT" as their result, then this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       If Red Hat OpenShift Compliance Operator is not used,, this check is Not Applicable.<br /><br />The compliance operator must be leveraged to ensure that components are configured in alignment with the SSP. Install the Compliance Operator by executing the following:<br /><br />oc apply -f - << 'EOF'<br />---<br />apiVersion: project.openshift.io/v1<br />kind: Project<br />metadata:<br />  labels:<br />    kubernetes.io/metadata.name: openshift-compliance<br />    openshift.io/cluster-monitoring: "true"<br />  name: openshift-compliance<br />spec: {}<br />...<br />---<br />apiVersion: operators.coreos.com/v1<br />kind: OperatorGroup<br />metadata:<br />  name: compliance-operator<br />  namespace: openshift-compliance<br />spec:<br />  targetNamespaces:<br />  - openshift-compliance<br />...<br />---<br />apiVersion: operators.coreos.com/v1alpha1<br />kind: Subscription<br />metadata:<br />  name: compliance-operator<br />  namespace: openshift-compliance<br />spec:<br />  channel: release-0.1<br />  installPlanApproval: Automatic<br />  name: compliance-operator<br />  source: redhat-operators<br />  sourceNamespace: openshift-marketplace<br />...<br />EOF<br /><br />Following installation of the Compliance Operator, a ScanSettingBinding object that configures the Compliance Operator to use the desired profile sets must be created. TailoredProfiles enable customization of controls to meet specific organizational controls defined in the SSP and can be based on existing profiles or written from scratch in standard SCAP format. If users have the definition for ScanSettingBinding that aligns profiles with ScanSettings in a YAML file named my-scansettingbinding.yml, users would apply that ScanSettingBinding by executing the following:<br /><br />oc apply -f my-scansettingbinding.yml -n openshift-compliance<br /><br />For more information about the compliance operator and its use, including the creation of TailoredProfiles and the ScanSettings available to meet specific security functions or organizational goals defined in the SSP, refer to https://docs.openshift.com/container-platform/4.8/security/compliance_operator/compliance-operator-understanding.html.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

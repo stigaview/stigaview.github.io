@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-030201 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must be configured to off-load audit logs onto a different system or storage media from the system being audited.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-030201 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001851&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000342-GPOS-00133">SRG-OS-000342-GPOS-00133</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Information stored in one location is vulnerable to accidental or incidental deletion or alteration.<br /><br />Off-loading is a common process in information systems with limited audit storage capacity.<br /><br />One method of off-loading audit logs in Red Hat Enterprise Linux is with the use of the audisp-remote dameon.  Without the configuration of the "au-remote" plugin, the audisp-remote daemon will not off load the logs from the system being audited.<br /><br />Satisfies: SRG-OS-000342-GPOS-00133, SRG-OS-000479-GPOS-00224
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the "au-remote" plugin is configured to always off-load audit logs using the audisp-remote daemon:<br /><br /># cat /etc/audisp/plugins.d/au-remote.conf | grep -v "^#"<br /><br />active = yes<br />direction = out<br />path = /sbin/audisp-remote<br />type = always<br />format = string<br /><br />If "active" is not set to "yes", "direction" is not set to "out", "path" is not set to "/sbin/audisp-remote", "type" is not set to "always", or any of the lines are commented out, ask the System Administrator to indicate how the audit logs are off-loaded to a different system or storage media.<br /><br />If there is no evidence that the system is configured to off-load audit logs to a different system or storage media, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Edit the /etc/audisp/plugins.d/au-remote.conf file and add or update the following values:<br /><br />active = yes<br />direction = out<br />path = /sbin/audisp-remote<br />type = always<br /><br />The audit daemon must be restarted for changes to take effect:<br /><br /># service auditd restart
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

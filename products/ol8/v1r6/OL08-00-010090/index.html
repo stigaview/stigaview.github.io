@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL08-00-010090 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OL 8, for PKI-based authentication, must validate certificates by constructing a certification path (which includes status information) to an accepted trust anchor.</h2>
+  <p>
+  <b>STIG ID:</b> OL08-00-010090 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000185&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000066-GPOS-00034">SRG-OS-000066-GPOS-00034</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without path validation, the relying party cannot make an informed trust decision when presented with any certificate not already explicitly trusted. <br /> <br />A trust anchor is an authoritative entity represented via a public key and associated data. It is used in the context of public key infrastructures, X.509 digital certificates, and DNSSEC. <br /> <br />When there is a chain of trust, usually the top entity to be trusted becomes the trust anchor; it can be, for example, a Certification Authority (CA). A certification path starts with the subject certificate and proceeds through a number of intermediate certificates up to a trusted root certificate, typically issued by a trusted CA. <br /> <br />This requirement verifies that a certification path to an accepted trust anchor is used for certificate validation and that the path includes status information. Path validation is necessary for a relying party to make an informed trust decision when presented with any certificate not already explicitly trusted. Status information for certification paths includes certificate revocation lists or online certificate status protocol responses. Validation of the certificate status information is out of scope for this requirement.<br /><br />Satisfies: SRG-OS-000066-GPOS-00034, SRG-OS-000384-GPOS-00167
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify OL 8, for PKI-based authentication, has valid certificates by constructing a certification path (which includes status information) to an accepted trust anchor.<br /><br />Note: If the System Administrator demonstrates the use of an approved alternate multifactor authentication method, this requirement is not applicable.<br /><br />Check that the system has a valid DoD root CA installed with the following command:<br /><br />$ sudo openssl x509 -text -in /etc/sssd/pki/sssd_auth_ca_db.pem<br /><br />Certificate:<br />Data:<br />Version: 3 (0x2)<br />Serial Number: 1 (0x1)<br />Signature Algorithm: sha256WithRSAEncryption<br />Issuer: C = US, O = U.S. Government, OU = DoD, OU = PKI, CN = DoD Root CA 3<br />Validity<br />Not Before: Mar 20 18:46:41 2012 GMT<br />Not After : Dec 30 18:46:41 2029 GMT<br />Subject: C = US, O = U.S. Government, OU = DoD, OU = PKI, CN = DoD Root CA 3<br />Subject Public Key Info:<br />Public Key Algorithm: rsaEncryption<br /><br />If the root ca file is not a DoD-issued certificate with a valid date installed in the "/etc/sssd/pki/sssd_auth_ca_db.pem" location, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure OL 8, for PKI-based authentication, to validate certificates by constructing a certification path (which includes status information) to an accepted trust anchor. <br /> <br />Obtain a valid copy of the DoD root CA file from the PKI CA certificate bundle at cyber.mil and copy it into the following file: <br /> <br />/etc/sssd/pki/sssd_auth_ca_db.pem
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-212020 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 must require a unique superusers name upon booting into single-user and maintenance modes.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-212020 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000213&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000080-GPOS-00048">SRG-OS-000080-GPOS-00048</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Having a nondefault grub superuser username makes password-guessing attacks less effective.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the boot loader superuser account has been set with the following command:<br /><br />$ sudo grep -A1 "superusers" /etc/grub2.cfg <br /><br /> set superusers="<superusers-account>"<br />export superusers<br /> <br />The <superusers-account> is the actual account name different from common names like root, admin, or administrator.<br /><br />If superusers contains easily guessable usernames, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure RHEL 9 to have a unique username for the grub superuser account.<br /><br />Edit the "/etc/grub.d/01_users" file and add or modify the following lines in the "### BEGIN /etc/grub.d/01_users ###" section:<br /><br />set superusers="superusers-account"<br />export superusers<br /><br />Once the superuser account has been added, update the grub.cfg file by running:<br /><br />$ sudo grubby --update-kernel=ALL'
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

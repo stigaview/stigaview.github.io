@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL08-00-040220 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OL 8 must not send Internet Control Message Protocol (ICMP) redirects.</h2>
+  <p>
+  <b>STIG ID:</b> OL08-00-040220 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       ICMP redirect messages are used by routers to inform hosts that a more direct route exists for a particular destination. These messages contain information from the system's route table, possibly revealing portions of the network topology. <br /> <br />There are notable differences between Internet Protocol version 4 (IPv4) and Internet Protocol version 6 (IPv6). There is only a directive to disable sending of IPv4 redirected packets. Refer to RFC4294 for an explanation of "IPv6 Node Requirements", which resulted in this difference between IPv4 and IPv6.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify OL 8 does not send IPv4 ICMP redirect messages. <br /> <br />Note: If IPv4 is disabled on the system, this requirement is not applicable. <br /> <br />Check the value of the "all send_redirects" variables with the following command: <br /> <br />$ sudo sysctl net.ipv4.conf.all.send_redirects <br /> <br />net.ipv4.conf.all.send_redirects = 0 <br /> <br />If the returned line does not have a value of "0" or a line is not returned, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure OL 8 to not allow interfaces to perform IPv4 ICMP redirects with the following command: <br /> <br />$ sudo sysctl -w net.ipv4.conf.all.send_redirects=0 <br /> <br />If "0" is not the system's default value, add or update the following line in "/etc/sysctl.conf" or in the appropriate file under "/etc/sysctl.d": <br /> <br />net.ipv4.conf.all.send_redirects=0
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

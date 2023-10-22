@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-212050 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 must enable mitigations against processor-based vulnerabilities.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-212050 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000433-GPOS-00193">SRG-OS-000433-GPOS-00193</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Kernel page-table isolation is a kernel feature that mitigates the Meltdown security vulnerability and hardens the kernel against attempts to bypass kernel address space layout randomization (KASLR).<br /><br />Satisfies: SRG-OS-000433-GPOS-00193, SRG-OS-000095-GPOS-00049
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify RHEL 9 enables kernel page-table isolation with the following command:<br /><br />$ sudo grubby --info=ALL | grep pti<br /><br />args="ro crashkernel=auto resume=/dev/mapper/rhel-swap rd.lvm.lv=rhel/root rd.lvm.lv=rhel/swap rhgb quiet fips=1 audit=1 audit_backlog_limit=8192 pti=on <br /><br />If the "pti" entry does not equal "on", or is missing, this is a finding.<br /><br />Check that kernel page-table isolation is enabled by default to persist in kernel updates: <br /><br />$ sudo grep pti /etc/default/grub<br /><br />GRUB_CMDLINE_LINUX="pti=on"<br /><br />If "pti" is not set to "on", is missing or commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure RHEL 9 to enable kernel page-table isolation with the following command:<br /><br />$ sudo grubby --update-kernel=ALL --args="pti=on"<br /><br />Add or modify the following line in "/etc/default/grub" to ensure the configuration survives kernel updates:<br /><br />GRUB_CMDLINE_LINUX="pti=on"
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

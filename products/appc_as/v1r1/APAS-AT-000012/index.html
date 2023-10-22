@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APAS-AT-000012 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Automation Controller must implement cryptography mechanisms to protect the integrity of information.</h2>
+  <p>
+  <b>STIG ID:</b> APAS-AT-000012 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000803&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000015-AS-000010">SRG-APP-000015-AS-000010</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Encryption is critical for protection of remote access sessions. If encryption is not being used for integrity, malicious users may gain the ability to modify Automation Controller configuration. The use of cryptography for ensuring integrity of remote access sessions mitigates that risk.<br /><br />Automation Controller utilizes a web management interface and scripted commands when allowing remote access. Web access requires the use of TLS and scripted access requires using SSH or some other form of approved cryptography. Automation Controller must have the ability to enable a secure remote admin capability.<br /><br />FIPS 140-2 approved TLS versions must be enabled and non-FIPS-approved SSL versions must be disabled.<br /><br />Automation Controller requires the use of Red Hat Enterprise Linux as an operating system and its underlying FIPS validated  cryptographic modules to ensure it meets FIPS 140-2 criteria.<br /><br />Satisfies: SRG-APP-000015-AS-000010, SRG-APP-000179-AS-000129, SRG-APP-000224-AS-000152, SRG-APP-000231-AS-000133, SRG-APP-000231-AS-000156, SRG-APP-000416-AS-000140, SRG-APP-000428-AS-000265, SRG-APP-000429-AS-000157, SRG-APP-000439-AS-000274, SRG-APP-000440-AS-000167, SRG-APP-000514-AS-000136
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a System administrator for each Automation Controller host, check if the Operating System is FIPS enabled:<br /><br />sysctl crypto.fips_enabled<br /><br />If fips_enabled is not 1, this is a finding.<br /><br />Verify the installed volume for Automation Controller is on a LUKS encrypted volume command:<br /><br />AAPROOT='/var/lib/awx' && cryptsetup status `df -T ${AAPROOT} | cut -d ' ' -f 1 | tail -n 1 `  | grep type | grep -i luks || echo "FAILED"<br /><br />If "FAILED" is displayed, this is a finding.<br /><br />Verify this LUKS encrypted volume is using FIPS-compliant cryptographic functions command:<br /><br />allowed_FIPS_ciphers=('aes.*\(256\|384\|512\)') ; echo "${allowed_FIPS_ciphers[*]}"  | tr ' ' '\n' >tempfile && cryptsetup status `df -T ${AAPROOT} | cut -d ' ' -f 1 | tail -n 1 ` | grep -e '\(cipher\|keysize\)' | awk '{print $2}' | paste -s -d '-' | grep -f tempfile 1>/dev/null || echo "FAILED" && rm -f tempfile<br /><br />If the output is not 1, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As an administrator for each Automation Controller host, configure the Operating System to be FIPS enabled command:<br /><br />sudo fips-mode-setup --enable<br /><br />Reboot each system.<br /><br />Configure Ansible Automation Platform installation location to reside on a LUKS encrypted volume:<br /><br />Add a LUKS volume using default or other encrypted volume in accordance with organizationally defined policy. The '/var/lib/awx' filesystem must reside on this volume.<br /><br />Reinstall the Ansible Automation Platform. <br /><br />Note: The phrasing "Reinstall the Ansible Automation Platform." is applicable here; the installer cannot just be rerun on the same system.<br /><br />Reinstall the operating system on the Automation Controller server with FIPS mode enabled at install time by following the guidance located here:<br />https://access.redhat.com/solutions/5416081<br />OR <br />Enable FIPS mode without reinstalling the operating system by following the guidance located here:<br />https://access.redhat.com/solutions/137833<br /><br />If the operating system was reinstalled, reinstall Automation Controller by following the guidance located here:<br />https://docs.ansible.com/ansible-tower/latest/html/installandreference/index.html
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

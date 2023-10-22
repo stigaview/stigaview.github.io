@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-010310 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must disable account identifiers (individuals, groups, roles, and devices) if the password expires.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-010310 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000795&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000118-GPOS-00060">SRG-OS-000118-GPOS-00060</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Inactive identifiers pose a risk to systems and applications because attackers may exploit an inactive identifier and potentially obtain undetected access to the system. Owners of inactive accounts will not notice if unauthorized access to their user account has been obtained.<br /><br />Operating systems need to track periods of inactivity and disable application identifiers after zero days of inactivity.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If passwords are not being used for authentication, this is Not Applicable.<br /><br />Verify the operating system disables account identifiers (individuals, groups, roles, and devices) after the password expires with the following command:<br /><br /># grep -i inactive /etc/default/useradd<br />INACTIVE=0<br /><br />If the value is not set to "0", is commented out, or is not defined, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to disable account identifiers (individuals, groups, roles, and devices) after the password expires.<br /><br />Add the following line to "/etc/default/useradd" (or modify the line to have the required value):<br /><br />INACTIVE=0
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

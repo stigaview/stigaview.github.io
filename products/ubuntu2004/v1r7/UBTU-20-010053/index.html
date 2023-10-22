@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-20-010053 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must require the change of at least 8 characters when passwords are changed.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-20-010053 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000195&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000072-GPOS-00040">SRG-OS-000072-GPOS-00040</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+        If the operating system allows the user to consecutively reuse extensive portions of passwords, this increases the chances of password compromise by increasing the window of opportunity for attempts at guessing and brute-force attacks. <br /> <br />The number of changed characters refers to the number of changes required with respect to the total number of positions in the current password. In other words, characters may be the same within the two passwords; however, the positions of the like characters must be different. <br /> <br />If the password length is an odd number then number of changed characters must be rounded up.  For example, a password length of 15 characters must require the change of at least 8 characters.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the Ubuntu operating system requires the change of at least eight characters when passwords are changed. <br /> <br />Determine if the field "difok" is set in the "/etc/security/pwquality.conf" file with the following command: <br /> <br />$ grep -i "difok" /etc/security/pwquality.conf <br />difok=8 <br /> <br />If the "difok" parameter is less than "8" or is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Ubuntu operating system to require the change of at least eight characters when passwords are changed. <br /> <br />Add or update the "/etc/security/pwquality.conf" file to include the "difok=8" parameter: <br /> <br />difok=8
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

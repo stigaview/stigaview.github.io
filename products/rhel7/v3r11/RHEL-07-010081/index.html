@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-010081 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must prevent a user from overriding the screensaver lock-delay setting for the graphical user interface.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-010081 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000057&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000029-GPOS-00010">SRG-OS-000029-GPOS-00010</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.<br /><br />The session lock is implemented at the point where session activity can be determined and/or controlled.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system prevents a user from overriding a screensaver lock after a 15-minute period of inactivity for graphical user interfaces. <br /><br />Note: If the system does not have GNOME installed, this requirement is Not Applicable.<br /><br />Determine which profile the system database is using with the following command:<br />     # grep system-db /etc/dconf/profile/user<br />     system-db:local<br /><br />Check for the lock delay setting with the following command:<br /><br />Note: The example below is using the database "local" for the system, so the path is "/etc/dconf/db/local.d". This path must be modified if a database other than "local" is being used.<br /><br />     # grep -i lock-delay /etc/dconf/db/local.d/locks/*<br />     /org/gnome/desktop/screensaver/lock-delay<br /><br />If the command does not return a result, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to prevent a user from overriding a screensaver lock after a 15-minute period of inactivity for graphical user interfaces.<br /><br />Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command: <br /><br />Note: The example below is using the database "local" for the system, so if the system is using another database in "/etc/dconf/profile/user", the file should be created under the appropriate subdirectory.<br /><br />     # touch /etc/dconf/db/local.d/locks/session<br /><br />Add the setting to lock the screensaver lock delay:<br /><br />     /org/gnome/desktop/screensaver/lock-delay
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

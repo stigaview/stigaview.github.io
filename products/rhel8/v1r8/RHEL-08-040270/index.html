@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-040270 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 8 must not allow interfaces to perform Internet Control Message Protocol (ICMP) redirects by default.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-040270 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       ICMP redirect messages are used by routers to inform hosts that a more direct route exists for a particular destination. These messages contain information from the system's route table, possibly revealing portions of the network topology.<br /><br />There are notable differences between Internet Protocol version 4 (IPv4) and Internet Protocol version 6 (IPv6). There is only a directive to disable sending of IPv4 redirected packets. Refer to RFC4294 for an explanation of "IPv6 Node Requirements", which resulted in this difference between IPv4 and IPv6.<br /><br />The sysctl --system command will load settings from all system configuration files. All configuration files are sorted by their filename in lexicographic order, regardless of which of the directories they reside in. If multiple files specify the same option, the entry in the file with the lexicographically latest name will take precedence. Files are read from directories in the following list from top to bottom. Once a file of a given filename is loaded, any file of the same name in subsequent directories is ignored.<br />/etc/sysctl.d/*.conf<br />/run/sysctl.d/*.conf<br />/usr/local/lib/sysctl.d/*.conf<br />/usr/lib/sysctl.d/*.conf<br />/lib/sysctl.d/*.conf<br />/etc/sysctl.conf
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify RHEL 8 does not allow interfaces to perform Internet Protocol version 4 (IPv4) ICMP redirects by default.<br /><br />Check the value of the "default send_redirects" variables with the following command:<br /><br />$ sudo sysctl net.ipv4.conf.default.send_redirects<br /><br />net.ipv4.conf.default.send_redirects=0<br /><br />If the returned line does not have a value of "0", or a line is not returned, this is a finding.<br /><br />Check that the configuration files are present to enable this network parameter.<br /><br />$ sudo grep -r net.ipv4.conf.default.send_redirects /run/sysctl.d/*.conf /usr/local/lib/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /lib/sysctl.d/*.conf /etc/sysctl.conf /etc/sysctl.d/*.conf<br /><br />/etc/sysctl.d/99-sysctl.conf: net.ipv4.conf.default.send_redirects = 0<br /><br />If "net.ipv4.conf.default.send_redirects" is not set to "0", is missing or commented out, this is a finding.<br /><br />If conflicting results are returned, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure RHEL 8 to not allow interfaces to perform Internet Protocol version 4 (IPv4) ICMP redirects by default.<br /><br />Add or edit the following line in a system configuration file, in the "/etc/sysctl.d/" directory:<br /><br />net.ipv4.conf.default.send_redirects = 0<br /><br />Remove any configurations that conflict with the above from the following locations: <br />/run/sysctl.d/*.conf<br />/usr/local/lib/sysctl.d/*.conf<br />/usr/lib/sysctl.d/*.conf<br />/lib/sysctl.d/*.conf<br />/etc/sysctl.conf<br />/etc/sysctl.d/*.conf<br /><br />Load settings from all system configuration files with the following command:<br /><br />$ sudo sysctl --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-231115 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 must mount /dev/shm with the noexec option.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-231115 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001764&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000368-GPOS-00154">SRG-OS-000368-GPOS-00154</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The "noexec" mount option causes the system to not execute binary files. This option must be used for mounting any file system not containing approved binary files, as they may be incompatible. Executing files from untrusted file systems increases the opportunity for nonprivileged users to attain unauthorized administrative access.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify "/dev/shm" is mounted with the "noexec" option with the following command:<br /><br />$ mount | grep /dev/shm<br /><br />tmpfs on /dev/shm type tmpfs (rw,nodev,nosuid,noexec,seclabel)<br /><br />If the /dev/shm file system is mounted without the "noexec" option, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Modify "/etc/fstab" to use the "noexec" option on the "/dev/shm" file system.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

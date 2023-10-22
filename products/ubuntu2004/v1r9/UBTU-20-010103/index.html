@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-20-010103 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/gshadow.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-20-010103 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000172&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000004-GPOS-00004">SRG-OS-000004-GPOS-00004</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Once an attacker establishes access to a system, the attacker often attempts to create a persistent method of reestablishing access. One way to accomplish this is for the attacker to create an account. Auditing account creation actions provides logging that can be used for forensic purposes. <br /> <br />To address access requirements, many operating systems may be integrated with enterprise level authentication/access/auditing mechanisms that meet or exceed access control policy requirements.<br /><br />Satisfies: SRG-OS-000004-GPOS-00004, SRG-OS-000239-GPOS-00089, SRG-OS-000240-GPOS-00090, SRG-OS-000241-GPOS-00091, SRG-OS-000303-GPOS-00120, SRG-OS-000458-GPOS-00203, SRG-OS-000476-GPOS-00221
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the Ubuntu operating system generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow". <br /> <br />Check the currently configured audit rules with the following command: <br /> <br />$ sudo auditctl -l | grep gshadow <br /> <br />-w /etc/gshadow -p wa -k usergroup_modification <br /> <br />If the command does not return a line that matches the example or the line is commented out, this is a finding. <br /> <br />Note: The "-k" allows for specifying an arbitrary identifier, and the string after it does not need to match the example output above.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Ubuntu operating system to generate audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow". <br /> <br />Add or update the following rule to "/etc/audit/rules.d/stig.rules": <br /> <br />-w /etc/gshadow -p wa -k usergroup_modification <br />  <br />To reload the rules file, issue the following command: <br /> <br />$ sudo augenrules --load
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-15-040440 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must not allow unattended or automatic logon via SSH.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-15-040440 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00229">SRG-OS-000480-GPOS-00229</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Failure to restrict system access via SSH to authenticated users negatively impacts SUSE operating system security.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system disables unattended or automatic logon via SSH.<br /><br />Check that unattended or automatic logon via SSH is disabled with the following command:<br /><br />> sudo egrep '(Permit(.*?)(Passwords|Environment))' /etc/ssh/sshd_config<br /><br />PermitEmptyPasswords no<br />PermitUserEnvironment no<br /><br />If "PermitEmptyPasswords" or "PermitUserEnvironment" keywords are not set to "no", are missing completely, or are commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system disables unattended or automatic logon via SSH.<br /><br />Add or edit the following lines in the "/etc/ssh/sshd_config" file:<br /><br />PermitEmptyPasswords no<br />PermitUserEnvironment no
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

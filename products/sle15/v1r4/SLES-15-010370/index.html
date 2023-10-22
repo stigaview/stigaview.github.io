@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-15-010370 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must have a firewall system installed to immediately disconnect or disable remote access to the whole operating system.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-15-010370 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002322&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000298-GPOS-00116">SRG-OS-000298-GPOS-00116</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Operating system remote access functionality must have the capability to immediately disconnect current users remotely accessing the information system and/or disable further remote access. The speed of disconnect or disablement varies based on the criticality of mission functions and the need to eliminate immediate or future remote access to organizational information systems.<br /><br />SUSE operating systems are capable to immediately stop remote connections and services by a local system administrator.<br /><br />To immediately disconnect or disable remote access, the firewall needs to be set into panic mode.<br /><br />> sudo firewall-cmd --panic-on<br /><br />To enable remote connection again, panic mode needs to be disabled.<br /><br />> sudo firewall-cmd --panic-off
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify "firewalld" is configured to protect the SUSE operating system. <br /><br />Run the following command:<br /><br />> systemctl status firewalld.service<br /> firewalld.service - firewalld - dynamic firewall daemon<br />   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: disabled)<br />   Active: active (running) since Wed 2019-11-06 10:58:11 CET; 24h ago<br />     Docs: man:firewalld(1)<br /> Main PID: 1105 (firewalld)<br />    Tasks: 2 (limit: 4915)<br />   CGroup: /system.slice/firewalld.service<br />           ??1105 /usr/bin/python3 -Es /usr/sbin/firewalld --nofork --nopid<br /><br />If the service is not enabled, this is a finding.<br /><br />If the service is not active, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to enable the firewall service. This is needed to be able to immediately disconnect or disable remote access to the whole system.<br /><br />Enable the "firewalld.service" by running the following command:<br /><br />> sudo systemctl enable firewalld.service<br /><br />Start the "firewalld.service" by running the following command:<br /><br />> sudo systemctl start firewalld.service<br /><br />To immediately disconnect or disable remote access the firewall needs to be set into panic mode.<br /><br />> sudo firewall-cmd --panic-on<br /><br />To enable remote connection again, panic mode needs to be disabled.<br /><br />> sudo firewall-cmd --panic-off
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

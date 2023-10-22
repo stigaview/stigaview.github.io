@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-OS-000079-GPOS-00047 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The operating system must obscure feedback of authentication information during the authentication process to protect the information from possible exploitation/use by unauthorized individuals.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-OS-000079-GPOS-00047 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000206&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000079">SRG-OS-000079</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       To prevent the compromise of authentication information, such as passwords during the authentication process, the feedback from the operating system shall not provide any information allowing an unauthorized user to compromise the authentication mechanism.<br /><br />Obfuscation of user-provided information that is typed into the system is a method used when addressing this risk.<br /><br />For example, displaying asterisks when a user types in a password is an example of obscuring feedback of authentication information.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system obscures feedback of authentication information during the authentication process to protect the information from possible exploitation/use by unauthorized individuals. If it does not, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to obscure feedback of authentication information during the authentication process to protect the information from possible exploitation/use by unauthorized individuals.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

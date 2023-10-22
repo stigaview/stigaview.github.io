@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APAS-AT-000017 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Automation Controller must use external log providers that can collect user activity logs in independent, protected repositories to prevent modification or repudiation.</h2>
+  <p>
+  <b>STIG ID:</b> APAS-AT-000017 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000139&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000080-AS-000045">SRG-APP-000080-AS-000045</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Automation Controller must be configured to use external logging to compile log records from multiple components within the server. The events occurring must be time-correlated in order to conduct accurate forensic analysis. In addition, the correlation must meet certain tolerance criteria. For instance, DOD may define that the time stamps of different logged events must not differ by any amount greater than ten seconds. Automation Controller must utilize an external logging tool that provides this capability.<br /><br />Satisfies: SRG-APP-000080-AS-000045, SRG-APP-000086-AS-000048, SRG-APP-000108-AS-000067, SRG-APP-000125-AS-000084, SRG-APP-000181-AS-000255, SRG-APP-000358-AS-000064, SRG-APP-000505-AS-000230, SRG-APP-000506-AS-000231, SRG-APP-000515-AS-000203
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Log in to Automation Controller as an administrator.<br /><br />Navigate to Settings >> System >> Logging setting.<br /><br />The following parameters must be set:<br /><br />Enable External Logging = On<br /><br />Logging Aggregator Level Threshold = DEBUG<br /><br />TCP Connection Timeout = 5 (default) or the organizational timeout<br /><br />Enable/disable HTTPS certificate verification = On<br /><br />Logging Aggregator <> (Default) "Not configured"<br /><br />If any of these settings are incorrect, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Log in to Automation Controller as an administrator.<br /><br />Navigate to Settings >> System >> Logging setting.<br /><br />Click "Edit" and set the following fields:<br /><br />Enable External Logging = On<br /><br />Logging Aggregator Level Threshold = DEBUG<br /><br />TCP Connection Timeout = 5 (default) or the organizational timeout<br /><br />Enable/disable HTTPS certificate verification = On<br /><br />Logging Aggregator <> (Default) "Not configured"<br /><br />Click "Save".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-020020 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 8 must log user name information when unsuccessful logon attempts occur.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-020020 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000044&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000021-GPOS-00005">SRG-OS-000021-GPOS-00005</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-force attacks, is reduced. Limits are imposed by locking the account.<br /><br />RHEL 8 can utilize the "pam_faillock.so" for this purpose. Note that manual changes to the listed files may be overwritten by the "authselect" program.<br /><br />From "Pam_Faillock" man pages: Note that the default directory that "pam_faillock" uses is usually cleared on system boot so the access will be reenabled after system reboot. If that is undesirable a different tally directory must be set with the "dir" option.<br /><br />In RHEL 8.2 the "/etc/security/faillock.conf" file was incorporated to centralize the configuration of the pam_faillock.so module. Also introduced is a "local_users_only" option that will only track failed user authentication attempts for local users in /etc/passwd and ignore centralized (AD, IdM, LDAP, etc.) users to allow the centralized platform to solely manage user lockout.<br /><br />Satisfies: SRG-OS-000021-GPOS-00005, SRG-OS-000329-GPOS-00128
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Check that the system logs user name information when unsuccessful logon attempts occur with the following commands:<br /><br />If the system is RHEL version 8.2 or newer, this check is not applicable.<br /><br />Note: If the System Administrator demonstrates the use of an approved centralized account management method that locks an account after three unsuccessful logon attempts within a period of 15 minutes, this requirement is not applicable.<br /><br />$ sudo grep pam_faillock.so /etc/pam.d/password-auth<br /><br />auth required pam_faillock.so preauth dir=/var/log/faillock silent audit deny=3 even_deny_root fail_interval=900 unlock_time=0<br />auth required pam_faillock.so authfail dir=/var/log/faillock unlock_time=0<br />account required pam_faillock.so<br /><br />If the "audit" option is missing from the "preauth" line with the "pam_faillock.so" module, this is a finding.<br /><br />$ sudo grep pam_faillock.so /etc/pam.d/system-auth<br /><br />auth required pam_faillock.so preauth dir=/var/log/faillock silent audit deny=3 even_deny_root fail_interval=900 unlock_time=0<br />auth required pam_faillock.so authfail dir=/var/log/faillock unlock_time=0<br />account required pam_faillock.so<br /><br />If the "audit" option is missing from the "preauth" line with the "pam_faillock.so" module, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to log user name information when unsuccessful logon attempts occur.<br /><br />Add/Modify the appropriate sections of the "/etc/pam.d/system-auth" and "/etc/pam.d/password-auth" files to match the following lines:<br /><br />auth required pam_faillock.so preauth dir=/var/log/faillock silent audit deny=3 even_deny_root fail_interval=900 unlock_time=0<br />auth required pam_faillock.so authfail dir=/var/log/faillock unlock_time=0<br />account required pam_faillock.so<br /><br />The "sssd" service must be restarted for the changes to take effect. To restart the "sssd" service, run the following command:<br /><br />$ sudo systemctl restart sssd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

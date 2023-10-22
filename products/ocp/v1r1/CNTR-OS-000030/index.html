@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000030 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must use a centralized user management solution to support account management functions.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000030 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000015&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000023-CTR-000055">SRG-APP-000023-CTR-000055</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       OpenShift supports several different types of identity providers. To add users and grant access to OpenShift, an identity provider must be configured. Some of the identity provider types such as HTPassword only provide simple user management and are not intended for production. Other types are public services like GitHub. These provider types are not appropriate as they are managed by public service providers, and therefore are unable to enforce the organizations account management requirements.<br /><br />Use either the LDAP or the OpenIDConnect Identity Provider type to configure OpenShift to use the organizations centrally managed IdP that is able to enforce the organization's policies regarding user identity management.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the authentication operator is configured to use either an LDAP or a OpenIDConnect provider by executing the following:<br /><br />oc get oauth cluster -o jsonpath="{.spec.identityProviders[*].type}{'\n'}"<br /><br />If the output lists any other type besides LDAP or OpenID, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure OpenShift to use an appropriate Identity Provider. Do not use HTPasswd. Use either LDAP(AD), OpenIDConnect, or an approved identity provider.<br /><br />To configure LDAP provider:<br />1. Create Secret for BIND DN password by executing the following:<br /><br />oc create secret generic ldap-secret --from-literal=bindPassword=<secret> -n openshift-config <br /><br />2. Create config map for LDAP Trust CA by executing the following:<br /> <br />oc create configmap ca-config-map --from-file=ca.crt=/path/to/ca -n openshift-config<br /><br />3. Create LDAP Auth Config Resource YAML:<br />Using the preferred text editor, create a file named ldapidp.yaml using the example content. (replacing config values as appropriate):<br /> <br />apiVersion: config.openshift.io/v1<br />kind: OAuth<br />metadata:<br />  name: cluster<br />spec:<br />  identityProviders:<br />  - name: ldapidp <br />    mappingMethod: claim <br />    type: LDAP<br />    ldap:<br />      attributes:<br />        id: <br />        - dn<br />        email: <br />        - mail<br />        name: <br />        - cn<br />        preferredUsername: <br />        - uid<br />      bindDN: <"bindDN"><br />      bindPassword: <br />        name: ldap-secret<br />      ca: <br />        name: ca-config-map<br />      insecure: false <br />      url: <URL> <br /><br />4. Apply LDAP config to cluster by executing the following:<br /> <br />oc apply -f ldapidp.yaml<br /> <br />Note: For more information on configuring an LDAP provider, refer to https://docs.openshift.com/container-platform/4.8/authentication/identity_providers/configuring-ldap-identity-provider.html.<br /> <br />To configure OpenID provider:<br />1. Create Secret for Client Secret by executing the following:<br /> <br />oc create secret generic idp-secret --from-literal=clientSecret=<secret> -n openshift-config<br /> <br />2. Create config map for OpenID Trust CA by executing the following:<br /> <br />oc create configmap ca-config-map --from-file=ca.crt=/path/to/ca -n openshift-config<br /><br />3. Create OpenID Auth Config Resource YAML.<br />Using the preferred text editor, create a file named oidcidp.yaml using the example content (replacing config values as appropriate).<br /><br />apiVersion: config.openshift.io/v1<br />kind: OAuth<br />metadata:<br />  name: cluster<br />spec:<br />  identityProviders:<br />  - name: oidcidp<br />    mappingMethod: claim<br />    type: OpenID<br />    openID:<br />      clientID: <clientID><br />      clientSecret:<br />        name: oidc-idp-secret<br />      claims:<br />        preferredUsername:<br />        - preferred_username<br />        name:<br />        - name<br />        email:<br />        - email<br />      ca:<br />        name: ca-config-map<br />      issuer: <URL><br /> <br />4. Apply OpenID config to cluster by executing the following:<br /> <br />oc apply -f ldapidp.yaml<br /> <br />Note: For more information on configuring an OpenID provider, refer to https://docs.openshift.com/container-platform/4.8/authentication/identity_providers/configuring-oidc-identity-provider.html.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

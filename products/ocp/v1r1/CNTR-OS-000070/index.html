@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000070 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must generate audit rules to capture account related actions.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000070 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000172&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000028-CTR-000080">SRG-APP-000028-CTR-000080</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Account management actions, such as creation, modification, disabling, removal, and enabling are important changes within the system. <br /><br />When management actions are modified, user accessibility is affected. Once an attacker establishes access to an application, the attacker often attempts to disable authorized accounts to disrupt services or prevent the implementation of countermeasures. In the event of a security incident or policy violation, having detailed audit logs for account creation, modification, disabling, removal, and enabling actions is crucial for incident response and forensic investigations. These logs provide a trail of activities that can be analyzed to determine the cause, impact, and scope of the incident, aiding in the investigation and remediation process.<br /><br />Satisfies: SRG-APP-000028-CTR-000080, SRG-APP-000291-CTR-000675, SRG-APP-000292-CTR-000680, SRG-APP-000293-CTR-000685, SRG-APP-000294-CTR-000690, SRG-APP-000319-CTR-000745, SRG-APP-000320-CTR-000750, SRG-APP-000509-CTR-001305
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the audit rules capture account creation, modification, disabling, removal, and enabling actions by executing the following:<br /><br />for node in $(oc get node -oname); do oc debug $node -- chroot /host /bin/bash -c 'echo -n "$HOSTNAME "; grep -e user-modify -e group-modify -e audit_rules_usergroup_modification /etc/audit/rules.d/* /etc/audit/audit.rules' 2>/dev/null; done<br /><br />Confirm the following rules exist on each node:<br /><br />-w /etc/group -p wa -k audit_rules_usergroup_modification<br />-w /etc/gshadow -p wa -k audit_rules_usergroup_modification<br />-w /etc/security/opasswd -p wa -k audit_rules_usergroup_modification<br />-w /etc/passwd -p wa -k audit_rules_usergroup_modification<br />-w /etc/shadow -p wa -k audit_rules_usergroup_modification<br /><br />If the above rules are not listed on each node, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Apply the machine config using the following command:<br /><br />for mcpool in $(oc get mcp -oname | sed "s:.*/::" ); do<br />echo "apiVersion: machineconfiguration.openshift.io/v1<br />kind: MachineConfig<br />metadata:<br />  name: 75-account-modifications-rules-$mcpool<br />  labels:<br />    machineconfiguration.openshift.io/role: $mcpool<br />spec:<br />  config:<br />    ignition:<br />      version: 3.1.0<br />    storage:<br />      files:<br />      - contents:<br />          source: data:,-w%20/etc/sudoers.d/%20-p%20wa%20-k%20actions%0A-w%20/etc/sudoers%20-p%20wa%20-k%20actions%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/75-audit-sysadmin-actions.rules<br />        overwrite: true<br />      - contents:<br />          source: data:,-w%20/etc/group%20-p%20wa%20-k%20audit_rules_usergroup_modification%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/30-etc_group_usergroup_modification.rules<br />        overwrite: true<br />      - contents:<br />          source: data:,-w%20/etc/gshadow%20-p%20wa%20-k%20audit_rules_usergroup_modification%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/30-etc_gshadow_usergroup_modification.rules<br />        overwrite: true<br />      - contents:<br />          source: data:,-w%20/etc/security/opasswd%20-p%20wa%20-k%20audit_rules_usergroup_modification%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/30-etc_security_opasswd_usergroup_modification.rules<br />        overwrite: true<br />      - contents:<br />          source: data:,-w%20/etc/passwd%20-p%20wa%20-k%20audit_rules_usergroup_modification%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/30-etc_passwd_usergroup_modification.rules<br />        overwrite: true<br />      - contents:<br />          source: data:,-w%20/etc/shadow%20-p%20wa%20-k%20audit_rules_usergroup_modification%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/30-etc_shadow_usergroup_modification.rules<br />        overwrite: true<br />" | oc apply -f -<br />done
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000940 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Automation Controller NGINX web servers must install security-relevant software updates within the configured time period directed by an authoritative source (e.g., IAVM, CTOs, DTMs, and STIGs).</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000940 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002605&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000456-WSR-000187">SRG-APP-000456-WSR-000187</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Security flaws with software applications are discovered daily. Red Hat constantly updates and patches Automation Controller to address newly discovered security vulnerabilities. Organizations (including any contractor to the organization) are required to promptly install security-relevant software updates (e.g., patches, service packs, and hot fixes). Flaws discovered during security assessments, continuous monitoring, incident response activities, or information system error handling must also be addressed expeditiously.<br /><br />The Automation Controller NGINX web server will be configured to check for and install security-relevant software updates from an authoritative source within an organizationally identified time period from the availability of the update. By default, this time period will be every 24 hours.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a System Administrator for each Automation Controller NGINX web server host, verify the system is configured to receive updates from an organizationally defined source for authoritative system updates:<br /><br />yum -v repolist<br /><br />If each URL is not valid and consistent with organizationally defined requirements, this is a finding.<br /><br />If each repository is not enabled in accordance with organizationally defined requirements, this is a finding.<br /><br />If the system is not configured to automatically receive and apply system updates from this source at least every 30 days, or manually receive and apply updates at least every 30 days, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a system administrator, for each Automation Controller NGINX web server host, perform the following:<br /><br />1. Either configure update repositories in accordance with organizationally defined requirements or subscribe to Red Hat update repositories for the underlying operating system.<br /><br />2. Execute an update from these repositories:<br /><br />$ yum update -y<br /><br />3. Perform one of the following:<br /><br />3.1. Schedule an update to occur every 30 days, or in accordance with organizationally defined policy:<br /><br />$ yum install -y dnf-automatic  && sed -i '/apply_updates/s/no/yes/' /etc/dnf/automatic.conf && sed -i '/OnCalendar/s/^OnCalendar\s*=.*/OnCalendar=*-1-* 6:00/' /usr/lib/systemd/system/dnf-automatic.timer && systemctl enable --now dnf-automatic.timer<br /><br />3.2. Schedule manual updates to occur at least every 30 days, or in accordance with organizationally defined policy. <br /><br />4. Restart the Automation Controller NGINX web server host.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

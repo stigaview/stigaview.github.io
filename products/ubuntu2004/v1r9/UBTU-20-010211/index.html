@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-20-010211 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must prevent all software from executing at higher privilege levels than users executing the software and the audit system must be configured to audit the execution of privileged functions.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-20-010211 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002233&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000326-GPOS-00126">SRG-OS-000326-GPOS-00126</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       In certain situations, software applications/programs need to execute with elevated privileges to perform required functions. However, if the privileges required for execution are at a higher level than the privileges assigned to organizational users invoking such applications/programs, those users are indirectly provided with greater privileges than assigned by the organizations. <br /> <br />Some programs and processes are required to operate at a higher privilege level and therefore should be excluded from the organization-defined software list after review.<br /><br />Satisfies: SRG-OS-000326-GPOS-00126, SRG-OS-000327-GPOS-00127
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the Ubuntu operating system audits the execution of privilege functions by auditing the "execve" system call. <br /> <br />Check the currently configured audit rules with the following command: <br /> <br />$ sudo auditctl -l | grep execve <br /> <br />-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -F key=execpriv  <br />-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -F key=execpriv  <br />-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F key=execpriv  <br />-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -F key=execpriv <br /> <br />If the command does not return lines that match the example or the lines are commented out, this is a finding. <br /> <br />Notes: <br />- For 32-bit architectures, only the 32-bit specific output lines from the commands are required. <br />- The "-k" allows for specifying an arbitrary identifier, and the string after it does not need to match the example output above.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Ubuntu operating system to audit the execution of all privileged functions. <br /> <br />Add or update the following rules in the "/etc/audit/rules.d/stig.rules" file: <br /> <br />-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -F key=execpriv  <br />-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -F key=execpriv  <br />-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F key=execpriv  <br />-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -F key=execpriv <br /> <br />Notes: For 32-bit architectures, only the 32-bit specific entries are required. <br /> <br />To reload the rules file, issue the following command: <br /> <br />$ sudo augenrules --load
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

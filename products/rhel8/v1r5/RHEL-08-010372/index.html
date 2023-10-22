@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-010372 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 8 must prevent the loading of a new kernel for later execution.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-010372 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001749&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000366-GPOS-00153">SRG-OS-000366-GPOS-00153</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Changes to any software components can have significant effects on the overall security of the operating system. This requirement ensures the software has not been tampered with and that it has been provided by a trusted vendor.<br /><br />Disabling kexec_load prevents an unsigned kernel image (that could be a windows kernel or modified vulnerable kernel) from being loaded. Kexec can be used subvert the entire secureboot process and should be avoided at all costs especially since it can load unsigned kernel images.<br /><br />The sysctl --system command will load settings from all system configuration files. All configuration files are sorted by their filename in lexicographic order, regardless of which of the directories they reside in. If multiple files specify the same option, the entry in the file with the lexicographically latest name will take precedence. Files are read from directories in the following list from top to bottom. Once a file of a given filename is loaded, any file of the same name in subsequent directories is ignored.<br />/etc/sysctl.d/*.conf<br />/run/sysctl.d/*.conf<br />/usr/local/lib/sysctl.d/*.conf<br />/usr/lib/sysctl.d/*.conf<br />/lib/sysctl.d/*.conf<br />/etc/sysctl.conf<br />Based on the information above, if a configuration file that begins with "99-" is created in the "/etc/sysctl.d/" directory, it will take precedence over any other configuration file on the system.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system is configured to disable kernel image loading with the following commands:<br /><br />Check the status of the kernel.kexec_load_disabled kernel parameter.<br /><br />$ sudo sysctl kernel.kexec_load_disabled<br /><br />kernel.kexec_load_disabled = 1<br /><br />If "kernel.kexec_load_disabled" is not set to "1" or is missing, this is a finding.<br /><br />Check that the configuration files are present to enable this kernel parameter.<br /><br />$ sudo grep -r kernel.kexec_load_disabled /etc/sysctl.d/*.conf<br /><br />/etc/sysctl.d/99-sysctl.conf:kernel.kexec_load_disabled = 1<br /><br />If "kernel.kexec_load_disabled" is not set to "1", is missing or commented out, this is a finding.<br /><br />If the configuration file does not begin with "99-", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to disable kernel image loading.<br /><br />Add or edit the following line in a system configuration file, which begins with "99-", in the "/etc/sysctl.d/" directory:<br /><br />kernel.kexec_load_disabled = 1<br /><br />Load settings from all system configuration files with the following command:<br /><br />$ sudo sysctl --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

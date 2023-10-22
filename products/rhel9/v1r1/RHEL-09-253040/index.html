@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-253040 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 must prevent IPv4 Internet Control Message Protocol (ICMP) redirect messages from being accepted.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-253040 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       ICMP redirect messages are used by routers to inform hosts that a more direct route exists for a particular destination. These messages modify the host's route table and are unauthenticated. An illicit ICMP redirect message could result in a man-in-the-middle attack.<br /><br />This feature of the IPv4 protocol has few legitimate uses. It must be disabled unless absolutely required.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify RHEL 9 will not accept IPv4 ICMP redirect messages.<br /><br />Check the value of the default "accept_redirects" variables with the following command:<br /><br />$ sysctl net.ipv4.conf.default.accept_redirects<br /><br />net.ipv4.conf.default.accept_redirects = 0<br /><br />If the returned line does not have a value of "0", a line is not returned, or the line is commented out, this is a finding.<br /><br />Check that the configuration files are present to enable this network parameter.<br /><br />$ sudo /usr/lib/systemd/systemd-sysctl --cat-config | egrep -v '^(#|;)' | grep -F net.ipv4.conf.default.accept_redirects | tail -1<br /><br />net.ipv4.conf.default.accept_redirects = 0<br /><br />If "net.ipv4.conf.default.accept_redirects" is not set to "0" or is missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure RHEL 9 to prevent IPv4 ICMP redirect messages from being accepted.<br /><br />Add or edit the following line in a single system configuration file, in the "/etc/sysctl.d/" directory:<br /><br />net.ipv4.conf.default.accept_redirects = 0<br /><br />Load settings from all system configuration files with the following command:<br /><br />$ sudo sysctl --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

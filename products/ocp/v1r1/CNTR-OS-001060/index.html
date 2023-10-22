@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-001060 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must continuously scan components, containers, and images for vulnerabilities.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-001060 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000516-CTR-001335">SRG-APP-000516-CTR-001335</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Finding vulnerabilities quickly within the container platform and within containers deployed within the platform is important to keep the overall platform secure. When a vulnerability within a component or container is unknown or allowed to remain unpatched, other containers and customers within the platform become vulnerability. The vulnerability can lead to the loss of application data, organizational infrastructure data, and Denial-of-Service (DoS) to hosted applications.<br /><br />Vulnerability scanning can be performed by the container platform or by external applications.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       To check if the Container Security Operator is running, execute the following:<br /><br />oc get deploy -n openshift-operators container-security-operator -ojsonpath='{.status.readyReplicas}'<br /><br />If this command returns an error or the number 0, and a separate tool is not being used to perform continuous vulnerability scans of components, containers, and container images, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Vulnerability scanning can be performed by the Container Security Operator, Red Hat Advanced Cluster Security (formerly StackRox) or by external applications. Follow instructions from the application vendor if using external tool for vulnerability scanning. To install the Container Security Operator into the cluster, run the following:<br /><br />oc apply -f - << 'EOF'<br />---<br />apiVersion: operators.coreos.com/v1alpha1<br />kind: Subscription<br />metadata:<br />  labels:<br />    operators.coreos.com/container-security-operator.openshift-operators: ''<br />  name: container-security-operator<br />  namespace: openshift-operators<br />spec:<br />  channel: stable-3.8<br />  installPlanApproval: Automatic<br />  name: container-security-operator<br />  source: redhat-operators<br />  sourceNamespace: openshift-marketplace<br />EOF
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

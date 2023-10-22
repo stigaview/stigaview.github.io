@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-020021 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must must confine SELinux users to roles that conform to least privilege.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-020021 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002165&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000324-GPOS-00125">SRG-OS-000324-GPOS-00125</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Preventing non-privileged users from executing privileged functions mitigates the risk that unauthorized individuals or processes may gain unnecessary access to information or privileges.<br /><br />Privileged functions include, for example, establishing accounts, performing system integrity checks, or administering cryptographic key management activities. Non-privileged users are individuals who do not possess appropriate authorizations. Circumventing intrusion detection and prevention mechanisms or malicious code protection mechanisms are examples of privileged functions that require protection from non-privileged users.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: Per OPORD 16-0080, the preferred endpoint security tool is Endpoint Security for Linux (ENSL) in conjunction with SELinux.<br /><br />Verify the operating system confines SELinux users to roles that conform to least privilege.<br /><br />Check the SELinux User list to SELinux Roles mapping by using the following command:<br /><br />$ sudo semanage user -l<br />SELinuxUser LabelingPrefix MLS/MCSLevel MLS/MCSRange SELinuxRoles<br />guest_u            user  s0  s0  guest_r<br />root                   user  s0  s0-s0:c0.c1023  staff_r sysadm_r system_r unconfined_r<br />staff_u              user  s0  s0-s0:c0.c1023  staff_r sysadm_r<br />sysadm_u         user  s0  s0-s0:c0.c1023  sysadm_r <br />system_u          user  s0  s0-s0:c0.c1023  system_r unconfined_r<br />unconfined_u  user  s0  s0-s0:c0.c1023  system_r unconfined_r<br />user_u               user  s0  s0  user_r<br />xguest_u           user  s0  s0  xguest_r<br /><br />If the output differs from the above example, ask the SA to demonstrate how the SELinux User mappings are exercising least privilege. If deviations from the example are not documented with the ISSO and do not demonstrate least privilege, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to confine SELinux users to roles that conform to least privilege.<br /><br />Use the following command to map the "staff_u" SELinux user to the "staff_r" and "sysadm_r" roles:<br /><br />$ sudo semanage user -m staff_u -R staff_r -R sysadm_r<br /><br />Use the following command to map the "user_u" SELinux user to the "user_r" role:<br /><br />$ sudo semanage -m user_u -R user_r
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

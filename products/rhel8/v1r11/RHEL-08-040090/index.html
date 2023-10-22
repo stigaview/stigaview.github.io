@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-040090 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>A RHEL 8 firewall must employ a deny-all, allow-by-exception policy for allowing connections to other systems.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-040090 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002314&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000297-GPOS-00115">SRG-OS-000297-GPOS-00115</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Failure to restrict network connectivity only to authorized systems permits inbound connections from malicious systems. It also permits outbound connections that may facilitate exfiltration of DoD data.<br /><br />RHEL 8 incorporates the "firewalld" daemon, which allows for many different configurations. One of these configurations is zones. Zones can be utilized to a deny-all, allow-by-exception approach. The default "drop" zone will drop all incoming network packets unless it is explicitly allowed by the configuration file or is related to an outgoing network connection.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify "firewalld" is configured to employ a deny-all, allow-by-exception policy for allowing connections to other systems with the following commands:<br /><br />$ sudo  firewall-cmd --state<br /><br />running<br /><br />$ sudo firewall-cmd --get-active-zones<br /><br />[custom]<br />   interfaces: ens33<br /><br />$ sudo firewall-cmd --info-zone=[custom] | grep target<br /><br />   target: DROP<br /><br />If no zones are active on the RHEL 8 interfaces or if the target is set to a different option other than "DROP", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the "firewalld" daemon to employ a deny-all, allow-by-exception with the following commands:<br /><br />$ sudo firewall-cmd --permanent --new-zone=[custom]<br /><br />$ sudo cp /usr/lib/firewalld/zones/drop.xml /etc/firewalld/zones/[custom].xml<br /><br />This will provide a clean configuration file to work with that employs a deny-all approach. Note: Add the exceptions that are required for mission functionality and update the short title in the xml file to match the [custom] zone name.<br /><br />Reload the firewall rules to make the new [custom] zone available to load:<br />$ sudo firewall-cmd --reload <br /><br />Set the default zone to the new [custom] zone:<br />$ sudo firewall-cmd --set-default-zone=[custom]<br /><br />Note: This is a runtime and permanent change.<br />Add any interfaces to the new [custom] zone:<br />$ sudo firewall-cmd --permanent --zone=[custom] --change-interface=ens33<br /><br />Reload the firewall rules for changes to take effect:<br />$ sudo firewall-cmd --reload
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

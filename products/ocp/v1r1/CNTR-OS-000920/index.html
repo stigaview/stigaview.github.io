@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000920 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must perform verification of the correct operation of security functions: upon startup and/or restart; upon command by a user with privileged access; and/or every 30 days.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000920 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002699&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000473-CTR-001175">SRG-APP-000473-CTR-001175</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Security functionality includes, but is not limited to, establishing system accounts, configuring access authorization (i.e., permissions, privileges), setting events to be audited, and setting intrusion detection parameters.<br /><br />The Compliance Operator enables continuous compliance monitoring within OpenShift. It regularly assesses the environment against defined compliance policies and automatically detects and reports any deviations. This helps organizations maintain a proactive stance towards compliance, identify potential issues in real-time, and take corrective actions promptly.<br /><br />The Compliance Operator assesses compliance of both the Kubernetes API resources of OpenShift Container Platform, as well as the nodes running the cluster. <br /><br />The Compliance Operator uses OpenSCAP, a NIST-certified tool, to scan and enforce security policies provided by the content. This allows an organization to define organizational policy to align with the SSP, combine it with standardized vendor-provided content, and periodically scan the platform in accordance with organization-defined policy.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If Red Hat OpenShift Compliance Operator is not used, this check is Not Applicable.<br /><br />Review the cluster configuration to validate that all required security functions are being validated with the Compliance Operator.<br /><br />To map the schedule of every profile through its ScanSettingBinding and output the schedules on which each Profile or TailoredProfile is run, execute the following commands:<br /> <br />declare -A binding_profiles<br /> declare -A binding_schedule<br /> while read binding setting profiles; do binding_profiles[$binding]="$profiles"; binding_schedule[$binding]=$(oc get scansetting -n openshift-compliance $setting -ojsonpath='{.schedule}'); done < <(oc get scansettingbinding -n openshift-compliance -ojsonpath='{range .items[*]}{.metadata.name} {.settingsRef.name} {range .profiles[*]}{.name} {end}{"\n"}{end}')<br /> for binding in "${!binding_profiles[@]}"; do for profile in ${binding_profiles[$binding]}; do echo "$profile: ${binding_schedule[$binding]}"; done; done<br /><br />If any error is returned, this is a finding.<br /><br />If the schedules are not at least monthly or within the organizationally defined periodicity, this is a finding.<br /><br />Check the profiles that are bound to schedules by executing the following:<br /><br />To determine which rules are enforced by the profiles that are currently bound to the scheduled periodicities, execute the following commands:<br /><br />for binding in "${!binding_profiles[@]}"; do for profile in ${binding_profiles[$binding]}; do for rule in $(oc get profile.compliance $profile -n openshift-compliance -ojsonpath='{range .rules[*]}{$}{"\n"}{end}'); do echo "$rule: ${binding_schedule[$binding]}"; done; done; done | sort -u<br /><br />If the profiles that are bound to schedules do not cover the organization-designed security functions, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       If Red Hat OpenShift Compliance Operator is not used, this check is Not Applicable.<br /><br />The compliance operator must be leveraged to ensure that components are configured in alignment with the SSP at a desired schedule. Install the Compliance Operator by executing the following:<br /><br />oc apply -f - << 'EOF'<br />---<br />apiVersion: project.openshift.io/v1<br />kind: Project<br />metadata:<br />  labels:<br />    kubernetes.io/metadata.name: openshift-compliance<br />    openshift.io/cluster-monitoring: "true"<br />  name: openshift-compliance<br />spec: {}<br />...<br />---<br />apiVersion: operators.coreos.com/v1<br />kind: OperatorGroup<br />metadata:<br />  name: compliance-operator<br />  namespace: openshift-compliance<br />spec:<br />  targetNamespaces:<br />  - openshift-compliance<br />...<br />---<br />apiVersion: operators.coreos.com/v1alpha1<br />kind: Subscription<br />metadata:<br />  name: compliance-operator<br />  namespace: openshift-compliance<br />spec:<br />  channel: release-0.1<br />  installPlanApproval: Automatic<br />  name: compliance-operator<br />  source: redhat-operators<br />  sourceNamespace: openshift-marketplace<br />...<br />EOF<br /><br />Following installation of the Compliance Operator, a ScanSettingBinding object that configures the Compliance Operator to use the desired scan cadence must be created. If users have the definition for ScanSettingBinding in a YAML file named my-scansettingbinding.yml, users would apply that ScanSettingBinding by executing the following:<br /><br />oc apply -f my-scansettingbinding.yml -n openshift-compliance<br /><br />For more information about the compliance operator and its use, including the configurability of scheduling of scan cadence in ScanSetting resources and the role-based access control requirements for manually triggered scans, refer to https://docs.openshift.com/container-platform/4.8/security/compliance_operator/compliance-operator-understanding.html.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

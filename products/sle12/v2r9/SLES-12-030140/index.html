@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-030140 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must deny direct logons to the root account using remote access via SSH.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-030140 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000770&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000109-GPOS-00056">SRG-OS-000109-GPOS-00056</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       To assure individual accountability and prevent unauthorized access, organizational users must be individually identified and authenticated.<br /><br />A group authenticator is a generic account used by multiple individuals. Use of a group authenticator alone does not uniquely identify individual users. Examples of the group authenticator is the UNIX OS "root" user account, the Windows "Administrator" account, the "sa" account, or a "helpdesk" account.<br /><br />For example, the UNIX and Windows SUSE operating systems offer a "switch user" capability, allowing users to authenticate with their individual credentials and, when needed, "switch" to the administrator role. This method provides for unique individual authentication prior to using a group authenticator.<br /><br />Users (and any processes acting on behalf of users) need to be uniquely identified and authenticated for all accesses other than those accesses explicitly identified and documented by the organization, which outlines specific user actions that can be performed on the SUSE operating system without identification or authentication.<br /><br />Requiring individuals to be authenticated with an individual authenticator prior to using a group authenticator allows for traceability of actions, as well as adding an additional level of protection of the actions that can be taken with group account knowledge.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system denies direct logons to the root account using remote access via SSH.<br /><br />Check that SSH denies any user trying to log on directly as root with the following command:<br /><br /># sudo grep -i permitrootlogin /etc/ssh/sshd_config<br />PermitRootLogin no<br /><br />If the "PermitRootLogin" keyword is set to "yes", is missing, or is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to deny direct logons to the root account using remote access via SSH.<br /><br />Edit the appropriate "/etc/ssh/sshd_config" file, add or uncomment the line for "PermitRootLogin" and set its value to "no" (this file may be named differently or be in a different location):<br /><br />PermitRootLogin no
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

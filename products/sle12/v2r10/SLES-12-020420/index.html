@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-020420 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must generate audit records for all uses of the chown, fchown, fchownat, and lchown syscalls.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-020420 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000130&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000037-GPOS-00015">SRG-OS-000037-GPOS-00015</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.<br /><br />Audit records can be generated from various components within the information system (e.g., module or policy filter).<br /><br />The system call rules are loaded into a matching engine that intercepts each syscall made by all programs on the system. Therefore, it is very important to use syscall rules only when absolutely necessary since these affect performance. The more rules, the bigger the performance hit. The performance is helped, however, by combining syscalls into one rule whenever possible.<br /><br />Satisfies: SRG-OS-000037-GPOS-00015, SRG-OS-000062-GPOS-00031, SRG-OS-000392-GPOS-00172, SRG-OS-000462-GPOS-00206, SRG-OS-000471-GPOS-00215
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system generates an audit record for all uses of the "chown", "fchown", "fchownat", and "lchown" syscalls.<br /><br />Verify that the following command call is being audited by performing the following command to check the file system rules in "/etc/audit/audit.rules":<br /><br />> sudo grep chown /etc/audit/audit.rules<br /><br />-a always,exit -F arch=b32 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod<br />-a always,exit -F arch=b64 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod<br /><br />If both the "b32" and "b64" audit rules are not defined for the "chown", "fchown", "fchownat", "lchown" syscalls, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Add or update the following rules to "/etc/audit/rules.d/audit.rules":<br /><br />-a always,exit -F arch=b32 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod<br />-a always,exit -F arch=b64 -S chown,fchown,fchownat,lchown -F auid>=1000 -F auid!=4294967295 -k perm_mod<br /><br />The audit daemon must be restarted for the changes to take effect.<br /><br />> sudo systemctl restart auditd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

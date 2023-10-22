@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-18-010516 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must be configured so that a file integrity tool verifies the correct operation of security functions every 30 days.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-18-010516 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002699&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000446-GPOS-00200">SRG-OS-000446-GPOS-00200</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without verification of the security functions, security functions may not operate correctly and the failure may go unnoticed. Security function is defined as the hardware, software, and/or firmware of the information system responsible for enforcing the system security policy and supporting the isolation of code and data on which the protection is based. Security functionality includes, but is not limited to, establishing system accounts, configuring access authorizations (i.e., permissions, privileges), setting events to be audited, and setting intrusion detection parameters.<br /><br />Notifications provided by information systems include, for example, electronic alerts to system administrators, messages to local computer consoles, and/or hardware indications, such as lights.<br /><br />This requirement applies to the Ubuntu operating system performing security function verification/testing and/or systems and environments that require this functionality.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that Advanced Intrusion Detection Environment (AIDE) performs a verification of the operation of security functions every 30 days.<br /><br />Note: A file integrity tool other than AIDE may be used, but the tool must be executed at least once per week.<br /><br />Check that AIDE is being executed every 30 days or less with the following command:<br /><br /># ls -al /etc/cron.daily/aide<br /><br />-rwxr-xr-x 1 root root 26049 Oct 24 2014 /etc/cron.daily/aide<br /><br />If the "/etc/cron.daily/aide" file does not exist or a cron job is not configured to run at least every 30 days, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       The cron file for AIDE is fairly complex as it creates the report. This file is installed with the aide-common package and the default can be restored by copying it from another location:<br /><br /># sudo cp /usr/share/aide/config/cron.daily/aide /etc/cron.daily/aide
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

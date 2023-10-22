@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-18-010305 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must be configured so that audit log files cannot be read or write-accessible by unauthorized users.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-18-010305 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000162&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000058-GPOS-00028">SRG-OS-000058-GPOS-00028</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.<br /><br />To ensure the veracity of audit information, the operating system must protect audit information from unauthorized modification.<br /><br />Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.<br /><br />Satisfies: SRG-OS-000058-GPOS-00028, SRG-OS-000057-GPOS-00027
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that the audit log files have a mode of "0600" or less permissive.<br /><br />First determine where the audit logs are stored with the following command:<br /><br /># sudo grep -iw log_file /etc/audit/auditd.conf<br />log_file = /var/log/audit/audit.log<br /><br />Using the path of the directory containing the audit logs, check if the audit log files have a mode of "0600" or less by using the following command:<br /><br /># sudo stat -c "%n %a" /var/log/audit/*<br />/var/log/audit/audit.log 600<br /><br />If the audit log files have a mode more permissive than "0600", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the audit log files to have a mode of "0600" or less permissive.<br /><br />First determine where the audit logs are stored with the following command:<br /><br /># sudo grep -iw log_file /etc/audit/auditd.conf<br />log_file = /var/log/audit/audit.log<br /><br />Using the path of the directory containing the audit logs, configure the audit log files to have a mode of "0600" or less permissive by using the following command:<br /><br /># sudo chmod 0600 /var/log/audit/*
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

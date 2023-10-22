@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000050 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must automatically audit account creation.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000050 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000018&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000026-CTR-000070">SRG-APP-000026-CTR-000070</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Once an attacker establishes access to a system, the attacker often attempts to create a persistent method of reestablishing access. One way to accomplish this is for the attacker to create a new account. Auditing account creation is one method for mitigating this risk.<br /><br />A comprehensive account management process will ensure an audit trail documents the creation of application user accounts and, as required, notifies administrators and/or application owners exists. Such a process greatly reduces the risk that accounts will be surreptitiously created and provides logging that can be used for forensic purposes.<br /><br />To address access requirements, many application developers choose to integrate their applications with enterprise-level authentication/access/auditing mechanisms that meet or exceed access control policy requirements. Such integration allows the application developer to off-load those access control functions and focus on core application features and functionality.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify Red Hat Enterprise Linux CoreOS (RHCOS) generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/shadow".<br /><br />Logging on as administrator, check the auditing rules in "/etc/audit/audit.rules" by executing the following:<br /><br />for node in $(oc get node -oname); do oc debug $node -- chroot /host /bin/bash -c 'echo -n "$HOSTNAME: "; grep /etc/shadow /etc/audit/audit.rules /etc/audit/rules.d/*'; done<br /><br />(Example output:<br />-w /etc/shadow -p wa -k identity)<br /><br />If the command does not return a line, or the line is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Apply the machine config using the following command:<br /><br />for mcpool in $(oc get mcp -oname | sed "s:.*/::" ); do<br />echo "apiVersion: machineconfiguration.openshift.io/v1<br />kind: MachineConfig<br />metadata:<br />  name: 75-account-modifications-rules-$mcpool<br />  labels:<br />    machineconfiguration.openshift.io/role: $mcpool<br />spec:<br />  config:<br />    ignition:<br />      version: 3.1.0<br />    storage:<br />      files:<br />      - contents:<br />          source: data:,-w%20/etc/sudoers.d/%20-p%20wa%20-k%20actions%0A-w%20/etc/sudoers%20-p%20wa%20-k%20actions%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/75-audit-sysadmin-actions.rules<br />        overwrite: true<br />      - contents:<br />          source: data:,-w%20/etc/group%20-p%20wa%20-k%20audit_rules_usergroup_modification%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/30-etc_group_usergroup_modification.rules<br />        overwrite: true<br />      - contents:<br />          source: data:,-w%20/etc/gshadow%20-p%20wa%20-k%20audit_rules_usergroup_modification%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/30-etc_gshadow_usergroup_modification.rules<br />        overwrite: true<br />      - contents:<br />          source: data:,-w%20/etc/security/opasswd%20-p%20wa%20-k%20audit_rules_usergroup_modification%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/30-etc_security_opasswd_usergroup_modification.rules<br />        overwrite: true<br />      - contents:<br />          source: data:,-w%20/etc/passwd%20-p%20wa%20-k%20audit_rules_usergroup_modification%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/30-etc_passwd_usergroup_modification.rules<br />        overwrite: true<br />      - contents:<br />          source: data:,-w%20/etc/shadow%20-p%20wa%20-k%20audit_rules_usergroup_modification%0A<br />        mode: 0644<br />        path: /etc/audit/rules.d/30-etc_shadow_usergroup_modification.rules<br />        overwrite: true<br />" | oc apply -f -<br />done
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

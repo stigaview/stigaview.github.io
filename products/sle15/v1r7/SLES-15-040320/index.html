@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-15-040320 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must not forward Internet Protocol version 4 (IPv4) source-routed packets by default.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-15-040320 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Source-routed packets allow the source of the packet to suggest that routers forward the packet along a different path than configured on the router, which can be used to bypass network security measures. This requirement applies only to the forwarding of source-routed traffic, such as when IPv4 forwarding is enabled and the system is functioning as a router.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system does not accept IPv4 source-routed packets by default.<br /><br />Check the value of the default IPv4 accept source route variable with the following command:<br /><br />> sudo sysctl net.ipv4.conf.default.accept_source_route<br />net.ipv4.conf.default.accept_source_route = 0<br /><br />If the network parameter "ipv4.conf.default.accept_source_route" is not equal to "0" or nothing is returned, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to disable IPv4 default source routing by running the following command as an administrator:<br /><br />> sudo sysctl -w net.ipv4.conf.default.accept_source_route=0<br /><br />If "0" is not the system's default value, add or update the following line in "/etc/sysctl.d/99-stig.conf":<br /><br />> sudo sh -c 'echo "net.ipv4.conf.default.accept_source_route=0" >> /etc/sysctl.d/99-stig.conf'<br /><br />> sudo sysctl --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-18-010402 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must initiate a session lock after a 15-minute period of inactivity for all connection types.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-18-010402 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000057&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000029-GPOS-00010">SRG-OS-000029-GPOS-00010</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, the Ubuntu operating system need to be able to identify when a user's session has idled and take action to initiate the session lock.<br /><br />The session lock is implemented at the point where session activity can be determined and/or controlled.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the Ubuntu operating system initiates a session logout after a 15-minute period of inactivity. <br /><br />Check that the proper auto logout script exists with the following command:<br /><br /># cat /etc/profile.d/autologout.sh<br />TMOUT=900<br />readonly TMOUT<br />export TMOUT<br /><br />If the file "/etc/profile.d/autologout.sh" does not exist with the contents shown above, the value of "TMOUT" is greater than 900, or the timeout values are commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Ubuntu operating system to initiate a session logout after a 15-minute period of inactivity. <br /><br />Create a file to contain the system-wide session auto logout script (if it does not already exist) with the following command:<br /><br /># sudo touch /etc/profile.d/autologout.sh<br /><br />Add the following lines to the "/etc/profile.d/autologout.sh" script:<br /><br />TMOUT=900<br />readonly TMOUT<br />export TMOUT
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

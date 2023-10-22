@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000490 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inactivity.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000490 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001133&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000190-CTR-000500">SRG-APP-000190-CTR-000500</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       In OpenShift, the "session token inactivity timeout" on OAuth clients is set to ensure security and protect against potential unauthorized access to user sessions. OAuth is an open standard for secure authorization and authentication between different services. By setting a session token inactivity timeout, OpenShift reduces the risk of unauthorized access to a user's session if they become inactive or leave their session unattended. It helps protect against potential session hijacking or session replay attacks.<br /><br />OpenShift is designed to efficiently manage resources across the cluster. Active sessions consume resources such as memory and CPU. By setting timeouts, OpenShift can reclaim these resources if a session remains inactive for a certain duration. This helps optimize resource allocation and ensures that resources are available for other active sessions and workloads.<br /><br />OpenShift provides the ability for automatic time-out to debug node sessions on client versions starting with 4.8.36. By setting a time-out, OpenShift can manage the allocation of resources efficiently. It prevents the scenario where a debug session remains active indefinitely, potentially consuming excessive resources and impacting the performance of other applications running on the cluster.<br /><br />Allowing debug sessions to run indefinitely could introduce security risks. If a session is left unattended or unauthorized access is gained to a debug session, it could potentially compromise the application or expose sensitive information. By enforcing time-outs, OpenShift reduces the window of opportunity for unauthorized access and helps maintain the security and stability of the platform.<br /><br />Satisfies: SRG-APP-000190-CTR-000500, SRG-APP-000389-CTR-000925
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       On each administrators terminal, verify the OC client version includes the required idle timeout by executing the following.<br /><br />oc version<br /><br />If the client version < "4.8.36", this is a finding.<br /><br />Determine if the session token inactivity timeout is set on the oauthclients by executing the following.<br /><br />oc get oauthclients -ojsonpath='{range .items[*]}{.metadata.name}{"\t"}{.accessTokenInactivityTimeoutSeconds}{"\n"}'<br /><br />The output will list each oauth client name followed by a number. The number represents the timeout in seconds. If no number is displayed, or the timeout value is >600, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Download the latest version of the OC client, and remove/replace any older versions.<br /><br />For each oauth client that does not have the idle timeout set, or the timeout is set to the wrong duration, run the following command to set the idle timeout value to 10 minutes.<br /><br />oc patch oauthclient/<CLIENT_NAME> --type=merge -p '{"accessTokenInactivityTimeoutSeconds":600}'<br /><br />where CLIENT_NAME is the name of the oauthclient identified in the check.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

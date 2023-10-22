@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-040284 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 8 must disable the use of user namespaces.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-040284 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.<br /><br />User namespaces are used primarily for Linux container.  The value 0 disallows the use of user namespaces.  When containers are not in use, namespaces should be disallowed.  When containers are deployed on a system, the value should be set to a large non-zero value.  The default value is 7182.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify RHEL 8 disables the use of user namespaces with the following commands:<br /><br />Note: User namespaces are used primarily for Linux containers.  If containers are in use, this requirement is not applicable.<br /><br />$ sudo sysctl user.max_user_namespaces<br /><br />user.max_user_namespaces = 0<br /><br />If the returned line does not have a value of "0", or a line is not returned, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure RHEL 8 to disable the use of user namespaces by adding the following line to a file in the "/etc/sysctl.d" directory:<br /><br />Note: User namespaces are used primarily for Linux containers.  If containers are in use, this requirement is not applicable. <br /><br />user.max_user_namespaces = 0<br /><br />The system configuration files need to be reloaded for the changes to take effect. To reload the contents of the files, run the following command:<br /><br />$ sudo sysctl --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

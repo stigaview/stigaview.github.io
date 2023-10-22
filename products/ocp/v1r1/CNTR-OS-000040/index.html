@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000040 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The kubeadmin account must be disabled.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000040 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000015&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000023-CTR-000055">SRG-APP-000023-CTR-000055</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Using a centralized user management solution for account management functions enhances security, simplifies administration, improves user experience, facilitates compliance, and provides scalability and integration capabilities. It is a foundational element of effective identity and access management practices.<br /><br />OpenShift supports several different types of identity providers. To add users and grant access to OpenShift, an identity provider needs to be configured. Some of the identity provider types, such as HTPassword, only provide simple user management and are not intended for production. Other types are public services, like GitHub. These provider types may not be appropriate as they are managed by public service providers and therefore are unable to enforce the organizations account management requirements.<br /><br />After a new install, the default authentication uses kubeadmin as the default cluster-admin account. This default account must be disabled and another user account must be given cluster-admin rights.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the kubeadmin account is disabled by executing the following:<br /><br />oc get secrets kubeadmin -n kube-system<br /><br />If the command returns an error, the secret was not found, and this is not a finding.<br /><br />(Example output:<br />Error from server (NotFound): secrets "kubeadmin" not found)<br /><br />If the command returns a listing that includes the kubeadmin secret, its type, the data count, and age, this is a finding.<br /><br />(Example Output for not a finding: <br />NAME        TYPE     DATA   AGE<br />kubeadmin   Opaque   1      6h3m)
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       If an alternative IDP is already configured and an administrative user exists with the role of cluster-admin, disable the kubeadmin account by running the following command as a cluster administrator:<br /><br />oc delete secrets kubeadmin -n kube-system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

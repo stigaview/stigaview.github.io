@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-271010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 must display the Standard Mandatory DOD Notice and Consent Banner before granting local or remote access to the system via a graphical user logon.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-271010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000048&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000023-GPOS-00006">SRG-OS-000023-GPOS-00006</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Display of a standardized and approved use notification before granting access to the operating system ensures privacy and security notification verbiage used is consistent with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance.<br /><br />For U.S. Government systems, system use notifications are required only for access via login interfaces with human users and are not required when such human interfaces do not exist.<br /><br />Satisfies: SRG-OS-000023-GPOS-00006, SRG-OS-000228-GPOS-00088
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify RHEL 9 displays a banner before granting access to the operating system via a graphical user logon.<br /><br />Note: This requirement assumes the use of the RHEL 9 default graphical user interface, the GNOME desktop environment. If the system does not have any graphical user interface installed, this requirement is Not Applicable. <br /><br />Determine if the operating system displays a banner at the logon screen with the following command:<br /><br />$ sudo grep banner-message-enable /etc/dconf/db/local.d/*<br /><br />banner-message-enable=true<br /><br />If "banner-message-enable" is set to "false", is commented out, or is missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure RHEL 9 to display the Standard Mandatory DOD Notice and Consent Banner before granting access to the system via a graphical user logon.<br /><br />Create a database to contain the system-wide graphical user logon settings (if it does not already exist) with the following command:<br /><br />$ sudo touch /etc/dconf/db/local.d/01-banner-message<br /><br />Add the following lines to the [org/gnome/login-screen] section of the "/etc/dconf/db/local.d/01-banner-message":<br /><br />[org/gnome/login-screen]<br /><br />banner-message-enable=true<br /><br />Run the following command to update the database:<br /><br />$ sudo dconf update
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APAS-AT-000011 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Automation Controller must use encryption strength in accordance with the categorization of the management data during remote access management sessions.</h2>
+  <p>
+  <b>STIG ID:</b> APAS-AT-000011 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000068&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000014-AS-000009">SRG-APP-000014-AS-000009</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Remote management access is accomplished by leveraging common communication protocols and establishing a remote connection to the application server via a network for the purposes of managing Automation Controller. If cryptography is not used, then the session data traversing the remote connection could be intercepted and compromised.<br /><br />Automation Controller is accessed via standard HTTP (redirect)/HTTPS on standard ports, provided by NGINX. A self-signed certificate/key is installed by default; however, a user can provide a locally appropriate certificate and key per their organizational policy. SSL/TLS algorithm support is configured in the /etc./nginx/nginx.conf configuration file.<br /><br />Satisfies: SRG-APP-000014-AS-000009, SRG-APP-000142-AS-000014, SRG-APP-000172-AS-000120, SRG-APP-000441-AS-000258, SRG-APP-000442-AS-000259
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As an unauthenticated user, open a new web browser and go to http://<Automation Controller HOST><br /><br />If not redirected to https://<Automation Controller HOST>, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Enable HTTPS by running the following command:<br /><br />./setup.sh -e nginx_disable_https=false<br /><br />The "nginx_disable_https" variable disables HTTPS traffic through NGINX, this is useful if offloading HTTPS to a load balancer.<br /><br />By default, this variable is set to false in the installers "roles/nginx/defaults/main.yml" file. If a load balancer is not needed, ensure this value has not been set to true.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

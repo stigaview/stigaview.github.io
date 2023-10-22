@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-040200 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must implement cryptography to protect the integrity of Lightweight Directory Access Protocol (LDAP) communications.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-040200 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001453&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000250-GPOS-00093">SRG-OS-000250-GPOS-00093</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without cryptographic integrity protections, information can be altered by unauthorized users without detection.<br /><br />Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the key used to generate the hash.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If LDAP is not being utilized, this requirement is Not Applicable.<br /><br />Verify the operating system implements cryptography to protect the integrity of remote LDAP access sessions.<br /><br />To determine if LDAP is being used for authentication, use the following command:<br /><br /># systemctl status sssd.service<br />sssd.service - System Security Services Daemon<br />Loaded: loaded (/usr/lib/systemd/system/sssd.service; enabled; vendor preset: disabled)<br />Active: active (running) since Wed 2018-06-27 10:58:11 EST; 1h 50min ago<br /><br />If the "sssd.service" is "active", then LDAP is being used.<br /><br />Determine the "id_provider" that the LDAP is currently using:<br /><br /># grep -i "id_provider" /etc/sssd/sssd.conf<br /><br />id_provider = ad<br /><br />If "id_provider" is set to "ad", this is Not Applicable.<br /><br />Check the path to the X.509 certificate for peer authentication with the following command:<br /><br /># grep -i tls_cacert /etc/sssd/sssd.conf<br /><br />ldap_tls_cacert = /etc/pki/tls/certs/ca-bundle.crt<br /><br />Verify the "ldap_tls_cacert" option points to a file that contains the trusted CA certificate.<br /><br />If this file does not exist, or the option is commented out or missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to implement cryptography to protect the integrity of LDAP remote access sessions.<br /><br />Add or modify the following line in "/etc/sssd/sssd.conf":<br /><br />ldap_tls_cacert = /etc/pki/tls/certs/ca-bundle.crt
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-010199 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must be configured to prevent overwriting of custom authentication configuration settings by the authconfig utility.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-010199 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000196&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000073-GPOS-00041">SRG-OS-000073-GPOS-00041</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       When using the authconfig utility to modify authentication configuration settings, the "system-auth" and "password-auth" files and any custom settings that they may contain are overwritten. This can be avoided by creating new local configuration files and creating new or moving existing symbolic links to them. The authconfig utility will recognize the local configuration files and not overwrite them, while writing its own settings to the original configuration files.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify "system-auth" and "password-auth" files are symbolic links pointing to "system-auth-local" and "password-auth-local":<br />     $ sudo ls -l /etc/pam.d/{password,system}-auth<br /><br />     lrwxrwxrwx. 1 root root 30 Apr 1 11:59 /etc/pam.d/password-auth -> /etc/pam.d/password-auth-local<br />     lrwxrwxrwx. 1 root root 28 Apr 1 11:59 /etc/pam.d/system-auth -> /etc/pam.d/system-auth-local<br />	<br />If system-auth and password-auth files are not symbolic links, this is a finding.<br /><br />If system-auth and password-auth are symbolic links but do not point to "system-auth-local" and "password-auth-local", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Create custom configuration files and their corresponding symbolic links:<br /><br />Rename the existing configuration files (skip this step if symbolic links are already present):<br />     $ sudo mv /etc/pam.d/system-auth /etc/pam.d/system-auth-ac<br />     $ sudo mv /etc/pam.d/password-auth /etc/pam.d/password-auth-ac<br />	<br />Create custom system-auth configuration file:<br />     $ sudo vi /etc/pam.d/system-auth-local<br />	<br />The new file, at minimum, must contain the following lines:<br />	<br />auth        required      pam_faillock.so preauth silent audit deny=3 even_deny_root fail_interval=900 unlock_time=900<br />auth        include       system-auth-ac<br />auth        sufficient    pam_unix.so try_first_pass<br />auth        [default=die] pam_faillock.so authfail audit deny=3 even_deny_root fail_interval=900 unlock_time=900<br /><br />account     required      pam_faillock.so<br />account     include       system-auth-ac<br /><br />password    requisite     pam_pwhistory.so use_authtok remember=5 retry=3<br />password    requisite     pam_pwquality.so retry=3<br />password    include       system-auth-ac<br />password    sufficient    pam_unix.so sha512 shadow try_first_pass use_authtok<br /><br />session     include       system-auth-ac<br /><br />Create custom password-auth configuration file:<br />     $ sudo vi /etc/pam.d/password-auth-local<br />	<br />The new file, at minimum, must contain the following lines:<br /><br />auth        required      pam_faillock.so preauth silent audit deny=3 even_deny_root fail_interval=900 unlock_time=900<br />auth        include       password-auth-ac<br />auth        sufficient    pam_unix.so try_first_pass<br />auth        [default=die] pam_faillock.so authfail audit deny=3 even_deny_root fail_interval=900 unlock_time=900<br /><br />account     required      pam_faillock.so<br />account     include       password-auth-ac<br /><br />password    requisite     pam_pwhistory.so use_authtok remember=5 retry=3<br />password    requisite     pam_pwquality.so retry=3<br />password    include       password-auth-ac<br />password    sufficient    pam_unix.so sha512 shadow try_first_pass use_authtok<br /><br />session     include       password-auth-ac<br />	<br />Create new or move existing symbolic links to the new custom configuration files:<br />     $ sudo ln -sf /etc/pam.d/system-auth-local /etc/pam.d/system-auth<br />     $ sudo ln -sf /etc/pam.d/password-auth-local /etc/pam.d/password-auth<br /><br />Once finished, the following file structure should be present:<br />    $ sudo ls -1 /etc/pam.d/{password,system}-auth*<br /><br />    /etc/pam.d/password-auth<br />    /etc/pam.d/password-auth-ac<br />    /etc/pam.d/password-auth-local<br />    /etc/pam.d/system-auth<br />    /etc/pam.d/system-auth-ac<br />    /etc/pam.d/system-auth-local<br /><br />Note: With this solution in place any custom settings to "system-auth" and "password-auth" will be retained and not overwritten by the use of the authconfig utility.  The authconfig utility will write its settings to "system-auth-ac" and "password-auth-ac" and continue to function as expected.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

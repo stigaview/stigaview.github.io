@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL08-00-010374 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OL 8 must enable kernel parameters to enforce Discretionary Access Control (DAC) on hardlinks.</h2>
+  <p>
+  <b>STIG ID:</b> OL08-00-010374 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002165&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000312-GPOS-00122">SRG-OS-000312-GPOS-00122</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       DAC is based on the notion that individual users are "owners" of objects and therefore have discretion over who should be authorized to access the object and in which mode (e.g., read or write). Ownership is usually acquired as a consequence of creating the object or via specified ownership assignment. DAC allows the owner to determine who will have access to objects they control. An example of DAC includes user-controlled file permissions.<br /><br />When DAC policies are implemented, subjects are not constrained as to what actions they can take with information for which they have already been granted access. Thus, subjects that have been granted access to information are not prevented from passing (i.e., the subjects have the discretion to pass) the information to other subjects or objects. A subject that is constrained in its operation by Mandatory Access Control (MAC) policies is still able to operate under the less rigorous constraints of this requirement. Therefore, while MAC imposes constraints preventing a subject from passing information to another subject operating at a different sensitivity level, this requirement permits the subject to pass the information to any subject at the same sensitivity level. The policy is bounded by the information system boundary. Once the information is passed outside the control of the information system, additional means may be required to ensure the constraints remain in effect. While the older, more traditional definitions of DAC require identity-based access control, that limitation is not required for this use of DAC.<br /><br />By enabling the "fs.protected_hardlinks" kernel parameter, users can no longer create soft or hard links to files they do not own. Disallowing such hardlinks mitigate vulnerabilities based on insecure file system accessed by privileged programs, avoiding an exploitation vector exploiting unsafe use of open() or creat().<br /><br />The sysctl --system command will load settings from all system configuration files. All configuration files are sorted by their filename in lexicographic order, regardless of which of the directories they reside in. If multiple files specify the same option, the entry in the file with the lexicographically latest name will take precedence. Files are read from directories in the following list from top to bottom. Once a file of a given filename is loaded, any file of the same name in subsequent directories is ignored.<br />/etc/sysctl.d/*.conf<br />/run/sysctl.d/*.conf<br />/usr/local/lib/sysctl.d/*.conf<br />/usr/lib/sysctl.d/*.conf<br />/lib/sysctl.d/*.conf<br />/etc/sysctl.conf
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system is configured to enable DAC on hardlinks with the following commands.<br /><br />Check the status of the "fs.protected_hardlinks" kernel parameter:<br /><br />$ sudo sysctl fs.protected_hardlinks<br /><br />fs.protected_hardlinks = 1<br /><br />If "fs.protected_hardlinks" is not set to "1" or is missing, this is a finding.<br /><br />Check that the configuration files are present to enable this kernel parameter:<br /><br />$ sudo grep -r fs.protected_hardlinks /run/sysctl.d/*.conf /usr/local/lib/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /lib/sysctl.d/*.conf /etc/sysctl.conf /etc/sysctl.d/*.conf<br /><br />/etc/sysctl.d/99-sysctl.conf:fs.protected_hardlinks = 1<br /><br />If "fs.protected_hardlinks" is not set to "1" or is missing or commented out, this is a finding.<br /><br />If conflicting results are returned, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure OL 8 to enable DAC on hardlinks.<br /><br />Add or edit the following line in a system configuration file in the "/etc/sysctl.d/" directory:<br /><br />fs.protected_hardlinks = 1<br /><br />Remove any configurations that conflict with the above from the following locations: <br />/run/sysctl.d/*.conf<br />/usr/local/lib/sysctl.d/*.conf<br />/usr/lib/sysctl.d/*.conf<br />/lib/sysctl.d/*.conf<br />/etc/sysctl.conf<br />/etc/sysctl.d/*.conf<br /><br />Load settings from all system configuration files with the following command:<br /><br />$ sudo sysctl --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

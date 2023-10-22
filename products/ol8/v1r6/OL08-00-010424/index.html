@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL08-00-010424 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OL 8 must not let Meltdown and Spectre exploit critical vulnerabilities in modern processors.</h2>
+  <p>
+  <b>STIG ID:</b> OL08-00-010424 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Hardware vulnerabilities allow programs to steal data that is currently processed on the computer. While programs are typically not permitted to read data from other programs, a malicious program can exploit Meltdown and Spectre to obtain secrets stored in the memory of other running programs. This might include passwords stored in a password manager or browser; personal photos, emails, and instant messages; and business-critical documents.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Determine the default kernel: <br />$ sudo grubby --default-kernel<br /><br />/boot/vmlinuz-5.4.17-2011.1.2.el8uek.x86_64<br /><br />Using the default kernel, verify that Meltdown mitigations are not disabled:<br /><br />$ sudo grubby --info=<path-to-default-kernel> | grep mitigation<br /><br />If the mitigation parameter is set to "off" this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Determine the default kernel:  <br /> <br />$ sudo grubby --default-kernel <br /> <br />/boot/vmlinuz-5.4.17-2011.1.2.el8uek.x86_64 <br /> <br />Using the default kernel, remove the Meltdown mitigations: <br /> <br />$ sudo grubby --update-kernel=<path-to-default-kernel>  --remove-args=mitigation=off <br /> <br />Reboot the system for the change to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

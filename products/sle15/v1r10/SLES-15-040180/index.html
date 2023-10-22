@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-15-040180 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All SUSE operating system world-writable directories must be group-owned by root, sys, bin, or an application group.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-15-040180 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If a world-writable directory has the sticky bit set and is not group-owned by a privileged Group Identifier (GID), unauthorized users may be able to modify files created by others.<br /><br />The only authorized public directories are those temporary directories supplied with the system or those designed to be temporary file repositories. The setting is normally reserved for directories used by the system and by users for temporary file storage, (e.g., /tmp), and for directories requiring global read/write access.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify all SUSE operating system world-writable directories are group-owned by root, sys, bin, or an application group.<br /><br />Check the system for world-writable directories with the following command:<br /><br />> sudo find / -perm -002 -type d -exec ls -lLd {} \;<br />drwxrwxrwt. 2 root root 40 Aug 26 13:07 /dev/mqueue<br />drwxrwxrwt. 2 root root 220 Aug 26 13:23 /dev/shm<br />drwxrwxrwt. 14 root root 4096 Aug 26 13:29 /tmp<br /><br />If any world-writable directories are not owned by root, sys, bin, or an application group associated with the directory, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Change the group of the SUSE operating system world-writable directories to root with the following command:<br /><br />> sudo chgrp root <directory>
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

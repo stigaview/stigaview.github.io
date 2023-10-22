@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000800 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must protect against or limit the effects of all types of Denial-of-Service (DoS) attacks by employing organization-defined security safeguards by including a default resource quota.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000800 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002385&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000435-CTR-001070">SRG-APP-000435-CTR-001070</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       DNS attacks that are internal to the container platform (exploited or otherwise malicious applications) can have a limited blast radius by adhering to least privilege RBAC and Network access:<br />https://docs.openshift.com/container-platform/4.8/post_installation_configuration/network-configuration.html#post-install-configuring-network-policy<br /><br />Additionally, applications can even be limited using OpenShift Service Mesh Operator.<br /><br />DoS attacks coming from outside the cluster (ingress) can also be limited using an external cloud load balancer or by using 3scale API Gateway:<br />https://docs.openshift.com/container-platform/4.8/security/container_security/security-platform.html<br /><br />Resource quotas must be set on a given namespace or across multiple namespaces. Using resource quotas will help to mitigate a DoS attack by limiting how much CPU, memory, and pods may be consumed in a project. This helps protect other projects (namespaces) from being denied resources to process.<br /><br />https://docs.openshift.com/container-platform/4.8/applications/quotas/quotas-setting-per-project.html
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the new project template includes a default resource quota by executing the following:<br /><br />oc get templates/project-request -n openshift-config -o jsonpath="{.objects[?(.kind=='ResourceQuota')]}{'\n'}"<br /><br />Review the ResourceQuota definition. If nothing is return, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure a default resource quota as necessary to protect resource over utilization.<br /><br />1. Create a bootstrap project template by executing the following:<br /><br />oc adm create-bootstrap-project-template -o yaml > template.yaml<br /><br />2. Edit the template and add a ResourceQuota object definition before the parameters section.<br /><br />- apiVersion: v1<br />  kind: ResourceQuota<br />  metadata:<br />    name: example<br />  spec:<br />    hard:<br />      persistentvolumeclaims: "10"<br />      requests.storage: "50Gi"<br />      ...<br />parameters:<br /><br />3. Apply the project template to the cluster by executing the following:<br /><br />oc create -f template.yaml -n openshift-config<br /><br />Details regarding the configuration of resource quotas can be reviewed at https://docs.openshift.com/container-platform/4.8/applications/quotas/quotas-setting-per-project.html.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

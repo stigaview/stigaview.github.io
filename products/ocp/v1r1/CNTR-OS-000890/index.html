@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000890 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must contain the latest images with most recent updates and execute within the container platform runtime as authorized by IAVM, CTOs, DTMs, and STIGs.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000890 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002605&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000456-CTR-001125">SRG-APP-000456-CTR-001125</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is critical to the security and stability of the container platform and the software services running on the platform to ensure that images are deployed through a trusted software supply chain. The OpenShift platform can be configured to limit and control which image source repositories may be used by the platform and the users of the platform. By configuring this to only allow users to deploy images from trusted sources, lowers the risk for a user to deploy unsafe or untested images that would be detrimental to the security and stability of the platform.<br /><br />In order to help users manage images, OpenShift uses image streams to provide a level of obstruction for the users. In this way the users can trigger automatic redeployments as images are updated. It is also possible to configure the image stream to periodically check the image source repository for any updates and automatically pull in the latest updates.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the image source policy is configured by executing the following:<br /><br /> oc get image.config.openshift.io/cluster -o jsonpath='{.spec.registrySources}{"\nAllowedRegistriesForImport: "}{.spec.allowedRegistriesForImport}{"\n"}'<br /><br />If nothing is returned, this is a finding. <br /><br />If the registries listed under allowedRegistries, insecureRegistries, or AllowedRegistriesForImport are not from trusted sources as defined by the organization, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Edit the cluster image config resource to define the allowed registries by executing the following:<br /><br />oc edit image.config.openshift.io/cluster<br /><br />The following is an example configuration. For a detailed explanation of the configuration properties, refer to https://docs.openshift.com/container-platform/4.8/openshift_images/image-configuration.html.<br /><br />----------------------------------------------------------------------<br />apiVersion: config.openshift.io/v1<br />kind: Image <br />metadata:<br />  annotations:<br />    release.openshift.io/create-only: "true"<br />  creationTimestamp: "2019-05-17T13:44:26Z"<br />  generation: 1<br />  name: cluster<br />  resourceVersion: "8302"<br />  selfLink: /apis/config.openshift.io/v1/images/cluster<br />  uid: e34555da-78a9-11e9-b92b-06d6c7da38dc<br />spec:<br />  allowedRegistriesForImport: <br />    - domainName: quay.io<br />      insecure: false<br />  additionalTrustedCA: <br />    name: myconfigmap<br />  registrySources: <br />    allowedRegistries:<br />    - example.com<br />    - quay.io<br />    - registry.redhat.io<br />    - image-registry.openshift-image-registry.svc:5000<br />    - reg1.io/myrepo/myapp:latest<br />    insecureRegistries:<br />    - insecure.com<br />status:<br />  internalRegistryHostname: image-registry.openshift-image-registry.svc:5000<br />----------------------------------------------------------------------
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

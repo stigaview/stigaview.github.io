@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-08-010290 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The RHEL 8 SSH daemon must be configured to use only Message Authentication Codes (MACs) employing FIPS 140-2 validated cryptographic hash algorithms.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-08-010290 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001453&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000250-GPOS-00093">SRG-OS-000250-GPOS-00093</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without cryptographic integrity protections, information can be altered by unauthorized users without detection.<br /><br />Remote access (e.g., RDP) is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.<br /><br />Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash.<br /><br />RHEL 8 incorporates system-wide crypto policies by default. The SSH configuration file has no effect on the ciphers, MACs, or algorithms unless specifically defined in the /etc/sysconfig/sshd file. The employed algorithms can be viewed in the /etc/crypto-policies/back-ends/openssh.config file.<br /><br />By specifying a hash algorithm list with the order of hashes being in a “strongest to weakest” orientation, the system will automatically attempt to use the strongest hash for securing SSH connections.<br /><br />Satisfies: SRG-OS-000250-GPOS-00093, SRG-OS-000393-GPOS-00173, SRG-OS-000394-GPOS-00174, SRG-OS-000125-GPOS-00065
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SSH daemon is configured to use only MACs employing FIPS 140-2-approved algorithms:<br /><br />Verify that system-wide crypto policies are in effect:<br /><br />$ sudo grep -i crypto_policy /etc/sysconfig/sshd<br /><br /># crypto_policy=<br /><br />If the "crypto_policy" is not commented out and is defined, this is a finding.<br /><br />Verify which system-wide crypto policy is in use:<br /><br />$ sudo update-crypto-policies --show<br /><br />FIPS<br /><br />Check that the MACs in the back-end configurations are FIPS 140-2-approved algorithms with the following command:<br /><br />$ sudo grep -i macs /etc/crypto-policies/back-ends/openssh.config /etc/crypto-policies/back-ends/opensshserver.config<br /><br />/etc/crypto-policies/back-ends/openssh.config:MACs hmac-sha2-512,hmac-sha2-256<br />/etc/crypto-policies/back-ends/opensshserver.config:CRYPTO_POLICY='-oCiphers=aes256-ctr,aes192-ctr,aes128-ctr -oMACS=hmac-sha2-512,hmac-sha2-256'<br />/etc/crypto-policies/back-ends/opensshserver.config:CRYPTO_POLICY='-oCiphers=aes256-ctr,aes192-ctr,aes128-ctr -oMACS=hmac-sha2-512,hmac-sha2-256'<br /><br />If the MAC entries in the "openssh.config" and "opensshserver.config" files have any hashes other than "hmac-sha2-512" and "hmac-sha2-256", the order differs from the example above, if they are missing, or commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the RHEL 8 SSH daemon to use only MACs employing FIPS 140-2-approved algorithms with the following commands:<br /><br />$ sudo fips-mode-setup --enable<br /><br />Next, update the "/etc/crypto-policies/back-ends/openssh.config" <br />and "/etc/crypto-policies/back-ends/opensshserver.config" files to include these MACs employing FIPS 140-2-approved algorithms:<br /><br />/etc/crypto-policies/back-ends/openssh.config:MACs hmac-sha2-512,hmac-sha2-256<br />/etc/crypto-policies/back-ends/opensshserver.config:CRYPTO_POLICY='-oCiphers=aes256-ctr,aes192-ctr,aes128-ctr -oMACS=hmac-sha2-512,hmac-sha2-256'<br />/etc/crypto-policies/back-ends/opensshserver.config:CRYPTO_POLICY='-oCiphers=aes256-ctr,aes192-ctr,aes128-ctr -oMACS=hmac-sha2-512,hmac-sha2-256'<br /><br />A reboot is required for the changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

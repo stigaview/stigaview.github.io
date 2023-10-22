@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000590 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Automation Controller NGINX web server document directory must be in a separate partition from the web server's system files.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000590 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001084&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000233-WSR-000146">SRG-APP-000233-WSR-000146</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is important that Automation Controller NGINX web server restricts the ability of clients to launch denial-of-service (DoS) attacks against other information systems or networks by disallowing access to system files via document and system file partitioning. DoS attacks are an attempt to negatively affect the availability of the server to end users through directory traversal and URL manipulation. An attack could compromise the end user’s access to websites and applications, which could be critical.<br /><br />If a client is allowed to enable a DoS attack through access to system files, it means that the whole server or network could be shut down. In a best-case scenario, it could deny the user access to required websites and applications, which poses a threat to productivity as well as the need to spend time researching and resolving the attack. This is why it is important that Automation Controller NGINX web server does not allow access to any system files.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Automation Controller serves static public content from the directory /var/lib/awx/public.<br /><br />As a System Administrator for each Automation Controller NGINX web server host, verify that a separate file system/partition has been created for /var/lib/awx/public:<br /><br />[[ $(sudo awk '$0~"/var/lib/awx/public" {print $2}' /etc/fstab) == "/var/lib/awx/public" ]] || echo "FAILED"<br /><br />If "FAILED" is displayed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a System Administrator for each Automation Controller NGINX web server host, migrate the "/var/lib/awx/public" path onto a separate file system. No automated fix is available for this action.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

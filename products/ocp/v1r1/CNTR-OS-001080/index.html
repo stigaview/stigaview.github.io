@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-001080 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must use FIPS-validated SHA-2 or higher hash function for digital signature generation and verification (nonlegacy use).</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-001080 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000803&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000610-CTR-001385">SRG-APP-000610-CTR-001385</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Using a FIPS-validated SHA-2 or higher hash function for digital signature generation and verification in OpenShift ensures strong cryptographic security, compliance with industry standards, and protection against known attacks. It promotes the integrity, authenticity, and nonrepudiation of digital signatures, which are essential for secure communication and data exchange in the OpenShift platform.<br /><br />SHA1 is disabled in digital signatures when FIPS mode is enabled. OpenShift must verify that the certificates in /etc/kubernetes and /etc/pki are using sha256 signatures.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the use of a FIPS-compliant hash function for digital signature generation and validation, by executing and reviewing the following commands:<br /><br />update-crypto-policies --show<br /><br />If the return is not "FIPS", this is a finding.<br /><br />Verify the crypto-policies by executing the following:<br /><br />openssl x509 -in /etc/kubernetes/kubelet-ca.crt -noout -text | grep Algorithm<br /><br />openssl x509 -in /etc/kubernetes/ca.crt -noout -text | grep Algorithm<br /><br />If any of the crypto-policies listed are not FIPS compliant, this is a finding. Details of algorithms can be reviewed at the following knowledge base article:<br />https://access.redhat.com/articles/3642912
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Reinstall the OpenShift cluster in FIPS mode. The file install-config.yaml has a top-level key that enables FIPS mode for all nodes and the cluster platform layer. If the install-config.yaml was not backed up prior to consumption as part of the installation, it must be recreated. An example install-config.yaml with some sections trimmed out for brevity, and the "fips: true" key applied at the top level is shown below:<br /><br />apiVersion: v1<br />baseDomain: example.com<br />controlPlane:<br />  name: master<br />  platform:<br />    aws:<br />      [...]<br />  replicas: 3<br />compute:<br />- name: worker<br />  platform:<br />    aws:<br />  replicas: 3<br />metadata:<br />  name: fips-cluster<br />networking:<br />  [...]<br />platform:<br />  aws:<br />    [...]<br />sshKey: ssh-ed25519 AAAA...<br />pullSecret: '{"auths": ...}'<br />fips: true<br /><br />After saving the install-config.yaml with the corresponding correct information, run the installer to create a cluster that uses FIPS-validated Modules in Process cryptographic libraries. The command to install a cluster and consume the install-config.yaml is:<br /><br />> ./openshift-install create cluster --dir=<installation_directory> --log-level=info<br />Where <installation_directory> is the directory that contains install-config.yaml<br /><br />Additional details can be found here: https://docs.openshift.com/container-platform/4.8/installing/installing-fips.html
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

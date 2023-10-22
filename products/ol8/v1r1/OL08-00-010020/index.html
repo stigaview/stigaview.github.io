@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL08-00-010020 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OL 8 must implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect data requiring data-at-rest protections in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.</h2>
+  <p>
+  <b>STIG ID:</b> OL08-00-010020 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000068&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000033-GPOS-00014">SRG-OS-000033-GPOS-00014</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Use of weak or untested encryption algorithms undermines the purposes of using encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated. <br /> <br />OL 8 uses GRUB 2 as the default bootloader. Note that GRUB 2 reads its configuration from the "/boot/grub2/grub.cfg" file on traditional BIOS-based machines and from the "/boot/efi/EFI/redhat/grub.cfg" file on UEFI machines. <br /> <br />The fips=1 kernel option needs to be added to the kernel command line during system installation so that key generation is done with FIPS-approved algorithms and continuous monitoring tests in place. Users should also ensure the system has plenty of entropy during the installation process by moving the mouse around, or if no mouse is available, ensuring that many keystrokes are typed. The recommended number of keystrokes is 256 and more. Fewer than 256 keystrokes may generate a non-unique key.<br /><br />Satisfies: SRG-OS-000033-GPOS-00014, SRG-OS-000125-GPOS-00065, SRG-OS-000250-GPOS-00093, SRG-OS-000393-GPOS-00173, SRG-OS-000394-GPOS-00174, SRG-OS-000423-GPOS-00187
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system implements DoD-approved encryption to protect the confidentiality of remote access sessions.<br /><br />Check to see if FIPS mode is enabled with the following command:<br /><br />$ fips-mode-setup --check<br /><br />FIPS mode is enabled<br /><br />If FIPS mode is "enabled", check to see if the kernel command line is configured to use FIPS mode with the following command:<br /><br />$ sudo grep fips /boot/grub2/grub.cfg<br /><br />/vmlinuz-3.8.0-0.40.el7.x86_64 root=/dev/mapper/OL-root ro rd.md=0 rd.dm=0 rd.lvm.lv=OL/swap crashkernel=auto rd.luks=0 vconsole.keymap=us rd.lvm.lv=OL/root rhgb fips=1 quiet<br /><br />If the kernel command line is configured to use FIPS mode, check to see if the system is in FIPS mode with the following command:<br /><br />$ sudo cat /proc/sys/crypto/fips_enabled<br /><br />1<br /><br />If FIPS mode is not "enabled", the kernel command line does not have a FIPS entry, or the system has a value of "0" for "fips_enabled" in "/proc/sys/crypto", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to implement DoD-approved encryption by following the steps below:<br /><br />To enable strict FIPS compliance, the fips=1 kernel option needs to be added to the kernel boot parameters during system installation so key generation is done with FIPS-approved algorithms and continuous monitoring tests in place.<br /><br />Enable FIPS mode after installation (not strict FIPS compliant) with the following command:<br /><br />$ sudo fips-mode-setup --enable<br /><br />Reboot the system for the changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

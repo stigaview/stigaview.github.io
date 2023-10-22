@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000350 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All Automation Controller NGINX web servers must protect system resources and privileged operations from hosted applications.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000350 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000141-WSR-000086">SRG-APP-000141-WSR-000086</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Automation Controller NGINX web servers may host too many applications. Each application will need certain system resources and privileged operations to operate correctly. The Automation Controller NGINX web servers must be configured to contain and control the applications and protect the system resources and privileged operations from those not needed by the application for operation.<br /><br />Not limiting the application will exacerbate the potential harm a compromised application could cause to a system.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a system administrator for each Automation Controller NGINX web server host, check if SELinux is enabled in enforcing mode:<br /><br />getenforce | grep Enforcing  >/dev/null || echo FAILED<br /><br />If "FAILED" is displayed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a system administrator for each Automation Controller NGINX web server host, place the server in SELinux enforcing mode:<br /><br />setenforce 1
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

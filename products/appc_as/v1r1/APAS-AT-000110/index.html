@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APAS-AT-000110 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Automation Controller must only allow the use of DOD PKI-established certificate authorities for verification of the establishment of protected sessions.</h2>
+  <p>
+  <b>STIG ID:</b> APAS-AT-000110 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002450&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000427-AS-000264">SRG-APP-000427-AS-000264</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       An untrusted source may leave the system vulnerable to issues such as unauthorized access, reduced data integrity, loss of confidentiality, etc.<br /><br />Satisfies: SRG-APP-000427-AS-000264, SRG-APP-000514-AS-000137
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       The Administrator must check the Automation Controller configuration. <br /><br />Download the latest DOD PKI CA certificate bundle:<br /><br />curl https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/certificates_pkcs7_DOD.zip > /root/certificates_pkcs7_DOD.zip && gunzip /root/certificates_pkcs7_DOD.zip<br /><br />Check the certificate at /etc/tower/tower.cert:<br /><br />openssl verify -verbose -x509_strict -CAfile /root/certificates_pkcs7_DOD.pem -CApath nosuchdir <(cat  /etc/tower/tower.cert >><organizationally defined intermediate certificate file in PEM format>>>)<br /><br />If the >><organizationally defined intermediate certificate file in PEM format>>> does not exist, this is a finding.<br /><br />Check the certificate at /etc/tower/tower.key:<br />openssl verify -CAfile /root/certificates_pkcs7_DOD.pem /etc/tower/tower.cert  <br /><br />If the >><organizationally defined intermediate certificate file in PEM format>>> does not exist, this is a finding.<br /><br />Check the trusted ca certificate:<br /><br />openssl x509 -in /etc/pki/ca-trust/tls-ca-bundle.pam custom_ca_cert<br /><br />If the >><organizationally defined intermediate certificate file in PEM format>>> does not exist, this is a finding.<br /><br />If the >><organizationally defined intermediate certificate file in PEM format>>> does not exist, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       For each Automation Controller host, the administrator must:<br /><br />Download the >><organizationally defined intermediate certificate file in PEM format>>>;<br /><br />Generate the appropriate /etc/tower/tower.key files, certificates, and CSRs and have the organizationally defined PKI authority issue a certificate signed by the >><organizationally defined intermediate certificate file in PEM format>>>;<br /><br />Place the signed certificate in /etc/tower/tower.cert.<br /><br />Place the >><organizationally defined intermediate certificate file in PEM format>>> in /etc/pki/ca-trust/source/anchors.<br /><br />Execute:<br />update-ca-trust extract && update-ca-trust;<br /><br />Download the latest DOD PKI CA certificate bundle:<br /><br />curl https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/certificates_pkcs7_DOD.zip > /root/certificates_pkcs7_DOD.z && gunzip /root/certificates_pkcs7_DOD.z > /etc/pki/ca-trust/source/anchors<br /><br />Install trusted root and intermediate CA certificates:<br /><br />update-ca-trust extract && update-ca-trust;
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

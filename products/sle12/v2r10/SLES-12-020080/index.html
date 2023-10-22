@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-020080 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system audit event multiplexor must be configured to use Kerberos.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-020080 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001851&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000342-GPOS-00133">SRG-OS-000342-GPOS-00133</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Information stored in one location is vulnerable to accidental or incidental deletion or alteration.<br /><br />Allowing devices and users to connect to or from the system without first authenticating them allows untrusted access and can lead to a compromise or attack. Audit events may include sensitive data must be encrypted prior to transmission. Kerberos provides a mechanism to provide both authentication and encryption for audit event records.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Determine if the SUSE operating system audit event multiplexor is configured to use Kerberos by running the following command:<br /><br /># sudo cat /etc/audisp/audisp-remote.conf | grep enable_krb5<br />enable_krb5 = yes<br /><br />If "enable-krb5" is not set to "yes", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system audit event multiplexor to use Kerberos by editing the "/etc/audisp/audisp-remote.conf" file. <br /><br />Edit or add the following line to match the text below:<br /><br />enable_krb5 = yes
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

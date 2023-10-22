@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-20-010444 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu operating system must implement cryptographic mechanisms to prevent unauthorized modification of all information at rest.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-20-010444 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002475&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000404-GPOS-00183">SRG-OS-000404-GPOS-00183</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Operating systems handling data requiring "data at rest" protections must employ cryptographic mechanisms to prevent unauthorized disclosure and modification of the information at rest. <br /> <br />Selection of a cryptographic mechanism is based on the need to protect the integrity of organizational information. The strength of the mechanism is commensurate with the security category and/or classification of the information. Organizations have the flexibility to either encrypt all information on storage devices (i.e., full disk encryption) or encrypt specific data structures (e.g., files, records, or fields).
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If there is a documented and approved reason for not having data-at-rest encryption, this requirement is Not Applicable. <br /> <br />Verify the Ubuntu operating system prevents unauthorized disclosure or modification of all information requiring at-rest protection by using disk encryption.  <br /> <br />Determine the partition layout for the system with the following command: <br /> <br />$ sudo fdisk -l <br />(..) <br />Disk /dev/vda: 15 GiB, 16106127360 bytes, 31457280 sectors <br />Units: sectors of 1 * 512 = 512 bytes <br />Sector size (logical/physical): 512 bytes / 512 bytes <br />I/O size (minimum/optimal): 512 bytes / 512 bytes <br />Disklabel type: gpt <br />Disk identifier: 83298450-B4E3-4B19-A9E4-7DF147A5FEFB <br /> <br />Device       Start      End  Sectors Size Type <br />/dev/vda1     2048     4095     2048   1M BIOS boot <br />/dev/vda2     4096  2101247  2097152   1G Linux filesystem <br />/dev/vda3  2101248 31455231 29353984  14G Linux filesystem <br />(...) <br /> <br />Verify that the system partitions are all encrypted with the following command: <br /> <br />$ more /etc/crypttab <br /> <br />Every persistent disk partition present must have an entry in the file. <br /> <br />If any partitions other than the boot partition or pseudo file systems (such as /proc or /sys) are not listed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       To encrypt an entire partition, dedicate a partition for encryption in the partition layout. <br /> <br />Note: Encrypting a partition in an already-installed system is more difficult because it will need to be resized and existing partitions changed.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

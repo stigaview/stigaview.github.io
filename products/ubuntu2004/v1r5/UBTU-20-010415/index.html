@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-20-010415 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must deploy Endpoint Security for Linux Threat Prevention (ENSLTP).</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-20-010415 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001233&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000191-GPOS-00080">SRG-OS-000191-GPOS-00080</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws. <br /> <br />To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using HBSS and periodic scanning using other tools, as specified in the requirement.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       The Ubuntu operating system is not compliant with this requirement; hence, it is a finding. However, the severity level can be mitigated to a CAT III if the ENSLTP module is installed and running. <br /> <br />Check that the "mfetp" package has been installed: <br /> <br /># dpkg -l | grep mfetp <br /> <br />If the "mfetp" package is not installed, this finding will remain as a CAT II. <br /> <br />Check that the daemon is running: <br /> <br /># /opt/McAfee/ens/tp/init/mfetpd-control.sh status <br /> <br />If the daemon is not running, this finding will remain as a CAT II.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       The Ubuntu operating system is not compliant with this requirement; however, the severity level can be mitigated to a CAT III if the ENSLTP module is installed and running. <br /> <br />Configure the Ubuntu operating system to use ENSLTP. <br /> <br />Install the "mfetp" package: <br /> <br /># sudo apt-get install mfetp
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

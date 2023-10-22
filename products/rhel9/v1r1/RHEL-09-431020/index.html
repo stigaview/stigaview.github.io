@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-431020 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 must configure SELinux context type to allow the use of a nondefault faillock tally directory.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-431020 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000044&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000021-GPOS-00005">SRG-OS-000021-GPOS-00005</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Not having the correct SELinux context on the faillock directory may lead to unauthorized access to the directory.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the location of the nondefault tally directory for the pam_faillock module with the following command:<br /><br />Note: If the system does not have SELinux enabled and enforcing a targeted policy, or if the pam_faillock module is not configured for use, this requirement is Not Applicable.<br /><br />$ grep 'dir =' /etc/security/faillock.conf<br /><br />dir = /var/log/faillock<br /><br />Check the security context type of the nondefault tally directory with the following command:<br /><br />$ ls -Zd /var/log/faillock<br /><br />unconfined_u:object_r:faillog_t:s0 /var/log/faillock<br /><br />If the security context type of the nondefault tally directory is not "faillog_t", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure RHEL 9 to allow the use of a nondefault faillock tally directory while SELinux enforces a targeted policy.<br /><br />Create a nondefault faillock tally directory (if it does not already exist) with the following example:<br /><br />$ sudo mkdir /var/log/faillock<br /><br />Update the /etc/selinux/targeted/contexts/files/file_contexts.local with "faillog_t" context type for the nondefault faillock tally directory with the following command:<br /><br />$ sudo semanage fcontext -a -t faillog_t "/var/log/faillock(/.*)?"<br /><br />Next, update the context type of the nondefault faillock directory/subdirectories and files with the following command:<br /><br />$ sudo restorecon -R -v /var/log/faillock
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

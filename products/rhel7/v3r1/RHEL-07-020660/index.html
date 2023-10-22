@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-020660 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must be configured so that all files and directories contained in local interactive user home directories are owned by the owner of the home directory.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-020660 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If local interactive users do not own the files in their directories, unauthorized users may be able to access them. Additionally, if files are not owned by the user, this could be an indication of system compromise.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify all files and directories in a local interactive user's home directory are owned by the user.<br /><br />Check the owner of all files and directories in a local interactive user's home directory with the following command:<br /><br />Note: The example will be for the user "smithj", who has a home directory of "/home/smithj".<br /><br /># ls -lLR /home/smithj<br />-rw-r--r-- 1 smithj smithj  18 Mar  5 17:06 file1<br />-rw-r--r-- 1 smithj smithj 193 Mar  5 17:06 file2<br />-rw-r--r-- 1 smithj smithj 231 Mar  5 17:06 file3<br /><br />If any files are found with an owner different than the home directory user, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Change the owner of a local interactive user's files and directories to that owner. To change the owner of a local interactive user's files and directories, use the following command:<br /><br />Note: The example will be for the user smithj, who has a home directory of "/home/smithj".<br /><br /># chown smithj /home/smithj/<file or directory>
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

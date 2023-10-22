@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-07-041010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Red Hat Enterprise Linux operating system must be configured so that all wireless network adapters are disabled.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-07-041010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001443&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000424-GPOS-00188">SRG-OS-000424-GPOS-00188</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The use of wireless networking can introduce many different attack vectors into the organization's network. Common attack vectors such as malicious association and ad hoc networks will allow an attacker to spoof a wireless access point (AP), allowing validated systems to connect to the malicious AP and enabling the attacker to monitor and record network traffic. These malicious APs can also serve to create a man-in-the-middle attack or be used to create a denial of service to valid network resources.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that there are no wireless interfaces configured on the system.<br /><br />This is N/A for systems that do not have wireless network adapters.<br /><br />Check for the presence of active wireless interfaces with the following command:<br /><br /># nmcli device<br />DEVICE TYPE STATE<br />eth0 ethernet connected<br />wlp3s0 wifi disconnected<br />lo loopback unmanaged<br /><br />If a wireless interface is configured and its use on the system is not documented with the Information System Security Officer (ISSO), this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the system to disable all wireless network interfaces with the following command:<br /><br />#nmcli radio wifi off
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

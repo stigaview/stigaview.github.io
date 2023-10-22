@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-18-010108 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must prohibit password reuse for a minimum of five generations.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-18-010108 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000200&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000077-GPOS-00045">SRG-OS-000077-GPOS-00045</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. If the information system or application allows the user to consecutively reuse their password when that password has exceeded its defined lifetime, the end result is a password that is not changed as per policy requirements.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that the Ubuntu operating system prevents passwords from being reused for a minimum of five generations by running the following command:<br /><br /># grep -i remember /etc/pam.d/common-password<br /><br />password [success=1 default=ignore] pam_unix.so sha512 shadow remember=5 rounds=5000<br /><br />If the "remember" parameter value is not greater than or equal to 5, commented out, or not set at all this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Ubuntu operating system prevents passwords from being reused for a minimum of five generations.<br /><br />Add, or modify the "remember" parameter value to the following line in "/etc/pam.d/common-password" file:<br /><br />password [success=1 default=ignore] pam_unix.so sha512 shadow remember=5 rounds=5000
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

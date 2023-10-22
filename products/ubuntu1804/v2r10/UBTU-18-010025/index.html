@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-18-010025 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system audit event multiplexor must be configured to off-load audit logs onto a different system or storage media from the system being audited.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-18-010025 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001851&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000342-GPOS-00133">SRG-OS-000342-GPOS-00133</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Information stored in one location is vulnerable to accidental or incidental deletion or alteration.<br /><br />Off-loading is a common process in information systems with limited audit storage capacity.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the audit event multiplexor is configured to off-load audit records to a different system or storage media from the system being audited.<br /><br />Check that audisp-remote plugin is installed:<br /><br /># sudo dpkg -s audispd-plugins<br /><br />If status is "not installed", verify that another method to off-load audit logs has been implemented.<br /><br />Check that the records are being off-loaded to a remote server with the following command:<br /><br /># sudo grep -i active /etc/audisp/plugins.d/au-remote.conf<br /><br />active = yes<br /><br />If "active" is not set to "yes", or the line is commented out, ask the System Administrator to indicate how the audit logs are off-loaded to a different system or storage media.<br /><br />If there is no evidence that the system is configured to off-load audit logs to a different system or storage media, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the audit event multiplexor to off-load audit records to a different system or storage media from the system being audited.<br /><br />Install the audisp-remote plugin:<br /><br /># sudo apt-get install audispd-plugins -y<br /><br />Set the audisp-remote plugin as active, by editing the /etc/audisp/plugins.d/au-remote.conf file:<br /><br /># sudo sed -i -E 's/active\s*=\s*no/active = yes/' /etc/audisp/plugins.d/au-remote.conf<br /><br />Set the address of the remote machine, by editing the /etc/audisp/audisp-remote.conf file:<br /><br /># sudo sed -i -E 's/(remote_server\s*=).*/\1 <remote addr>/' audisp-remote.conf<br /><br />where <remote addr> must be substituted by the address of the remote server receiving the audit log.<br /><br />Make the audit service reload its configuration files:<br /><br /># sudo systemctl restart auditd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

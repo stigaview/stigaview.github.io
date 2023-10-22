@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-010061 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must uniquely identify and must authenticate users using multifactor authentication via a graphical user logon.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-010061 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001948&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000375-GPOS-00160">SRG-OS-000375-GPOS-00160</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       To assure accountability and prevent unauthenticated access, users must be identified and authenticated to prevent potential misuse and compromise of the system.<br /><br />Multifactor solutions that require devices separate from information systems gaining access include, for example, hardware tokens providing time-based or challenge-response authenticators and smart cards such as the U.S. Government Personal Identity Verification card and the DoD Common Access Card.<br /><br />Satisfies: SRG-OS-000375-GPOS-00161, SRG-OS-000377-GPOS-00162
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system uniquely identifies and authenticates users using multifactor authentication via a graphical user logon.<br /><br />Note: If the system does not have GNOME installed, this requirement is Not Applicable. <br /><br />Determine which profile the system database is using with the following command:<br /><br /># grep system-db /etc/dconf/profile/user<br /><br />system-db:local<br /><br />Note: The example is using the database local for the system, so the path is "/etc/dconf/db/local.d". This path must be modified if a database other than local is being used.<br /><br /># grep enable-smartcard-authentication /etc/dconf/db/local.d/*<br /><br />enable-smartcard-authentication=true<br /><br />If "enable-smartcard-authentication" is set to "false" or the keyword is missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to uniquely identify and authenticate users using multifactor authentication via a graphical user logon.<br /><br />Note: If the system does not have GNOME installed, this requirement is Not Applicable.<br /><br />Create a database to contain the system-wide screensaver settings (if it does not already exist) with the following command: <br /><br />Note: The example is using the local system database, so if the system is using another database in "/etc/dconf/profile/user", create the file under the appropriate subdirectory.<br /><br /># touch /etc/dconf/db/local.d/00-defaults<br /><br />Edit "[org/gnome/login-screen]" and add or update the following line:<br />enable-smartcard-authentication=true <br /><br />Update the system databases:<br /># dconf update
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>RHEL-09-214020 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>RHEL 9 must check the GPG signature of locally installed software packages before installation.</h2>
+  <p>
+  <b>STIG ID:</b> RHEL-09-214020 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001749&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000366-GPOS-00153">SRG-OS-000366-GPOS-00153</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Changes to any software components can have significant effects on the overall security of the operating system. This requirement ensures the software has not been tampered with and that it has been provided by a trusted vendor.<br /><br />All software packages must be signed with a cryptographic key recognized and approved by the organization.<br /><br />Verifying the authenticity of software prior to installation validates the integrity of the software package received from a vendor. This verifies the software has not been tampered with and that it has been provided by a trusted vendor.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that dnf always checks the GPG signature of locally installed software packages before installation:<br /><br />$ grep localpkg_gpgcheck /etc/dnf/dnf.conf <br /><br />localpkg_gpgcheck=1 <br /><br />If "localpkg_gpgcheck" is not set to "1", or if the option is missing or commented out, ask the system administrator how the GPG signatures of local software packages are being verified.<br /><br />If there is no process to verify GPG signatures that is approved by the organization, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure dnf to always check the GPG signature of local software packages before installation.<br /><br />Add or update the following line in the [main] section of the /etc/dnf/dnf.conf file:<br /><br />localpkg_gpgcheck=1
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

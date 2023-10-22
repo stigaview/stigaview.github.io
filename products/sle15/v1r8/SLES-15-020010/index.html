@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-15-020010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must lock an account after three consecutive invalid access attempts.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-15-020010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000044&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000021-GPOS-00005">SRG-OS-000021-GPOS-00005</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       By limiting the number of failed access attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-forcing, is reduced. Limits are imposed by locking the account.<br /><br />The pam_tally2.so module maintains a count of attempted accesses. This includes user name entry into a logon field as well as password entry. With counting access attempts, it is possible to lock an account without presenting a password into the password field. This should be taken into consideration as it poses as an avenue for denial of service.<br /><br />Satisfies: SRG-OS-000021-GPOS-00005, SRG-OS-000329-GPOS-00128
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system locks a user account after three consecutive failed access attempts until the locked account is released by an administrator. <br /><br />Check that the system locks a user account after three consecutive failed login attempts using the following command: <br /><br />> grep pam_tally2.so /etc/pam.d/common-auth <br />auth required pam_tally2.so onerr=fail deny=3 <br /><br />If no line is returned or the line is commented out, this is a finding.<br />If the line is missing "onerr=fail", this is a finding.<br />If the line has "deny" set to a value other than 1, 2, or 3, this is a finding.<br /><br />Check that the system resets the failed login attempts counter after a successful login using the following command: <br /><br />> grep pam_tally2.so /etc/pam.d/common-account <br />account required pam_tally2.so<br /><br />If the account option is missing, or commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to lock an account when three unsuccessful access attempts occur.<br /><br />Modify the first line of the auth section "/etc/pam.d/common-auth" file to match the following lines:<br /><br />auth required pam_tally2.so onerr=fail silent audit deny=3<br /><br />Add or modify the following line in the /etc/pam.d/common-account file:<br />account required pam_tally2.so <br /><br />Note: Manual changes to the listed files may be overwritten by the "pam-config" program. The "pam-config" program should not be used to update the configurations listed in this requirement.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

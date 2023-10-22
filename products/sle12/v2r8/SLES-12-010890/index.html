@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-010890 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The SUSE operating system must prevent unauthorized users from accessing system error messages.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-010890 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001314&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000206-GPOS-00084">SRG-OS-000206-GPOS-00084</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the SUSE operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.<br /><br />The structure and content of error messages must be carefully considered by the organization and development team. The extent to which the information system is able to identify and handle error conditions is guided by organizational policy and operational requirements.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that the SUSE operating system prevents unauthorized users from accessing system error messages.<br /><br />Check the "/var/log/messages" file permissions with the following comand:<br /><br />> sudo stat -c "%n %U:%G %a" /var/log/messages<br /><br />/var/log/messages root:root 640<br /><br />Check that "permissions.local" file contains the correct permissions rules with the following command:<br /><br />> grep -i messages /etc/permissions.local<br /><br />/var/log/messages root:root 640<br /><br />If the effective permissions do not match the "permissions.local" file, the command does not return any output, or is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to prevent unauthorized users from accessing system error messages.<br /><br />Add or update the following rules in "/etc/permissions.local":<br /><br />/var/log/messages root:root 640<br /><br />Set the correct permissions with the following command:<br /><br />> sudo chkstat --set --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

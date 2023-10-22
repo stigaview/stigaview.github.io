@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL08-00-010149 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OL 8 operating systems booted with a BIOS must have a unique name for the grub superusers account when booting into single-user and maintenance modes.</h2>
+  <p>
+  <b>STIG ID:</b> OL08-00-010149 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000213&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000080-GPOS-00048">SRG-OS-000080-GPOS-00048</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If the system does not require valid authentication before it boots into single-user or maintenance mode, anyone who invokes single-user or maintenance mode is granted privileged access to all files on the system. GRUB 2 is the default boot loader for OL 8 and is designed to require a password to boot into single-user mode or modify the boot menu.<br />The GRUB 2 superuser account is an account of last resort.  Establishing a unique username for this account hardens the boot loader against brute force attacks. Due to the nature of the superuser account database being distinct from the OS account database, this allows the use of a username that is not among those within the OS account database. Examples of non-unique superusers names are (root, superuser, unlock, etc.)
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       For systems that use UEFI, this is Not Applicable.<br /><br />Verify that a unique name is set as the "superusers" account:<br /><br />$ sudo grep -iw "superusers" /boot/grub2/grub.cfg<br />set superusers="[someuniqueUserNamehere]"<br />export superusers<br /><br />If "superusers" is identical to any OS account name or is missing a name, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the system to replace "root" with a unique name for the grub superusers account.<br /><br />Edit the /etc/grub.d/01_users file and add or modify the following lines:<br /><br />set superusers="[someuniqueUserNamehere]"<br />export superusers<br />password_pbkdf2 [someuniqueUserNamehere] ${GRUB2_PASSWORD}<br /><br />Generate a new grub.cfg file with the following command:<br /><br />$ sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-021350 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system must implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect data requiring data-at-rest protections in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-021350 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000068&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000033-GPOS-00014">SRG-OS-000033-GPOS-00014</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Use of weak or untested encryption algorithms undermines the purposes of using encryption to protect data. The operating system must implement cryptographic modules that adhere to the higher standards approved by the federal government to ensure they have been tested and validated.<br /><br />Satisfies: SRG-OS-000033-GPOS-00014, SRG-OS-000185-GPOS-00079, SRG-OS-000396-GPOS-00176, SRG-OS-000405-GPOS-00184, SRG-OS-000478-GPOS-00223
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system implements DoD-approved encryption to protect the confidentiality of remote access sessions.<br /><br />Check to see if the "dracut-fips" package is installed with the following command:<br /><br /># yum list installed dracut-fips<br /><br />dracut-fips-033-360.el7_2.x86_64.rpm<br /><br />If a "dracut-fips" package is installed, check to see if the kernel command line is configured to use FIPS mode with the following command:<br /><br />Note: GRUB 2 reads its configuration from the "/boot/grub2/grub.cfg" file on traditional BIOS-based machines and from the "/boot/efi/EFI/redhat/grub.cfg" file on UEFI machines.<br /><br /># grep fips /boot/grub2/grub.cfg<br />/vmlinuz-3.8.0-0.40.el7.x86_64 root=/dev/mapper/rhel-root ro rd.md=0 rd.dm=0 rd.lvm.lv=rhel/swap crashkernel=auto rd.luks=0 vconsole.keymap=us rd.lvm.lv=rhel/root rhgb fips=1 quiet<br /><br />If the kernel command line is configured to use FIPS mode, check to see if the system is in FIPS mode with the following command:<br /><br /># cat /proc/sys/crypto/fips_enabled <br />1<br /><br />If a "dracut-fips" package is not installed, the kernel command line does not have a fips entry, or the system has a value of "0" for "fips_enabled" in "/proc/sys/crypto", this is a finding.<br /><br />Verify the file /etc/system-fips exists.<br /><br /># ls -l /etc/system-fips<br /><br />If this file does not exist, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to implement DoD-approved encryption by installing the dracut-fips package.<br /><br />To enable strict FIPS compliance, the fips=1 kernel option needs to be added to the kernel command line during system installation so key generation is done with FIPS-approved algorithms and continuous monitoring tests in place.<br /><br />Configure the operating system to implement DoD-approved encryption by following the steps below: <br /><br />The fips=1 kernel option needs to be added to the kernel command line during system installation so that key generation is done with FIPS-approved algorithms and continuous monitoring tests in place. Users should also ensure that the system has plenty of entropy during the installation process by moving the mouse around, or if no mouse is available, ensuring that many keystrokes are typed. The recommended amount of keystrokes is 256 and more. Less than 256 keystrokes may generate a non-unique key.<br /><br />Install the dracut-fips package with the following command:<br /><br /># yum install dracut-fips<br /><br />Recreate the "initramfs" file with the following command:<br /><br />Note: This command will overwrite the existing "initramfs" file.<br /><br /># dracut -f<br /><br />Modify the kernel command line of the current kernel in the "grub.cfg" file by adding the following option to the GRUB_CMDLINE_LINUX key in the "/etc/default/grub" file and then rebuild the "grub.cfg" file:<br /><br />fips=1<br /><br />Changes to "/etc/default/grub" require rebuilding the "grub.cfg" file as follows:<br /><br />On BIOS-based machines, use the following command:<br /><br /># grub2-mkconfig -o /boot/grub2/grub.cfg<br /><br />On UEFI-based machines, use the following command:<br /><br /># grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg<br /><br />If /boot or /boot/efi reside on separate partitions, the kernel parameter boot=<partition of /boot or /boot/efi> must be added to the kernel command line. You can identify a partition by running the df /boot or df /boot/efi command:<br /><br /># df /boot<br />Filesystem 1K-blocks Used Available Use% Mounted on<br />/dev/sda1 495844 53780 416464 12% /boot<br /><br />To ensure the "boot=" configuration option will work even if device naming changes occur between boots, identify the universally unique identifier (UUID) of the partition with the following command:<br /><br /># blkid /dev/sda1<br />/dev/sda1: UUID="05c000f1-a213-759e-c7a2-f11b7424c797" TYPE="ext4"<br /><br />For the example above, append the following string to the kernel command line:<br /><br />boot=UUID=05c000f1-a213-759e-c7a2-f11b7424c797<br /><br />If the file /etc/system-fips does not exists, recreate it:<br /><br /># touch /etc/ system-fips<br /><br />Reboot the system for the changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

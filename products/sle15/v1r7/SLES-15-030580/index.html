@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-15-030580 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Information System Security Officer (ISSO) and System Administrator (SA), at a minimum, must have mail aliases to be notified of a SUSE operating system audit processing failure.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-15-030580 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000139&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000046-GPOS-00022">SRG-OS-000046-GPOS-00022</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is critical for the appropriate personnel to be aware if a system is at risk of failing to process audit logs as required. Without this notification, the security personnel may be unaware of an impending failure of the audit capability, and system operation may be adversely affected.<br /><br />Audit processing failures include software/hardware errors, failures in the audit capturing mechanisms, and audit storage capacity being reached or exceeded.<br /><br />This requirement applies to each audit data storage repository (i.e., distinct information system component where audit records are stored), the centralized audit storage capacity of organizations (i.e., all audit data storage repositories combined), or both.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the administrators are notified in the event of a SUSE operating system audit processing failure by checking that "/etc/aliases" has a defined value for root.<br /><br />> grep -i "^postmaster:" /etc/aliases<br /><br />postmaster: root<br /><br />If the above command does not return a value of "root", or the output is commented out, this is a finding<br /><br />Verify the alias for root forwards to a monitored e-mail account:<br /><br />> grep -i "^root:" /etc/aliases<br />root: person@server.mil<br /><br />If the alias for root does not forward to a monitored e-mail account, or the output is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the auditd service to notify the administrators in the event of a SUSE operating system audit processing failure. <br /><br />Configure an alias value for the postmaster with the following command:<br /><br />> sudo sh -c 'echo "postmaster: root" >> /etc/aliases' <br /><br />Configure an alias for root that forwards to a monitored email address with the following command:<br /><br />> sudo sh -c 'echo "root: box@server.mil" >> /etc/aliases'<br /><br />The following command must be run to implement changes to the /etc/aliases file:<br /><br />> sudo newaliases
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

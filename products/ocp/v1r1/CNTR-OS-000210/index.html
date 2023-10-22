@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>CNTR-OS-000210 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>OpenShift must take appropriate action upon an audit failure.</h2>
+  <p>
+  <b>STIG ID:</b> CNTR-OS-000210 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000140&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000109-CTR-000215">SRG-APP-000109-CTR-000215</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is critical that when the container platform is at risk of failing to process audit logs as required that it takes action to mitigate the failure. Audit processing failures include software/hardware errors, failures in the audit capturing mechanisms, and audit storage capacity being reached or exceeded. Responses to audit failure depend upon the nature of the failure mode.<br /><br />Because availability of the services provided by the container platform, approved actions in response to an audit failure are as follows:<br /><br />(i) If the failure was caused by the lack of audit record storage capacity, the container platform must continue generating audit records if possible (automatically restarting the audit service if necessary), overwriting the oldest audit records in a first-in-first-out manner.<br /><br />(ii) If audit records are sent to a centralized collection server and communication with this server is lost or the server fails, the container platform must queue audit records locally until communication is restored or until the audit records are retrieved manually. Upon restoration of the connection to the centralized collection server, action must be taken to synchronize the local audit data with the collection server.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify there is a Prometheus rule to watch for audit events by executing the following:<br /><br />oc get prometheusrule -o yaml --all-namespaces | grep apiserver_audit<br /><br />Output:<br />         sum by (apiserver,instance)(rate(apiserver_audit_error_total{apiserver=~".+-apiserver"}[5m])) / sum by (apiserver,instance) (rate(apiserver_audit_event_total{apiserver=~".+-apiserver"}[5m])) > 0<br /><br />If the output above is not displayed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Apply the following Prometheus rule by executing the following:<br /><br />oc apply -f - << 'EOF'<br />---<br /># platform = multi_platform_ocp<br />apiVersion: monitoring.coreos.com/v1<br />kind: PrometheusRule<br />metadata:<br />  name: audit-errors<br />  namespace: openshift-kube-apiserver<br />spec:<br />  groups:<br />  - name: apiserver-audit<br />    rules:<br />    - alert: AuditLogError<br />      annotations:<br />        summary: |-<br />          An API Server instance was unable to write audit logs. This could be<br />          triggered by the node running out of space, or a malicious actor<br />          tampering with the audit logs.<br />        description: An API Server had an error writing to an audit log.<br />      expr: |<br />        sum by (apiserver,instance)(rate(apiserver_audit_error_total{apiserver=~".+-apiserver"}[5m])) / sum by (apiserver,instance) (rate(apiserver_audit_event_total{apiserver=~".+-apiserver"}[5m])) > 0<br />      for: 1m<br />      labels:<br />        severity: warning<br />EOF
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

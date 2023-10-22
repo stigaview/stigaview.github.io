@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-18-010420 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must use SSH to protect the confidentiality and integrity of transmitted information unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-18-010420 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002418&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000423-GPOS-00187">SRG-OS-000423-GPOS-00187</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without protection of the transmitted information, confidentiality and integrity may be compromised because unprotected communications can be intercepted and either read or altered. <br /><br />This requirement applies to both internal and external networks and all types of information system components from which information can be transmitted (e.g., servers, mobile devices, notebook computers, printers, copiers, scanners, and facsimile machines). Communication paths outside the physical protection of a controlled boundary are exposed to the possibility of interception and modification. <br /><br />Protecting the confidentiality and integrity of organizational information can be accomplished by physical means (e.g., employing physical distribution systems) or by logical means (e.g., employing cryptographic techniques). If physical means of protection are employed, then logical means (cryptography) do not have to be employed, and vice versa.<br /><br />Alternative physical protection measures include PDS. PDSs are used to transmit unencrypted classified National Security Information (NSI) through an area of lesser classification or control. Since the classified NSI is unencrypted, the PDS must provide adequate electrical, electromagnetic, and physical safeguards to deter exploitation.<br /><br />Satisfies: SRG-OS-000423-GPOS-00187, SRG-OS-000424-GPOS-00188, SRG-OS-000425-GPOS-00189, SRG-OS-000426-GPOS-00190
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Check that the ssh package is installed with the following command:<br /><br /># sudo dpkg -l | grep openssh<br />ii openssh-client 1:7.6p1-4ubuntu0.1 amd64 secure shell (SSH) client, for secure access to remote machines<br />ii openssh-server 1:7.6p1-4ubuntu0.1 amd64 secure shell (SSH) server, for secure access from remote machines<br />ii openssh-sftp-server 1:7.6p1-4ubuntu0.1 amd64 secure shell (SSH) sftp server module, for SFTP access from remote machines<br /><br />If the "openssh" server package is not installed, this is a finding.<br /><br />Check that the "sshd.service" is loaded and active with the following command:<br /><br /># sudo systemctl status sshd.service | egrep -i "(active|loaded)"<br /> Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)<br /> Active: active (running) since Thu 2019-01-24 22:52:58 UTC; 1 weeks 3 days ago<br /><br />If "sshd.service" is not active or loaded, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install the "ssh" meta-package on the system with the following command:<br /><br /># sudo apt install ssh<br /><br />Enable the "ssh" service to start automatically on reboot with the following command:<br /><br /># sudo systemctl enable sshd.service<br /><br />Ensure that the "ssh" service is running.<br /><br /># sudo systemctl start sshd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

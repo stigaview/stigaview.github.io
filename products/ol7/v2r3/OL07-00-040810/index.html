@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>OL07-00-040810 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Oracle Linux operating system access control program must be configured to grant or deny system access to specific hosts and services.</h2>
+  <p>
+  <b>STIG ID:</b> OL07-00-040810 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If the systems access control program is not configured with appropriate rules for allowing and denying access to system network resources, services may be accessible to unauthorized hosts.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the "firewalld" package is not installed, ask the System Administrator (SA) if another firewall application (such as iptables) is installed. If an application firewall is not installed, this is a finding. <br /><br />Verify the system's access control program is configured to grant or deny system access to specific hosts.<br /><br />Check to see if "firewalld" is active with the following command:<br /><br /># systemctl status firewalld<br />firewalld.service - firewalld - dynamic firewall daemon<br />Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled)<br />Active: active (running) since Sun 2014-04-20 14:06:46 BST; 30s ago<br /><br />If "firewalld" is active, check to see if it is configured to grant or deny access to specific hosts or services with the following commands:<br /><br /># firewall-cmd --get-default-zone<br />public<br /><br /># firewall-cmd --list-all --zone=public<br />public (active)<br />target: default<br />icmp-block-inversion: no<br />interfaces: eth0<br />sources:<br />services: mdns ssh<br />ports:<br />protocols:<br />masquerade: no<br />forward-ports:<br />icmp-blocks:<br /><br />If "firewalld" is not active, determine whether "tcpwrappers" is being used by checking whether the "hosts.allow" and "hosts.deny" files are empty with the following commands:<br /><br /># ls -al /etc/hosts.allow<br />rw-r----- 1 root root 9 Aug 2 23:13 /etc/hosts.allow<br /><br /># ls -al /etc/hosts.deny<br />-rw-r----- 1 root root 9 Apr 9 2007 /etc/hosts.deny<br /><br />If "firewalld" and "tcpwrappers" are not installed, configured, and active, ask the SA if another access control program (such as iptables) is installed and active. Ask the SA to show that the running configuration grants or denies access to specific hosts or services.<br /><br />If "firewalld" is active and is not configured to grant access to specific hosts or "tcpwrappers" is not configured to grant or deny access to specific hosts, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       If "firewalld" is installed and active on the system, configure rules for allowing specific services and hosts. <br /><br />If "firewalld" is not "active", enable "tcpwrappers" by configuring "/etc/hosts.allow" and "/etc/hosts.deny" to allow or deny access to specific hosts.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

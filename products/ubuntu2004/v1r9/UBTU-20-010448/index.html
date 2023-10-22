@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-20-010448 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must implement address space layout randomization to protect its memory from unauthorized code execution.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-20-010448 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002824&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000433-GPOS-00193">SRG-OS-000433-GPOS-00193</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Some adversaries launch attacks with the intent of executing code in non-executable regions of memory or in memory locations that are prohibited. Security safeguards employed to protect memory include, for example, data execution prevention and address space layout randomization. Data execution prevention safeguards can either be hardware-enforced or software-enforced with hardware providing the greater strength of mechanism. <br /> <br />Examples of attacks are buffer overflow attacks.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the Ubuntu operating system implements address space layout randomization (ASLR) with the following command: <br /> <br />$ sudo sysctl kernel.randomize_va_space <br /> <br />kernel.randomize_va_space = 2 <br /> <br />If nothing is returned, verify the kernel parameter "randomize_va_space" is set to "2" with the following command: <br /> <br />$ cat /proc/sys/kernel/randomize_va_space <br /> <br />2 <br /> <br />If "kernel.randomize_va_space" is not set to "2", this is a finding. <br /> <br />Verify that a saved value of the "kernel.randomize_va_space" variable is not defined. <br /> <br />$ sudo egrep -R "^kernel.randomize_va_space=[^2]" /etc/sysctl.conf /etc/sysctl.d <br /> <br />If this returns a result, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Remove the "kernel.randomize_va_space" entry found in the "/etc/sysctl.conf" file or any file located in the "/etc/sysctl.d/" directory. <br /> <br />After the line has been removed, the kernel settings from all system configuration files must be reloaded before any of the changes will take effect. Run the following command to reload all of the kernel system configuration files: <br /> <br />$ sudo sysctl --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

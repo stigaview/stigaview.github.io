@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-OS-000040-GPOS-00018 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The operating system must produce audit records containing information to establish the source of the events.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-OS-000040-GPOS-00018 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000133&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000040">SRG-OS-000040</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without establishing the source of the event, it is impossible to establish, correlate, and investigate the events leading up to an outage or attack.<br /><br />In addition to logging where events occur within the operating system, the operating system must also generate audit records that identify sources of events. Sources of operating system events include, but are not limited to, processes and services.<br /><br />In order to compile an accurate risk assessment and provide forensic analysis, it is essential for security personnel to know the source of the event.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the operating system produces audit records containing information to establish the source of the events. If it does not, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the operating system to produce audit records containing information to establish the source of the events.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

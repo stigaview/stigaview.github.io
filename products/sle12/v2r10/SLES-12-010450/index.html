@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SLES-12-010450 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28473ef"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All SUSE operating system persistent disk partitions must implement cryptographic mechanisms to prevent unauthorized disclosure or modification of all information that requires at rest protection.</h2>
+  <p>
+  <b>STIG ID:</b> SLES-12-010450 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001199&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000185-GPOS-00079">SRG-OS-000185-GPOS-00079</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       SUSE operating systems handling data requiring "data at rest" protections must employ cryptographic mechanisms to prevent unauthorized disclosure and modification of the information at rest.<br /><br />Selection of a cryptographic mechanism is based on the need to protect the integrity of organizational information. The strength of the mechanism is commensurate with the security category and/or classification of the information. Organizations have the flexibility to either encrypt all information on storage devices (i.e., full disk encryption) or encrypt specific data structures (e.g., files, records, or fields).<br /><br />Satisfies: SRG-OS-000185-GPOS-00079, SRG-OS-000404-GPOS-00183, SRG-OS-000405-GPOS-00184
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SUSE operating system prevents unauthorized disclosure or modification of all information requiring at rest protection by using disk encryption. <br /><br />Determine the partition layout for the system with the following command:<br /><br /># sudo fdisk -l<br /><br />Device     Boot    Start       End  Sectors  Size Id Type<br />/dev/sda1           2048   4208639  4206592    2G 82 Linux swap / Solaris<br />/dev/sda2  *     4208640  53479423 49270784 23.5G 83 Linux<br />/dev/sda3       53479424 125829119 72349696 34.5G 83 Linux<br /><br />Verify the system partitions are all encrypted with the following command: <br /><br /># sudo more /etc/crypttab<br /><br />luks       UUID=114167a-2a94-6cda-f1e7-15ad146c258b<br />swap       /dev/sda1       /dev/urandom       swap<br />truecrypt  /dev/sda2       /etc/container_password  tcrypt<br />truecrypt  /dev/sda3       /etc/container_password  tcrypt<br /><br />Every persistent disk partition present on the system must have an entry in the file. <br /><br />If any partitions other than pseudo file systems (such as /proc or /sys) are not listed or "/etc/crypttab" does not exist, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SUSE operating system to prevent unauthorized modification of all information at rest by using disk encryption. <br /><br />Encrypting a partition in an already-installed system is more difficult because of the need to resize and change existing partitions. To encrypt an entire partition, dedicate a partition for encryption in the partition layout. The standard partitioning proposal as suggested by YaST (installation and configuration tool for Linux) does not include an encrypted partition by default. Add it manually in the partitioning dialog.<br /><br />Refer to the document "SUSE 12 Security Guide", Section 11.1, for a detailed disk encryption guide:<br /><br />https://www.suse.com/documentation/sles-12/book_security/data/sec_security_cryptofs_y2.html#sec_security_cryptofs_y2_part_run
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>
