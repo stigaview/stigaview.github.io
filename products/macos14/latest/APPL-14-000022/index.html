@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-000022 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must limit consecutive failed log on attempts to three.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-000022 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000044&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000021-GPOS-00005">SRG-OS-000021-GPOS-00005</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The macOS must be configured to limit the number of failed log on<br />                attempts to a maximum of three. When the maximum number of failed attempts is reached, the account must<br />                be locked for a period of time after.<br /><br />                This rule protects against malicious users attempting to gain access to the system via brute-force<br />                hacking methods.<br /><br />                Satisfies: SRG-OS-000021-GPOS-00005,SRG-OS-000329-GPOS-00128
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to limit consecutive failed log on attempts to<br />                    three with the following command:<br /><br />                    /usr/bin/pwpolicy -getaccountpolicies 2> /dev/null | /usr/bin/tail +2 | /usr/bin/xmllint --xpath<br />                    '//dict/key[text()="policyAttributeMaximumFailedAuthentications"]/following-sibling::integer[1]/text()'<br />                    - | /usr/bin/awk '{ if ($1 <= 3) {print "yes"} else {print "no"}}'<br /><br />                    If the result is not "yes", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to limit consecutive failed log on attempts<br />                to three by installing the "com.apple.mobiledevice.passwordpolicy" configuration profile or by a<br />                directory service.<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

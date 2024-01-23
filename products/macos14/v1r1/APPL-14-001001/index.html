@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-001001 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must be configured to audit all administrative action events.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-001001 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000018&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000004-GPOS-00004">SRG-OS-000004-GPOS-00004</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Administrative action events include changes made to the system (e.g.,<br />                modifying authentication policies). If audit records do not include "ad" events, it is difficult to<br />                identify incidents and to correlate incidents to subsequent events. Audit records can be generated from<br />                various components within the information system (e.g., via a module or policy filter).<br /><br />                Administrative and privileged access, including administrative use of the command line tools "kextload"<br />                and "kextunload" and changes to configuration settings, are logged by way of the "ad" flag.<br /><br />                Satisfies:<br />                SRG-OS-000004-GPOS-00004,SRG-OS-000239-GPOS-00089,SRG-OS-000240-GPOS-00090,SRG-OS-000241-GPOS-00091,SRG-OS-000327-GPOS-00127,SRG-OS-000365-GPOS-00152,SRG-OS-000392-GPOS-00172,SRG-OS-000458-GPOS-00203,SRG-OS-000471-GPOS-00215,SRG-OS-000471-GPOS-00216,SRG-OS-000476-GPOS-00221
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to audit privileged access with the following<br />                    command:<br /><br />                    /usr/bin/awk -F':' '/^flags/ { print $NF }' /etc/security/audit_control | /usr/bin/tr ',' '\n' |<br />                    /usr/bin/grep -Ec 'ad'<br /><br />                    If "ad" is not listed in the output, this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to audit privileged access with the<br />                following command:<br /><br />                /usr/bin/grep -qE "^flags.*[^-]ad" /etc/security/audit_control || /usr/bin/sed -i.bak '/^flags/<br />                s/$/,ad/' /etc/security/audit_control; /usr/sbin/audit -s<br /><br />                A text editor may also be used to implement the required updates to the "/etc/security/audit_control"<br />                file.<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

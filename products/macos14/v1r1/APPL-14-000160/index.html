@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-000160 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must enforce auto logout after 86400 seconds of inactivity.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-000160 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002361&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000279-GPOS-00109">SRG-OS-000279-GPOS-00109</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Auto logout must be configured to automatically terminate a user session<br />                and log out the after 86400 seconds of inactivity.<br /><br />                Note: The maximum that macOS can be configured for autologoff is 86400 seconds.<br /><br />                [IMPORTANT]<br />                ====<br />                The automatic logout may cause disruptions to an organization's workflow and/or loss of data.<br />                Information system security officers (ISSOs) are advised to first fully weigh the potential risks posed<br />                to their organization before opting to disable the automatic logout setting.<br />                ====
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to enforce auto logout after 86400 seconds of<br />                    inactivity with the following command:<br /><br />                    /usr/bin/osascript -l JavaScript << EOS<br />                    $.NSUserDefaults.alloc.initWithSuiteName('.GlobalPreferences')\<br />                    .objectForKey('com.apple.autologout.AutoLogOutDelay').js<br />                    EOS<br /><br />                    If the result is not "86400", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to enforce auto logout after 86400 seconds<br />                of inactivity by installing the "com.apple.GlobalPreferences" configuration profile.<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

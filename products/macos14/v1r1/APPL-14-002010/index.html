@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-002010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must disable FaceTime.app.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-002010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000095-GPOS-00049">SRG-OS-000095-GPOS-00049</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The macOS built-in FaceTime.app must be disabled.<br /><br />                The FaceTime.app establishes a connection to Apple's iCloud service, even when security controls have<br />                been put in place to disable iCloud access.<br /><br />                [IMPORTANT]<br />                ====<br />                Apple has deprecated the use of application restriction controls<br />                (https://github.com/apple/device-management/blob/eb51fb0cb9626cac4717858556912c257a734ce0/mdm/profiles/com.apple.applicationaccess.new.yaml#L67-L70).<br />                Using these controls may not work as expected. Third-party software may be required to fulfill the<br />                compliance requirements.<br />                ====
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to disable FaceTime.app with the following command:<br /><br />                    /usr/bin/osascript -l JavaScript << EOS<br />                    function run() {<br />                    let pref1 = ObjC.unwrap($.NSUserDefaults.alloc.initWithSuiteName('com.apple.applicationaccess.new')\<br />                    .objectForKey('familyControlsEnabled'))<br />                    let pathlist = $.NSUserDefaults.alloc.initWithSuiteName('com.apple.applicationaccess.new')\<br />                    .objectForKey('pathBlackList').js<br />                    for ( let app in pathlist ) {<br />                    if ( ObjC.unwrap(pathlist[app]) == "/Applications/FaceTime.app" && pref1 == true ){<br />                    return("true")<br />                    }<br />                    }<br />                    return("false")<br />                    }<br />                    EOS<br /><br />                    If the result is not "true", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to disable FaceTime.app by installing the<br />                "com.apple.applicationaccess.new" configuration profile.<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

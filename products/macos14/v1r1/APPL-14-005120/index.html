@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-005120 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must enable recovery lock.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-005120 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A recovery lock password must be enabled and set.<br /><br />                Single user mode, recovery mode, the Startup Manager, and several other tools are available on macOS by<br />                holding down specific key combinations during startup. Setting a recovery lock restricts access to these<br />                tools.<br /><br />                IMPORTANT: Recovery lock passwords are not supported on Intel devices. This rule is only applicable to<br />                Apple Silicon devices.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       For non-Apple Silicon systems, this is not applicable.<br /><br />                    Verify the macOS system is configured with recovery lock with the following command:<br /><br />                    /usr/libexec/mdmclient QuerySecurityInfo | /usr/bin/grep -c "IsRecoveryLockEnabled = 1"<br /><br />                    If the result is not "1", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system with recovery lock with the SetRecoveryLock<br />                command. This can be used to set a Recovery Lock password and must be from the MDM.<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-003020 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must enforce smart card authentication.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-003020 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000186&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000067-GPOS-00035">SRG-OS-000067-GPOS-00035</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Smart card authentication must be enforced.<br /><br />                The use of smart card credentials facilitates standardization and reduces the risk of unauthorized<br />                access.<br /><br />                When enforceSmartCard is set to "true", the smart card must be used for logon, authorization, and<br />                unlocking the screensaver.<br /><br />                CAUTION: enforceSmartCard will apply to the whole system. No users will be able to log on with their<br />                password unless the profile is removed or a user is exempt from smart card enforcement.<br /><br />                Note: enforceSmartcard requires allowSmartcard to be set to true in order to work.<br /><br />                Satisfies:<br />                SRG-OS-000067-GPOS-00035,SRG-OS-000105-GPOS-00052,SRG-OS-000106-GPOS-00053,SRG-OS-000107-GPOS-00054,SRG-OS-000108-GPOS-00055,SRG-OS-000112-GPOS-00057,SRG-OS-000375-GPOS-00160,SRG-OS-000376-GPOS-00161
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to enforce multifactor authentication with the<br />                    following command:<br /><br />                    /usr/bin/osascript -l JavaScript << EOS<br />                    $.NSUserDefaults.alloc.initWithSuiteName('com.apple.security.smartcard')\<br />                    .objectForKey('enforceSmartCard').js<br />                    EOS<br /><br />                    If the result is not "true", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to enforce multifactor authentication by<br />                installing the "com.apple.security.smartcard" configuration profile.<br /><br />                Note: To ensure continued access to the operating system, consult the supplemental guidance provided<br />                with the STIG before applying the configuration profile.<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

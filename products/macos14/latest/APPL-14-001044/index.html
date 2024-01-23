@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-001044 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must configure system to audit all authorization and authentication events.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-001044 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000172&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000365-GPOS-00152">SRG-OS-000365-GPOS-00152</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The auditing system must be configured to flag authorization and<br />                authentication (aa) events.<br /><br />                Authentication events contain information about the identity of a user, server, or client. Authorization<br />                events contain information about permissions, rights, and rules. If audit records do not include aa<br />                events, it is difficult to identify incidents and to correlate incidents to subsequent events.<br /><br />                Audit records can be generated from various components within the information system (e.g., via a module<br />                or policy filter).<br /><br />                Satisfies:<br />                SRG-OS-000365-GPOS-00152,SRG-OS-000392-GPOS-00172,SRG-OS-000458-GPOS-00203,SRG-OS-000463-GPOS-00207,SRG-OS-000465-GPOS-00209,SRG-OS-000466-GPOS-00210,SRG-OS-000467-GPOS-00211,SRG-OS-000468-GPOS-00212,SRG-OS-000471-GPOS-00215,SRG-OS-000471-GPOS-00216,SRG-OS-000475-GPOS-00220,SRG-OS-000477-GPOS-00222
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to audit logon events with the following command:<br /><br />                    /usr/bin/awk -F':' '/^flags/ { print $NF }' /etc/security/audit_control | /usr/bin/tr ',' '\n' |<br />                    /usr/bin/grep -Ec 'aa'<br /><br />                    If the result is not "1", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to audit logon events with the following<br />                command:<br /><br />                /usr/bin/grep -qE "^flags.*[^-]aa" /etc/security/audit_control || /usr/bin/sed -i.bak '/^flags/<br />                s/$/,aa/' /etc/security/audit_control; /usr/sbin/audit -s<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

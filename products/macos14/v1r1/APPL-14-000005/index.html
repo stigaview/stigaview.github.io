@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-000005 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must configure user session lock when a smart token is removed.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-000005 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000058&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000030-GPOS-00011">SRG-OS-000030-GPOS-00011</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The screen lock must be configured to initiate automatically when the<br />                smart token is removed from the system.<br /><br />                Session locks are temporary actions taken when users stop work and move away from the immediate vicinity<br />                of the information system but do not want to log out because of the temporary nature of their absence.<br />                While a session lock is not an acceptable substitute for logging out of an information system for longer<br />                periods of time, they prevent a malicious user from accessing the information system when a user has<br />                removed their smart token.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to lock the user session when a smart token is<br />                    removed with the following command:<br /><br />                    /usr/bin/osascript -l JavaScript << EOS<br />                    $.NSUserDefaults.alloc.initWithSuiteName('com.apple.security.smartcard')\<br />                    .objectForKey('tokenRemovalAction').js<br />                    EOS<br /><br />                    If the result is not "1", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to lock the user session when a smart token<br />                is removed by installing the "com.apple.security.smartcard" configuration profile.<br /><br />                Note: To ensure continued access to the operating system, consult the supplemental guidance provided<br />                with the STIG before applying the configuration profile.<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

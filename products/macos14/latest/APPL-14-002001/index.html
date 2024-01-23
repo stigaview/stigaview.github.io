@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-002001 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must disable Server Message Block sharing.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-002001 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000213&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000080-GPOS-00048">SRG-OS-000080-GPOS-00048</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Support for Server Message Block (SMB) file sharing is nonessential and<br />                must be disabled.<br /><br />                The information system must be configured to provide only essential capabilities.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to disable Server Message Block sharing with the<br />                    following command:<br /><br />                    /bin/launchctl print-disabled system | /usr/bin/grep -c '"com.apple.smbd" => disabled'<br /><br />                    If the result is not "1", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to disable Server Message Block sharing with<br />                the following command:<br /><br />                /bin/launchctl disable system/com.apple.smbd<br /><br />                The system may need to be restarted for the update to take effect.<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

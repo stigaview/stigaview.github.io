@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-000024 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must enforce SSH to display the Standard Mandatory DOD Notice and Consent Banner.
+            </h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-000024 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000048&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000023-GPOS-00006">SRG-OS-000023-GPOS-00006</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Displaying a standardized and approved use notification before granting<br />                access to the operating system ensures that users are provided with privacy and security notification<br />                verbiage that is consistent with applicable federal laws, Executive Orders, directives, policies,<br />                regulations, standards, and guidance.<br /><br />                System use notifications are required only for access via logon interfaces with human users and are not<br />                required when such human interfaces do not exist.<br /><br />                The banner must be formatted in accordance with DTM-08-060.<br /><br />                Note: /etc/ssh/sshd_config will be automatically modified to its original state following any update or<br />                major upgrade to the operating system.<br /><br />                Satisfies: SRG-OS-000023-GPOS-00006,SRG-OS-000024-GPOS-00007
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to display the contents of "/etc/banner" before<br />                    granting access to the system with the following command:<br /><br />                    /usr/sbin/sshd -G | /usr/bin/grep -c "^banner /etc/banner"<br /><br />                    If the command does not return "1", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to display the contents of "/etc/banner"<br />                before granting access to the system by creating a plain text file in the<br />                /private/etc/ssh/sshd_config.d/ directory containing the following:<br /><br />                banner /etc/banner<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-003080 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must disable accounts after 35 days of inactivity.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-003080 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000795&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000118-GPOS-00060">SRG-OS-000118-GPOS-00060</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The macOS must be configured to disable accounts after 35 days of<br />                inactivity.<br /><br />                This rule prevents malicious users from making use of unused accounts to gain access to the system while<br />                avoiding detection.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to disable accounts after 35 days of inactivity<br />                    with the following command:<br /><br />                    /usr/bin/pwpolicy -getaccountpolicies 2> /dev/null | /usr/bin/tail +2 | /usr/bin/xmllint --xpath<br />                    '//dict/key[text()="policyAttributeInactiveDays"]/following-sibling::integer[1]/text()' -<br /><br />                    If the result is not "35", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to disable accounts after 35 days of<br />                inactivity with the following command:<br /><br />                This setting may be enforced using local policy or by a directory service.<br /><br />                To set local policy to disable an inactive user after 35 days, edit the current password policy to<br />                contain the following <dict> within the "policyCategoryAuthentication":<br /><br />                [source,xml]<br />                ----<br />                <dict><br />                <key>policyContent</key><br />                <string>policyAttributeLastAuthenticationTime &gt; policyAttributeCurrentTime -<br />                (policyAttributeInactiveDays * 24 * 60 * 60)</string><br />                <key>policyIdentifier</key><br />                <string>Inactive Account</string><br />                <key>policyParameters</key><br />                <dict><br />                <key>policyAttributeInactiveDays</key><br />                <integer>35</integer><br />                </dict><br />                </dict><br />                ----<br />                After saving the file and exiting to the command prompt, run the following command to load the new<br />                policy file, substituting the path to the file in place of "$pwpolicy_file".<br /><br />                [source,bash]<br />                ----<br />                /usr/bin/pwpolicy setaccountpolicies $pwpolicy_file<br />                ----<br />                Note: Refer to the password policy supplemental on more information on how to implement password<br />                policies on macOS.<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

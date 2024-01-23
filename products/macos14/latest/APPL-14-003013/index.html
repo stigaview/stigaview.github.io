@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-003013 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must enable firmware password.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-003013 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A firmware password must be enabled and set.<br /><br />                Single user mode, recovery mode, the Startup Manager, and several other tools are available on macOS by<br />                holding the "Option" key down during startup. Setting a firmware password restricts access to these<br />                tools.<br /><br />                To set a firmware passcode use the following command:<br /><br />                [source,bash]<br />                ----<br />                /usr/sbin/firmwarepasswd -setpasswd<br />                ----<br /><br />                Note: If firmware password or passcode is forgotten, the only way to reset the forgotten password is<br />                through the use of a machine specific binary generated and provided by Apple. Schedule a support call<br />                and provide proof of purchase before the firmware binary will be generated.<br /><br />                Note: Firmware passwords are not supported on Apple Silicon devices. This rule is only applicable to<br />                Intel devices.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       For Apple Silicon systems, this is not applicable.<br /><br />                    Verify the macOS system is configured with a firmware password with the following command:<br /><br />                    /usr/sbin/firmwarepasswd -check | /usr/bin/grep -c "Password Enabled: Yes"<br /><br />                    If the result is not "1", this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system with a firmware password with the following<br />                command:<br /><br />                /usr/sbin/firmwarepasswd -setpasswd<br /><br />                Note: If firmware password or passcode is forgotten, the only way to reset the forgotten password is<br />                through a machine-specific binary generated and provided by Apple. Users must schedule a support call<br />                and provide proof of purchase before the firmware binary will be generated.<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

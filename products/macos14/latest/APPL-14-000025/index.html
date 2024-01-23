@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-000025 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 4c1c2f9"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must display the Standard Mandatory DOD Notice and Consent Banner at the login
+                window.
+            </h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-000025 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000048&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000023-GPOS-00006">SRG-OS-000023-GPOS-00006</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Displaying a standardized and approved use notification before granting<br />                access to the operating system ensures that users are provided with privacy and security notification<br />                verbiage that is consistent with applicable federal laws, Executive Orders, directives, policies,<br />                regulations, standards, and guidance.<br /><br />                System use notifications are required only for access via logon interfaces with human users and are not<br />                required when such human interfaces do not exist.<br /><br />                The policy banner will show if a "PolicyBanner.rtf" or "PolicyBanner.rtfd" exists in the<br />                "/Library/Security" folder.<br /><br />                The banner must be formatted in accordance with DTM-08-060.<br /><br />                Satisfies: SRG-OS-000023-GPOS-00006,SRG-OS-000024-GPOS-00007,SRG-OS-000228-GPOS-00088
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to display a policy banner with the following<br />                    command:<br /><br />                    /bin/ls -ld /Library/Security/PolicyBanner.rtf* | /usr/bin/wc -l | /usr/bin/tr -d ' '<br /><br />                    If "PolicyBanner.rtfd" does not exist, this is a finding.<br /><br />                    If the permissions for "PolicyBanner.rtfd" are not "644", this is a finding.<br /><br />                    The banner text of the document must read:<br /><br />                    "You are accessing a U.S. Government (USG) Information System (IS) that is provided for<br />                    USG-authorized use only. By using this IS (which includes any device attached to this IS), you<br />                    consent to the following conditions:<br /><br />                    -The USG routinely intercepts and monitors communications on this IS for purposes including, but not<br />                    limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel<br />                    misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.<br /><br />                    -At any time, the USG may inspect and seize data stored on this IS.<br /><br />                    -Communications using, or data stored on, this IS are not private, are subject to routine<br />                    monitoring, interception, and search, and may be disclosed or used for any USG authorized purpose.<br /><br />                    -This IS includes security measures (e.g., authentication and access controls) to protect USG<br />                    interests--not for your personal benefit or privacy.<br /><br />                    -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative<br />                    searching or monitoring of the content of privileged communications, or work product, related to<br />                    personal representation or services by attorneys, psychotherapists, or clergy, and their assistants.<br />                    Such communications and work product are private and confidential. See User Agreement for details."<br /><br />                    If the text is not worded exactly this way, this is a finding.<br />                
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to display a policy banner by creating an<br />                RTF file containing the required text. Name the file "PolicyBanner.rtfd" and place it in<br />                "/Library/Security/".<br /><br />                Update the permissions of the "/Library/Security/PolicyBanner.rtfd" file with the following command:<br /><br />                /usr/bin/sudo /bin/chmod 644 /Library/Security/PolicyBanner.rtfd<br />            
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>
