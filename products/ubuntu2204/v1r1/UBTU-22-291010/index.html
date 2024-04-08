@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-291010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must disable automatic mounting of Universal Serial Bus (USB) mass storage driver.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-291010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001958&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000378-GPOS-00163">SRG-OS-000378-GPOS-00163</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without authenticating devices, unidentified or unknown devices may be introduced, thereby facilitating malicious activity. <br /> <br />Peripherals include, but are not limited to, such devices as flash drives, external storage, and printers.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify Ubuntu 22.04 LTS disables ability to load the USB storage kernel module by using the following command: <br /> <br />     $ grep usb-storage /etc/modprobe.d/* | grep "/bin/false" <br />     /etc/modprobe.d/stig.conf:install usb-storage /bin/false <br /> <br />If the command does not return any output, or the line is commented out, this is a finding. <br /> <br />Verify Ubuntu 22.04 LTS disables the ability to use USB mass storage device. <br /> <br />     $ grep usb-storage /etc/modprobe.d/* | grep -i "blacklist" <br />     /etc/modprobe.d/stig.conf:blacklist usb-storage <br /> <br />If the command does not return any output, or the line is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure Ubuntu 22.04 LTS to disable using the USB storage kernel module.  <br /> <br />Create and/or append a custom file under "/etc/modprobe.d/" to contain the following: <br /> <br />     $ sudo su -c "echo install usb-storage /bin/false >> /etc/modprobe.d/stig.conf" <br /> <br />Configure Ubuntu 22.04 LTS to disable the ability to use USB mass storage devices. <br /> <br />     $ sudo su -c "echo blacklist usb-storage >> /etc/modprobe.d/stig.conf"
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

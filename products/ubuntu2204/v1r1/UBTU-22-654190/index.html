@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-654190 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must generate audit records for all events that affect the systemd journal files.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-654190 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Once an attacker establishes access to a system, the attacker often attempts to create a persistent method of reestablishing access. One way to accomplish this is for the attacker to modify system level binaries and their operation. Auditing the systemd journal files provides logging that can be used for forensic purposes. <br />  <br />To address access requirements, many operating systems may be integrated with enterprise level authentication/access/auditing mechanisms that meet or exceed access control policy requirements.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify Ubuntu 22.04 LTS generates audit records for all events that affect "/var/log/journal" by using the following command:  <br />  <br />     $ sudo auditctl -l | grep journal  <br />     -w /var/log/journal -p wa -k systemd_journal  <br />  <br />If the command does not return a line that matches the example or the line is commented out, this is a finding.  <br />  <br />Note: The "-k" value is arbitrary and can be different from the example output above.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure Ubuntu 22.04 LTS to generate audit records for events that affect "/var/log/journal".  <br />  <br />Add or modify the following line to "/etc/audit/rules.d/stig.rules":  <br />  <br />-w /var/log/journal -p wa -k systemd_journal  <br />   <br />To reload the rules file, issue the following command:  <br />  <br />     $ sudo augenrules --load <br /> <br />Note: The "-k <keyname>" at the end of the line gives the rule a unique meaning to help during an audit investigation. The <keyname> does not need to match the example above.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

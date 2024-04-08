@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-411035 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must disable account identifiers (individuals, groups, roles, and devices) after 35 days of inactivity.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-411035 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000795&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000118-GPOS-00060">SRG-OS-000118-GPOS-00060</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Inactive identifiers pose a risk to systems and applications because attackers may exploit an inactive identifier and potentially obtain undetected access to the system. Owners of inactive accounts will not notice if unauthorized access to their user account has been obtained.  <br />  <br />Operating systems need to track periods of inactivity and disable application identifiers after 35 days of inactivity.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the account identifiers (individuals, groups, roles, and devices) are disabled after 35 days of inactivity by using the following command:  <br />  <br />Check the account inactivity value by performing the following command:  <br />  <br />     $ grep INACTIVE /etc/default/useradd  <br />     INACTIVE=35  <br />  <br />If "INACTIVE" is set to "-1" or is not set to "35", is commented out, or is missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure Ubuntu 22.04 LTS to disable account identifiers after 35 days of inactivity after the password expiration.   <br />  <br />Run the following command to change the configuration for adduser:  <br />  <br />     $ sudo useradd -D -f 35 <br />  <br />Note: DOD recommendation is 35 days, but a lower value is acceptable. The value "0" will disable the account immediately after the password expires.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

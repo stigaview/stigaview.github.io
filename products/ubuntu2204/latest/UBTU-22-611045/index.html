@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-611045 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must be configured so that when passwords are changed or new passwords are established, pwquality must be used.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-611045 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00225">SRG-OS-000480-GPOS-00225</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Use of a complex password helps to increase the time and resources required to compromise the password. Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. "pwquality" enforces complex password construction configuration and has the ability to limit brute-force attacks on the system.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify Ubuntu 22.04 LTS enforces password complexity rules by using the following command:   <br /> <br />     $ grep -i enforcing /etc/security/pwquality.conf  <br />     enforcing = 1  <br />  <br />If "enforcing" is not "1", is commented out, or is missing, this is a finding.  <br />  <br />Check for the use of "pwquality" by using the following command:  <br />  <br />     $ cat /etc/pam.d/common-password | grep requisite | grep pam_pwquality <br />      password     requisite     pam_pwquality.so retry=3  <br />  <br />If "retry" is set to "0" or is greater than "3", or is missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure Ubuntu 22.04 LTS to enforce password complexity rules. <br />  <br />Add or modify the following line in the "/etc/security/pwquality.conf" file: <br />  <br />enforcing = 1  <br />  <br />Add or modify the following line in the "/etc/pam.d/common-password" file: <br />  <br />password requisite pam_pwquality.so retry=3  <br />  <br />Note: The value of "retry" should be between "1" and "3".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

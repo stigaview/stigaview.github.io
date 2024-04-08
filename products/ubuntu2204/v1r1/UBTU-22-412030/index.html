@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-412030 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must automatically exit interactive command shell user sessions after 15 minutes of inactivity.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-412030 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002361&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000279-GPOS-00109">SRG-OS-000279-GPOS-00109</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Terminating an idle interactive command shell user session within a short time period reduces the window of opportunity for unauthorized personnel to take control of it when left unattended in a virtual terminal or physical console.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify Ubuntu 22.04 LTS is configured to automatically exit interactive command shell user sessions after 15 minutes of inactivity or less by using the following command: <br />  <br />     $ sudo grep -E "\bTMOUT=[0-9]+" /etc/bash.bashrc /etc/profile.d/* <br />     /etc/profile.d/99-terminal_tmout.sh:TMOUT=900 <br />  <br />If "TMOUT" is not set to "900" or less, is set to "0", is commented out, or missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure Ubuntu 22.04 LTS to exit interactive command shell user sessions after 15 minutes of inactivity. <br /> <br />Create and/or append a custom file under "/etc/profile.d/" by using the following command: <br /> <br />     $ sudo su -c "echo TMOUT=900 >> /etc/profile.d/99-terminal_tmout.sh" <br />  <br />This will set a timeout value of 15 minutes for all future sessions.  <br />  <br />To set the timeout for the current sessions, execute the following command over the terminal session:  <br />  <br />     $ export TMOUT=900
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

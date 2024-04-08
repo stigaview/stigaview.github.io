@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-232145 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must set a sticky bit on all public directories to prevent unauthorized and unintended information transferred via shared system resources.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-232145 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001090&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000138-GPOS-00069">SRG-OS-000138-GPOS-00069</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Preventing unauthorized information transfers mitigates the risk of information, including encrypted representations of information, produced by the actions of prior users/roles (or the actions of processes acting on behalf of prior users/roles) from being available to any current users/roles (or current processes) that obtain access to shared system resources (e.g., registers, main memory, hard disks) after those resources have been released back to information systems. The control of information in shared resources is also commonly referred to as object reuse and residual information protection.  <br />  <br />This requirement generally applies to the design of an information technology product, but it can also apply to the configuration of particular information system components that are, or use, such products. This can be verified by acceptance/validation processes in DOD or other government agencies.  <br />  <br />There may be shared resources with configurable protections (e.g., files in storage) that may be assessed on specific information system components.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that all public directories have the public sticky bit set by using the following command:   <br />  <br />     $ sudo find / -type d -perm -002 ! -perm -1000 <br />  <br />If any public directories are found missing the sticky bit, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure all public directories to have the sticky bit set to prevent unauthorized and unintended information transferred via shared system resources.  <br />  <br />Set the sticky bit on all public directories using the following command, replacing "<public_directory_name>" with any directory path missing the sticky bit:  <br />  <br />     $ sudo chmod +t  <public_directory_name>
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-431015 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must be configured to use AppArmor.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-431015 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001764&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000368-GPOS-00154">SRG-OS-000368-GPOS-00154</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Control of program execution is a mechanism used to prevent execution of unauthorized programs. Some operating systems may provide a capability that runs counter to the mission or provides users with functionality that exceeds mission requirements. This includes functions and services installed at the operating system level.  <br />  <br />Some of the programs, installed by default, may be harmful or may not be necessary to support essential organizational operations (e.g., key missions, functions). Removal of executable programs is not always possible; therefore, establishing a method of preventing program execution is critical to maintaining a secure system baseline.  <br />  <br />Methods for complying with this requirement include restricting execution of programs in certain environments, while preventing execution in other environments; or limiting execution of certain program functionality based on organization-defined criteria (e.g., privileges, subnets, sandboxed environments, or roles).<br /><br />Satisfies: SRG-OS-000368-GPOS-00154, SRG-OS-000370-GPOS-00155, SRG-OS-000324-GPOS-00125
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify Ubuntu 22.04 LTS AppArmor is active by using the following commands:  <br /> <br />     $ systemctl is-enabled apparmor.service <br />     enabled  <br /> <br />     $ systemctl is-active apparmor.service <br />     active   <br /> <br />If "apparmor.service" is not enabled and active, this is a finding. <br /> <br />Check if AppArmor profiles are loaded and enforced by using the following command: <br /> <br />     $ sudo apparmor_status | grep -i profile <br />     32 profiles are loaded. <br />     32 profiles are in enforce mode. <br />     0 profiles are in complain mode. <br />     0 profiles are in kill mode. <br />     0 profiles are in unconfined mode. <br />     2 processes have profiles defined. <br />     0 processes are unconfined but have a profile defined. <br /> <br />If no profiles are loaded and enforced, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Enable and start "apparmor.service" by using the following command: <br />  <br />     $ sudo systemctl enable apparmor.service --now <br />  <br />Note: AppArmor must have properly configured profiles for applications and home directories. All configurations will be based on the actual system setup and organization and normally are on a per role basis. See the AppArmor documentation for more information on configuring profiles.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

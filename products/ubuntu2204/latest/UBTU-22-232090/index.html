@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-232090 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must configure the files used by the system journal to be owned by "root".</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-232090 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001314&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000206-GPOS-00084">SRG-OS-000206-GPOS-00084</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, personally identifiable information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.  <br />  <br />The structure and content of error messages must be carefully considered by the organization and development team. The extent to which the information system is able to identify and handle error conditions is guided by organizational policy and operational requirements.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the /run/log/journal and /var/log/journal files are owned by "root" by using the following command: <br /> <br />     $ sudo find /run/log/journal /var/log/journal  -type f -exec stat -c "%n %U" {} \; <br />     /var/log/journal/3b018e681c904487b11671b9c1987cce/system@99dcc72bb1134aaeae4bf157aa7606f4-0000000000003c7a-0006073f8d1c0fec.journal root <br />     /var/log/journal/3b018e681c904487b11671b9c1987cce/system.journal root <br />     /var/log/journal/3b018e681c904487b11671b9c1987cce/user-1000.journal root <br />     /var/log/journal/3b018e681c904487b11671b9c1987cce/user-1000@bdedf14602ff4081a77dc7a6debc8626-00000000000062a6-00060b4b414b617a.journal root <br />     /var/log/journal/3b018e681c904487b11671b9c1987cce/system@99dcc72bb1134aaeae4bf157aa7606f4-0000000000005301-000609a409<br />593.journal root <br />     /var/log/journal/3b018e681c904487b11671b9c1987cce/system@99dcc72bb1134aaeae4bf157aa7606f4-0000000000000001-000604dae53225ee.journal root <br />     /var/log/journal/3b018e681c904487b11671b9c1987cce/user-1000@bdedf14602ff4081a77dc7a6debc8626-000000000000083b-000604dae72c7e3b.journal root <br /> <br />If any output returned is not owned by "root", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure Ubuntu 22.04 LTS to set the appropriate ownership to the files used by the systemd journal: <br /> <br />Add or modify the following lines in the "/usr/lib/tmpfiles.d/systemd.conf" file: <br /> <br />Z /run/log/journal/%m ~2640 root systemd-journal - - <br />z /var/log/journal/%m 2640 root systemd-journal - - <br />z /var/log/journal/%m/system.journal 0640 root systemd-journal - - <br /> <br />Restart the system for the changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

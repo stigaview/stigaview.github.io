@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-612015 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must accept personal identity verification (PIV) credentials.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-612015 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001953&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000376-GPOS-00161">SRG-OS-000376-GPOS-00161</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The use of PIV credentials facilitates standardization and reduces the risk of unauthorized access.  <br />  <br />DOD has mandated the use of the common access card (CAC) to support identity management and personal authentication for systems covered under Homeland Security Presidential Directive (HSPD) 12, as well as making the CAC a primary component of layered protection for national security systems.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the "opensc-pcks11" package is installed on the system by using the following command:  <br />  <br />     $ dpkg -l | grep opensc-pkcs11 <br />     ii     opensc-pkcs11:amd64     0.22.0-1Ubuntu2     amd64     Smart card utilities with support for PKCS#15 compatible cards  <br />  <br />If the "opensc-pcks11" package is not installed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install the "opensc-pkcs11" package by using the following command:  <br />  <br />     $ sudo apt-get install opensc-pkcs11
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

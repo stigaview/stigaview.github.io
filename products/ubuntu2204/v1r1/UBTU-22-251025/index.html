@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-251025 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must configure the Uncomplicated Firewall (ufw) to rate-limit impacted network interfaces.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-251025 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002385&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000420-GPOS-00186">SRG-OS-000420-GPOS-00186</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Denial of service (DoS) is a condition when a resource is not available for legitimate users. When this occurs, the organization either cannot accomplish its mission or must operate at degraded capacity.  <br />  <br />This requirement addresses the configuration of the operating system to mitigate the impact of DoS attacks that have occurred or are ongoing on system availability. For each system, known and potential DoS attacks must be identified and solutions for each type implemented. A variety of technologies exist to limit or, in some cases, eliminate the effects of DoS attacks (e.g., limiting processes or establishing memory partitions). Employing increased capacity and bandwidth, combined with service redundancy, may reduce the susceptibility to some DoS attacks.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify an application firewall is configured to rate limit any connection to the system.  <br />  <br />Check all the services listening to the ports by using the following command:  <br />  <br />     $ ss -l46ut <br />     Netid               State          Recv-Q          Send-Q                               Local Address:Port            Peer Address:Port               Process                 <br />     tcp                 LISTEN               0                     511                                           *:http                                          *:*  <br />     tcp                 LISTEN               0                     128                                           [::]:ssh                                        [::]:* <br />     tcp                 LISTEN               0                     128                                           [::]:ipp                                        [::]:*  <br />     tcp                 LISTEN               0                     128                                           [::]:smtp                                    [::]:* <br /> <br />  <br />For each entry, verify that the ufw is configured to rate limit the service ports by using the following command:  <br />  <br />     $ sudo ufw status  <br />     Status: active  <br />  <br />     To                           Action     From  <br />     --                             ------         ----  <br />     80/tcp                    LIMIT       Anywhere <br />     25/tcp                    LIMIT       Anywhere <br />     Anywhere            DENY       240.9.19.81 <br />     443                           LIMIT      Anywhere        <br />     22/tcp                     LIMIT      Anywhere     <br />     80/tcp (v6)            LIMIT      Anywhere <br />     25/tcp (v6)            LIMIT      Anywhere                <br />     22/tcp (v6)            LIMIT      Anywhere (v6)  <br /> <br />     25                             DENY OUT    Anywhere <br />     25 (v6)                    DENY OUT    Anywhere (v6) <br /> <br />If any port with a state of "LISTEN" that does not have an action of "DENY", is not marked with the "LIMIT" action, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the application firewall to protect against or limit the effects of DoS attacks by ensuring Ubuntu 22.04 LTS is implementing rate-limiting measures on impacted network interfaces.  <br />  <br />For each service with a port listening to connections, run the following command, replacing "<service_name>" with the service that needs to be rate limited.  <br />  <br />     $ sudo ufw limit <service_name>  <br />  <br />Rate-limiting can also be done on an interface. An example of adding a rate limit on the "ens160" interface follows:  <br />  <br />     $ sudo ufw limit in on ens160
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

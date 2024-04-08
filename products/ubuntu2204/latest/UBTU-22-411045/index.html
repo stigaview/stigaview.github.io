@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-411045 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts have been made.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-411045 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000044&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000021-GPOS-00005">SRG-OS-000021-GPOS-00005</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-forcing, is reduced. Limits are imposed by locking the account.<br /><br />Satisfies: SRG-OS-000021-GPOS-00005, SRG-OS-000329-GPOS-00128
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that Ubuntu 22.04 LTS utilizes the "pam_faillock" module by using the following command: <br /> <br />     $ grep faillock /etc/pam.d/common-auth <br /> <br />auth     [default=die]  pam_faillock.so authfail <br />auth     sufficient     pam_faillock.so authsucc <br /> <br />If the "pam_faillock.so" module is not present in the "/etc/pam.d/common-auth" file, this is a finding. <br /> <br />Verify the "pam_faillock" module is configured to use the following options: <br /> <br />     $ sudo grep -Ew 'silent|audit|deny|fail_interval|unlock_time' /etc/security/faillock.conf <br />     audit <br />     silent <br />     deny = 3 <br />     fail_interval = 900 <br />     unlock_time = 0 <br /> <br />If "audit" is commented out, or is missing, this is a finding.<br /><br />If "silent" is commented out, or is missing, this is a finding.<br /><br />If "deny" is set to a value greater than "3", is commented out, or is missing, this is a finding.<br /> <br />If "fail_interval" is set to a value greater than "900", is commented out, or is missing, this is a finding.<br /> <br />If "unlock_time" is not set to "0", is commented out, or is missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure Ubuntu 22.04 LTS to utilize the "pam_faillock" module.  <br /> <br />Add or modify the following lines in the "/etc/pam.d/common-auth" file, below the "auth" definition for "pam_unix.so":  <br /> <br />auth     [default=die]  pam_faillock.so authfail <br />auth     sufficient          pam_faillock.so authsucc <br /> <br />Configure the "pam_faillock" module to use the following options. <br /> <br />Add or modify the following lines in the "/etc/security/faillock.conf" file: <br /> <br />audit <br />silent <br />deny = 3 <br />fail_interval = 900 <br />unlock_time = 0
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

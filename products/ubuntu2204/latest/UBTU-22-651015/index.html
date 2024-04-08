@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-651015 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must configure AIDE to perform file integrity checking on the file system.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-651015 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002696&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000445-GPOS-00199">SRG-OS-000445-GPOS-00199</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without verification of the security functions, security functions may not operate correctly and the failure may go unnoticed. Security function is defined as the hardware, software, and/or firmware of the information system responsible for enforcing the system security policy and supporting the isolation of code and data on which the protection is based. Security functionality includes, but is not limited to, establishing system accounts, configuring access authorizations (i.e., permissions, privileges), setting events to be audited, and setting intrusion detection parameters.  <br />  <br />This requirement applies to Ubuntu 22.04 LTS performing security function verification/testing and/or systems and environments that require this functionality.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that Advanced Intrusion Detection Environment (AIDE) is configured and operating correctly by using the following command (this will take a few minutes): <br /> <br />Note: If AIDE is not installed, this requirement is not applicable. <br /> <br />     $ sudo aide -c /etc/aide/aide.conf --check <br /> <br />Example output: <br /> <br />Start timestamp: 2024-04-01 04:20:00 +1300 (AIDE 0.17.4) <br />AIDE found differences between database and filesystem!! <br />Ignored e2fs attributes: EIh <br />... <br /> <br />If AIDE is being used to perform file integrity checks but the command fails, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Initialize AIDE (this will take a few minutes): <br /> <br />     $ sudo aideinit <br />     Running aide --init... <br /> <br />Example output: <br /> <br />Start timestamp: 2024-04-01 04:20:00 +1300 (AIDE 0.17.4) <br />AIDE initialized database at /var/lib/aide/aide.db.new <br />Ignored e2fs attributes: EIh <br /> <br />Number of entries:      146185 <br /> <br />--------------------------------------------------- <br />The attributes of the (uncompressed) database(s): <br />--------------------------------------------------- <br /> <br />/var/lib/aide/aide.db.new <br /> SHA256    : UrYbC/KBOJcs8zKcSlKoifnnoPK66DEC <br />             Aw6odu/BpgY= <br /> SHA512    : ezENbbuh937SPWvtsdjRzy3i47XjLg7j <br />             L3UGmr0EcgY6u8rczxgbn2RuwJfrIpef <br />             0c1qMNobzrLXyDnnqEqAqw== <br /> RMD160    : yBq2xio+g5ne4kvZzzMZ2v+EO9w= <br /> TIGER     : GkJ/xkzJGu/aSQqk9A5LN271IOAQC3d0 <br /> CRC32     : g/beXA== <br /> HAVAL     : zZm220YZiGna2edJ6Gi0rPv16AlpqeHB <br />             y/XLB3hIPEY= <br /> WHIRLPOOL : k6veoXavJ/BH9L125pCYAfTB8w5ZJkdC <br />             DvVmYS0+cgmg7M0y/S2v42FNCEJ993mc <br />             3kZMXJR/VVmwKg/7ntGixQ== <br /> GOST      : psjiyix6mJlNsE984D0NwbfgBmB0ETGl <br />             /R4PNvm/wKg= <br /> <br />End timestamp: 2024-04-01 04:29:16 +1300 (run time: 9m 16s)
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

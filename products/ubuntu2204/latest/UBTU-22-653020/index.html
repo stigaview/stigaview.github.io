@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-653020 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS audit event multiplexor must be configured to offload audit logs onto a different system from the system being audited.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-653020 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001851&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000342-GPOS-00133">SRG-OS-000342-GPOS-00133</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Information stored in one location is vulnerable to accidental or incidental deletion or alteration.  <br />  <br />Offloading is a common process in information systems with limited audit storage capacity. <br /> <br />The auditd service does not include the ability to send audit records to a centralized server for management directly. However, it can use a plug-in for audit event multiplexor to pass audit records to a remote server.<br /><br />Satisfies: SRG-OS-000342-GPOS-00133, SRG-OS-000479-GPOS-00224
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the audit event multiplexor is configured to offload audit records to a different system from the system being audited.  <br />  <br />Check if the "audispd-plugins" package is installed:  <br />  <br />     $ dpkg -l | grep audispd-plugins <br />     ii     audispd-plugins     1:3.0.7-1build1     amd64     Plugins for the audit event dispatcher <br />  <br />If the "audispd-plugins" package is not installed, this is a finding.  <br />  <br />Check that the records are being offloaded to a remote server by using the following command:  <br />  <br />     $ sudo grep -i active /etc/audit/plugins.d/au-remote.conf <br />     active = yes  <br />  <br />If "active" is not set to "yes", or the line is commented out, or is missing, this is a finding.  <br />  <br />Check that audisp-remote plugin is configured to send audit logs to a different system:  <br />  <br />     $ sudo grep -i remote_server /etc/audit/audisp-remote.conf <br />     remote_server = 240.9.19.81 <br />  <br />If the "remote_server" parameter is not set, is set with a local IP address, or is set with an invalid IP address, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the audit event multiplexor to offload audit records to a different system from the system being audited.  <br />  <br />Install the "audisp-plugins" package by using the following command:  <br />  <br />     $ sudo apt-get install audispd-plugins <br />  <br />Set the audisp-remote plugin as active by editing the "/etc/audit/plugins.d/au-remote.conf" file:  <br />  <br />     $ sudo sed -i -E 's/active\s*=\s*no/active = yes/' /etc/audit/plugins.d/au-remote.conf <br />  <br />Set the IP address of the remote system by editing the "/etc/audit/audisp-remote.conf" file:  <br />  <br />     $ sudo sed -i -E 's/(remote_server\s*=).*/\1 <remote_server_ip_address>/' /etc/audit/audisp-remote.conf <br />  <br />Restart the "auditd.service" for the changes to take effect:  <br />  <br />     $ sudo systemctl restart auditd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

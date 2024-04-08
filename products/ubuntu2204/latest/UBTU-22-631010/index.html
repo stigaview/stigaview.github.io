@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-631010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must use DOD PKI-established certificate authorities for verification of the establishment of protected sessions.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-631010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002470&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000403-GPOS-00182">SRG-OS-000403-GPOS-00182</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Untrusted certificate authorities (CA) can issue certificates, but they may be issued by organizations or individuals that seek to compromise DOD systems or by organizations with insufficient security controls. If the CA used for verifying the certificate is not a DOD-approved CA, trust of this CA has not been established.  <br />  <br />The DOD will only accept PKI-certificates obtained from a DOD-approved internal or external certificate authority. Reliance on CAs for the establishment of secure sessions includes, for example, the use of SSL/TLS certificates.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the directory containing the root certificates for Ubuntu 22.04 LTS contains certificate files for DOD PKI-established certificate authorities by iterating over all files in the "/etc/ssl/certs" directory and checking if, at least one, has the subject matching "DOD ROOT CA". <br /> <br />     $ ls /etc/ssl/certs | grep -i DOD <br />     DOD_PKE_CA_chain.pem <br /> <br />If no DOD root certificate is found, this is a finding. <br /> <br />Verify that all root certificates present on the system have been approved by the AO. <br /> <br />     $ ls /etc/ssl/certs <br /> <br />If a certificate is present that is not approved by the AO, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure Ubuntu 22.04 LTS to use of DOD PKI-established certificate authorities for verification of the establishment of protected sessions.  <br /> <br />Add at least one DOD certificate authority to the "/usr/share/ca-certificates" directory in the CRT format.  <br />  <br />Update the "/etc/ssl/certs" directory by using the following command:  <br />  <br />     $ sudo dpkg-reconfigure ca-certificates
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

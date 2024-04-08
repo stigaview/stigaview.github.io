@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-22-215030 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 0ce1fa5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Ubuntu 22.04 LTS must not have the "rsh-server" package installed.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-22-215030 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000095-GPOS-00049">SRG-OS-000095-GPOS-00049</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.  <br />  <br />Remote Shell (RSH) is a client/server application protocol that provides an unencrypted remote access service, which does not provide for the confidentiality and integrity of user passwords or the remote session. If users were allowed to login to a system using RSH, the privileged user passwords and communications could be compromised. <br /> <br />Removing the "rsh-server" package decreases the risk of accidental or intentional activation of the RSH service.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the "rsh-server" package is not installed by using the following command:  <br />  <br />     $ dpkg -l | grep rsh-server <br />  <br />If the "rsh-server" package is installed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Remove the "rsh-server" package by using the following command:  <br /> <br />     $ sudo apt-get remove rsh-server
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>
