@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN10-00-000145 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Data Execution Prevention (DEP) must be configured to at least OptOut.</h2>
+  <p>
+  <b>STIG ID:</b> WN10-00-000145 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002824&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000433-GPOS-00192">SRG-OS-000433-GPOS-00192</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Attackers are constantly looking for vulnerabilities in systems and applications. Data Execution Prevention (DEP) prevents harmful code from running in protected memory locations reserved for Windows and other programs.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the DEP configuration.<br />Open a command prompt (cmd.exe) or PowerShell with elevated privileges (Run as administrator).<br />Enter "BCDEdit /enum {current}". (If using PowerShell "{current}" must be enclosed in quotes.)<br />If the value for "nx" is not "OptOut", this is a finding.<br />(The more restrictive configuration of "AlwaysOn" would not be a finding.)
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure DEP to at least OptOut.<br /><br />Note: Suspend BitLocker before making changes to the DEP configuration.<br /><br />Open a command prompt (cmd.exe) or PowerShell with elevated privileges (Run as administrator).<br />Enter "BCDEDIT /set {current} nx OptOut".  (If using PowerShell "{current}" must be enclosed in quotes.)<br />"AlwaysOn", a more restrictive selection, is also valid but does not allow applications that do not function properly to be opted out of DEP.<br /><br />Opted out exceptions can be configured in the "System Properties".<br /><br />Open "System" in Control Panel.<br />Select "Advanced system settings".<br />Click "Settings" in the "Performance" section.<br />Select the "Data Execution Prevention" tab.<br />Applications that are opted out are configured in the window below the selection "Turn on DEP for all programs and services except those I select:".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

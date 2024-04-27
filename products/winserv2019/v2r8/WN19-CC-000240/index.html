@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN19-CC-000240 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2019 administrator accounts must not be enumerated during elevation.</h2>
+  <p>
+  <b>STIG ID:</b> WN19-CC-000240 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001084&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000134-GPOS-00068">SRG-OS-000134-GPOS-00068</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Enumeration of administrator accounts when elevating can provide part of the logon information to an unauthorized user. This setting configures the system to always require users to type in a username and password to elevate a running application.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the following registry value does not exist or is not configured as specified, this is a finding:<br /><br />Registry Hive: HKEY_LOCAL_MACHINE<br />Registry Path: \SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\CredUI\<br /><br />Value Name: EnumerateAdministrators<br /><br />Type: REG_DWORD<br />Value: 0x00000000 (0)
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the policy value for Computer Configuration >> Administrative Templates >> Windows Components >> Credential User Interface >> "Enumerate administrator accounts on elevation" to "Disabled".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN16-00-000180 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Permissions for the Windows installation directory must conform to minimum requirements.</h2>
+  <p>
+  <b>STIG ID:</b> WN16-00-000180 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002165&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000312-GPOS-00122">SRG-OS-000312-GPOS-00122</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Changing the system's file and directory permissions allows the possibility of unauthorized and anonymous modification to the operating system and installed applications.<br /><br />The default permissions are adequate when the Security Option "Network access: Let everyone permissions apply to anonymous users" is set to "Disabled" (WN16-SO-000290).<br /><br />Satisfies: SRG-OS-000312-GPOS-00122, SRG-OS-000312-GPOS-00123, SRG-OS-000312-GPOS-00124
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       The default permissions are adequate when the Security Option "Network access: Let everyone permissions apply to anonymous users" is set to "Disabled" (WN16-SO-000290).<br /><br />Review the permissions for the Windows installation directory (usually C:\Windows). Non-privileged groups such as Users or Authenticated Users must not have greater than "Read & execute" permissions. (Individual accounts must not be used to assign permissions.)<br /><br />If permissions are not as restrictive as the default permissions listed below, this is a finding.<br /><br />Viewing in File Explorer:<br /><br />For each folder, view the Properties.<br /><br />Select the "Security" tab and the "Advanced" button.<br /><br />Default permissions:<br />\Windows<br />Type - "Allow" for all<br />Inherited from - "None" for all<br /><br />Principal - Access - Applies to<br /><br />TrustedInstaller - Full control - This folder and subfolders<br />SYSTEM - Modify - This folder only<br />SYSTEM - Full control - Subfolders and files only<br />Administrators - Modify - This folder only<br />Administrators - Full control - Subfolders and files only<br />Users - Read & execute - This folder, subfolders, and files<br />CREATOR OWNER - Full control - Subfolders and files only<br />ALL APPLICATION PACKAGES - Read & execute - This folder, subfolders, and files<br />ALL RESTRICTED APPLICATION PACKAGES - Read & execute - This folder, subfolders, and files<br /><br />Alternately, use icacls:<br /><br />Open a Command prompt (admin).<br /><br />Enter "icacls" followed by the directory:<br /><br />"icacls c:\windows"<br /><br />The following results should be displayed for each when entered:<br /><br />c:\windows<br />NT SERVICE\TrustedInstaller:(F)<br />NT SERVICE\TrustedInstaller:(CI)(IO)(F)<br />NT AUTHORITY\SYSTEM:(M)<br />NT AUTHORITY\SYSTEM:(OI)(CI)(IO)(F)<br />BUILTIN\Administrators:(M)<br />BUILTIN\Administrators:(OI)(CI)(IO)(F)<br />BUILTIN\Users:(RX)<br />BUILTIN\Users:(OI)(CI)(IO)(GR,GE)<br />CREATOR OWNER:(OI)(CI)(IO)(F)<br />APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(RX)<br />APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(OI)(CI)(IO)(GR,GE)<br />APPLICATION PACKAGE AUTHORITY\ALL RESTRICTED APPLICATION PACKAGES:(RX)<br />APPLICATION PACKAGE AUTHORITY\ALL RESTRICTED APPLICATION PACKAGES:(OI)(CI)(IO)(GR,GE)<br />Successfully processed 1 files; Failed processing 0 files
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Maintain the default file ACLs and configure the Security Option "Network access: Let everyone permissions apply to anonymous users" to "Disabled" (WN16-SO-000290).<br /><br />Default permissions:<br />Type - "Allow" for all<br />Inherited from - "None" for all<br /><br />Principal - Access - Applies to<br /><br />TrustedInstaller - Full control - This folder and subfolders<br />SYSTEM - Modify - This folder only<br />SYSTEM - Full control - Subfolders and files only<br />Administrators - Modify - This folder only<br />Administrators - Full control - Subfolders and files only<br />Users - Read & execute - This folder, subfolders, and files<br />CREATOR OWNER - Full control - Subfolders and files only<br />ALL APPLICATION PACKAGES - Read & execute - This folder, subfolders, and files<br />ALL RESTRICTED APPLICATION PACKAGES - Read & execute - This folder, subfolders, and files
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

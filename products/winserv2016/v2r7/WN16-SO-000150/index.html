@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN16-SO-000150 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The required legal notice must be configured to display before console logon.</h2>
+  <p>
+  <b>STIG ID:</b> WN16-SO-000150 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000048&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000023-GPOS-00006">SRG-OS-000023-GPOS-00006</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Failure to display the logon banner prior to a logon attempt will negate legal proceedings resulting from unauthorized access to system resources.<br /><br />Satisfies: SRG-OS-000023-GPOS-00006, SRG-OS-000024-GPOS-00007, SRG-OS-000228-GPOS-00088
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the following registry value does not exist or is not configured as specified, this is a finding.<br /><br />Registry Hive: HKEY_LOCAL_MACHINE <br />Registry Path: \SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\<br /><br />Value Name: LegalNoticeText<br /><br />Value Type: REG_SZ<br />Value: See message text below<br /><br />You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.<br /><br />By using this IS (which includes any device attached to this IS), you consent to the following conditions:<br /><br />-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.<br /><br />-At any time, the USG may inspect and seize data stored on this IS.<br /><br />-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.<br /><br />-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.<br /><br />-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "Interactive Logon: Message text for users attempting to log on" to the following:<br /><br />You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.<br /><br />By using this IS (which includes any device attached to this IS), you consent to the following conditions:<br /><br />-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.<br /><br />-At any time, the USG may inspect and seize data stored on this IS.<br /><br />-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.<br /><br />-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.<br /><br />-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

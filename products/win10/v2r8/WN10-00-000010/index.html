@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN10-00-000010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows 10 domain-joined systems must have a Trusted Platform Module (TPM) enabled and ready for use.</h2>
+  <p>
+  <b>STIG ID:</b> WN10-00-000010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Credential Guard uses virtualization-based security to protect information that could be used in credential theft attacks if compromised. A number of system requirements must be met for Credential Guard to be configured and enabled properly. Without a TPM enabled and ready for use, Credential Guard keys are stored in a less secure method using software.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify domain-joined systems have a TPM enabled and ready for use.<br /><br />For standalone or nondomain-joined systems, this is NA.<br /><br />Virtualization-based security, including Credential Guard, currently cannot be implemented in virtual desktop implementations (VDI) due to specific supporting requirements including a TPM, UEFI with Secure Boot, and the capability to run the Hyper-V feature within the virtual desktop.<br /><br />For VDIs where the virtual desktop instance is deleted or refreshed upon logoff, this is NA.<br /><br />Verify the system has a TPM and is ready for use.<br />Run "tpm.msc".<br />Review the sections in the center pane.<br />"Status" must indicate it has been configured with a message such as "The TPM is ready for use" or "The TPM is on and ownership has been taken".<br />TPM Manufacturer Information - Specific Version = 2.0 or 1.2<br /><br />If a TPM is not found or is not ready for use, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       For standalone or nondomain-joined systems, this is NA.<br /><br />Virtualization-based security, including Credential Guard, currently cannot be implemented in VDI due to specific supporting requirements including a TPM, UEFI with Secure Boot, and the capability to run the Hyper-V feature within the virtual desktop.<br /><br />For VDIs where the virtual desktop instance is deleted or refreshed upon logoff, this is NA.<br /><br />Ensure domain-joined systems have a Trusted Platform Module (TPM) that is configured for use. (Versions 2.0 or 1.2 support Credential Guard.)<br /><br />The TPM must be enabled in the firmware.<br /><br />Run "tpm.msc" for configuration options in Windows.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

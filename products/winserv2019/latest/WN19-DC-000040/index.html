@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN19-DC-000040 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2019 Kerberos user ticket lifetime must be limited to 10 hours or less.</h2>
+  <p>
+  <b>STIG ID:</b> WN19-DC-000040 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001941&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000112-GPOS-00057">SRG-OS-000112-GPOS-00057</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       In Kerberos, there are two types of tickets: Ticket Granting Tickets (TGTs) and Service Tickets. Kerberos tickets have a limited lifetime so the time an attacker has to implement an attack is limited. This policy controls how long TGTs can be renewed. With Kerberos, the user's initial authentication to the domain controller results in a TGT, which is then used to request Service Tickets to resources. Upon startup, each computer gets a TGT before requesting a service ticket to the domain controller and any other computers it needs to access. For services that start up under a specified user account, users must always get a TGT first and then get Service Tickets to all computers and services accessed.<br /><br />Satisfies: SRG-OS-000112-GPOS-00057, SRG-OS-000113-GPOS-00058
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This applies to domain controllers. It is NA for other systems.<br /><br />Verify the following is configured in the Default Domain Policy:<br /><br />Open "Group Policy Management".<br /><br />Navigate to "Group Policy Objects" in the Domain being reviewed (Forest >> Domains >> Domain).<br /><br />Right-click on the "Default Domain Policy".<br /><br />Select "Edit".<br /><br />Navigate to Computer Configuration >> Policies >> Windows Settings >> Security Settings >> Account Policies >> Kerberos Policy.<br /><br />If the value for "Maximum lifetime for user ticket" is "0" or greater than "10" hours, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the policy value in the Default Domain Policy for Computer Configuration >> Policies >> Windows Settings >> Security Settings >> Account Policies >> Kerberos Policy >> "Maximum lifetime for user ticket" to a maximum of "10" hours but not "0", which equates to "Ticket doesn't expire".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN16-DC-000300 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>PKI certificates associated with user accounts must be issued by the DoD PKI or an approved External Certificate Authority (ECA).</h2>
+  <p>
+  <b>STIG ID:</b> WN16-DC-000300 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000185&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000066-GPOS-00034">SRG-OS-000066-GPOS-00034</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A PKI implementation depends on the practices established by the Certificate Authority (CA) to ensure the implementation is secure. Without proper practices, the certificates issued by a CA have limited value in authentication functions.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This applies to domain controllers. It is NA for other systems.<br /><br />Review user account mappings to PKI certificates.<br /><br />Open "Windows PowerShell".<br /><br />Enter "Get-ADUser -Filter * | FT Name, UserPrincipalName, Enabled".<br /><br />Exclude disabled accounts (e.g., DefaultAccount, Guest) and the krbtgt account.<br /><br />If the User Principal Name (UPN) is not in the format of an individual's identifier for the certificate type and for the appropriate domain suffix, this is a finding.<br /><br />For standard NIPRNet certificates the individual's identifier is in the format of an Electronic Data Interchange - Personnel Identifier (EDI-PI).<br /><br />Alt Tokens and other certificates may use a different UPN format than the EDI-PI which vary by organization. Verified these with the organization.<br /><br />NIPRNet Example:<br />Name - User Principal Name<br />User1 - 1234567890@mil<br /><br />See PKE documentation for other network domain suffixes.<br /><br />If the mappings are to certificates issued by a CA authorized by the Component's CIO, this is a CAT II finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Map user accounts to PKI certificates using the appropriate User Principal Name (UPN) for the network. See PKE documentation for details.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN19-SO-000420 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2019 User Account Control must be configured to detect application installations and prompt for elevation.</h2>
+  <p>
+  <b>STIG ID:</b> WN19-SO-000420 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001084&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000134-GPOS-00068">SRG-OS-000134-GPOS-00068</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       User Account Control (UAC) is a security mechanism for limiting the elevation of privileges, including administrative accounts, unless authorized. This setting requires Windows to respond to application installation requests by prompting for credentials.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       UAC requirements are NA for Server Core installations (this is the default installation option for Windows Server 2019 versus Server with Desktop Experience).<br /><br />If the following registry value does not exist or is not configured as specified, this is a finding:<br /><br />Registry Hive: HKEY_LOCAL_MACHINE <br />Registry Path: \SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\<br /><br />Value Name: EnableInstallerDetection<br /><br />Value Type: REG_DWORD<br />Value: 0x00000001 (1)
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Detect application installations and prompt for elevation" to "Enabled".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

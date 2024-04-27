@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN11-00-000260 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Windows 11 time service must synchronize with an appropriate DOD time source.</h2>
+  <p>
+  <b>STIG ID:</b> WN11-00-000260 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001891&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000355-GPOS-00143">SRG-OS-000355-GPOS-00143</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The Windows Time Service controls time synchronization settings. Time synchronization is essential for authentication and auditing purposes. If the Windows Time Service is used, it must synchronize with a secure, authorized time source. Domain-joined systems are automatically configured to synchronize with domain controllers. If an NTP server is configured, it must synchronize with a secure, authorized time source.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review the Windows time service configuration.<br /><br />Open an elevated "Command Prompt" (run as administrator).<br /><br />Enter "W32tm /query /configuration".<br /><br />Domain-joined systems (excluding the domain controller with the PDC emulator role):<br /><br />If the value for "Type" under "NTP Client" is not "NT5DS", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the system to synchronize time with an appropriate DOD time source.<br /><br />Domain-joined systems use NT5DS to synchronize time from other systems in the domain by default.<br /><br />If the system needs to be configured to an NTP server, configure the system to point to an authorized time server by setting the policy value for Computer Configuration >> Administrative Templates >> System >> Windows Time Service >> Time Providers >> "Configure Windows NTP Client" to "Enabled", and configure the "NtpServer" field to point to an appropriate DOD time server.<br /><br />The US Naval Observatory operates stratum 1 time servers, identified at https://www.cnmoc.usff.navy.mil/Our-Commands/United-States-Naval-Observatory/Precise-Time-Department/Network-Time-Protocol-NTP/. Time synchronization will occur through a hierarchy of time servers down to the local level. Clients and lower-level servers will synchronize with an authorized time server in the hierarchy.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

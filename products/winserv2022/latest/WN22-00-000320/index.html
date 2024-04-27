@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN22-00-000320 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2022 must not have the Fax Server role installed.</h2>
+  <p>
+  <b>STIG ID:</b> WN22-00-000320 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000095-GPOS-00049">SRG-OS-000095-GPOS-00049</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Unnecessary services increase the attack surface of a system. Some of these services may not support required levels of authentication or encryption or may provide unauthorized access to the system.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Open "PowerShell".<br /><br />Enter "Get-WindowsFeature | Where Name -eq Fax".<br /><br />If "Installed State" is "Installed", this is a finding.<br /><br />An Installed State of "Available" or "Removed" is not a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Uninstall the "Fax Server" role.<br /><br />Start "Server Manager".<br /><br />Select the server with the role.<br /><br />Scroll down to "ROLES AND FEATURES" in the right pane.<br /><br />Select "Remove Roles and Features" from the drop-down "TASKS" list.<br /><br />Select the appropriate server on the "Server Selection" page and click "Next".<br /><br />Deselect "Fax Server" on the "Roles" page.<br /><br />Click "Next" and "Remove" as prompted.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

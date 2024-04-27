@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN19-DC-000130 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2019 domain controllers must run on a machine dedicated to that function.</h2>
+  <p>
+  <b>STIG ID:</b> WN19-DC-000130 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000095-GPOS-00049">SRG-OS-000095-GPOS-00049</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Executing application servers on the same host machine with a directory server may substantially weaken the security of the directory server. Web or database server applications usually require the addition of many programs and accounts, increasing the attack surface of the computer. <br /><br />Some applications require the addition of privileged accounts, providing potential sources of compromise. Some applications (such as Microsoft Exchange) may require the use of network ports or services conflicting with the directory server. In this case, non-standard ports might be selected, and this could interfere with intrusion detection or prevention services.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This applies to domain controllers, it is NA for other systems.<br /><br />Review the installed roles the domain controller is supporting.<br /><br />Start "Server Manager".<br /><br />Select "AD DS" in the left pane and the server name under "Servers" to the right.<br /><br />Select "Add (or Remove) Roles and Features" from "Tasks" in the "Roles and Features" section. (Cancel before any changes are made.)<br /><br />Determine if any additional server roles are installed. A basic domain controller setup will include the following:<br /><br />- Active Directory Domain Services<br />- DNS Server<br />- File and Storage Services<br /><br />If any roles not requiring installation on a domain controller are installed, this is a finding. <br /><br />A Domain Name System (DNS) server integrated with the directory server (e.g., AD-integrated DNS) is an acceptable application. However, the DNS server must comply with the DNS STIG security requirements.<br /><br />Run "Programs and Features".<br /><br />Review installed applications.<br /><br />If any applications are installed that are not required for the domain controller, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Remove additional roles or applications such as web, database, and email from the domain controller.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN19-DC-000030 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2019 Kerberos service ticket maximum lifetime must be limited to 600 minutes or less.</h2>
+  <p>
+  <b>STIG ID:</b> WN19-DC-000030 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001941&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000112-GPOS-00057">SRG-OS-000112-GPOS-00057</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       This setting determines the maximum amount of time (in minutes) that a granted session ticket can be used to access a particular service. Session tickets are used only to authenticate new connections with servers. Ongoing operations are not interrupted if the session ticket used to authenticate the connection expires during the connection.<br /><br />Satisfies: SRG-OS-000112-GPOS-00057, SRG-OS-000113-GPOS-00058
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This applies to domain controllers. It is NA for other systems.<br /><br />Verify the following is configured in the Default Domain Policy:<br /><br />Open "Group Policy Management".<br /><br />Navigate to "Group Policy Objects" in the Domain being reviewed (Forest >> Domains >> Domain). <br /><br />Right-click on the "Default Domain Policy".<br /><br />Select "Edit".<br /><br />Navigate to Computer Configuration >> Policies >> Windows Settings >> Security Settings >> Account Policies >> Kerberos Policy.<br /><br />If the value for "Maximum lifetime for service ticket" is "0" or greater than "600" minutes, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the policy value in the Default Domain Policy for Computer Configuration >> Policies >> Windows Settings >> Security Settings >> Account Policies >> Kerberos Policy >> "Maximum lifetime for service ticket" to a maximum of "600" minutes, but not "0", which equates to "Ticket doesn't expire".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

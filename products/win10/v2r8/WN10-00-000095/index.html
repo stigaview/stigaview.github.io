@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN10-00-000095 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Permissions for system files and directories must conform to minimum requirements.</h2>
+  <p>
+  <b>STIG ID:</b> WN10-00-000095 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002165&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000312-GPOS-00122">SRG-OS-000312-GPOS-00122</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Changing the system's file and directory permissions allows the possibility of unauthorized and anonymous modification to the operating system and installed applications.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       The default file system permissions are adequate when the Security Option "Network access: Let Everyone permissions apply to anonymous users" is set to "Disabled" (WN10-SO-000160).<br /><br />If the default file system permissions are maintained and the referenced option is set to "Disabled", this is not a finding.<br /><br />Verify the default permissions for the sample directories below. Nonprivileged groups such as Users or Authenticated Users must not have greater than Read & execute permissions except where noted as defaults. (Individual accounts must not be used to assign permissions.)<br /><br />Viewing in File Explorer:<br />Select the "Security" tab and the "Advanced" button.<br /><br />C:\<br />Type - "Allow" for all<br />Inherited from - "None" for all<br />Principal - Access - Applies to<br />Administrators - Full control - This folder, subfolders and files<br />SYSTEM - Full control - This folder, subfolders and files<br />Users - Read & execute - This folder, subfolders and files<br />Authenticated Users - Modify - Subfolders and files only<br />Authenticated Users - Create folders / append data - This folder only<br /><br />\Program Files<br />Type - "Allow" for all<br />Inherited from - "None" for all<br />Principal - Access - Applies to<br />TrustedInstaller - Full control - This folder and subfolders<br />SYSTEM - Modify - This folder only<br />SYSTEM - Full control - Subfolders and files only<br />Administrators - Modify - This folder only<br />Administrators - Full control - Subfolders and files only<br />Users - Read & execute - This folder, subfolders and files<br />CREATOR OWNER - Full control - Subfolders and files only<br />ALL APPLICATION PACKAGES - Read & execute - This folder, subfolders and files<br />ALL RESTRICTED APPLICATION PACKAGES - Read & execute - This folder, subfolders and files<br /><br />\Windows<br />Type - "Allow" for all<br />Inherited from - "None" for all<br />Principal - Access - Applies to<br />TrustedInstaller - Full control - This folder and subfolders<br />SYSTEM - Modify - This folder only<br />SYSTEM - Full control - Subfolders and files only<br />Administrators - Modify - This folder only<br />Administrators - Full control - Subfolders and files only<br />Users - Read & execute - This folder, subfolders and files<br />CREATOR OWNER - Full control - Subfolders and files only<br />ALL APPLICATION PACKAGES - Read & execute - This folder, subfolders and files<br />ALL RESTRICTED APPLICATION PACKAGES - Read & execute - This folder, subfolders and files<br /><br />Alternately use icacls.<br /><br />Run "CMD" as administrator.<br />Enter "icacls" followed by the directory.<br /><br />icacls c:\<br />icacls "c:\program files"<br />icacls c:\windows<br /><br />The following results will be displayed as each is entered:<br /><br />c:\S-1-15-3-65536-1888954469-739942743-1668119174-2468466756-4239452838-1296943325-355587736-700089176:(S,RD,X,RA)<br />BUILTIN\Administrators:(OI)(CI)(F)<br />NT AUTHORITY\SYSTEM:(OI)(CI)(F)<br />BUILTIN\Users:(OI)(CI)(RX)<br />NT AUTHORITY\Authenticated Users:(OI)(CI)(IO)(M)<br />NT AUTHORITY\Authenticated Users:(AD)<br />Mandatory Label\High Mandatory Level:(OI)(NP)(IO)(NW)<br />Successfully processed 1 files; Failed processing 0 files<br /><br />c:\program files <br />NT SERVICE\TrustedInstaller:(F)<br />NT SERVICE\TrustedInstaller:(CI)(IO)(F)<br />NT AUTHORITY\SYSTEM:(M)<br />NT AUTHORITY\SYSTEM:(OI)(CI)(IO)(F)<br />BUILTIN\Administrators:(M)<br />BUILTIN\Administrators:(OI)(CI)(IO)(F)<br />BUILTIN\Users:(RX)<br />BUILTIN\Users:(OI)(CI)(IO)(GR,GE)<br />CREATOR OWNER:(OI)(CI)(IO)(F)<br />APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(RX)<br />APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(OI)(CI)(IO)(GR,GE)<br />APPLICATION PACKAGE AUTHORITY\ALL RESTRICTED APPLICATION PACKAGES:(RX)<br />APPLICATION PACKAGE AUTHORITY\ALL RESTRICTED APPLICATION PACKAGES:(OI)(CI)(IO)(GR,GE)<br />Successfully processed 1 files; Failed processing 0 files<br /><br />c:\windows<br />NT SERVICE\TrustedInstaller:(F)<br />NT SERVICE\TrustedInstaller:(CI)(IO)(F)<br />NT AUTHORITY\SYSTEM:(M)<br />NT AUTHORITY\SYSTEM:(OI)(CI)(IO)(F)<br />BUILTIN\Administrators:(M)<br />BUILTIN\Administrators:(OI)(CI)(IO)(F)<br />BUILTIN\Users:(RX)<br />BUILTIN\Users:(OI)(CI)(IO)(GR,GE)<br />CREATOR OWNER:(OI)(CI)(IO)(F)<br />APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(RX)<br />APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES:(OI)(CI)(IO)(GR,GE)<br />APPLICATION PACKAGE AUTHORITY\ALL RESTRICTED APPLICATION PACKAGES:(RX)<br />APPLICATION PACKAGE AUTHORITY\ALL RESTRICTED APPLICATION PACKAGES:(OI)(CI)(IO)(GR,GE)<br />Successfully processed 1 files; Failed processing 0 files
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Maintain the default file system permissions and configure the Security Option: "Network access: Let everyone permissions apply to anonymous users" to "Disabled" (WN10-SO-000160).
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

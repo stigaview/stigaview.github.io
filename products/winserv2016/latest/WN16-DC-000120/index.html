@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN16-DC-000120 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Data files owned by users must be on a different logical partition from the directory server data files.</h2>
+  <p>
+  <b>STIG ID:</b> WN16-DC-000120 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001090&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000138-GPOS-00069">SRG-OS-000138-GPOS-00069</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       When directory service data files, especially for directories used for identification, authentication, or authorization, reside on the same logical partition as user-owned files, the directory service data may be more vulnerable to unauthorized access or other availability compromises. Directory service and user-owned data files sharing a partition may be configured with less restrictive permissions in order to allow access to the user data. <br /><br />The directory service may be vulnerable to a denial of service attack when user-owned files on a common partition are expanded to an extent preventing the directory service from acquiring more space for directory or audit data.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This applies to domain controllers. It is NA for other systems.<br /><br />Run "Regedit".<br /><br />Navigate to "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NTDS\Parameters".<br /><br />Note the directory locations in the values for "DSA Database file".<br /><br />Open "Command Prompt".<br /><br />Enter "net share".<br /><br />Note the logical drive(s) or file system partition for any organization-created data shares.<br /><br />Ignore system shares (e.g., NETLOGON, SYSVOL, and administrative shares ending in $). User shares that are hidden (ending with $) should not be ignored.<br /><br />If user shares are located on the same logical partition as the directory server data files, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Move shares used to store files owned by users to a different logical partition than the directory server data files.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

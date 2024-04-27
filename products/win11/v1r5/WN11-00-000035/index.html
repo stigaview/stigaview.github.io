@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN11-00-000035 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The operating system must employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs.</h2>
+  <p>
+  <b>STIG ID:</b> WN11-00-000035 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001774&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000370-GPOS-00155">SRG-OS-000370-GPOS-00155</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Utilizing an allowlist provides a configuration management method for allowing the execution of only authorized software. Using only authorized software decreases risk by limiting the number of potential vulnerabilities.<br /><br />The organization must identify authorized software programs and only permit execution of authorized software. The process used to identify software programs that are authorized to execute on organizational information systems is commonly referred to as allowlisting.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This is applicable to unclassified systems.<br /><br />Verify the operating system employs a deny-all, permit-by-exception policy to allow the execution of authorized software programs. This must include packaged apps such as the universal apps installed by default on systems.<br /><br />If an application allowlisting program is not in use on the system, this is a finding.<br /><br />Configuration of allowlisting applications will vary by the program.<br /><br />AppLocker is an allowlisting application built into Windows 11 Enterprise. A deny-by-default implementation is initiated by enabling any AppLocker rules within a category, only allowing what is specified by defined rules.<br /><br />If AppLocker is used, perform the following to view the configuration of AppLocker:<br />Run "PowerShell".<br /><br />Execute the following command, substituting [c:\temp\file.xml] with a location and file name appropriate for the system:<br />Get-AppLockerPolicy -Effective -XML > c:\temp\file.xml<br /><br />This will produce an xml file with the effective settings that can be viewed in a browser or opened in a program such as Excel for review.<br /><br />Implementation guidance for AppLocker is available at the following link:<br /><br />https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-policies-deployment-guide
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure an application allowlisting program to employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs.<br /><br />Configuration of allowlisting applications will vary by the program. AppLocker is an allowlisting application built into Windows 11 Enterprise.<br /><br />If AppLocker is used, it is configured through group policy in Computer Configuration >> Windows Settings >> Security Settings >> Application Control Policies >> AppLocker.<br /><br />Implementation guidance for AppLocker is available in the NSA paper "Application allowlisting using Microsoft AppLocker" at the following link:<br /><br />https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-policies-deployment-guide
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

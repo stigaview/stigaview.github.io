@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN19-AC-000020 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2019 must have the number of allowed bad logon attempts configured to three or less.</h2>
+  <p>
+  <b>STIG ID:</b> WN19-AC-000020 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000044&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000021-GPOS-00005">SRG-OS-000021-GPOS-00005</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The account lockout feature, when enabled, prevents brute-force password attacks on the system. The higher this value is, the less effective the account lockout feature will be in protecting the local system. The number of bad logon attempts must be reasonably small to minimize the possibility of a successful password attack while allowing for honest errors made during normal user logon.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the effective setting in Local Group Policy Editor.<br /><br />Run "gpedit.msc".<br /><br />Navigate to Local Computer Policy >> Computer Configuration >> Windows Settings >> Security Settings >> Account Policies >> Account Lockout Policy.<br /><br />If the "Account lockout threshold" is "0" or more than "3" attempts, this is a finding.<br /><br />For server core installations, run the following command:<br /><br />Secedit /Export /Areas SecurityPolicy /CFG C:\Path\FileName.Txt<br /><br />If "LockoutBadCount" equals "0" or is greater than "3" in the file, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Account Policies >> Account Lockout Policy >> "Account lockout threshold" to "3" or fewer invalid logon attempts (excluding "0", which is unacceptable).
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN22-DC-000370 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2022 Deny access to this computer from the network user right on domain controllers must be configured to prevent unauthenticated access.</h2>
+  <p>
+  <b>STIG ID:</b> WN22-DC-000370 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000213&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000080-GPOS-00048">SRG-OS-000080-GPOS-00048</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Inappropriate granting of user rights can provide system, administrative, and other high-level capabilities.<br /><br />The "Deny access to this computer from the network" user right defines the accounts that are prevented from logging on from the network.<br /><br />The Guests group must be assigned this right to prevent unauthenticated access.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This applies to domain controllers. A separate version applies to other systems.<br /><br />Verify the effective setting in Local Group Policy Editor.<br /><br />Run "gpedit.msc".<br /><br />Navigate to Local Computer Policy >> Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment.<br /><br />If the following accounts or groups are not defined for the "Deny access to this computer from the network" user right, this is a finding:<br /><br />- Guests Group<br /><br />For server core installations, run the following command:<br /><br />Secedit /Export /Areas User_Rights /cfg c:\path\filename.txt<br /><br />Review the text file.<br /><br />If the following SIDs are not defined for the "SeDenyNetworkLogonRight" user right, this is a finding.<br /><br />S-1-5-32-546 (Guests)
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Deny access to this computer from the network to include the following:<br /><br />- Guests Group
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

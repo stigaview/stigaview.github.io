@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN22-PK-000010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2022 must have the DoD Root Certificate Authority (CA) certificates installed in the Trusted Root Store.</h2>
+  <p>
+  <b>STIG ID:</b> WN22-PK-000010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000185&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000066-GPOS-00034">SRG-OS-000066-GPOS-00034</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       To ensure secure DoD websites and DoD-signed code are properly validated, the system must trust the DoD Root CAs. The DoD root certificates will ensure that the trust chain is established for server certificates issued from the DoD CAs.<br /><br />Satisfies: SRG-OS-000066-GPOS-00034, SRG-OS-000403-GPOS-00182
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       The certificates and thumbprints referenced below apply to unclassified systems; refer to PKE documentation for other networks.<br /><br />Open "Windows PowerShell" as an administrator.<br /><br />Execute the following command:<br /><br />Get-ChildItem -Path Cert:Localmachine\root | Where Subject -Like "*DoD*" | FL Subject, Thumbprint, NotAfter<br /><br />If the following certificate "Subject" and "Thumbprint" information is not displayed, this is a finding. <br /><br />Subject: CN=DoD Root CA 3, OU=PKI, OU=DoD, O=U.S. Government, C=US<br />Thumbprint: D73CA91102A2204A36459ED32213B467D7CE97FB<br />NotAfter: 12/30/2029<br /><br />Subject: CN=DoD Root CA 4, OU=PKI, OU=DoD, O=U.S. Government, C=US<br />Thumbprint: B8269F25DBD937ECAFD4C35A9838571723F2D026<br />NotAfter: 7/25/2032<br /><br />Subject: CN=DoD Root CA 5, OU=PKI, OU=DoD, O=U.S. Government, C=US<br />Thumbprint: 4ECB5CC3095670454DA1CBD410FC921F46B8564B<br />NotAfter: 6/14/2041<br /><br />Subject: CN=DoD Root CA 6, OU=PKI, OU=DoD, O=U.S. Government, C=US <br />Thumbprint : D37ECF61C0B4ED88681EF3630C4E2FC787B37AEF<br />NotAfter: 1/24/2053 11:36:17 AM<br /><br />Alternately, use the Certificates MMC snap-in:<br /><br />Run "MMC".<br /><br />Select "File", "Add/Remove Snap-in".<br /><br />Select "Certificates" and click "Add".<br /><br />Select "Computer account" and click "Next".<br /><br />Select "Local computer: (the computer this console is running on)" and click "Finish".<br /><br />Click "OK".<br /><br />Expand "Certificates" and navigate to "Trusted Root Certification Authorities >> Certificates".<br /><br />For each of the DoD Root CA certificates noted below:<br /><br />Right-click on the certificate and select "Open".<br /><br />Select the "Details" tab.<br /><br />Scroll to the bottom and select "Thumbprint".<br /><br />If the DoD Root CA certificates below are not listed or the value for the "Thumbprint" field is not as noted, this is a finding.<br /><br />DoD Root CA 3<br />Thumbprint: D73CA91102A2204A36459ED32213B467D7CE97FB<br />Valid to: Sunday, December 30, 2029<br /><br />DoD Root CA 4<br />Thumbprint: B8269F25DBD937ECAFD4C35A9838571723F2D026<br />Valid to: Sunday, July 25, 2032<br /><br />DoD Root CA 5<br />Thumbprint: 4ECB5CC3095670454DA1CBD410FC921F46B8564B<br />Valid to: Friday, June 14, 2041<br /><br />DoD Root CA 6<br />Thumbprint: D37ECF61C0B4ED88681EF3630C4E2FC787B37AEFB<br />Valid to: Friday, January 24, 2053
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install the DoD Root CA certificates:<br /><br />DoD Root CA 3<br />DoD Root CA 4<br />DoD Root CA 5<br />DoD Root CA 6<br /><br />The InstallRoot tool is available on Cyber Exchange at https://cyber.mil/pki-pke/tools-configuration-files. Certificate bundles published by the PKI can be found at https://crl.gds.disa.mil/.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

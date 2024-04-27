@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN11-CC-000206 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Update must not obtain updates from other PCs on the internet.</h2>
+  <p>
+  <b>STIG ID:</b> WN11-CC-000206 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Windows 11 allows Windows Update to obtain updates from additional sources instead of Microsoft. In addition to Microsoft, updates can be obtained from and sent to PCs on the local network as well as on the Internet. This is part of the Windows Update trusted process, however to minimize outside exposure, obtaining updates from or sending to systems on the internet must be prevented.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the following registry value does not exist or is not configured as specified, this is a finding:<br /><br />Registry Hive: HKEY_LOCAL_MACHINE<br />Registry Path: \SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization\<br /><br />Value Name: DODownloadMode<br /><br />Value Type: REG_DWORD<br />Value: 0x00000000 (0) - No peering (HTTP Only)<br />0x00000001 (1) - Peers on same NAT only (LAN)<br />0x00000002 (2) - Local Network / Private group peering (Group)<br />0x00000063 (99) - Simple download mode, no peering (Simple)<br />0x00000064 (100) - Bypass mode, Delivery Optimization not used (Bypass)<br /><br />A value of 0x00000003 (3), Internet, is a finding.<br /><br />Standalone systems (configured in Settings):<br />If the following registry value does not exist or is not configured as specified, this is a finding:<br /><br />Registry Hive: HKEY_LOCAL_MACHINE<br />Registry Path: \SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config\<br /><br />Value Name: DODownloadMode<br /><br />Value Type: REG_DWORD<br />Value: 0x00000000 (0) - Off<br />0x00000001 (1) - LAN
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the policy value for Computer Configuration >> Administrative Templates >> Windows Components >> Delivery Optimization >> "Download Mode" to "Enabled" with any option except "Internet" selected.<br /><br />Acceptable selections include:<br />Bypass (100)<br />Group (2)<br />HTTP only (0)<br />LAN (1)<br />Simple (99)<br /><br />.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

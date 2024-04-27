@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN22-DC-000080 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2022 Active Directory SYSVOL directory must have the proper access control permissions.</h2>
+  <p>
+  <b>STIG ID:</b> WN22-DC-000080 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002235&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000324-GPOS-00125">SRG-OS-000324-GPOS-00125</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Improper access permissions for directory data files could allow unauthorized users to read, modify, or delete directory data.<br /><br />The SYSVOL directory contains public files (to the domain) such as policies and logon scripts. Data in shared subdirectories are replicated to all domain controllers in a domain.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This applies to domain controllers. It is NA for other systems.<br /><br />Open a command prompt.<br /><br />Run "net share".<br /><br />Make note of the directory location of the SYSVOL share.<br /><br />By default, this will be \Windows\SYSVOL\sysvol. For this requirement, permissions will be verified at the first SYSVOL directory level.<br /><br />If any standard user accounts or groups have greater than "Read & execute" permissions, this is a finding. <br /><br />The default permissions noted below meet this requirement:<br /><br />Open "Command Prompt".<br /><br />Run "icacls c:\Windows\SYSVOL".<br /><br />The following results must be displayed:<br /><br />NT AUTHORITY\Authenticated Users:(RX)<br />NT AUTHORITY\Authenticated Users:(OI)(CI)(IO)(GR,GE)<br />BUILTIN\Server Operators:(RX)<br />BUILTIN\Server Operators:(OI)(CI)(IO)(GR,GE)<br />BUILTIN\Administrators:(M,WDAC,WO)<br />BUILTIN\Administrators:(OI)(CI)(IO)(F)<br />NT AUTHORITY\SYSTEM:(F)<br />NT AUTHORITY\SYSTEM:(OI)(CI)(IO)(F)<br />CREATOR OWNER:(OI)(CI)(IO)(F)<br /><br />(RX) - Read & execute <br /><br />Run "icacls /help" to view definitions of other permission codes.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Maintain the permissions on the SYSVOL directory. Do not allow greater than "Read & execute" permissions for standard user accounts or groups. The defaults below meet this requirement:<br /><br />C:\Windows\SYSVOL<br />Type - "Allow" for all<br />Inherited from - "None" for all<br /><br />Principal - Access - Applies to<br /><br />Authenticated Users - Read & execute - This folder, subfolder, and files<br />Server Operators - Read & execute- This folder, subfolder, and files<br />Administrators - Special - This folder only (Special = Basic Permissions: all selected except Full control)<br />CREATOR OWNER - Full control - Subfolders and files only<br />Administrators - Full control - Subfolders and files only<br />SYSTEM - Full control - This folder, subfolders, and files
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

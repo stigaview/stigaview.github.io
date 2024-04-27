@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN16-DC-000160 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The directory service must be configured to terminate LDAP-based network connections to the directory server after 5 minutes of inactivity.</h2>
+  <p>
+  <b>STIG ID:</b> WN16-DC-000160 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001133&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000163-GPOS-00072">SRG-OS-000163-GPOS-00072</a> |
+  <b>Severity: </b>low
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The failure to terminate inactive network connections increases the risk of a successful attack on the directory server. The longer an established session is in progress, the more time an attacker has to hijack the session, implement a means to passively intercept data, or compromise any protections on client access. For example, if an attacker gains control of a client computer, an existing (already authenticated) session with the directory server could allow access to the directory. The lack of confidentiality protection in LDAP-based sessions increases exposure to this vulnerability.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This applies to domain controllers. It is NA for other systems.<br /><br />Open an elevated "Command Prompt" (run as administrator).<br /><br />Enter "ntdsutil".<br /><br />At the "ntdsutil:" prompt, enter "LDAP policies".<br /><br />At the "ldap policy:" prompt, enter "connections".<br /><br />At the "server connections:" prompt, enter "connect to server [host-name]"<br />(where [host-name] is the computer name of the domain controller).<br /><br />At the "server connections:" prompt, enter "q".<br /><br />At the "ldap policy:" prompt, enter "show values". <br /><br />If the value for MaxConnIdleTime is greater than "300" (5 minutes) or is not specified, this is a finding.<br /><br />Enter "q" at the "ldap policy:" and "ntdsutil:" prompts to exit.<br /><br />Alternately, Dsquery can be used to display MaxConnIdleTime:<br /><br />Open "Command Prompt (Admin)".<br />Enter the following command (on a single line).<br /><br />dsquery * "cn=Default Query Policy,cn=Query-Policies,cn=Directory Service, cn=Windows NT,cn=Services,cn=Configuration,dc=[forest-name]" -attr LDAPAdminLimits <br /><br />The quotes are required and dc=[forest-name] is the fully qualified LDAP name of the domain being reviewed (e.g., dc=disaost,dc=mil).<br /><br />If the results do not specify a "MaxConnIdleTime" or it has a value greater than "300" (5 minutes), this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the directory service to terminate LDAP-based network connections to the directory server after 5 minutes of inactivity.<br /><br />Open an elevated "Command prompt" (run as administrator).<br /><br />Enter "ntdsutil".<br /><br />At the "ntdsutil:" prompt, enter "LDAP policies".<br /><br />At the "ldap policy:" prompt, enter "connections".<br /><br />At the "server connections:" prompt, enter "connect to server [host-name]" (where [host-name] is the computer name of the domain controller).<br /><br />At the "server connections:" prompt, enter "q".<br /><br />At the "ldap policy:" prompt, enter "Set MaxConnIdleTime to 300".<br /><br />Enter "Commit Changes" to save.<br /><br />Enter "Show values" to verify changes.<br /><br />Enter "q" at the "ldap policy:" and "ntdsutil:" prompts to exit.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN22-00-000170 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2022 default permissions for the HKEY_LOCAL_MACHINE registry hive must be maintained.</h2>
+  <p>
+  <b>STIG ID:</b> WN22-00-000170 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002235&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000324-GPOS-00125">SRG-OS-000324-GPOS-00125</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The registry is integral to the function, security, and stability of the Windows system. Changing the system's registry permissions allows the possibility of unauthorized and anonymous modification to the operating system.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review the registry permissions for the keys of the HKEY_LOCAL_MACHINE hive noted below.<br /><br />If any nonprivileged groups such as Everyone, Users, or Authenticated Users have greater than Read permission, this is a finding.<br /><br />If permissions are not as restrictive as the default permissions listed below, this is a finding:<br /><br />Run "Regedit".<br /><br />Right-click on the registry areas noted below.<br /><br />Select "Permissions" and the "Advanced" button.<br /><br />HKEY_LOCAL_MACHINE\SECURITY<br /><br />Type - "Allow" for all<br />Inherited from - "None" for all<br />Principal - Access - Applies to<br />SYSTEM - Full Control - This key and subkeys<br />Administrators - Special - This key and subkeys<br /><br />HKEY_LOCAL_MACHINE\SOFTWARE<br /><br />Type - "Allow" for all<br />Inherited from - "None" for all<br />Principal - Access - Applies to<br />Users - Read - This key and subkeys<br />Administrators - Full Control - This key and subkeys<br />SYSTEM - Full Control - This key and subkeys<br />CREATOR OWNER - Full Control - This key and subkeys<br />ALL APPLICATION PACKAGES - Read - This key and subkeys<br /><br />HKEY_LOCAL_MACHINE\SYSTEM<br /><br />Type - "Allow" for all<br />Inherited from - "None" for all<br />Principal - Access - Applies to<br />Users - Read - This key and subkeys<br />Administrators - Full Control - This key and subkeys<br />SYSTEM - Full Control - This key and subkeys<br />CREATOR OWNER - Full Control - Subkeys<br />ALL APPLICATION PACKAGES - Read - This key and subkeys<br />Server Operators - Read - This Key and subkeys (Domain controllers only)<br /><br />Other examples under the noted keys may also be sampled. There may be some instances where nonprivileged groups have greater than Read permission.<br /><br />Microsoft has given Read permission to the SOFTWARE and SYSTEM registry keys in Windows Server 2022 to the following SID. This is currently not a finding.<br />S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681<br /><br />If the defaults have not been changed, these are not a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Maintain the default permissions for the HKEY_LOCAL_MACHINE registry hive.<br /><br />The default permissions of the higher-level keys are noted below.<br /><br />HKEY_LOCAL_MACHINE\SECURITY<br /><br />Type - "Allow" for all<br />Inherited from - "None" for all<br />Principal - Access - Applies to<br />SYSTEM - Full Control - This key and subkeys<br />Administrators - Special - This key and subkeys<br /><br />HKEY_LOCAL_MACHINE\SOFTWARE<br /><br />Type - "Allow" for all<br />Inherited from - "None" for all<br />Principal - Access - Applies to<br />Users - Read - This key and subkeys<br />Administrators - Full Control - This key and subkeys<br />SYSTEM - Full Control - This key and subkeys<br />CREATOR OWNER - Full Control - This key and subkeys<br />ALL APPLICATION PACKAGES - Read - This key and subkeys<br /><br />HKEY_LOCAL_MACHINE\SYSTEM<br /><br />Type - "Allow" for all<br />Inherited from - "None" for all<br />Principal - Access - Applies to<br />Users - Read - This key and subkeys<br />Administrators - Full Control - This key and subkeys<br />SYSTEM - Full Control - This key and subkeys<br />CREATOR OWNER - Full Control - Subkeys only<br />ALL APPLICATION PACKAGES - Read - This key and subkeys<br />Server Operators - Read - This Key and subkeys (Domain controllers only)<br /><br />Microsoft has also given Read permission to the SOFTWARE and SYSTEM registry keys in Windows Server 2022 to the following SID:<br />S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

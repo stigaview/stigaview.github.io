@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN22-PK-000020 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2022 must have the DoD Interoperability Root Certificate Authority (CA) cross-certificates installed in the Untrusted Certificates Store on unclassified systems.</h2>
+  <p>
+  <b>STIG ID:</b> WN22-PK-000020 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000185&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000066-GPOS-00034">SRG-OS-000066-GPOS-00034</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       To ensure users do not experience denial of service when performing certificate-based authentication to DoD websites due to the system chaining to a root other than DoD Root CAs, the DoD Interoperability Root CA cross-certificates must be installed in the Untrusted Certificate Store. This requirement only applies to unclassified systems.<br /><br />Satisfies: SRG-OS-000066-GPOS-00034, SRG-OS-000403-GPOS-00182
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This is applicable to unclassified systems. It is NA for others.<br /><br />Open "PowerShell" as an administrator.<br /><br />Execute the following command:<br /><br />Get-ChildItem -Path Cert:Localmachine\disallowed | Where {$_.Issuer -Like "*DoD Interoperability*" -and $_.Subject -Like "*DoD*"} | FL Subject, Issuer, Thumbprint, NotAfter<br /><br />If the following certificate "Subject", "Issuer", and "Thumbprint" information is not displayed, this is a finding. <br /><br />Subject: CN=DoD Root CA 3, OU=PKI, OU=DoD, O=U.S. Government, C=US<br />Issuer: CN=DoD Interoperability Root CA 2, OU=PKI, OU=DoD, O=U.S. Government, C=US<br />Thumbprint: 49CBE933151872E17C8EAE7F0ABA97FB610F6477<br />NotAfter: 11/16/2024 09:57:16 AM<br /><br />Alternately, use the Certificates MMC snap-in:<br /><br />Run "MMC".<br /><br />Select "File", "Add/Remove Snap-in".<br /><br />Select "Certificates" and click "Add".<br /><br />Select "Computer account" and click "Next".<br /><br />Select "Local computer: (the computer this console is running on)" and click "Finish".<br /><br />Click "OK".<br /><br />Expand "Certificates" and navigate to Untrusted Certificates >> Certificates.<br /><br />For each certificate with "DoD Root CA..." under "Issued To" and "DoD Interoperability Root CA..." under "Issued By":<br /><br />Right-click on the certificate and select "Open".<br /><br />Select the "Details" tab.<br /><br />Scroll to the bottom and select "Thumbprint".<br /><br />If the certificates below are not listed or the value for the "Thumbprint" field is not as noted, this is a finding.<br /><br />Issued To: DoD Root CA 3<br />Issued By: DoD Interoperability Root CA 2<br />Thumbprint: 49CBE933151872E17C8EAE7F0ABA97FB610F6477<br />Valid to: Wednesday, November 16, 2024
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install the DoD Interoperability Root CA cross-certificates on unclassified systems.<br /><br />Issued To - Issued By - Thumbprint<br /><br />DoD Root CA 3- DoD Interoperability Root CA 2 - 49CBE933151872E17C8EAE7F0ABA97FB610F6477<br /><br />Administrators must run the Federal Bridge Certification Authority (FBCA) Cross-Certificate Removal Tool once as an administrator and once as the current user.<br /><br />The FBCA Cross-Certificate Remover Tool and User Guide are available on Cyber Exchange at https://cyber.mil/pki-pke/tools-configuration-files. Certificate bundles published by the PKI can be found at https://crl.gds.disa.mil/.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

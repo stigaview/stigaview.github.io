@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN19-DC-000430 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The password for the krbtgt account on a domain must be reset at least every 180 days.</h2>
+  <p>
+  <b>STIG ID:</b> WN19-DC-000430 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The krbtgt account acts as a service account for the Kerberos Key Distribution Center (KDC) service.  The account and password are created when a domain is created and the password is typically not changed.  If the krbtgt account is compromised, attackers can create valid Kerberos Ticket Granting Tickets (TGT).<br /><br />The password must be changed twice to effectively remove the password history. Changing once, waiting for replication to complete and the amount of time equal to or greater than the maximum Kerberos ticket lifetime, and changing again reduces the risk of issues.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This requirement is applicable to domain controllers; it is NA for other systems. <br /><br />Open "Windows PowerShell".<br /><br />Enter "Get-ADUser krbtgt -Property PasswordLastSet".<br /><br />If the "PasswordLastSet" date is more than 180 days old, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Reset the password for the krbtgt account a least every 180 days. The password must be changed twice to effectively remove the password history. Changing once, waiting for replication to complete and changing again reduces the risk of issues. Changing twice in rapid succession forces clients to reauthenticate (including application services) but is desired if a compromise is suspected.<br /><br />PowerShell scripts are available to accomplish this such as at the following link:<br /><br />https://docs.microsoft.com/en-us/answers/questions/97108/resetting-the-krbtgt-account-password-in-a-domain.html<br /><br />All scripts should be tested.<br /><br />Open "Active Directory Users and Computers" (available from various menus or run "dsa.msc").<br /><br />Select "Advanced Features" in the "View" menu if not previously selected.<br /><br />Select the "Users" node.<br /><br />Right-click on the krbtgt account and select "Reset password".<br /><br />Enter a password that meets password complexity requirements.<br /><br />Clear the "User must change password at next logon" check box.<br /><br />The system will automatically change this to a system-generated complex password.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

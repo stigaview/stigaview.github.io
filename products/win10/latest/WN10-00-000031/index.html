@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN10-00-000031 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows 10 systems must use a BitLocker PIN for pre-boot authentication.</h2>
+  <p>
+  <b>STIG ID:</b> WN10-00-000031 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001199&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000185-GPOS-00079">SRG-OS-000185-GPOS-00079</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If data at rest is unencrypted, it is vulnerable to disclosure. Even if the operating system enforces permissions on data access, an adversary can remove non-volatile memory and read it directly, thereby circumventing operating system controls. Encrypting the data ensures that confidentiality is protected even when the operating system is not running. Pre-boot authentication prevents unauthorized users from accessing encrypted drives.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the following registry value does not exist or is not configured as specified, this is a finding.<br /><br />For virtual desktop implementations (VDIs) in which the virtual desktop instance is deleted or refreshed upon logoff, this is NA.<br /><br />For Azure Virtual Desktop (AVD) implementations with no data at rest, this is NA.<br /><br />Registry Hive: HKEY_LOCAL_MACHINE<br />Registry Path: \SOFTWARE\Policies\Microsoft\FVE\<br /><br />Value Name: UseAdvancedStartup<br />Type: REG_DWORD<br />Value: 0x00000001 (1)<br /><br />If one of the following registry values does not exist or is not configured as specified, this is a finding.<br /><br />Registry Hive: HKEY_LOCAL_MACHINE<br />Registry Path: \SOFTWARE\Policies\Microsoft\FVE\<br /><br />Value Name: UseTPMPIN<br />Type: REG_DWORD<br />Value: 0x00000001 (1)<br /><br />Value Name: UseTPMKeyPIN<br />Type: REG_DWORD<br />Value: 0x00000001 (1)<br /><br />When BitLocker network unlock is used:<br /><br />Value Name: UseTPMPIN<br />Type: REG_DWORD<br />Value: 0x00000002 (2)<br /><br />Value Name: UseTPMKeyPIN<br />Type: REG_DWORD<br />Value: 0x00000002 (2)<br /><br />BitLocker network unlock may be used in conjunction with a BitLocker PIN. Refer to the article at the link below for information about network unlock.<br /><br />https://docs.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-how-to-enable-network-unlock
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the policy value for Computer Configuration >> Administrative Templates >> Windows Components >> BitLocker Drive Encryption >> Operating System Drives "Require additional authentication at startup" to "Enabled" with "Configure TPM Startup PIN:" set to "Require startup PIN with TPM" or with "Configure TPM startup key and PIN:" set to "Require startup key and PIN with TPM".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

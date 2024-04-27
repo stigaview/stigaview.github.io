@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN11-CC-000215 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Explorer Data Execution Prevention must be enabled.</h2>
+  <p>
+  <b>STIG ID:</b> WN11-CC-000215 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002824&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000433-GPOS-00192">SRG-OS-000433-GPOS-00192</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Data Execution Prevention (DEP) provides additional protection by performing checks on memory to help prevent malicious code from running. This setting will prevent Data Execution Prevention from being turned off for File Explorer.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       The default behavior is for data execution prevention to be turned on for file explorer.<br /><br />If it exists and is configured with a value of "1", this is a finding.<br /><br />Registry Hive: HKEY_LOCAL_MACHINE<br />Registry Path: \SOFTWARE\Policies\Microsoft\Windows\Explorer\<br /><br />Value Name: NoDataExecutionPrevention<br /><br />Value Type: REG_DWORD<br />Value: 0 (or if the Value Name does not exist)
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       The default behavior is for data execution prevention to be turned on for file explorer.<br /><br />To correct this, configure the policy value for Computer Configuration >> Administrative Templates >> Windows Components >> File Explorer >> "Turn off Data Execution Prevention for Explorer" to "Not Configured" or "Disabled".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

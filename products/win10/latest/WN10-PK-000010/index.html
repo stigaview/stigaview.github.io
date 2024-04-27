@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN10-PK-000010 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The External Root CA certificates must be installed in the Trusted Root Store on unclassified systems.</h2>
+  <p>
+  <b>STIG ID:</b> WN10-PK-000010 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000185&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000066-GPOS-00034">SRG-OS-000066-GPOS-00034</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       To ensure secure websites protected with External Certificate Authority (ECA) server certificates are properly validated, the system must trust the ECA Root CAs. The ECA root certificates will ensure the trust chain is established for server certificates issued from the External CAs. This requirement only applies to unclassified systems.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the ECA Root CA certificates are installed on unclassified systems as Trusted Root Certification Authorities.<br /><br />Run "PowerShell" as an administrator.<br /><br />Execute the following command:<br /><br />Get-ChildItem -Path Cert:Localmachine\root | Where Subject -Like "*ECA*" | FL Subject, Thumbprint, NotAfter<br /><br />If the following certificate "Subject" and "Thumbprint" information is not displayed, this is a finding. <br /><br />Subject: CN=ECA Root CA 4, OU=ECA, O=U.S. Government, C=US<br />Thumbprint: 73E8BB08E337D6A5A6AEF90CFFDD97D9176CB582<br />NotAfter: 12/30/2029<br /><br />Alternately use the Certificates MMC snap-in:<br /><br />Run "MMC".<br /><br />Select "File", "Add/Remove Snap-in".<br /><br />Select "Certificates", click "Add".<br /><br />Select "Computer account", click "Next".<br /><br />Select "Local computer: (the computer this console is running on)", click "Finish".<br /><br />Click "OK".<br /><br />Expand "Certificates" and navigate to "Trusted Root Certification Authorities >> Certificates".<br /><br />For each of the ECA Root CA certificates noted below:<br /><br />Right-click on the certificate and select "Open".<br /><br />Select the "Details" Tab.<br /><br />Scroll to the bottom and select "Thumbprint".<br /><br />If the ECA Root CA certificate below is not listed or the value for the "Thumbprint" field is not as noted, this is a finding.<br /><br />ECA Root CA 4<br />Thumbprint: 73E8BB08E337D6A5A6AEF90CFFDD97D9176CB582<br />Valid to: Sunday, December 30, 2029
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install the ECA Root CA certificate on unclassified systems.<br />ECA Root CA 4<br /><br />The InstallRoot tool is available on Cyber Exchange at https://cyber.mil/pki-pke/tools-configuration-files. Certificate bundles published by the PKI can be found at https://crl.gds.disa.mil/.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

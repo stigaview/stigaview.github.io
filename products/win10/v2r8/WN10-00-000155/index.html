@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN10-00-000155 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 28d0e01"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Windows PowerShell 2.0 feature must be disabled on the system.</h2>
+  <p>
+  <b>STIG ID:</b> WN10-00-000155 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000095-GPOS-00049">SRG-OS-000095-GPOS-00049</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Windows PowerShell 5.0 added advanced logging features which can provide additional detail when malware has been run on a system.  Disabling the Windows PowerShell 2.0 mitigates against a downgrade attack that evades the Windows PowerShell 5.0 script block logging feature.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Run "Windows PowerShell" with elevated privileges (run as administrator).<br /><br />Enter the following:<br />Get-WindowsOptionalFeature -Online | Where FeatureName -like *PowerShellv2*<br /><br />If either of the following have a "State" of "Enabled", this is a finding.<br /><br />FeatureName : MicrosoftWindowsPowerShellV2<br />State : Enabled<br />FeatureName : MicrosoftWindowsPowerShellV2Root<br />State : Enabled<br /><br />Alternately:<br />Search for "Features".<br /><br />Select "Turn Windows features on or off".<br /><br />If "Windows PowerShell 2.0" (whether the subcategory of "Windows PowerShell 2.0 Engine" is selected or not) is selected, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Disable "Windows PowerShell 2.0" on the system.<br /><br />Run "Windows PowerShell" with elevated privileges (run as administrator).<br />Enter the following:<br />Disable-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root<br /><br />This command should disable both "MicrosoftWindowsPowerShellV2Root" and "MicrosoftWindowsPowerShellV2" which correspond to "Windows PowerShell 2.0" and "Windows PowerShell 2.0 Engine" respectively in "Turn Windows features on or off".<br /><br />Alternately:<br />Search for "Features".<br />Select "Turn Windows features on or off".<br />De-select "Windows PowerShell 2.0".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>
