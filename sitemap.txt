@@ -32360,5 +32360,6 @@ https://stigaview.com/products/ubuntu2204/latest/UBTU-22-654235
 https://stigaview.com/products/ubuntu2204/latest/UBTU-22-651030
 https://stigaview.com/products/ubuntu2204/latest/UBTU-22-255065
 https://stigaview.com/products/ubuntu2204
+https://stigaview.com/404.html
 https://stigaview.com
 https://stigaview.com/stigs
