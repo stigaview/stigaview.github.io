@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000156 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All accounts installed with the IIS 10.0 web server software and tools must have passwords assigned and default passwords changed.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000156 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000516-WSR-000079">SRG-APP-000516-WSR-000079</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       During installation of the web server software, accounts are created for the web server to operate properly. The accounts installed can have either no password installed or a default password, which will be known and documented by the vendor and the user community.<br /><br />The first things an attacker will try when presented with a logon screen are the default user identifiers with default passwords. Installed applications may also install accounts with no password, making the logon even easier. Once the web server is installed, the passwords for any created accounts should be changed and documented. The new passwords must meet the requirements for all passwords, i.e., upper/lower characters, numbers, special characters, time until change, reuse policy, etc.<br /><br />Service accounts or system accounts that have no logon capability do not need to have passwords set or changed.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Access the IIS 10.0 web server.<br /><br />Access the "Apps" menu. Under "Administrative Tools", select "Computer Management".<br /><br />In left pane, expand "Local Users and Groups" and click "Users".<br /><br />Review the local users listed in the middle pane. <br /><br />If any local accounts are present and used by IIS 10.0, verify with System Administrator that default passwords have been changed.<br /><br />If passwords have not been changed from the default, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Access the IIS 10.0 web server.<br /><br />Access the "Apps" menu. Under Administrative Tools, select Computer Management.<br /><br />In left pane, expand "Local Users and Groups" and click on "Users".<br /><br />Change passwords for any local accounts present that are used by IIS 10.0, then verify with System Administrator default passwords have been changed.<br /><br />Develop an internal process for changing passwords on a regular basis.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

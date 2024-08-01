@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000159 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 web server must have a global authorization rule configured to restrict access.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000159 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000516-WSR-000174">SRG-APP-000516-WSR-000174</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Authorization rules can be configured at the server, website, folder (including Virtual Directories), or file level. It is recommended that URL Authorization be configured to only grant access to the necessary security principals. Configuring a global Authorization rule that restricts access ensures inheritance of the settings down through the hierarchy of web directories. This will ensure access to current and future content is only granted to the appropriate principals, mitigating risk of unauthorized access. 
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: If ASP.NET is not installed, this is Not Applicable.<br />Note: If the Server is hosting Microsoft SharePoint, this is Not Applicable.<br />Note: If the server is hosting WSUS, this is Not Applicable.<br />Note: If the server is hosting Exchange, this is Not Applicable.<br />Note: If the server is public facing, this is Not Applicable.<br /><br />Open the IIS 10.0 Manager.<br /><br />Click the IIS 10.0 web server name.<br /><br />Double-click the ".NET Authorization Rules" icon.<br /><br />Ensure "All Users" is set to "Allow", and "Anonymous Users" is set to "Deny", otherwise this is a finding.<br />If any other rules are present, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Open the IIS 10.0 Manager.<br /><br />Click the IIS 10.0 web server name.<br /><br />Double-click the ".NET Authorization Rules" icon.<br /><br />Alter the list as necessary to ensure "All Users" is set to "Allow" and "Anonymous Users" is set to "Deny".<br /><br />Remove any other line items.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

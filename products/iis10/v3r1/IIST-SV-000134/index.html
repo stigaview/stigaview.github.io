@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000134 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 web server must use cookies to track session state.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000134 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001664&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000223-WSR-000011">SRG-APP-000223-WSR-000011</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Cookies are used to exchange data between the web server and the client. Cookies, such as a session cookie, may contain session information and user credentials used to maintain a persistent connection between the user and the hosted application since HTTP/HTTPS is a stateless protocol.<br /><br />Using URI will embed the session ID as a query string in the Uniform Resource Identifier (URI) request and then the URI is redirected to the originally requested URL. The changed URI request is used for the duration of the session, so no cookie is necessary.<br /><br />By requiring expired session IDs to be regenerated while using URI, potential attackers have less time to capture a cookie and gain access to the Web server content.<br /><br />Satisfies: SRG-APP-000223-WSR-000011, SRG-APP-000220-WSR-000201
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Open the IIS 10.0 Manager.<br />Click the IIS 10.0 web server name.<br />Under "ASP.Net", double-click the "Session State" icon.<br />Under "Cookie Settings", verify the "Mode" has "Use Cookies" selected from the drop-down list.<br />If the "Cookie Settings" "Mode" is not set to "Use Cookies", this is a finding.<br /><br />Alternative method:<br /><br />Click the site name.<br />Select "Configuration Editor" under the "Management" section.<br />From the "Section:" drop-down list at the top of the configuration editor, locate "system.web/sessionState".<br />Verify the "cookieless" is set to "UseCookies".<br />If the "cookieless" is not set to "UseCookies", this is a finding.<br /><br />Note: If IIS 10.0 server/site is used only for system-to-system maintenance, does not allow users to connect to interface, and is restricted to specific system IPs, this is Not Applicable.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Open the IIS 10.0 Manager.<br /><br />Click the IIS 10.0 web server name.<br /><br />Under "ASP.Net", double-click the "Session State" icon.<br /><br />Under "Cookie Settings", select "Use Cookies” from the "Mode" drop-down list.<br /><br />Click "Apply" in the "Actions" pane.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

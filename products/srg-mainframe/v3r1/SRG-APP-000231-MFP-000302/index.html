@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-APP-000231-MFP-000302 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Mainframe Product must protect the confidentiality and integrity of all information at rest.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-APP-000231-MFP-000302 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001199&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000231">SRG-APP-000231</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Information at rest refers to the state of information when it is located on a secondary storage device (e.g., disk drive and tape drive) within an organizational information system. Mobile devices, laptops, desktops, and storage devices can be either lost or stolen, and the contents of their data storage (e.g., hard drives and non-volatile memory) can be read, copied, or altered. Applications and application users generate information throughout the course of their application use.<br /><br />This requirement addresses protection of user-generated data, as well as, operating system-specific configuration data. Organizations may choose to employ different mechanisms to achieve confidentiality and integrity protections, as appropriate, in accordance with the security category and/or classification of the information.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Examine installation and configuration settings.<br /><br />Verify that the Mainframe Product identifies product system-related files and user files for dataset/resource protection.<br /><br />If the Mainframe Product is not configured to protect product system and user files for dataset/resources from unauthorized access, this is a finding.<br /><br />If an external security manager (ESM) is in use, examine ESM configuration and rules.<br /><br />If the configuration and rules do not protect product system-related files and user files for dataset resources from unauthorized access, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Mainframe Product to protect the product system and user files for dataset/resources from unauthorized access in accordance with applicable access control policies.<br /> <br />This can be accomplished using an ESM.<br /><br />Configure the ESM to restrict access to authorized users only in accordance with applicable access control policies.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

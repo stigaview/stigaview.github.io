@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-APP-000412-MFP-000261 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Mainframe Products must implement cryptographic mechanisms to protect the confidentiality of nonlocal maintenance and diagnostic communications.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-APP-000412-MFP-000261 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-003123&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000412">SRG-APP-000412</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Privileged access contains control and configuration information which is particularly sensitive, so additional protections are necessary. This is maintained by using cryptographic mechanisms to protect confidentiality.<br /><br />Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection. <br /><br />The application can meet this requirement through leveraging a cryptographic module.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the Mainframe Product has no function or capability for nonlocal maintenance, this is not applicable.<br /><br />Examine installation and configuration settings.<br /><br />If the Mainframe Product does not use FIPS 140 compliant modules to protect the confidentiality of nonlocal maintenance and diagnostic communications, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Mainframe Product to use FIPS 140 compliant modules to protect the confidentiality of nonlocal maintenance and diagnostic communications.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

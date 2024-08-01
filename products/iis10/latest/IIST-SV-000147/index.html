@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000147 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Access to web administration tools must be restricted to the web manager and the web managers designees.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000147 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000213&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000380-WSR-000072">SRG-APP-000380-WSR-000072</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A web server can be modified through parameter modification, patch installation, upgrades to the web server or modules, and security parameter changes. With each of these changes, there is the potential for an adverse effect such as a DoS, web server instability, or hosted application instability.<br /><br />To limit changes to the web server and limit exposure to any adverse effects from the changes, files such as the web server application files, libraries, and configuration files must have permissions and ownership set properly to only allow privileged users access.<br /><br />The key web service administrative and configuration tools must only be accessible by the web server staff. All users granted this authority will be documented and approved by the ISSO. Access to the IIS Manager will be limited to authorized users and administrators.<br /><br />Satisfies: SRG-APP-000380-WSR-000072, SRG-APP-000435-WSR-000147, SRG-APP-000033-WSR-000169
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Right-click "InetMgr.exe", then click "Properties" from the "Context" menu.<br /><br />Select the "Security" tab.<br /><br />Review the groups and user names.<br /><br />The following accounts may have Full control privileges:<br /><br />TrustedInstaller<br />Web Managers<br />Web Manager designees<br />CREATOR OWNER: Full Control, Subfolders and files only<br /><br />The following accounts may have read and execute, or read permissions:<br /><br />Non Web Manager Administrators<br />ALL APPLICATION PACKAGES (built-in security group)<br />ALL RESTRICTED APPLICATION PACKAGES (built-in security group)<br />SYSTEM<br />Users<br /><br />Specific users may be granted read and execute and read permissions.<br /><br />Compare the local documentation authorizing specific users, against the users observed when reviewing the groups and users.<br /><br />If any other access is observed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Restrict access to the web administration tool to only the web manager and the web manager’s designees.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

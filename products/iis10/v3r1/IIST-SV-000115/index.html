@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000115 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The log information from the IIS 10.0 web server must be protected from unauthorized modification or deletion.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000115 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000164&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000120-WSR-000070">SRG-APP-000120-WSR-000070</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A major tool in exploring the website use, attempted use, unusual conditions, and problems are the access and error logs. In the event of a security incident, these logs can provide the System Administrator (SA) and the web manager with valuable information. Failure to protect log files could enable an attacker to modify the log file data or falsify events to mask an attacker's activity.<br /><br />Satisfies: SRG-APP-000120-WSR-000070, SRG-APP-000118-WSR-000068, SRG-APP-000118-WSR-000069
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This check does not apply to service account IDs utilized by automated services necessary to process, manage, and store log files.<br />Open the IIS 10.0 Manager.<br />Click the IIS 10.0 web server name.<br />Click the "Logging" icon.<br />Click "Browse" and navigate to the directory where the log files are stored.<br />Right-click the log file directory to review.<br />Click "Properties".<br />Click the "Security" tab.<br />Verify log file access is restricted as follows. Otherwise, this is a finding.<br />SYSTEM - Full Control<br />Administrators - Full Control
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Open the IIS 10.0 Manager.<br /><br />Click the IIS 10.0 web server name.<br /><br />Click the "Logging" icon.<br /><br />Click "Browse" and navigate to the directory where the log files are stored.<br /><br />Right-click the log file directory to review and click "Properties".<br /><br />Click the "Security" tab.<br /><br />Set the log file permissions for the appropriate group(s).<br /><br />Click "OK".<br /><br />Select "Apply" in the "Actions" pane.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

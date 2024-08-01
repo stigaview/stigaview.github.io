@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-APP-000409-MFP-000257 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Mainframe Products must audit nonlocal maintenance and diagnostic sessions audit events as defined in site security plan.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-APP-000409-MFP-000257 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002884&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000409">SRG-APP-000409</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If events associated with nonlocal administrative access or diagnostic sessions are not logged and audited, a major tool for assessing and investigating attacks would not be available.<br /><br />This requirement addresses auditing-related issues associated with maintenance tools used specifically for diagnostic and repair actions on organizational information systems.<br /><br />This requirement applies to hardware/software diagnostic test equipment or tools. This requirement does not cover hardware/software components that may support information system maintenance, yet are a part of the system (e.g., the software implementing "ping," "ls," "ipconfig," or the hardware and software implementing the monitoring port of an Ethernet switch).
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the Mainframe Product has no function or capability for nonlocal maintenance this is not applicable.<br /><br />Examine installation and configuration settings.<br /><br />If the Mainframe Product does not audit the nonlocal maintenance and diagnostic sessions audit events defined in site security plan using external security manager files and/or SMF records, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Mainframe Product to audit the nonlocal maintenance and diagnostic sessions audit events defined in site security plan using external security manager files and/or SMF records.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

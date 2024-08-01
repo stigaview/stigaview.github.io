@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-APP-000004-MFP-000004 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Mainframe Product must provide the capability for users to directly initiate a session lock.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-APP-000004-MFP-000004 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000057&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000004">SRG-APP-000004</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system, but does not want to log out because of the temporary nature of the absence. <br /><br />The session lock is implemented at the point where session activity can be determined. This is typically at the operating system-level, but may be at the application-level. Rather than be forced to wait for a period of time to expire before the user session can be locked, applications need to provide users with the ability to manually invoke a session lock so users may secure their application should the need arise for them to temporarily vacate the immediate physical vicinity.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the Mainframe Product has no data screen capability, this requirement is not applicable. <br /><br />Determine whether the Mainframe Product allows users to directly initiate a session lock. If it does not this is a finding.<br /><br />Examine the Mainframe Product configuration parameters and user attributes to determine whether user can initiate a session lock.<br /><br />If the parameters are not properly set and/or user is not permitted, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Mainframe Product user's attributes to enable ability to initiate a session lock.<br /><br />Verify the external security manager permits it.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

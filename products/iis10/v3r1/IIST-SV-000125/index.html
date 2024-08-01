@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000125 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 web server must have Web Distributed Authoring and Versioning (WebDAV) disabled.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000125 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000141-WSR-000085">SRG-APP-000141-WSR-000085</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A web server can be installed with functionality that by its nature is not secure. Web Distributed Authoring (WebDAV) is an extension to the HTTP protocol which, when developed, was meant to allow users to create, change, and move documents on a server, typically a web server or web share. Allowing this functionality, development, and deployment is much easier for web authors.<br /><br />WebDAV is not widely used and has serious security concerns because it may allow clients to modify unauthorized files on the web server.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Open the IIS 10.0 Manager.<br /><br />Click the IIS 10.0 web server name.<br /><br />Review the features listed under the “IIS" section.<br /><br />If the "WebDAV Authoring Rules" icon exists, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Access Server Manager on the IIS 10.0 web server.<br /><br />Click the IIS 10.0 web server name.<br /><br />Click on "Manage".<br /><br />Select "Add Roles and Features".<br /><br />Click "Next" in the "Before you begin" dialog box.<br /><br />Select "Role-based or feature-based installation" on the "Installation Type" dialog box and click "Next".<br /><br />Select the IIS 10.0 web server in the "Server Selection" dialog box.<br /><br />From the "Windows Features" dialog box, navigate to "World Wide Web Services" >> "Common HTTP Features".<br /><br />De-select "WebDAV Publishing", and click "Next" to complete removing the WebDAV Publishing feature from the IIS 10.0 web server.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

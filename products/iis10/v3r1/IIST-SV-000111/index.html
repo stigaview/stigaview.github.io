@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000111 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 web server must produce log records containing sufficient information to establish the identity of any user/subject or process associated with an event.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000111 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001487&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000100-WSR-000064">SRG-APP-000100-WSR-000064</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Web server logging capability is critical for accurate forensic analysis. Without sufficient and accurate information, a correct replay of the events cannot be determined.<br /><br />Determining user accounts, processes running on behalf of the user, and running process identifiers also enable a better understanding of the overall event. User tool identification is also helpful to determine if events are related to overall user access or specific client tools.<br /><br />Log record content that may be necessary to satisfy the requirement of this control includes: time stamps, source and destination addresses, user/process identifiers, event descriptions, success/fail indications, file names involved, and access control or flow control rules invoked.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Access the IIS 10.0 web server IIS Manager.<br />Click the IIS 10.0 web server name.<br />Under "IIS", double-click the "Logging" icon.<br />Verify the "Format:" under "Log File" is configured to "W3C".<br />Select the "Fields" button.<br />Under "Standard Fields", verify "User Agent", "User Name", and "Referrer" are selected.<br />Under "Custom Fields", verify the following field has been configured:<br />Request Header >> Authorization<br />Response Header >> Content-Type<br />If any of the above fields are not selected, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Access the IIS 10.0 web server IIS Manager.<br />Click the IIS 10.0 web server name.<br />Under "IIS", double-click the "Logging" icon.<br />Verify the "Format:" under "Log File" is configured to "W3C".<br />Select the "Fields" button.<br />Under "Standard Fields", select "User Agent", "User Name", and "Referrer".<br />Under "Custom Fields", select the following fields:<br />Click on the "Source Type" drop-down list and select "Request Header".<br />Click on the "Source" drop-down list and select "Authorization".<br />Click "OK" to add.<br /><br />Click on the "Source" drop-down list and select "Content-Type".<br />Click on the "Source Type" drop-down list and select "Response Header".<br />Click "OK" to add.<br />Click "OK".<br />Click "Apply" under the "Actions" pane.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

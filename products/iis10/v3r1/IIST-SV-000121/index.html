@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000121 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The accounts created by uninstalled features (i.e., tools, utilities, specific, etc.) must be deleted from the IIS 10.0 server.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000121 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000141-WSR-000078">SRG-APP-000141-WSR-000078</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Accounts used for web server features such as documentation, sample code, example applications, tutorials, utilities, and services created when the feature is not installed, become an exploitable threat to a web server.<br /><br />These accounts become inactive, are not monitored through regular use, and passwords for the accounts are not created or updated. An attacker, through very little effort, can use these accounts to gain access to the web server and begin investigating ways to elevate the account privileges.<br /><br />The accounts used for web server features not installed must not be created and must be deleted when these features are uninstalled.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Access the IIS 10.0 web server.<br /><br />Access “Apps” menu. Under “Administrative Tools”, select “Computer Management”.<br /><br />In the left pane, expand "Local Users and Groups" and click "Users".<br /><br />Review the local users listed in the middle pane.<br /><br />If any local accounts are present and were created by features which have been uninstalled or are not used, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Access the IIS 10.0 web server.<br /><br />Access “Apps” menu. Under “Administrative Tools”, select “Computer Management”.<br /><br />In the left pane, expand "Local Users and Groups" and click "Users".<br /><br />Delete any local accounts which were created by features which have been uninstalled or are not used.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

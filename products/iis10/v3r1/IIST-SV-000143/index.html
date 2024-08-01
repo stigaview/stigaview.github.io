@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000143 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 web server must provide the capability to immediately disconnect or disable remote access to the hosted applications.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000143 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002322&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000316-WSR-000170">SRG-APP-000316-WSR-000170</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       During an attack on the web server or any of the hosted applications, the system administrator may need to disconnect or disable access by users to stop the attack.<br /><br />The web server must provide a capability to disconnect users to a hosted application without compromising other hosted applications unless deemed necessary to stop the attack. Methods to disconnect or disable connections are to stop the application service for a specified hosted application, stop the web server, or block all connections through web server access list.<br /><br />The web server capabilities used to disconnect or disable users from connecting to hosted applications and the web server must be documented to make certain that, during an attack, the proper action is taken to conserve connectivity to any other hosted application if possible and to make certain log data is conserved for later forensic analysis.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Interview the System Administrator and Web Manager.<br /><br />Ask for documentation for the IIS 10.0 web server administration.<br /><br />Verify there are documented procedures for shutting down an IIS 10.0 website in the event of an attack. The procedure should, at a minimum, provide the following steps:<br /><br />Determine the respective website for the application at risk of an attack.<br /><br />Access the IIS 10.0 web server IIS Manager.<br /><br />Select the respective website.<br /><br />In the "Actions" pane, under "Manage Website", click "Stop".<br /><br />If necessary, stop all websites.<br /><br />If necessary, stop the IIS 10.0 web server by selecting the web server in the IIS Manager.<br /><br />In the "Actions" pane, under "Manage Server", click "Stop".<br /><br />If the web server is not capable or cannot be configured to disconnect or disable remote access to the hosted applications when necessary, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Prepare documented procedures for shutting down an IIS 10.0 website in the event of an attack.<br /><br />The procedure should, at a minimum, provide the following steps:<br /><br />Determine the respective website for the application at risk of an attack.<br /><br />Access the IIS 10.0 web server IIS Manager.<br /><br />Select the respective website. <br /><br />In the "Actions" pane, under "Manage Website", click "Stop".<br /><br />If necessary, stop all websites.<br /><br />If necessary, stop the IIS 10.0 web server by selecting the web server in the IIS Manager.<br /><br />In the "Actions" pane, under "Manage Server", click "Stop".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

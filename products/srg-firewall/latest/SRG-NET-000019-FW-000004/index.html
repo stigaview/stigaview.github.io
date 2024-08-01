@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-NET-000019-FW-000004 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The firewall must immediately use updates made to policy enforcement mechanisms such as firewall rules, security policies, and security zones.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-NET-000019-FW-000004 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001414&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-NET-000019">SRG-NET-000019</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Information flow policies regarding dynamic information flow control include, for example, allowing or disallowing information flows based on changes to the Ports, Protocols, Services Management [PPSM] Category Assurance Levels [CAL] list, vulnerability assessments, or mission conditions. Changing conditions include changes in the threat environment and detection of potentially harmful or adverse events.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the firewall immediately uses updates made to policy enforcement mechanisms such as firewall rules, security policies, and security zones. For example, there is no need to reinitialize or reboot or the action to commit the changes is prompted.<br /><br />If the firewall does not immediately use updates made to policy enforcement mechanisms such as firewall rules, security policies, and security zones, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Require system administrators to commit and test changes upon configuration of the firewall.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000145 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 web server must use a logging mechanism configured to allocate log record storage capacity large enough to accommodate the logging requirements of the IIS 10.0 web server.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000145 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001849&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000357-WSR-000150">SRG-APP-000357-WSR-000150</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       To ensure the logging mechanism used by the web server has sufficient storage capacity in which to write the logs, the logging mechanism must be able to allocate log record storage capacity.<br /><br />The task of allocating log record storage capacity is usually performed during initial installation of the logging mechanism. The system administrator will usually coordinate the allocation of physical drive space with the web server administrator along with the physical location of the partition and disk. Refer to NIST SP 800-92 for specific requirements on log rotation and storage dependent on the impact of the web server.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Open the IIS 10.0 Manager.<br /><br />Click the IIS 10.0 web server name.<br /><br />Under "IIS" double-click the "Logging" icon.<br /><br />In the "Logging" configuration box, determine the "Directory:" to which the "W3C" logging is being written.<br /><br />Confirm with the System Administrator that the designated log path is of sufficient size to maintain the logging.<br /><br />Under "Log File Rollover", verify "Do not create new log files" is not selected.<br /><br />Verify a schedule is configured to rollover log files on a regular basis.<br /><br />Consult with the System Administrator to determine if there is a documented process for moving the log files off of the IIS 10.0 web server to another logging device.<br /><br />If the designated logging path device is not of sufficient space to maintain all log files, and there is not a schedule to rollover files on a regular basis, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Open the IIS 10.0 Manager.<br /><br />Click the IIS 10.0 web server name.<br /><br />Under "IIS" double-click on the "Logging" icon.<br /><br />If necessary, in the "Logging" configuration box, re-designate a log path to a location able to house the logs.<br /><br />Under "Log File Rollover", de-select the "Do not create new log files" setting.<br /><br />Configure a schedule to rollover log files on a regular basis.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

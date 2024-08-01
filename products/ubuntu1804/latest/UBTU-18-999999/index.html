@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>UBTU-18-999999 - V2R15 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Ubuntu operating system must be a vendor supported release.</h2>
+  <p>
+  <b>STIG ID:</b> UBTU-18-999999 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       An Ubuntu operating system release is considered "supported" if the vendor continues to provide security patches for the product. With an unsupported release, it will not be possible to resolve security issues discovered in the system software.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the version of the Ubuntu operating system is vendor supported.<br /><br />Check the version of the Ubuntu operating system with the following command:<br /><br /># cat /etc/lsb-release<br /><br />DISTRIB_RELEASE=18.04<br />DISTRIB_CODENAME=bionic<br />DISTRIB_DESCRIPTION="Ubuntu 18.04.1 LTS"<br /><br />Validate that "Extended Security Maintenance" support has been purchased from the vendor.<br />If the operating system does not have a documented "Extended Security Maintenance" agreement in place, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Upgrade to a supported version of the Ubuntu operating system.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

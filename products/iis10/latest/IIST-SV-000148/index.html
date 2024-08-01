@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000148 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 web server must not be running on a system providing any other role.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000148 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001762&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000383-WSR-000175">SRG-APP-000383-WSR-000175</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Web servers provide numerous processes, features, and functionalities that utilize TCP/IP ports. Some of these processes may be deemed unnecessary or too unsecure to run on a production system.<br /><br />The web server must provide the capability to disable or deactivate network-related services deemed non-essential to the server mission, are too unsecure, or are prohibited by the PPSM CAL and vulnerability assessments.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review programs installed on the OS.<br /><br />Open Control Panel.<br /><br />Open Programs and Features.<br /><br />The following programs may be installed without any additional documentation:<br /><br />Administration Pack for IIS<br />IIS Search Engine Optimization Toolkit<br />Microsoft .NET Framework version 3.5 SP1 or greater<br />Microsoft Web Platform Installer version 3.x or greater<br />Virtual Machine Additions<br /><br />Review the installed programs, if any programs are installed other than those listed above, this is a finding.<br /><br />Note: If additional software is needed and has supporting documentation signed by the ISSO, this is not a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Remove all unapproved programs and roles from the production web server.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

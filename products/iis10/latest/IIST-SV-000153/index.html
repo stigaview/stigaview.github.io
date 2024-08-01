@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000153 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>An IIS 10.0 web server must maintain the confidentiality of controlled information during transmission through the use of an approved Transport Layer Security (TLS) version.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000153 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002418&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000439-WSR-000156">SRG-APP-000439-WSR-000156</a> |
+  <b>Severity: </b>high
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       TLS encryption is a required security setting for a private web server. Encryption of private information is essential to ensuring data confidentiality. If private information is not encrypted, it can be intercepted and easily read by an unauthorized party. A private web server must use a FIPS 140-2-approved TLS version, and all non-FIPS-approved SSL versions must be disabled.<br /><br />NIST SP 800-52 specifies the preferred configurations for government systems.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Access the IIS 10.0 Web Server.<br /><br />Navigate to:<br />HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server<br /><br />Verify a REG_DWORD value of "0" for "DisabledByDefault".<br />Verify a REG_DWORD value of "1" for "Enabled".<br /><br />Navigate to:<br />HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server<br />HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server<br />HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Server<br />HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server<br /><br />Verify a REG_DWORD value of "1" for "DisabledByDefault".<br />Verify a REG_DWORD value of "0" for "Enabled".<br /><br />If any of the respective registry paths do not exist or are configured with the wrong value, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Access the IIS 10.0 Web Server.<br /><br />Navigate to:<br />HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server <br /><br />Create a REG_DWORD named "DisabledByDefault" with a value of "0".<br />Create a REG_DWORD named "Enabled" with a  value of "1".<br /><br />Navigate to:<br />HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server<br />HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server<br />HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Server<br />HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server<br /><br />For each protocol:<br />Create a REG_DWORD named "DisabledByDefault" with a value of "1".<br />Create a REG_DWORD named "Enabled" with a  value of "0".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

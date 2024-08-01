@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-APP-000149-MFP-000207 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Mainframe Product must use multifactor authentication for network access to privileged accounts.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-APP-000149-MFP-000207 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000765&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000149">SRG-APP-000149</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without the use of multifactor authentication, the ease of access to privileged functions is greatly increased. <br /><br />Multifactor authentication requires using two or more factors to achieve authentication. <br /><br />Factors include: <br />(i) something a user knows (e.g., password/PIN); <br />(ii) something a user has (e.g., cryptographic identification device, token); or <br />(iii) something a user is (e.g., biometric). <br /><br />A privileged account is defined as an information system account with authorizations of a privileged user. <br /><br />Network access is defined as access to an information system by a user (or a process acting on behalf of a user) communicating through a network (e.g., local area network, wide area network, or the Internet).
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the Mainframe Product has no function or capability for user logon, this is not applicable.<br /><br />If the Mainframe Product employs an external security manager for all account management functions, this is not applicable.<br /><br />Examine user account management configurations. <br /><br />If the Mainframe Product is configured to require multifactor authentication for network access to privileged accounts, this is not a finding
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Mainframe Product account management settings to require multifactor authentication for network access to privileged accounts.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

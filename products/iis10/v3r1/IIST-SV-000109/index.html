@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000109 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>An IIS 10.0 web server behind a load balancer or proxy server must produce log records containing the source client IP and destination information.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000109 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000133&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000098-WSR-000060">SRG-APP-000098-WSR-000060</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Web server logging capability is critical for accurate forensic analysis. Without sufficient and accurate information, a correct replay of the events cannot be determined.<br /><br />Ascertaining the correct source (e.g., source IP), of the events is important during forensic analysis. Correctly determining the source of events will add information to the overall reconstruction of the loggable event. By determining the source of the event correctly, analysis of the enterprise can be undertaken to determine if events tied to the source occurred in other areas within the enterprise.<br /><br />A web server behind a load balancer or proxy server, when not configured correctly, will record the load balancer or proxy server as the source of every loggable event. When looking at the information forensically, this information is not helpful in the investigation of events. The web server must record with each event the client source of the event.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Interview the System Administrator to review the configuration of the IIS 10.0 architecture and determine if inbound web traffic is passed through a proxy.<br /><br />If the IIS 10.0 web server is receiving inbound web traffic through a proxy, the audit logs must be reviewed to determine if correct source information is being passed through by the proxy server.<br /><br />Follow this procedure for web server and each website:<br /><br />Open the IIS 10.0 Manager.<br /><br />Click the IIS 10.0 web server name.<br /><br />Click the "Logging" icon.<br /><br />Click on "View log files" under the "Actions" pane.<br /><br />When the log file is displayed, review source IP information in log entries and verify the entries do not reflect the IP address of the proxy server.<br /><br />If the website is not behind a load balancer or proxy server, this is Not Applicable.<br /><br />If the log entries in the log file(s) reflect the IP address of the proxy server as the source, this is a finding.<br /><br />If provisions have been made to log the client IP via another field (i.e., utilizing X-Forwarded-For), this is not a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Access the proxy server through which inbound web traffic is passed and configure settings to pass web traffic to the IIS 10.0 web server transparently.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

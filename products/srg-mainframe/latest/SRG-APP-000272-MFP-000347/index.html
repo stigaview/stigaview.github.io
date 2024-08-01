@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-APP-000272-MFP-000347 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Mainframe Product must update malicious code protection mechanisms whenever new releases are available in accordance with organizational configuration management policy.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-APP-000272-MFP-000347 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-004964&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000272">SRG-APP-000272</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Malicious software detection applications need to be constantly updated in order to identify new threats as they are discovered. <br /><br />All malicious software detection software must come with an update mechanism that automatically updates the application and any associated signature definitions. The organization (including any contractor to the organization) is required to promptly install security-relevant malicious code protection software updates. Examples of relevant updates include antivirus signatures, detection heuristic rule sets, and/or file reputation data employed to identify and/or block malicious software from executing.<br /><br />Malicious code includes viruses, worms, Trojan horses, and spyware.<br /><br />This requirement applies to applications providing malicious code protection.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the Mainframe Product has no function or capability for providing malicious code scanning or protection, this is not applicable.<br /><br />Refer to organizational configuration management policy.<br /><br />Examine installation and configuration settings. <br /><br />If the Mainframe Product is not configured to receive automatic updates using organizational-defined configuration management policy, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Mainframe Product to install new releases using organizational configuration management policy.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

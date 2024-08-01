@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-NET-000364-FW-000036 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The firewall must restrict traffic entering the VPN tunnels to the management network to only the authorized management packets based on destination address.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-NET-000364-FW-000036 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002403&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-NET-000364">SRG-NET-000364</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Protect the management network with a filtering firewall configured to block unauthorized traffic. This requirement is similar to the out-of-band management (OOBM) model, when the production network is managed in-band. The management network could also be housed at a Network Operations Center (NOC) that is located locally or remotely at a single or multiple interconnected sites. <br /><br />NOC interconnectivity, as well as connectivity between the NOC and the managed networks’ premise routers, would be enabled using either provisioned circuits or VPN technologies such as IPsec tunnels or MPLS VPN services.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Inspect the architecture diagrams. Inspect the NOC and the managed network. Note that the IPsec tunnel endpoints may be configured on the premise or gateway router, the VPN gateway firewall, or a VPN concentrator. <br /><br />Verify that all traffic between the managed network and management network and vice-versa is secured via IPsec encapsulation.<br /><br />If the firewall does not restrict traffic entering the VPN tunnels to the management network to only the authorized management packets based on destination address, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Where IPsec technology is deployed to connect the managed network to the NOC, restrict the traffic entering the tunnels so that only the authorized management packets with authorized destination addresses are permitted.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

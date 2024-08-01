@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-APP-000086-MFP-000110 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>For Mainframe Products providing audit record aggregation, the Mainframe Product must compile audit records from mainframe components into a system-wide audit trail that is time-correlated with a tolerance for the relationship between time stamps of individual records in the audit trail in accordance with the site security plan.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-APP-000086-MFP-000110 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000174&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000086">SRG-APP-000086</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without the ability to collate records based on the time when the events occurred, the ability to perform forensic analysis and investigations across multiple components is significantly degraded.<br /><br />Audit trails are time-correlated if the time stamps in the individual audit records can be reliably related to the time stamps in other audit records to achieve a time ordering of the records within an organization-defined level of tolerance.<br /><br />This requirement applies only to Mainframe Products that provide the capability to compile system-wide audit records for multiple systems or system components.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the Mainframe Product does not perform audit record aggregation, this is not applicable.<br /><br />Examine configuration settings.<br /><br />If the Mainframe Product settings do not use the operating system clock for time stamps, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Mainframe Product to use the operating system clock for time stamps.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

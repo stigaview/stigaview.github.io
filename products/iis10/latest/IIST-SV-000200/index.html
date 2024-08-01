@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000200 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 websites MaxConnections setting must be configured to limit the number of allowed simultaneous session requests.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000200 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000054&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000001-WSR-000001">SRG-APP-000001-WSR-000001</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Resource exhaustion can occur when an unlimited number of concurrent requests are allowed on a website, facilitating a Denial of Service (DoS) attack. Mitigating this kind of attack will include limiting the number of concurrent HTTP/HTTPS requests per IP address and may include, where feasible, limiting parameter values associated with keepalive (i.e., a parameter used to limit the amount of time a connection may be inactive).
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Access the IIS 10.0 IIS Manager.<br /><br />Click the IIS 10.0 server.<br /><br />Select "Configuration Editor" under the "Management" section.<br /><br />From the "Section:" drop-down list at the top of the configuration editor, locate "system.applicationHost/sites".<br /><br />Expand "siteDefaults".<br />Expand "limits".<br /><br />Review the results and verify the value is greater than zero for the "maxconnections" parameter.<br /><br />If the maxconnections parameter is set to zero, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Access the IIS 10.0 IIS Manager.<br /><br />Click the IIS 10.0 server.<br /><br />Select "Configuration Editor" under the "Management" section.<br /><br />From the "Section:" drop-down list at the top of the configuration editor, locate "system.applicationHost/sites".<br /><br />Expand "siteDefaults".<br />Expand "limits".<br /><br />Set the "maxconnections" parameter to a value greater than zero.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

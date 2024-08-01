@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000103 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Both the log file and Event Tracing for Windows (ETW) for the IIS 10.0 web server must be enabled.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000103 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000139&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000092-WSR-000055">SRG-APP-000092-WSR-000055</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Internet Information Services (IIS) on Windows Server 2012 provides basic logging capabilities. However, because IIS takes some time to flush logs to disk, administrators do not have access to logging information in real-time. In addition, text-based log files can be difficult and time-consuming to process.<br /><br />In IIS 10.0, the administrator has the option of sending logging information to Event Tracing for Windows (ETW). This option gives the administrator the ability to use standard query tools, or create custom tools, for viewing real-time logging information in ETW. This provides a significant advantage over parsing text-based log files that are not updated in real time.<br /><br />Satisfies: SRG-APP-000092-WSR-000055, SRG-APP-000108-WSR-000166, SRG-APP-000358-WSR-000063
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Open the IIS 10.0 Manager.<br /><br />Click the IIS 10.0 server name.<br /><br />Click the "Logging" icon.<br /><br />Under Log Event Destination, verify the "Both log file and ETW event" radio button is selected.<br /><br />If the "Both log file and ETW event" radio button is not selected, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Open the IIS 10.0 Manager.<br /><br />Click the IIS 10.0 server name.<br /><br />Click the "Logging" icon.<br /><br />Under Log Event Destination, select the "Both log file and ETW event" radio button.<br /><br />Under the "Actions" pane, click "Apply".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

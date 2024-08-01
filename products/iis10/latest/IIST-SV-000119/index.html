@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000119 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 web server must not be both a website server and a proxy server.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000119 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000141-WSR-000076">SRG-APP-000141-WSR-000076</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A web server should be primarily a web server or a proxy server but not both, for the same reasons that other multi-use servers are not recommended. Scanning for web servers that also proxy requests into an otherwise protected network is a common attack, making the attack anonymous.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Open the IIS 10.0 Manager.<br /><br />Under the "Connections" pane on the left side of the management console, select the IIS 10.0 web server.<br /><br />If, under the IIS installed features "Application Request Routing Cache" is not present, this is not a finding.<br /><br />If, under the IIS installed features "Application Request Routing Cache" is present, double-click the icon to open the feature.<br /><br />From the right "Actions" pane under "Proxy", select "Server Proxy Settings...".<br /><br />In the "Application Request Routing" settings window, verify whether "Enable proxy" is selected.<br /><br />If "Enable proxy" is selected under the "Application Request Routing" settings, this is a finding.<br /><br />If the server has been approved to be a Proxy server, this requirement is Not Applicable.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Open the IIS 10.0 Manager.<br /><br />Under the "Connections" pane on the left side of the management console, select the IIS 10.0 web server.<br /><br />Under the IIS installed features, if "Application Request Routing Cache" is present, double-click the icon to open the feature.<br /><br />From the right "Actions" pane, under "Proxy", select "Server Proxy Settings...".<br /><br />In the "Application Request Routing" settings window, remove the check from the "Enable proxy" check box.<br /><br />Click "Apply" in the "Actions" pane.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

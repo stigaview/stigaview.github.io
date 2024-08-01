@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-APP-000475-MFP-000374 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Mainframe product must perform an integrity check of all software from vendors/sources that provide cryptographic mechanisms to enable the validation of code authenticity and integrity at startup, at transitional states as defined in site security plan or security-relevant events, or annually.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-APP-000475-MFP-000374 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002710&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000475">SRG-APP-000475</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Unauthorized changes to software can occur due to errors or malicious activity (e.g., tampering). Software includes, for example, operating systems (with key internal components such as kernels, drivers), middleware, and applications. State-of-the-practice integrity-checking mechanisms (e.g., parity checks, cyclical redundancy checks, cryptographic hashes) and associated tools can automatically monitor the integrity of information systems and hosted applications.<br /><br />Security-relevant events include, for example, the identification of a new threat to which organizational information systems are susceptible and the installation of new hardware, software, or firmware. Transitional states include, for example, system startup, restart, shutdown, and abort.<br /><br />This requirement applies to integrity verification tools that are used to detect unauthorized changes to organization-defined software.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the Mainframe Product has no function or capability for integrity verification, this is not applicable.<br /><br />Examine installation and configuration settings. <br /><br />If the Mainframe Product is not configured to perform an integrity check of all software from vendors/sources that provide cryptographic mechanisms to enable the validation of code authenticity and integrity at startup, at transitional states as defined in site security plan or security-relevant events, or annually, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Mainframe Product to perform an integrity check of all software from vendors/sources that provide cryptographic mechanisms to enable the validation of code authenticity and integrity at startup, at transitional states as defined in site security plan or security-relevant events, or annually.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

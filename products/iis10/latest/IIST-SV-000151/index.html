@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000151 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 web server must be tuned to handle the operational requirements of the hosted application.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000151 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002385&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000435-WSR-000148">SRG-APP-000435-WSR-000148</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       A Denial of Service (DoS) can occur when the web server is overwhelmed and can no longer respond to additional requests. A web server not properly tuned may become overwhelmed and cause a DoS condition even with expected traffic from users. To avoid a DoS, the web server must be tuned to handle the expected traffic for the hosted applications.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the IIS 10.0 web server is not hosting any applications, this is Not Applicable.<br /><br />If the IIS 10.0 web server is hosting applications, consult with the System Administrator to determine risk analysis performed when the application was written and deployed to the IIS 10.0 web server.<br /><br />Obtain documentation on the configuration.<br /><br />Verify, at a minimum, the following tuning settings in the registry.<br /><br />Access the IIS 10.0 web server registry.<br /><br />Verify the following keys are present and configured. The required setting depends upon the requirements of the application. <br /><br />Recommended settings are not provided as these settings must be explicitly configured to show a conscientious tuning has been made.<br /><br />Navigate to HKLM\SYSTEM\CurrentControlSet\Services\HTTP\Parameters\<br />"URIEnableCache"<br />"UriMaxUriBytes"<br />"UriScavengerPeriod"<br /><br />If explicit settings are not configured for "URIEnableCache", "UriMaxUriBytes" and "UriScavengerPeriod", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Access the IIS 10.0 web server registry.<br /><br />Verify the following keys are present and configured. The required setting depends upon the requirements of the application. These settings must be explicitly configured to show a conscientious tuning has been made.<br /><br />Navigate to HKLM\SYSTEM\CurrentControlSet\Services\HTTP\Parameters\<br /><br />Configure the following registry keys to levels to accommodate the hosted applications.<br /><br />"URIEnableCache"<br />"UriMaxUriBytes"<br />"UriScavengerPeriod"
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>SRG-APP-000357-MFP-000148 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The mainframe product must allocate audit record storage capacity in accordance with organization-defined audit record storage requirements.</h2>
+  <p>
+  <b>STIG ID:</b> SRG-APP-000357-MFP-000148 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001849&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000357">SRG-APP-000357</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       In order to ensure applications have a sufficient storage capacity in which to write the audit logs, applications need to be able to allocate audit record storage capacity. <br /><br />The task of allocating audit record storage capacity is usually performed during initial installation of the application and is closely associated with the DBA and system administrator roles. The DBA or system administrator will usually coordinate the allocation of physical drive space with the application owner/installer and the application will prompt the installer to provide the capacity information, the physical location of the disk, or both.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the Mainframe Product uses MVS System Management Facility (SMF) recording or ESM log files for auditing purposes, this is not applicable.<br /><br />Examine the Mainframe Product installation and configuration auditing settings.<br /><br />If the installation and/or configuration setting for auditing do not allocate audit record storage capacity in accordance with organization-defined audit record storage requirements, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure installation and/or configuration auditing settings to allocate audit record storage capacity in accordance with organization-defined audit record storage requirements.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

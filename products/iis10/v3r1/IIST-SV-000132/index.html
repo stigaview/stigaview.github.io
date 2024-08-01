@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>IIST-SV-000132 - V3R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 03227f5"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The IIS 10.0 web server must separate the hosted applications from hosted web server management functionality.</h2>
+  <p>
+  <b>STIG ID:</b> IIST-SV-000132 &nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001082&nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000211-WSR-000129">SRG-APP-000211-WSR-000129</a> |
+  <b>Severity: </b>medium
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The separation of user functionality from web server management can be accomplished by moving management functions to a separate IP address or port. To further separate the management functions, separate authentication methods and certificates should be used.<br /><br />By moving the management functionality, the possibility of accidental discovery of the management functions by non-privileged users during hosted application use is minimized.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review the IIS 10.0 web server configuration with the System Administrator.<br /><br />Determine if the IIS 10.0 web server hosts any applications.<br /><br />If the IIS 10.0 web server does not host any applications, this is Not Applicable.<br /><br />If the IIS 10.0 web server is hosting Exchange, this is Not Applicable.<br /><br />If the IIS 10.0 web server hosts applications, review the application's management functionality and authentication methods with the System Administrator to determine if the management of the application is accomplished with the same functions and authentication methods as the web server management.<br /><br />If the IIS 10.0 web server management and the application's management functionality is not separated, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Develop a method to manage the hosted applications, either by moving its management functions off of the IIS 10.0 web server or by accessing the application's management via a uniquely assigned IP address.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>
