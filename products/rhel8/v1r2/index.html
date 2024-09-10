@@ -6,7 +6,7 @@
   <title>Red Hat Enterprise Linux 8 STIG V1R2 - STIG-A-View</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Online STIG viewer"/>
-  <meta name="generator" content="STIG-A-View Static - 897284d"/>
+  <meta name="generator" content="STIG-A-View Static - 594a585"/>
   <link href="/static/css/style.css" rel="stylesheet" />
   <link href="/favicon.png" rel="shortcut icon" />
 </head>
@@ -28,7 +28,6 @@
     <thead>
         <tr>
             <th>STIG ID</th>
-            <th>CCI</th>
             <th>Title</th>
         </tr>
     </thead>
@@ -36,2059 +35,1716 @@
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010000">RHEL-08-010000</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must be a vendor-supported release.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010010">RHEL-08-010010</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 vendor packaged system security patches and updates must be installed and up to date.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010020">RHEL-08-010020</a></td>
-                <td>CCI-000068</td>
                 <td>RHEL 8 must implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect data requiring data-at-rest protections in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010030">RHEL-08-010030</a></td>
-                <td>CCI-001199</td>
                 <td>All RHEL 8 local disk partitions must implement cryptographic mechanisms to prevent unauthorized disclosure or modification of all information that requires at rest protection.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010040">RHEL-08-010040</a></td>
-                <td>CCI-000048</td>
                 <td>RHEL 8 must display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a ssh logon.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010050">RHEL-08-010050</a></td>
-                <td>CCI-000048</td>
                 <td>RHEL 8 must display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a graphical user logon.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010060">RHEL-08-010060</a></td>
-                <td>CCI-000048</td>
                 <td>RHEL 8 must display the Standard Mandatory DoD Notice and Consent Banner before granting local or remote access to the system via a command line user logon.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010070">RHEL-08-010070</a></td>
-                <td>CCI-000067</td>
                 <td>All RHEL 8 remote access methods must be monitored.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010090">RHEL-08-010090</a></td>
-                <td>CCI-000185</td>
                 <td>RHEL 8, for PKI-based authentication, must validate certificates by constructing a certification path (which includes status information) to an accepted trust anchor.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010100">RHEL-08-010100</a></td>
-                <td>CCI-000186</td>
                 <td>RHEL 8, for certificate-based authentication, must enforce authorized access to the corresponding private key.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010110">RHEL-08-010110</a></td>
-                <td>CCI-000196</td>
                 <td>RHEL 8 must encrypt all stored passwords with a FIPS 140-2 approved cryptographic hashing algorithm.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010120">RHEL-08-010120</a></td>
-                <td>CCI-000196</td>
                 <td>RHEL 8 must employ FIPS 140-2 approved cryptographic hashing algorithms for all stored passwords.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010130">RHEL-08-010130</a></td>
-                <td>CCI-000196</td>
                 <td>RHEL 8 must employ FIPS 140-2 approved cryptographic hashing algorithms for all created passwords.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010140">RHEL-08-010140</a></td>
-                <td>CCI-000213</td>
                 <td>RHEL 8 operating systems booted with United Extensible Firmware Interface (UEFI) implemented must require authentication upon booting into single-user mode and maintenance.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010150">RHEL-08-010150</a></td>
-                <td>CCI-000213</td>
                 <td>RHEL 8 operating systems booted with a BIOS must require authentication upon booting into single-user and maintenance modes.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010151">RHEL-08-010151</a></td>
-                <td>CCI-000213</td>
                 <td>RHEL 8 operating systems must require authentication upon booting into emergency or rescue modes.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010160">RHEL-08-010160</a></td>
-                <td>CCI-000803</td>
                 <td>The RHEL 8 pam_unix.so module must use a FIPS 140-2 approved cryptographic hashing algorithm for system authentication.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010161">RHEL-08-010161</a></td>
-                <td>CCI-000803</td>
                 <td>RHEL 8 must prevent system daemons from using Kerberos for authentication.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010162">RHEL-08-010162</a></td>
-                <td>CCI-000803</td>
                 <td>The krb5-workstation package must not be installed on RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010170">RHEL-08-010170</a></td>
-                <td>CCI-001084</td>
                 <td>RHEL 8 must use a Linux Security Module configured to enforce limits on system services.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010171">RHEL-08-010171</a></td>
-                <td>CCI-001084</td>
                 <td>RHEL 8 must have policycoreutils package installed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010180">RHEL-08-010180</a></td>
-                <td>CCI-001090</td>
                 <td>All RHEL 8 public directories must be owned by root or a system account to prevent unauthorized and unintended information transferred via shared system resources.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010190">RHEL-08-010190</a></td>
-                <td>CCI-001090</td>
                 <td>A sticky bit must be set on all RHEL 8 public directories to prevent unauthorized and unintended information transferred via shared system resources.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010200">RHEL-08-010200</a></td>
-                <td>CCI-001133</td>
                 <td>RHEL 8 must be configured so that all network connections associated with SSH traffic are terminated at the end of the session or after 10 minutes of inactivity, except to fulfill documented and validated mission requirements.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010210">RHEL-08-010210</a></td>
-                <td>CCI-001314</td>
                 <td>The RHEL 8 /var/log/messages file must have mode 0640 or less permissive.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010220">RHEL-08-010220</a></td>
-                <td>CCI-001314</td>
                 <td>The RHEL 8 /var/log/messages file must be owned by root.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010230">RHEL-08-010230</a></td>
-                <td>CCI-001314</td>
                 <td>The RHEL 8 /var/log/messages file must be group-owned by root.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010240">RHEL-08-010240</a></td>
-                <td>CCI-001314</td>
                 <td>The RHEL 8 /var/log directory must have mode 0755 or less permissive.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010250">RHEL-08-010250</a></td>
-                <td>CCI-001314</td>
                 <td>The RHEL 8 /var/log directory must be owned by root.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010260">RHEL-08-010260</a></td>
-                <td>CCI-001314</td>
                 <td>The RHEL 8 /var/log directory must be group-owned by root.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010290">RHEL-08-010290</a></td>
-                <td>CCI-001453</td>
                 <td>The RHEL 8 SSH daemon must be configured to use only Message Authentication Codes (MACs) employing FIPS 140-2 validated cryptographic hash algorithms.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010291">RHEL-08-010291</a></td>
-                <td>CCI-001453</td>
                 <td>The RHEL 8 operating system must implement DoD-approved encryption to protect the confidentiality of SSH connections.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010292">RHEL-08-010292</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must ensure the SSH server uses strong entropy.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010293">RHEL-08-010293</a></td>
-                <td>CCI-001453</td>
                 <td>The RHEL 8 operating system must implement DoD-approved encryption in the OpenSSL package.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010294">RHEL-08-010294</a></td>
-                <td>CCI-001453</td>
                 <td>The RHEL 8 operating system must implement DoD-approved TLS encryption in the OpenSSL package.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010295">RHEL-08-010295</a></td>
-                <td>CCI-001453</td>
                 <td>The RHEL 8 operating system must implement DoD-approved TLS encryption in the GnuTLS package.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010300">RHEL-08-010300</a></td>
-                <td>CCI-001499</td>
                 <td>RHEL 8 system commands must have mode 0755 or less permissive.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010310">RHEL-08-010310</a></td>
-                <td>CCI-001499</td>
                 <td>RHEL 8 system commands must be owned by root.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010320">RHEL-08-010320</a></td>
-                <td>CCI-001499</td>
                 <td>RHEL 8 system commands must be group-owned by root or a system account.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010330">RHEL-08-010330</a></td>
-                <td>CCI-001499</td>
                 <td>RHEL 8 library files must have mode 0755 or less permissive.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010340">RHEL-08-010340</a></td>
-                <td>CCI-001499</td>
                 <td>RHEL 8 library files must be owned by root.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010350">RHEL-08-010350</a></td>
-                <td>CCI-001499</td>
                 <td>RHEL 8 library files must be group-owned by root or a system account.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010360">RHEL-08-010360</a></td>
-                <td>CCI-001744</td>
                 <td>The RHEL 8 file integrity tool must notify the system administrator when changes to the baseline configuration or anomalies in the operation of any security functions are discovered within an organizationally defined frequency.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010370">RHEL-08-010370</a></td>
-                <td>CCI-001749</td>
                 <td>RHEL 8 must prevent the installation of software, patches, service packs, device drivers, or operating system components from a repository without verification they have been digitally signed using a certificate that is issued by a Certificate Authority (CA) that is recognized and approved by the organization.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010371">RHEL-08-010371</a></td>
-                <td>CCI-001749</td>
                 <td>RHEL 8 must prevent the installation of software, patches, service packs, device drivers, or operating system components of local packages without verification they have been digitally signed using a certificate that is issued by a Certificate Authority (CA) that is recognized and approved by the organization.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010372">RHEL-08-010372</a></td>
-                <td>CCI-001749</td>
                 <td>RHEL 8 must prevent the loading of a new kernel for later execution.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010373">RHEL-08-010373</a></td>
-                <td>CCI-002165</td>
                 <td>RHEL 8 must enable kernel parameters to enforce discretionary access control on symlinks.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010374">RHEL-08-010374</a></td>
-                <td>CCI-002165</td>
                 <td>RHEL 8 must enable kernel parameters to enforce discretionary access control on hardlinks.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010375">RHEL-08-010375</a></td>
-                <td>CCI-001090</td>
                 <td>RHEL 8 must restrict access to the kernel message buffer.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010376">RHEL-08-010376</a></td>
-                <td>CCI-001090</td>
                 <td>RHEL 8 must prevent kernel profiling by unprivileged users.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010380">RHEL-08-010380</a></td>
-                <td>CCI-002038</td>
                 <td>RHEL 8 must require users to provide a password for privilege escalation.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010381">RHEL-08-010381</a></td>
-                <td>CCI-002038</td>
                 <td>RHEL 8 must require users to reauthenticate for privilege escalation.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010390">RHEL-08-010390</a></td>
-                <td>CCI-001948</td>
                 <td>RHEL 8 must have the packages required for multifactor authentication installed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010400">RHEL-08-010400</a></td>
-                <td>CCI-001948</td>
                 <td>RHEL 8 must implement certificate status checking for multifactor authentication.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010410">RHEL-08-010410</a></td>
-                <td>CCI-001953</td>
                 <td>RHEL 8 must accept Personal Identity Verification (PIV) credentials.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010420">RHEL-08-010420</a></td>
-                <td>CCI-002824</td>
                 <td>RHEL 8 must implement non-executable data to protect its memory from unauthorized code execution.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010421">RHEL-08-010421</a></td>
-                <td>CCI-001084</td>
                 <td>RHEL 8 must clear the page allocator to prevent use-after-free attacks.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010422">RHEL-08-010422</a></td>
-                <td>CCI-001084</td>
                 <td>RHEL 8 must disable virtual syscalls.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010423">RHEL-08-010423</a></td>
-                <td>CCI-001084</td>
                 <td>RHEL 8 must clear SLUB/SLAB objects to prevent use-after-free attacks.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010430">RHEL-08-010430</a></td>
-                <td>CCI-002824</td>
                 <td>RHEL 8 must implement address space layout randomization (ASLR) to protect its memory from unauthorized code execution.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010440">RHEL-08-010440</a></td>
-                <td>CCI-002617</td>
                 <td>YUM must remove all software components after updated versions have been installed on RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010450">RHEL-08-010450</a></td>
-                <td>CCI-002696</td>
                 <td>RHEL 8 must enable the SELinux targeted policy.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010460">RHEL-08-010460</a></td>
-                <td>CCI-000366</td>
                 <td>There must be no shosts.equiv files on the RHEL 8 operating system.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010470">RHEL-08-010470</a></td>
-                <td>CCI-000366</td>
                 <td>There must be no .shosts files on the RHEL 8 operating system.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010471">RHEL-08-010471</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must enable the hardware random number generator entropy gatherer service.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010480">RHEL-08-010480</a></td>
-                <td>CCI-000366</td>
                 <td>The RHEL 8 SSH public host key files must have mode 0644 or less permissive.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010490">RHEL-08-010490</a></td>
-                <td>CCI-000366</td>
                 <td>The RHEL 8 SSH private host key files must have mode 0640 or less permissive.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010500">RHEL-08-010500</a></td>
-                <td>CCI-000366</td>
                 <td>The RHEL 8 SSH daemon must perform strict mode checking of home directory configuration files.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010510">RHEL-08-010510</a></td>
-                <td>CCI-000366</td>
                 <td>The RHEL 8 SSH daemon must not allow compression or must only allow compression after successful authentication.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010520">RHEL-08-010520</a></td>
-                <td>CCI-000366</td>
                 <td>The RHEL 8 SSH daemon must not allow authentication using known host’s authentication.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010521">RHEL-08-010521</a></td>
-                <td>CCI-000366</td>
                 <td>The RHEL 8 SSH daemon must not allow unused methods of authentication.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010540">RHEL-08-010540</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must use a separate file system for /var.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010541">RHEL-08-010541</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must use a separate file system for /var/log.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010542">RHEL-08-010542</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must use a separate file system for the system audit data path.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010543">RHEL-08-010543</a></td>
-                <td>CCI-000366</td>
                 <td>A separate RHEL 8 filesystem must be used for the /tmp directory.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010550">RHEL-08-010550</a></td>
-                <td>CCI-000770</td>
                 <td>RHEL 8 must not permit direct logons to the root account using remote access via SSH.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010560">RHEL-08-010560</a></td>
-                <td>CCI-000366</td>
                 <td>The auditd service must be running in RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010561">RHEL-08-010561</a></td>
-                <td>CCI-000366</td>
                 <td>The rsyslog service must be running in RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010570">RHEL-08-010570</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent files with the setuid and setgid bit set from being executed on file systems that contain user home directories.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010571">RHEL-08-010571</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent files with the setuid and setgid bit set from being executed on the /boot directory.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010580">RHEL-08-010580</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent special devices on non-root local partitions.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010590">RHEL-08-010590</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent code from being executed on file systems that contain user home directories.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010600">RHEL-08-010600</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent special devices on file systems that are used with removable media.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010610">RHEL-08-010610</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent code from being executed on file systems that are used with removable media.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010620">RHEL-08-010620</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent files with the setuid and setgid bit set from being executed on file systems that are used with removable media.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010630">RHEL-08-010630</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent code from being executed on file systems that are imported via Network File System (NFS).</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010640">RHEL-08-010640</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent special devices on file systems that are imported via Network File System (NFS).</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010650">RHEL-08-010650</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent files with the setuid and setgid bit set from being executed on file systems that are imported via Network File System (NFS).</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010660">RHEL-08-010660</a></td>
-                <td>CCI-000366</td>
                 <td>Local RHEL 8 initialization files must not execute world-writable programs.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010670">RHEL-08-010670</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must disable kernel dumps unless needed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010671">RHEL-08-010671</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must disable the kernel.core_pattern.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010672">RHEL-08-010672</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must disable acquiring, saving, and processing core dumps.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010673">RHEL-08-010673</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must disable core dumps for all users.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010674">RHEL-08-010674</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must disable storing core dumps.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010675">RHEL-08-010675</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must disable core dump backtraces.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010680">RHEL-08-010680</a></td>
-                <td>CCI-000366</td>
                 <td>For RHEL 8 systems using Domain Name Servers (DNS) resolution, at least two name servers must be configured.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010690">RHEL-08-010690</a></td>
-                <td>CCI-000366</td>
                 <td>Executable search paths within the initialization files of all local interactive RHEL 8 users must only contain paths that resolve to the system default or the users home directory.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010700">RHEL-08-010700</a></td>
-                <td>CCI-000366</td>
                 <td>All RHEL 8 world-writable directories must be owned by root, sys, bin, or an application group.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010710">RHEL-08-010710</a></td>
-                <td>CCI-000366</td>
                 <td>All RHEL 8 world-writable directories must be group-owned by root, sys, bin, or an application group.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010720">RHEL-08-010720</a></td>
-                <td>CCI-000366</td>
                 <td>All RHEL 8 local interactive users must have a home directory assigned in the /etc/passwd file.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010730">RHEL-08-010730</a></td>
-                <td>CCI-000366</td>
                 <td>All RHEL 8 local interactive user home directories must have mode 0750 or less permissive.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010740">RHEL-08-010740</a></td>
-                <td>CCI-000366</td>
                 <td>All RHEL 8 local interactive user home directories must be group-owned by the home directory owner’s primary group.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010750">RHEL-08-010750</a></td>
-                <td>CCI-000366</td>
                 <td>All RHEL 8 local interactive user home directories defined in the /etc/passwd file must exist.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010760">RHEL-08-010760</a></td>
-                <td>CCI-000366</td>
                 <td>All RHEL 8 local interactive user accounts must be assigned a home directory upon creation.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010770">RHEL-08-010770</a></td>
-                <td>CCI-000366</td>
                 <td>All RHEL 8 local initialization files must have mode 0740 or less permissive.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010780">RHEL-08-010780</a></td>
-                <td>CCI-000366</td>
                 <td>All RHEL 8 local files and directories must have a valid owner.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010790">RHEL-08-010790</a></td>
-                <td>CCI-000366</td>
                 <td>All RHEL 8 local files and directories must have a valid group owner.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010800">RHEL-08-010800</a></td>
-                <td>CCI-000366</td>
                 <td>A separate RHEL 8 filesystem must be used for user home directories (such as /home or an equivalent).</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010820">RHEL-08-010820</a></td>
-                <td>CCI-000366</td>
                 <td>Unattended or automatic logon via the RHEL 8 graphical user interface must not be allowed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010830">RHEL-08-010830</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not allow users to override SSH environment variables.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020000">RHEL-08-020000</a></td>
-                <td>CCI-000016</td>
                 <td>RHEL 8 temporary user accounts must be provisioned with an expiration time of 72 hours or less.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020010">RHEL-08-020010</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must automatically lock an account when three unsuccessful logon attempts occur.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020011">RHEL-08-020011</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must automatically lock an account when three unsuccessful logon attempts occur.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020012">RHEL-08-020012</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must automatically lock an account when three unsuccessful logon attempts occur during a 15-minute time period.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020013">RHEL-08-020013</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must automatically lock an account when three unsuccessful logon attempts occur during a 15-minute time period.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020014">RHEL-08-020014</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts occur during a 15-minute time period.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020015">RHEL-08-020015</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts occur during a 15-minute time period.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020016">RHEL-08-020016</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must ensure account lockouts persist.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020017">RHEL-08-020017</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must ensure account lockouts persist.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020018">RHEL-08-020018</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must prevent system messages from being presented when three unsuccessful logon attempts occur.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020019">RHEL-08-020019</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must prevent system messages from being presented when three unsuccessful logon attempts occur.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020020">RHEL-08-020020</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must log user name information when unsuccessful logon attempts occur.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020021">RHEL-08-020021</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must log user name information when unsuccessful logon attempts occur.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020022">RHEL-08-020022</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must include root when automatically locking an account until the locked account is released by an administrator when three unsuccessful logon attempts occur during a 15-minute time period.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020023">RHEL-08-020023</a></td>
-                <td>CCI-000044</td>
                 <td>RHEL 8 must include root when automatically locking an account until the locked account is released by an administrator when three unsuccessful logon attempts occur during a 15-minute time period.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020024">RHEL-08-020024</a></td>
-                <td>CCI-000054</td>
                 <td>RHEL 8 must limit the number of concurrent sessions to ten for all accounts and/or account types.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020030">RHEL-08-020030</a></td>
-                <td>CCI-000056</td>
                 <td>RHEL 8 must enable a user session lock until that user re-establishes access using established identification and authentication procedures for graphical user sessions.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020040">RHEL-08-020040</a></td>
-                <td>CCI-000056</td>
                 <td>RHEL 8 must enable a user session lock until that user re-establishes access using established identification and authentication procedures for command line sessions.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020041">RHEL-08-020041</a></td>
-                <td>CCI-000056</td>
                 <td>RHEL 8 must ensure session control is automatically started at shell initialization.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020042">RHEL-08-020042</a></td>
-                <td>CCI-000056</td>
                 <td>RHEL 8 must prevent users from disabling session control mechanisms.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020050">RHEL-08-020050</a></td>
-                <td>CCI-000056</td>
                 <td>RHEL 8 must be able to initiate directly a session lock for all connection types using smartcard when the smartcard is removed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020060">RHEL-08-020060</a></td>
-                <td>CCI-000057</td>
                 <td>RHEL 8 must automatically lock graphical user sessions after 15 minutes of inactivity.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020070">RHEL-08-020070</a></td>
-                <td>CCI-000057</td>
                 <td>RHEL 8 must automatically lock command line user sessions after 15 minutes of inactivity.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020080">RHEL-08-020080</a></td>
-                <td>CCI-000057</td>
                 <td>RHEL 8 must prevent a user from overriding graphical user interface settings.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020090">RHEL-08-020090</a></td>
-                <td>CCI-000187</td>
                 <td>RHEL 8 must map the authenticated identity to the user or group account for PKI-based authentication.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020100">RHEL-08-020100</a></td>
-                <td>CCI-000192</td>
                 <td>RHEL 8 must ensure a password complexity module is enabled.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020110">RHEL-08-020110</a></td>
-                <td>CCI-000192</td>
                 <td>RHEL 8 must enforce password complexity by requiring that at least one uppercase character be used.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020120">RHEL-08-020120</a></td>
-                <td>CCI-000193</td>
                 <td>RHEL 8 must enforce password complexity by requiring that at least one lower-case character be used.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020130">RHEL-08-020130</a></td>
-                <td>CCI-000194</td>
                 <td>RHEL 8 must enforce password complexity by requiring that at least one numeric character be used.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020140">RHEL-08-020140</a></td>
-                <td>CCI-000195</td>
                 <td>RHEL 8 must require the maximum number of repeating characters of the same character class be limited to four when passwords are changed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020150">RHEL-08-020150</a></td>
-                <td>CCI-000195</td>
                 <td>RHEL 8 must require the maximum number of repeating characters be limited to three when passwords are changed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020160">RHEL-08-020160</a></td>
-                <td>CCI-000195</td>
                 <td>RHEL 8 must require the change of at least four character classes when passwords are changed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020170">RHEL-08-020170</a></td>
-                <td>CCI-000195</td>
                 <td>RHEL 8 must require the change of at least 8 characters when passwords are changed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020180">RHEL-08-020180</a></td>
-                <td>CCI-000198</td>
                 <td>RHEL 8 passwords must have a 24 hours/1 day minimum password lifetime restriction in /etc/shadow.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020190">RHEL-08-020190</a></td>
-                <td>CCI-000198</td>
                 <td>RHEL 8 passwords for new users or password changes must have a 24 hours/1 day minimum password lifetime restriction in /etc/logins.def.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020200">RHEL-08-020200</a></td>
-                <td>CCI-000199</td>
                 <td>RHEL 8 user account passwords must have a 60-day maximum password lifetime restriction.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020210">RHEL-08-020210</a></td>
-                <td>CCI-000199</td>
                 <td>RHEL 8 user account passwords must be configured so that existing passwords are restricted to a 60-day maximum lifetime.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020220">RHEL-08-020220</a></td>
-                <td>CCI-000200</td>
                 <td>RHEL 8 passwords must be prohibited from reuse for a minimum of five generations.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020230">RHEL-08-020230</a></td>
-                <td>CCI-000205</td>
                 <td>RHEL 8 passwords must have a minimum of 15 characters.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020231">RHEL-08-020231</a></td>
-                <td>CCI-000205</td>
                 <td>RHEL 8 passwords for new users must have a minimum of 15 characters.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020240">RHEL-08-020240</a></td>
-                <td>CCI-000764</td>
                 <td>RHEL 8 duplicate User IDs (UIDs) must not exist for interactive users.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020250">RHEL-08-020250</a></td>
-                <td>CCI-000765</td>
                 <td>RHEL 8 must implement smart card logon for multifactor authentication for access to interactive accounts.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020260">RHEL-08-020260</a></td>
-                <td>CCI-000795</td>
                 <td>RHEL 8 account identifiers (individuals, groups, roles, and devices) must be disabled after 35 days of inactivity.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020270">RHEL-08-020270</a></td>
-                <td>CCI-001682</td>
                 <td>RHEL 8 emergency accounts must be automatically removed or disabled after the crisis is resolved or within 72 hours.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020280">RHEL-08-020280</a></td>
-                <td>CCI-001619</td>
                 <td>All RHEL 8 passwords must contain at least one special character.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020290">RHEL-08-020290</a></td>
-                <td>CCI-002007</td>
                 <td>RHEL 8 must prohibit the use of cached authentications after one day.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020300">RHEL-08-020300</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent the use of dictionary words for passwords.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020310">RHEL-08-020310</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must enforce a delay of at least four seconds between logon prompts following a failed logon attempt.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020320">RHEL-08-020320</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not have unnecessary accounts.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020330">RHEL-08-020330</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not have accounts configured with blank or null passwords.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020340">RHEL-08-020340</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must display the date and time of the last successful account logon upon logon.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020350">RHEL-08-020350</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must display the date and time of the last successful account logon upon an SSH logon.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020351">RHEL-08-020351</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must define default permissions for all authenticated users in such a way that the user can only read and modify their own files.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020352">RHEL-08-020352</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must set the umask value to 077 for all local interactive user accounts.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-020353">RHEL-08-020353</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must define default permissions for logon and non-logon shells.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030000">RHEL-08-030000</a></td>
-                <td>CCI-002233</td>
                 <td>The RHEL 8 audit system must be configured to audit the execution of privileged functions and prevent all software from executing at higher privilege levels than users executing the software.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030010">RHEL-08-030010</a></td>
-                <td>CCI-000366</td>
                 <td>Cron logging must be implemented in RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030020">RHEL-08-030020</a></td>
-                <td>CCI-000139</td>
                 <td>The RHEL 8 System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) must be alerted of an audit processing failure event.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030030">RHEL-08-030030</a></td>
-                <td>CCI-000139</td>
                 <td>The RHEL 8 Information System Security Officer (ISSO) and System Administrator (SA) (at a minimum) must have mail aliases to be notified of an audit processing failure.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030040">RHEL-08-030040</a></td>
-                <td>CCI-000140</td>
                 <td>The RHEL 8 System must take appropriate action when an audit processing failure occurs.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030050">RHEL-08-030050</a></td>
-                <td>CCI-000140</td>
                 <td>The RHEL 8 System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) must be alerted when the audit storage volume is full.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030060">RHEL-08-030060</a></td>
-                <td>CCI-000140</td>
                 <td>The RHEL 8 audit system must take appropriate action when the audit storage volume is full.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030061">RHEL-08-030061</a></td>
-                <td>CCI-000366</td>
                 <td>The RHEL 8 audit system must audit local events.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030062">RHEL-08-030062</a></td>
-                <td>CCI-001851</td>
                 <td>RHEL 8 must label all off-loaded audit logs before sending them to the central log server.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030063">RHEL-08-030063</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must resolve audit information before writing to disk.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030070">RHEL-08-030070</a></td>
-                <td>CCI-000162</td>
                 <td>RHEL 8 audit logs must have a mode of 0600 or less permissive to prevent unauthorized read access.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030080">RHEL-08-030080</a></td>
-                <td>CCI-000162</td>
                 <td>RHEL 8 audit logs must be owned by root to prevent unauthorized read access.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030090">RHEL-08-030090</a></td>
-                <td>CCI-000162</td>
                 <td>RHEL 8 audit logs must be group-owned by root to prevent unauthorized read access.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030100">RHEL-08-030100</a></td>
-                <td>CCI-000162</td>
                 <td>RHEL 8 audit log directory must be owned by root to prevent unauthorized read access.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030110">RHEL-08-030110</a></td>
-                <td>CCI-000162</td>
                 <td>RHEL 8 audit log directory must be group-owned by root to prevent unauthorized read access.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030120">RHEL-08-030120</a></td>
-                <td>CCI-000162</td>
                 <td>RHEL 8 audit log directory must have a mode of 0700 or less permissive to prevent unauthorized read access.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030121">RHEL-08-030121</a></td>
-                <td>CCI-000162</td>
                 <td>RHEL 8 audit system must protect auditing rules from unauthorized change.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030122">RHEL-08-030122</a></td>
-                <td>CCI-000162</td>
                 <td>RHEL 8 audit system must protect logon UIDs from unauthorized change.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030130">RHEL-08-030130</a></td>
-                <td>CCI-000169</td>
                 <td>RHEL 8 must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/shadow.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030140">RHEL-08-030140</a></td>
-                <td>CCI-000169</td>
                 <td>RHEL 8 must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/security/opasswd.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030150">RHEL-08-030150</a></td>
-                <td>CCI-000169</td>
                 <td>RHEL 8 must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/passwd.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030160">RHEL-08-030160</a></td>
-                <td>CCI-000169</td>
                 <td>RHEL 8 must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/gshadow.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030170">RHEL-08-030170</a></td>
-                <td>CCI-000169</td>
                 <td>RHEL 8 must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/group.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030171">RHEL-08-030171</a></td>
-                <td>CCI-000169</td>
                 <td>RHEL 8 must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/sudoers.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030172">RHEL-08-030172</a></td>
-                <td>CCI-000169</td>
                 <td>RHEL 8 must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/sudoers.d/.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030180">RHEL-08-030180</a></td>
-                <td>CCI-000169</td>
                 <td>RHEL 8 audit records must contain information to establish what type of events occurred, the source of events, where events occurred, and the outcome of events.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030190">RHEL-08-030190</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the su command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030200">RHEL-08-030200</a></td>
-                <td>CCI-000169</td>
                 <td>The RHEL 8 audit system must be configured to audit any usage of the lremovexattr system call.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030210">RHEL-08-030210</a></td>
-                <td>CCI-000169</td>
                 <td>The RHEL 8 audit system must be configured to audit any usage of the removexattr system call.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030220">RHEL-08-030220</a></td>
-                <td>CCI-000169</td>
                 <td>The RHEL 8 audit system must be configured to audit any usage of the lsetxattr system call.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030230">RHEL-08-030230</a></td>
-                <td>CCI-000169</td>
                 <td>The RHEL 8 audit system must be configured to audit any usage of the fsetxattr system call.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030240">RHEL-08-030240</a></td>
-                <td>CCI-000169</td>
                 <td>The RHEL 8 audit system must be configured to audit any usage of the fremovexattr system call.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030250">RHEL-08-030250</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the chage command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030260">RHEL-08-030260</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the chcon command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030270">RHEL-08-030270</a></td>
-                <td>CCI-000169</td>
                 <td>The RHEL 8 audit system must be configured to audit any usage of the setxattr system call.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030280">RHEL-08-030280</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the ssh-agent in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030290">RHEL-08-030290</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the passwd command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030300">RHEL-08-030300</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the mount command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030301">RHEL-08-030301</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the umount command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030302">RHEL-08-030302</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the mount syscall in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030310">RHEL-08-030310</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the unix_update in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030311">RHEL-08-030311</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of postdrop in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030312">RHEL-08-030312</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of postqueue in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030313">RHEL-08-030313</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of semanage in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030314">RHEL-08-030314</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of setfiles in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030315">RHEL-08-030315</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of userhelper in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030316">RHEL-08-030316</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of setsebool in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030317">RHEL-08-030317</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of unix_chkpwd in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030320">RHEL-08-030320</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the ssh-keysign in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030330">RHEL-08-030330</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the setfacl command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030340">RHEL-08-030340</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the pam_timestamp_check command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030350">RHEL-08-030350</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the newgrp command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030360">RHEL-08-030360</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the init_module command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030361">RHEL-08-030361</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the rename command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030362">RHEL-08-030362</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the renameat command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030363">RHEL-08-030363</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the rmdir command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030364">RHEL-08-030364</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the unlink command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030365">RHEL-08-030365</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the unlinkat command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030370">RHEL-08-030370</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the gpasswd command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030380">RHEL-08-030380</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the finit_module command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030390">RHEL-08-030390</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the delete_module command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030400">RHEL-08-030400</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the crontab command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030410">RHEL-08-030410</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the chsh command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030420">RHEL-08-030420</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the truncate command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030430">RHEL-08-030430</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the openat system call in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030440">RHEL-08-030440</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the open system call in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030450">RHEL-08-030450</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the open_by_handle_at system call in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030460">RHEL-08-030460</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the ftruncate command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030470">RHEL-08-030470</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the creat system call in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030480">RHEL-08-030480</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the chown command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030490">RHEL-08-030490</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the chmod command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030500">RHEL-08-030500</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the lchown system call in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030510">RHEL-08-030510</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the fchownat system call in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030520">RHEL-08-030520</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the fchown system call in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030530">RHEL-08-030530</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the fchmodat system call in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030540">RHEL-08-030540</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the fchmod system call in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030550">RHEL-08-030550</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the sudo command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030560">RHEL-08-030560</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the usermod command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030570">RHEL-08-030570</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the chacl command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030580">RHEL-08-030580</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful uses of the kmod command in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030590">RHEL-08-030590</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful modifications to the faillock log file in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030600">RHEL-08-030600</a></td>
-                <td>CCI-000169</td>
                 <td>Successful/unsuccessful modifications to the lastlog file in RHEL 8 must generate an audit record.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030601">RHEL-08-030601</a></td>
-                <td>CCI-000169</td>
                 <td>RHEL 8 must enable auditing of processes that start prior to the audit daemon.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030602">RHEL-08-030602</a></td>
-                <td>CCI-001849</td>
                 <td>RHEL 8 must allocate an audit_backlog_limit of sufficient size to capture processes that start prior to the audit daemon.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030603">RHEL-08-030603</a></td>
-                <td>CCI-000169</td>
                 <td>RHEL 8 must enable Linux audit logging for the USBGuard daemon.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030610">RHEL-08-030610</a></td>
-                <td>CCI-000171</td>
                 <td>RHEL 8 must allow only the Information System Security Manager (ISSM) (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030620">RHEL-08-030620</a></td>
-                <td>CCI-001493</td>
                 <td>RHEL 8 audit tools must have a mode of 0755 or less permissive.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030630">RHEL-08-030630</a></td>
-                <td>CCI-001493</td>
                 <td>RHEL 8 audit tools must be owned by root.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030640">RHEL-08-030640</a></td>
-                <td>CCI-001493</td>
                 <td>RHEL 8 audit tools must be group-owned by root.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030650">RHEL-08-030650</a></td>
-                <td>CCI-001496</td>
                 <td>RHEL 8 must use cryptographic mechanisms to protect the integrity of audit tools.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030660">RHEL-08-030660</a></td>
-                <td>CCI-001849</td>
                 <td>RHEL 8 must allocate audit record storage capacity to store at least one week of audit records, when audit records are not immediately sent to a central audit record storage facility.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030670">RHEL-08-030670</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must have the packages required for offloading audit logs installed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030680">RHEL-08-030680</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must have the packages required for encrypting offloaded audit logs installed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030690">RHEL-08-030690</a></td>
-                <td>CCI-001851</td>
                 <td>The RHEL 8 audit records must be off-loaded onto a different system or storage media from the system being audited.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030700">RHEL-08-030700</a></td>
-                <td>CCI-001851</td>
                 <td>RHEL 8 must take appropriate action when the internal event queue is full.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030710">RHEL-08-030710</a></td>
-                <td>CCI-001851</td>
                 <td>RHEL 8 must encrypt the transfer of audit records off-loaded onto a different system or media from the system being audited.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030720">RHEL-08-030720</a></td>
-                <td>CCI-001851</td>
                 <td>RHEL 8 must authenticate the remote logging server for off-loading audit logs.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030730">RHEL-08-030730</a></td>
-                <td>CCI-001855</td>
                 <td>RHEL 8 must notify the System Administrator (SA) and Information System Security Officer (ISSO) (at a minimum) when allocated audit record storage volume reaches 75 percent of the repository maximum audit record storage capacity.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030740">RHEL-08-030740</a></td>
-                <td>CCI-001891</td>
                 <td>RHEL 8 must securely compare internal information system clocks at least every 24 hours with a server synchronized to an authoritative time source, such as the United States Naval Observatory (USNO) time servers, or a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS).</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030741">RHEL-08-030741</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must disable the chrony daemon from acting as a server.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-030742">RHEL-08-030742</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must disable network management of the chrony daemon.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040000">RHEL-08-040000</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must not have the telnet-server package installed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040001">RHEL-08-040001</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must not have any automated bug reporting tools installed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040002">RHEL-08-040002</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must not have the sendmail package installed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040004">RHEL-08-040004</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must enable mitigations against processor-based vulnerabilities.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040010">RHEL-08-040010</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must not have the rsh-server package installed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040020">RHEL-08-040020</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must cover or disable the built-in or attached camera when not in use.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040021">RHEL-08-040021</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must disable the asynchronous transfer mode (ATM) protocol.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040022">RHEL-08-040022</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must disable the controller area network (CAN) protocol.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040023">RHEL-08-040023</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must disable the stream control transmission (SCTP) protocol.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040024">RHEL-08-040024</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must disable the transparent inter-process communication (TIPC) protocol.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040025">RHEL-08-040025</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must disable mounting of cramfs.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040026">RHEL-08-040026</a></td>
-                <td>CCI-000381</td>
                 <td>RHEL 8 must disable IEEE 1394 (FireWire) Support.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040030">RHEL-08-040030</a></td>
-                <td>CCI-000382</td>
                 <td>RHEL 8 must be configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the Ports, Protocols, and Services Management (PPSM) Category Assignments List (CAL) and vulnerability assessments.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040070">RHEL-08-040070</a></td>
-                <td>CCI-000778</td>
                 <td>The RHEL 8 file system automounter must be disabled unless required.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040080">RHEL-08-040080</a></td>
-                <td>CCI-000778</td>
                 <td>RHEL 8 must be configured to disable USB mass storage.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040090">RHEL-08-040090</a></td>
-                <td>CCI-002314</td>
                 <td>A RHEL 8 firewall must employ a deny-all, allow-by-exception policy for allowing connections to other systems.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040100">RHEL-08-040100</a></td>
-                <td>CCI-002314</td>
                 <td>A firewall must be installed on RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040110">RHEL-08-040110</a></td>
-                <td>CCI-001444</td>
                 <td>RHEL 8 wireless network adapters must be disabled.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040111">RHEL-08-040111</a></td>
-                <td>CCI-001443</td>
                 <td>RHEL 8 Bluetooth must be disabled.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040120">RHEL-08-040120</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /dev/shm with the nodev option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040121">RHEL-08-040121</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /dev/shm with the nosuid option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040122">RHEL-08-040122</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /dev/shm with the noexec option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040123">RHEL-08-040123</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /tmp with the nodev option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040124">RHEL-08-040124</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /tmp with the nosuid option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040125">RHEL-08-040125</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /tmp with the noexec option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040126">RHEL-08-040126</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /var/log with the nodev option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040127">RHEL-08-040127</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /var/log with the nosuid option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040128">RHEL-08-040128</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /var/log with the noexec option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040129">RHEL-08-040129</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /var/log/audit with the nodev option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040130">RHEL-08-040130</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /var/log/audit with the nosuid option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040131">RHEL-08-040131</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /var/log/audit with the noexec option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040132">RHEL-08-040132</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /var/tmp with the nodev option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040133">RHEL-08-040133</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /var/tmp with the nosuid option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040134">RHEL-08-040134</a></td>
-                <td>CCI-001764</td>
                 <td>RHEL 8 must mount /var/tmp with the noexec option.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040135">RHEL-08-040135</a></td>
-                <td>CCI-001764</td>
                 <td>The RHEL 8 fapolicy module must be configured to employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040140">RHEL-08-040140</a></td>
-                <td>CCI-001958</td>
                 <td>RHEL 8 must block unauthorized peripherals before establishing a connection.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040150">RHEL-08-040150</a></td>
-                <td>CCI-002385</td>
                 <td>A firewall must be able to protect against or limit the effects of Denial of Service (DoS) attacks by ensuring RHEL 8 can implement rate-limiting measures on impacted network interfaces.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040160">RHEL-08-040160</a></td>
-                <td>CCI-002418</td>
                 <td>All RHEL 8 networked systems must have and implement SSH to protect the confidentiality and integrity of transmitted and received information, as well as information during preparation for transmission.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040161">RHEL-08-040161</a></td>
-                <td>CCI-000068</td>
                 <td>RHEL 8 must force a frequent session key renegotiation for SSH connections to the server.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040162">RHEL-08-040162</a></td>
-                <td>CCI-000068</td>
                 <td>RHEL 8 must force a frequent session key renegotiation for SSH connections by the client.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040170">RHEL-08-040170</a></td>
-                <td>CCI-000366</td>
                 <td>The x86 Ctrl-Alt-Delete key sequence must be disabled on RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040171">RHEL-08-040171</a></td>
-                <td>CCI-000366</td>
                 <td>The x86 Ctrl-Alt-Delete key sequence in RHEL 8 must be disabled if a graphical user interface is installed.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040172">RHEL-08-040172</a></td>
-                <td>CCI-000366</td>
                 <td>The systemd Ctrl-Alt-Delete burst key sequence in RHEL 8 must be disabled.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040180">RHEL-08-040180</a></td>
-                <td>CCI-000366</td>
                 <td>The debug-shell systemd service must be disabled on RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040190">RHEL-08-040190</a></td>
-                <td>CCI-000366</td>
                 <td>The Trivial File Transfer Protocol (TFTP) server package must not be installed if not required for RHEL 8 operational support.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040200">RHEL-08-040200</a></td>
-                <td>CCI-000366</td>
                 <td>The root account must be the only account having unrestricted access to the RHEL 8 system.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040210">RHEL-08-040210</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must prevent Internet Control Message Protocol (ICMP) redirect messages from being accepted.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040220">RHEL-08-040220</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not send Internet Control Message Protocol (ICMP) redirects.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040230">RHEL-08-040230</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not respond to Internet Control Message Protocol (ICMP) echoes sent to a broadcast address.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040240">RHEL-08-040240</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not forward source-routed packets.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040250">RHEL-08-040250</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not forward source-routed packets by default.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040260">RHEL-08-040260</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not be performing packet forwarding unless the system is a router.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040261">RHEL-08-040261</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not accept router advertisements on all IPv6 interfaces.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040262">RHEL-08-040262</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not accept router advertisements on all IPv6 interfaces by default.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040270">RHEL-08-040270</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must not allow interfaces to perform Internet Control Message Protocol (ICMP) redirects by default.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040280">RHEL-08-040280</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must ignore Internet Control Message Protocol (ICMP) redirect messages.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040281">RHEL-08-040281</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must disable access to network bpf syscall from unprivileged processes.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040282">RHEL-08-040282</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must restrict usage of ptrace to descendant  processes.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040283">RHEL-08-040283</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must restrict exposed kernel pointer addresses access.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040284">RHEL-08-040284</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must disable the use of user namespaces.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040285">RHEL-08-040285</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must use reverse path filtering on all IPv4 interfaces.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040290">RHEL-08-040290</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must be configured to prevent unrestricted mail relaying.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040300">RHEL-08-040300</a></td>
-                <td>CCI-000366</td>
                 <td>The RHEL 8 file integrity tool must be configured to verify extended attributes.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040310">RHEL-08-040310</a></td>
-                <td>CCI-000366</td>
                 <td>The RHEL 8 file integrity tool must be configured to verify Access Control Lists (ACLs).</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040320">RHEL-08-040320</a></td>
-                <td>CCI-000366</td>
                 <td>The graphical display manager must not be installed on RHEL 8 unless approved.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040330">RHEL-08-040330</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 network interfaces must not be in promiscuous mode.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040340">RHEL-08-040340</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 remote X connections for interactive users must be disabled unless to fulfill documented and validated mission requirements.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040341">RHEL-08-040341</a></td>
-                <td>CCI-000366</td>
                 <td>The RHEL 8 SSH daemon must prevent remote hosts from connecting to the proxy display.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040350">RHEL-08-040350</a></td>
-                <td>CCI-000366</td>
                 <td>If the Trivial File Transfer Protocol (TFTP) server is required, the RHEL 8 TFTP daemon must be configured to operate in secure mode.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040360">RHEL-08-040360</a></td>
-                <td>CCI-000366</td>
                 <td>A File Transfer Protocol (FTP) server package must not be installed unless mission essential on RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040370">RHEL-08-040370</a></td>
-                <td>CCI-000381</td>
                 <td>The gssproxy package must not be installed unless mission essential on RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040380">RHEL-08-040380</a></td>
-                <td>CCI-000366</td>
                 <td>The iprutils package must not be installed unless mission essential on RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-040390">RHEL-08-040390</a></td>
-                <td>CCI-000366</td>
                 <td>The tuned package must not be installed unless mission essential on RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010163">RHEL-08-010163</a></td>
-                <td>CCI-000803</td>
                 <td>The krb5-server package must not be installed on RHEL 8.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010382">RHEL-08-010382</a></td>
-                <td>CCI-000366</td>
                 <td>RHEL 8 must restrict privilege elevation to authorized personnel.</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010383">RHEL-08-010383</a></td>
-                <td>CCI-002227</td>
                 <td>RHEL 8 must use the invoking user's password for privilege escalation when using "sudo".</td>
             </tr>
         
             <tr>
                 <td><a href="/products/rhel8/v1r2/RHEL-08-010384">RHEL-08-010384</a></td>
-                <td>CCI-002038</td>
                 <td>RHEL 8 must require re-authentication when using the "sudo" command.</td>
             </tr>
         
