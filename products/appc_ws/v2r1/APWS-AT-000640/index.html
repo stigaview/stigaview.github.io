@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000640 - V2R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Debugging and trace information, within Automation Controller NGINX web server, used to diagnose the web server must be disabled.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000640 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000266-WSR-000160">SRG-APP-000266-WSR-000160</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001312&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-256959&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is important that Automation Controller NGINX web server debugging and trace information used to diagnose the web server is disabled, because debugging information can yield information about the Automation Controller NGINX webserver, like web server type, version, patches installed, plugins, modules, the hosted app’s code type. Back ends used for storage could be revealed, as well. An attacker would not need to cause an error condition to gain this information because they could reside in logs and general messages.<br /><br />If debugging/trace information is enabled, attackers could get the information from logs and general information, without drawing attention to themselves via an error message.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       For each Automation Controller NGINX web server, a system administrator must check to determine if any error or debug information is being logged or generated:<br /><br />NGINXCONF=`nginx -V 2>&1 | tr ' ' '\n' | sed -ne '/conf-path/{s/.*conf-path=\(.*\)/\1/;p}' ` ;  cat $NGINXCONF  | grep '^\s*error_log' && echo FAILED<br /><br />If "FAILED" is displayed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       For each Automation Controller NGINX web server, a system administrator must complete the following steps. <br /><br />Verify the NGINX configuration file in use:<br /><br />NGINXCONF=`nginx -V 2>&1 | tr ' ' '\n' | sed -ne '/conf-path/{s/.*conf-path=\(.*\)/\1/;p}' ` ;  echo $NGINXCONF<br /><br />Remove the error_log directive from the NGINX configuration file.<br /><br />Cause NGINX to reload its configuration file:<br /><br />pkill -HUP nginx
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

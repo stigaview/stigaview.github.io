@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-015400 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Apple iOS/iPadOS 18 must disable ChatGPT connection for Apple Intelligence.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-015400 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-993300">PP-MDF-993300</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268068&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The ChatGPT feature of Apple Intelligence allows DOD information to be downloaded from the DOD iPhone/iPad and processed by the ChatGPT application in the cloud. The ChatGPT feature of Apple Intelligence increases the risk of compromise of sensitive DOD information.<br /><br />SFRID: FMT_MOF_EXT.1.2 #47
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Apple Intelligence support for ChatGPT is not expected to be available until iOS/iPad 18.1 and will be available only on specific iPhone and iPad models.<br /><br />This check procedure is performed on the device management tool.<br /><br />Note: If an organization has multiple configuration profiles, the check procedure must be performed on the relevant configuration profiles applicable to the scope of the review.<br /><br />In the iOS management tool, verify "Allow ChatGPT" is unchecked.<br /><br />If "Allow ChatGPT" is not disabled in the management tool, this is a finding.<br /><br />Note: As of the publication date of this STIG version (V1R1), the exact name and logic of the ChatGPT management key is not available. When ChatGPT support is released by Apple (expected in iOS/iPadOS 18.1), the required configuration could be either "enable" or "disable".  The intent of this requirement is to disable Apple Intelligence ChatGPT access.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Apple Intelligence support for ChatGPT is not expected to be available until iOS/iPad 18.1 and will be available only on specific iPhone and iPad models.<br /><br />Install a configuration profile to disable ChatGPT connection for Apple Intelligence.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

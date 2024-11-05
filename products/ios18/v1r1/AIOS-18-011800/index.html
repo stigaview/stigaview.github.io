@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-011800 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Apple iOS/iPadOS 18 must implement the management setting: force Apple Watch wrist detection.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-011800 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-993300">PP-MDF-993300</a>&nbsp;|&nbsp;
+  <b>Severity: </b>low&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268040&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Because Apple Watch is a personal device, it is key that any sensitive DOD data displayed on the Apple Watch cannot be viewed when the watch is not in the immediate possession of the user. This control ensures the Apple Watch screen locks when the user takes the watch off, thereby protecting sensitive DOD data from possible exposure.<br /><br />SFRID: FMT_SMF.1.1 #47
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review configuration settings to confirm "Force Apple Watch wrist detection" is enabled.<br /><br />This check procedure is performed on both the Apple iOS/iPadOS management tool and the iPhone and iPad.<br /><br />Note: If an organization has multiple configuration profiles, the check procedure must be performed on the relevant configuration profiles applicable to the scope of the review.<br /><br />In the Apple iOS/iPadOS management tool, verify "Wrist detection enforced on Apple Watch" is enforced.<br /><br />On the iPhone and iPad:<br />1. Open the Settings app.<br />2. Tap "General".<br />3. Tap "VPN & Device Management".<br />4. Tap the Configuration Profile from the Apple iOS/iPadOS management tool containing the restrictions policy.<br />5. Tap "Restrictions".<br />6. Verify "Wrist detection enforced on Apple Watch" is listed.<br /><br />If "Wrist detection enforced on Apple Watch" is not enforced in the Apple iOS/iPadOS management tool or the restrictions policy on the iPhone and iPad does not list "Wrist detection enforced on Apple Watch", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install a configuration profile to force Apple Watch wrist detection.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000310 - V2R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All Automation Controller NGINX web servers must have Multipurpose Internet Mail Extensions (MIME) that invoke OS shell programs disabled.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000310 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000141-WSR-000081">SRG-APP-000141-WSR-000081</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-256949&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Controlling what a user of a hosted application can access is part of the security posture of the Automation Controller NGINX web server.<br /><br />Any time a user can access more functionality than is needed for the operation of the hosted application, it  poses a security issue. A user with too much access can view information that is not needed for the user's job role, or the user could use the function in an unintentional manner.<br /><br />A MIME tells the Automation Controller NGINX web servers what type of program various file types and extensions are and what external utilities or programs are needed to execute the file type.<br /><br />A shell is a program that serves as the basic interface between the user and the operating system, so hosted application users must not have access to these programs. Shell programs may execute shell escapes and can then perform unauthorized activities that could damage the security posture of Automation Controller.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a System Administrator for each Automation Controller NGINX web server, check the allowed mime types and associated shell applications:<br /><br />NGINXCONF=`nginx -V 2>&1 | tr ' ' '\n' | sed -ne '/conf-path/{s/.*conf-path=\(.*\)/\1/;p}' ` ; MIME_TYPES=`grep mime $NGINXCONF | awk '{printf $2}' | sed 's/;$//' ` ; disallowed_mime_types=('application.*\sbin' 'application.*\sexe' 'application.*\srpm' 'application.*\smsi' 'application.*\smsp application.*\smsm' 'application.*\sjs') ; echo "${disallowed_mime_types[*]}" | tr ' ' '\n' >tempfile ; cat $MIME_TYPES | grep -f tempfile 1>/dev/null && echo "FAILED"; rm -f tempfile<br /><br />If "FAILED" is displayed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a System Administrator for each Automation Controller NGINX web server, remove the disallowed mime types:<br /><br />NGINXCONF=`nginx -V 2>&1 | tr ' ' '\n' | sed -ne '/conf-path/{s/.*conf-path=\(.*\)/\1/;p}' ` ; <br />MIME_TYPES=`grep mime $NGINXCONF | awk '{printf $2}' | sed 's/;$//' ` ;<br /> disallowed_mime_types=('application.*\sbin' 'application.*\sexe' 'application.*\srpm' 'application.*\smsi' 'application.*\smsp application.*\smsm' 'application.*\sjs') ; <br />echo "${disallowed_mime_types[*]}" | tr ' ' '\n' >tempfile ; cat $MIME_TYPES | grep -vf tempfile >$MIME_TYPES; rm -f tempfile<br /><br />Restart NGINX.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

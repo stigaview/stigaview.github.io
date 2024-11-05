@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-005001 - V2R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must ensure System Integrity Protection is enabled.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-005001 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000051-GPOS-00024">SRG-OS-000051-GPOS-00024</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000154,CCI-000158,CCI-000162,CCI-000163,CCI-000164,CCI-000169,CCI-000213,CCI-001493,CCI-001494,CCI-001495,CCI-001496,CCI-001499,CCI-001876,CCI-001878&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-259560&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       System Integrity Protection (SIP) must be enabled.<br /><br />SIP is vital to protecting the integrity of the system as it prevents malicious users and software from making unauthorized and/or unintended modifications to protected files and folders; ensures the presence of an audit record generation capability for defined auditable events for all operating system components; protects audit tools from unauthorized access, modification, and deletion; restricts the root user account and limits the actions that the root user can perform on protected parts of the macOS; and prevents nonprivileged users from granting other users direct access to the contents of their home directories and folders.<br /><br />Note: SIP is enabled by default in macOS.<br /><br />Satisfies: SRG-OS-000051-GPOS-00024,SRG-OS-000054-GPOS-00025,SRG-OS-000057-GPOS-00027,SRG-OS-000058-GPOS-00028,SRG-OS-000059-GPOS-00029,SRG-OS-000062-GPOS-00031,SRG-OS-000080-GPOS-00048,SRG-OS-000122-GPOS-00063,SRG-OS-000256-GPOS-00097,SRG-OS-000257-GPOS-00098,SRG-OS-000258-GPOS-00099,SRG-OS-000259-GPOS-00100,SRG-OS-000278-GPOS-00108,SRG-OS-000350-GPOS-00138
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to enable System Integrity Protection with the following command:<br /><br />/usr/bin/csrutil status | /usr/bin/grep -c 'System Integrity Protection status: enabled.'<br /><br />If the result is not "1", this is a finding.<br /><br />/usr/bin/grep -c "logger -s -p" /etc/security/audit_warn<br /><br />If the result is not "1", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to enable "System Integrity Protection" by booting into "Recovery" mode, launch "Terminal" from the "Utilities" menu, and run the following command:<br /><br />/usr/bin/csrutil enable
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

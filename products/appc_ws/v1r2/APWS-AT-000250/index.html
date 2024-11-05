@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000250 - V1R2 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All Automation Controller NGINX front-end web servers must not perform user management for hosted applications.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000250 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000141-WSR-000015">SRG-APP-000141-WSR-000015</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-256946&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Web servers require enterprise-wide user management capability in order to prevent unauthorized access, with features like attempt lockouts and password complexity requirements.<br /><br />Unauthorized access to the web server makes the web server and the organization vulnerable to attack.<br /><br />Note: The underlying NGINX web server does not perform user management or authentication. The Automation Controller includes user management and authentication capabilities. However, the user management controls built into Automation Controller may not be sufficient to enforce the appropriate level of password, sessions, and other policies required. It is strongly recommended that Automation Controller be configured to use the organization's Identity Management/Authentication Service. This may be an AD/LDAP service, OIDC, or other supported authentication service.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a system administrator for each Automation Controller NGINX web server host, navigate to Settings >> Authentication.<br /><br />Review the configuration and verify that the appropriate authentication service is configured.<br /><br />If no authentication service is configured, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a system administrator for each Automation Controller NGINX web server host, navigate to Settings >> Authentication.<br /><br />Configure the appropriate authentication service.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-008400 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Apple iOS/iPadOS 18 must be configured to display the DOD advisory warning message at startup or each time the user unlocks the device.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-008400 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-333160">PP-MDF-333160</a>&nbsp;|&nbsp;
+  <b>Severity: </b>low&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000048&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268007&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Before granting access to the system, the mobile operating system is required to display the DOD-approved system use notification message or banner that provides privacy and security notices consistent with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance. Required banners help ensure that DOD can audit and monitor the activities of mobile device users without legal restriction.<br /><br />System use notification messages can be displayed when individuals first access or unlock the mobile device. The banner must be implemented as a "click-through" banner at device unlock (to the extent permitted by the operating system). A "click-through" banner prevents further activity on the information system unless and until the user executes a positive action to manifest agreement by clicking on a box indicating "OK".<br /><br />The approved DOD text must be used exactly as required in the Knowledge Service referenced in DODI 8500.01. For devices accommodating banners of 1300 characters, the banner text is: <br /><br />You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only. <br />By using this IS (which includes any device attached to this IS), you consent to the following conditions: <br />-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations. <br />-At any time, the USG may inspect and seize data stored on this IS. <br />-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose. <br />-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy. <br />-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.<br /><br />For devices with severe character limitations, the banner text is: <br /><br />I've read & consent to terms in IS user agreem't.<br /><br />The administrator must configure the banner text exactly as written without any changes.<br /><br />SFRID: FMT_SMF.1.1 #36
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       The DOD warning banner can be displayed by either of the following methods (required text is found in the Vulnerability Discussion):<br /><br />1. By placing the DOD warning banner text in the user agreement signed by each iPhone and iPad user. <br />2. By installing a Lock Screen Message payload with the required text (preferred method).<br /><br />Determine which method is used at the iOS device site and follow the appropriate validation procedure below.<br /><br />Validation Procedure for Method #1:<br />Review the signed user agreements for several iOS device users and verify the agreement includes the required DOD warning banner text.<br /><br />Validation Procedure for Method #2:<br />In the Apple iOS/iPadOS management tool, verify a Lock Screen Message payload has been installed on each managed device. The LockScreenFootnote string should include required text. <br /><br />If, for Method #1, the required warning banner text is not on all signed user agreements reviewed, or for Method #2, the DOD warning banner text is not set as the lock screen footnote, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the DOD warning banner by either of the following methods (required text is found in the Vulnerability Discussion):<br /><br />1. By placing the DOD warning banner text in the user agreement signed by each iOS device user.<br />2. By installing a Lock Screen Message payload with the required text (preferred method).
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

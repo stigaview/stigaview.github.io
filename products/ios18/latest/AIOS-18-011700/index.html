@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-011700 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Apple iOS/iPadOS 18 must implement the management setting: not share location data through iCloud.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-011700 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-993300">PP-MDF-993300</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000048&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268039&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Sharing of location data is an operational security (OPSEC) risk because it potentially allows an adversary to determine a DOD user's location, movements, and patterns in those movements over time. An adversary could use this information to target the user or gather intelligence on the user's likely activities. Using commercial cloud services to store and handle location data could leave the data vulnerable to breach, particularly by sophisticated adversaries. Disabling the use of such services mitigates this risk.<br /><br />SFRID: FMT_SMF.1.1 #47
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review configuration settings to confirm "Share My Location" is disabled. Note that this is a User-Based Enforcement (UBE) control, which cannot be managed by an MDM server.<br /><br />This check procedure is performed on the iPhone and iPad only.<br /><br />On the iPhone and iPad:<br />1. Open the Settings app.<br />2. Tap "Privacy & Security".<br />3. Tap "Location Services".<br />4. If the authorizing official (AO) has not approved use of personal iCloud accounts on the device, verify "Share My Location" is grayed out (cannot be selected).<br />5. If the AO has approved the use of personal iCloud accounts on the device, tap "Share My Location".<br />6. Verify "Share My Location" is off.<br /><br />If "Share My Location" is not grayed out (cannot be selected) when the AO has not approved use of personal iCloud accounts on the device, this is a finding.<br /><br />If "Share My Location" is toggled to the right and appears green on the iPhone and iPad when the AO has approved the use of personal iCloud accounts, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       The user must configure Apple iOS/iPadOS to disable location sharing through iCloud.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

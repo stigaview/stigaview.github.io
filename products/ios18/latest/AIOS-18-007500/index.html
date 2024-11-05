@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-007500 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Apple iOS/iPadOS 18 must be configured to not display notifications when the device is locked.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-007500 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-333080">PP-MDF-333080</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000060&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-267998&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Many mobile devices display notifications on the lock screen so users can obtain relevant information in a timely manner without having to frequently unlock the phone to determine if there are new notifications. However, in many cases, these notifications can contain sensitive information. When they are available on the lock screen, an adversary can see them merely by being in close physical proximity to the device. Configuring the mobile operating system to not send notifications to the lock screen mitigates this risk.<br /><br />SFRID: FMT_SMF.1.1 #18
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review configuration settings to confirm the display of notifications when the device is locked has been disabled. <br /><br />This check procedure is performed on the Apple iOS/iPadOS management tool and mobile device. <br /><br />In the Apple iOS/iPadOS management tool, for each managed app, verify the app is configured to disable Notifications preview.<br /><br />On the iPhone and iPad:<br />1. Open the Settings app.<br />2. Tap "General".<br />3. Tap "VPN & Device Management".<br />4. Tap the Configuration Profile from the iOS management tool containing the management policy.<br />5. Tap "Apps".<br />6. Tap an app and verify "Disallow notification view in locked screen" is listed.<br /><br />Repeat steps 5 and 6 for each managed app in the list.<br /><br />If one or more managed apps are not set to disable showing notification view on locked screen, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install a configuration profile to disable the display of notifications when the device is locked.<br /><br />Install a configuration profile to disable Notification Center from the device Lock screen.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

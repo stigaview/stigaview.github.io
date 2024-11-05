@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-013400 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Apple iOS must be configured to disable automatic transfer of diagnostic data to an external device other than an MDM service with which the device has enrolled.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-013400 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-993300">PP-MDF-993300</a>&nbsp;|&nbsp;
+  <b>Severity: </b>low&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001199&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268057&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Many software systems automatically send diagnostic data to the manufacturer or a third-party. This data enables the developers to understand real-world field behavior and improve the product based on that information. Unfortunately, it can also reveal information about what DOD users are doing with the systems and what causes them to fail. An adversary embedded within the software development team or elsewhere could use the information acquired to breach mobile operating system security. Disabling automatic transfer of such information mitigates this risk.<br /><br />SFRID: FMT_SMF.1.1 #47a
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review configuration settings to confirm "Allow sending diagnostic and usage data to Apple" is disabled.<br /><br />This check procedure is performed on both the iOS management tool and the iOS device.<br /><br />Note: If an organization has multiple configuration profiles, the check procedure must be performed on the relevant configuration profiles applicable to the scope of the review. <br /><br />In the iOS management tool, verify "Allow sending diagnostic and usage data to Apple" is unchecked.<br /><br />Alternatively, verify the text "<key>allowDiagnosticSubmission</key><false/>" appears in the configuration profile (.mobileconfig file).<br /><br />On the Apple iOS device: <br />1. Open the Settings app. <br />2. Tap "General".<br />3. Tap "VPN & Device Management".<br />4. Tap the Configuration Profile from the iOS management tool containing the management policy.<br />5. Tap "Restrictions".<br />6. Verify "Diagnostic submission not allowed".<br /><br />Note: This setting also disables "Share With App Developers".<br /><br />If "Allow sending diagnostic and usage data to Apple" is checked in the iOS management tool, "<key>allowDiagnosticSubmission</key><true/>" appears in the configuration profile, or the restrictions policy on the Apple iOS device from the Apple iOS management tool does not list "Diagnostic submission not allowed", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install a configuration profile to disable sending diagnostic data to an organization other than DOD.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

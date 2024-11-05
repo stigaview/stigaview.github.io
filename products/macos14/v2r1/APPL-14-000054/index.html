@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-000054 - V2R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must limit SSHD to FIPS-compliant connections.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-000054 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000033-GPOS-00014">SRG-OS-000033-GPOS-00014</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000068,CCI-000803,CCI-001453,CCI-002421,CCI-002450,CCI-002890,CCI-003123&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-259438&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If SSHD is enabled then it must be configured to limit the Ciphers, HostbasedAcceptedAlgorithms, HostKeyAlgorithms, KexAlgorithms, MACs, PubkeyAcceptedAlgorithms, CASignatureAlgorithms to algorithms that are FIPS 140 validated.<br /><br />FIPS 140-2 is the current standard for validating that mechanisms used to access cryptographic modules utilize authentication that meet federal requirements.<br /><br />Operating systems utilizing encryption must use FIPS validated mechanisms for authenticating to cryptographic modules.<br /><br />Note: For more information on FIPS compliance with the version of SSHD included in the macOS, the manual page apple_ssh_and_fips has additional information.<br /><br />Satisfies: SRG-OS-000033-GPOS-00014,SRG-OS-000120-GPOS-00061,SRG-OS-000250-GPOS-00093,SRG-OS-000393-GPOS-00173,SRG-OS-000394-GPOS-00174,SRG-OS-000396-GPOS-00176,SRG-OS-000424-GPOS-00188,SRG-OS-000478-GPOS-00223
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to limit SSHD to FIPS-compliant connections with the following command:<br /><br />fips_sshd_config=("Ciphers aes128-gcm@openssh.com" "HostbasedAcceptedAlgorithms ecdsa-sha2-nistp256,ecdsa-sha2-nistp256-cert-v01@openssh.com" "HostKeyAlgorithms ecdsa-sha2-nistp256,ecdsa-sha2-nistp256-cert-v01@openssh.com" "KexAlgorithms ecdh-sha2-nistp256" "MACs hmac-sha2-256" "PubkeyAcceptedAlgorithms ecdsa-sha2-nistp256,ecdsa-sha2-nistp256-cert-v01@openssh.com" "CASignatureAlgorithms ecdsa-sha2-nistp256")<br />total=0<br />for config in $fips_sshd_config; do<br />  total=$(expr $(/usr/sbin/sshd -G | /usr/bin/grep -i -c "$config") + $total)<br />done<br /><br />echo $total<br /><br />If the result is not "7", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to limit SSHD to FIPS-compliant connections with the following command:<br /><br />fips_sshd_config="Ciphers aes128-gcm@openssh.com<br />HostbasedAcceptedAlgorithms ecdsa-sha2-nistp256,ecdsa-sha2-nistp256-cert-v01@openssh.com<br />HostKeyAlgorithms ecdsa-sha2-nistp256,ecdsa-sha2-nistp256-cert-v01@openssh.com<br />KexAlgorithms ecdh-sha2-nistp256<br />MACs hmac-sha2-256<br />PubkeyAcceptedAlgorithms ecdsa-sha2-nistp256,ecdsa-sha2-nistp256-cert-v01@openssh.com<br />CASignatureAlgorithms ecdsa-sha2-nistp256"<br />/bin/echo "${fips_sshd_config}" > /etc/ssh/sshd_config.d/fips_sshd_config
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

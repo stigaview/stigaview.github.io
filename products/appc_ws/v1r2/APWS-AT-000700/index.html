@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000700 - V1R2 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Nonprivileged accounts on the hosting system must only access Automation Controller NGINX web server security-relevant information and functions through a distinct administrative account.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000700 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000340-WSR-000029">SRG-APP-000340-WSR-000029</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001082,CCI-002235&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-256960&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is important that Automation Controller NGINX web server security features are separated from nonprivileged users. Special “privileged” roles need to be developed so that only they can have access to those features and administer the web server, when necessary. These privileged roles will be better trained in the security features and will limit loss of data for forensic analysis and limits accidental changes to the web server.<br /><br />Without isolating privileged users from nonprivileged users when administering to the web server, organizations run the risk of having limited access to forensic data, as well as increased risk of accidental changes, by nonprivileged and presumably less-trained individuals.<br /><br />Satisfies: SRG-APP-000340-WSR-000029, SRG-APP-000211-WSR-000031
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a system administrator, for each Automation Controller NGINX web server host, inspect the current permissions and owner of Tower's web server configuration directory:<br /><br />stat -c "%a %U %G" /etc/nginx | grep -q "755 root root" || echo "FAILED"<br />stat -c "%a %U %G" /etc/nginx/conf.d | grep -q "755 root root" || echo "FAILED"<br />stat -c "%a %U %G" /etc/nginx/nginx.conf | grep -q "644 root root" || echo "FAILED"<br /> <br />If "FAILED" is displayed, this is a finding.<br /><br />Inspect the current permissions and owner of Automation Controller web server program configuration files:<br /><br />stat -c "%a %U %G" /usr/lib/systemd/system/nginx.service | grep -q "644 root root" || echo "FAILED"<br /> <br />If "FAILED" is displayed, this is a finding.<br /> <br />Inspect the current permissions and owner of Automation Controller application content directory:<br /><br />stat -c "%a %U %G" /var/lib/awx/public/static | grep -q "755 root awx" || echo "FAILED"<br /> <br />If "FAILED" is displayed, this is a finding.<br /> <br />Inspect the current permissions and owner of Automation Controller web server log directory:<br /><br />stat -c "%a %U %G" /var/log/nginx| grep -q "770 nginx root" || echo "FAILED"<br /> <br />If "FAILED" is displayed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a system administrator, for each Automation Controller NGINX web server host, set the permissions and owner of Automation Controller web server program configuration directory:<br /><br />sudo chown -R root:root /etc/nginx/<br />sudo chmod 755 /etc/nginx /etc/nginx<br />sudo chmod 755 /etc/nginx /etc/nginx/conf.d<br />sudo chmod 644 /etc/nginx/nginx.conf<br /> <br />As a system administrator, for each Automation Controller NGINX web server program configuration files.<br /><br />sudo chown root:root /usr/lib/systemd/system/nginx.service<br />sudo chmod 644 /usr/lib/systemd/system/nginx.service<br /> <br />Set the permissions and owner of Automation Controller application content directory:<br /><br />sudo chmod 755 /var/lib/awx/public/static<br />sudo chown root:awx /var/lib/awx/public/static
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

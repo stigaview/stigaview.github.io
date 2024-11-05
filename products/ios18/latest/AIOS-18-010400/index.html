@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-010400 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Apple iOS/iPadOS 18 must require a valid password be successfully entered before the mobile device data is unencrypted.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-010400 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-993300">PP-MDF-993300</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001199&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268024&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Passwords provide a form of access control that prevents unauthorized individuals from accessing computing resources and sensitive data. Passwords may also be a source of entropy for generation of key encryption or data encryption keys. If a password is not required to access data, this data is accessible to any adversary who obtains physical possession of the device. Requiring that a password be successfully entered before the mobile device data is unencrypted mitigates this risk.<br /><br />Note: MDF PP requires a Password Authentication Factor and requires management of its length and complexity. It leaves open whether the  existence of a password is subject to management. This requirement addresses the configuration to require a password, which is critical to the cybersecurity posture of the device.<br /><br />SFRID: FIA_UAU_EXT.1.1
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review configuration settings to confirm the device is set to require a passcode before use.<br /><br />This procedure is performed on the iOS and iPadOS device.<br /><br />On the iPhone and iPad: <br />1. Open the Settings app. <br />2. Tap "General".<br />3. Tap "VPN & Device Management".<br />4. Tap the Configuration Profile from the iOS management tool containing the password policy.<br />5. Tap "Restrictions".<br />6. Tap "Passcode".<br />7. Verify "Passcode required" is set to "Yes".<br /><br />If "Passcode required" is not set to "Yes", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install a configuration profile to require a password to unlock the device.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000270 - V1R2 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All Automation Controller NGINX web servers must not be a proxy server for any process other than the Automation Controller application.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000270 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000141-WSR-000076">SRG-APP-000141-WSR-000076</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-256947&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The Automation Controller NGINX web server must be primarily a web server or a proxy server but not both, for the same reasons that other multi-use servers are not recommended. Scanning for web servers that will also proxy requests into an otherwise protected network is a very common anonymous attack.<br /><br />In a scenario where Automation Controller is still reachable without use of the proxy/load balancer or when the proxy does not validate the header, X-Forwarded-For can be spoofed fairly easily to fake the originating IP addresses. Using HTTP_X_FORWARDED_FOR in the REMOTE_HOST_HEADERS setting poses a vulnerability that essentially gives users access to certain resources that they must not have.<br /><br />Satisfies: SRG-APP-000141-WSR-000076, SRG-APP-000141-WSR-000083, SRG-APP-000141-WSR-000087
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a system administrator for each Automation Controller NGINX web server host, ensure that the only upstream servers configured are for the Automation Controller ASGI and WSGI modules:<br /><br />NGINXCONF=`nginx -V 2>&1 | tr ' ' '\n' | sed -ne '/conf-path/{s/.*conf-path=\(.*\)/\1/;p}' `<br />sudo grep -E 'proxy_pass|uwsgi_pass' $NGINXCONF | grep -Pqz '^\s+proxy_pass http://daphne;\n\s+uwsgi_pass uwsgi;\n$' || echo FAILED<br />[ "`sudo grep -Pzo 'upstream\s+daphne\s+{[^}]+}' $NGINXCONF | grep -a server | grep -v 'server unix:/var/run/tower/daphne.sock;'`" == '' ] || echo FAILED<br />[ "`sudo grep -Pzo 'upstream\s+uwsgi\s+{[^}]+}' $NGINXCONF | grep -a server | grep -v 'server unix:/var/run/tower/uwsgi.sock;'`" == '' ] || echo FAILED<br /><br />If "FAILED" is displayed, this is a finding.<br /><br />Ensure all locations are served by either these upstream servers or other well-known content:<br /><br />[ "`sudo grep location $NGINXCONF | grep -v '^\s*#' | grep -Ev '^\s+location\s+/(favicon.ico|static|websocket)?\s+{'`" == "" ] || echo "FAILED"<br />sudo grep -Eq 'location\s+/favicon.ico\s+{\s+alias\s+/var/lib/awx/public/static/media/favicon.ico;\s+}' $NGINXCONF || echo "FAILED"<br />sudo grep -Eq 'location\s+/static\s+{\s+alias\s+/var/lib/awx/public/static;\s+}' $NGINXCONF || echo "FAILED"<br />sudo grep -Pzo 'location\s+/websocket\s+({([^{}]|(?1))*})' $NGINXCONF | grep -Eq '^\s+proxy_pass\s+http://daphne;' || echo "FAILED"<br />sudo grep -Pzo 'location\s+/\s+({([^{}]|(?1))*})' $NGINXCONF | grep -Eq '^\s+uwsgi_pass\s+uwsgi;' || echo "FAILED"<br /><br />If "FAILED" is displayed, this is a finding.<br /><br />Verify the content present and served from the static content location (/var/lib/awx/public/static) is acceptable per organizationally defined policy.<br /><br />If any content present in this location (or its subdirectories) is not acceptable per organizationally defined policy, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a System Administrator, remove any content present and served from the static content location (/var/lib/awx/public/static) that is not acceptable per organizationally defined policy.<br /><br />Run the setup.sh command in the Ansible Automation Platform installer directory to reconfigure the controller to the default state, which only contains the required configuration:<br /><br />sudo ./setup.sh
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

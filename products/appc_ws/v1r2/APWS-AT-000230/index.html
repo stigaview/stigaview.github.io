@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000230 - V1R2 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All Automation Controller NGINX front-end web server files must be verified for their integrity (e.g., checksums and hashes) before becoming part of the production web server.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000230 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000131-WSR-000051">SRG-APP-000131-WSR-000051</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001749&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-256944&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Being able to verify that a patch, upgrade, certificate, etc., being added to the web server is unchanged from the producer of the file is essential for file validation and nonrepudiation of the information. <br /><br />The Automation Controller NGINX web server host must have a mechanism to verify that files are valid prior to installation.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As a System Administrator, for each Automation Controller NGINX web server host, verify the integrity of the Automation Controller NGINX web server hosts files:<br /><br />aide --check<br /><br />Verify the displayed checksums against previously reserved checksums of the Advanced Intrusion Detection Environment (AIDE) database.<br /><br />If there are any unauthorized or unexplained changes against previous checksums, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a System Administrator, for each Automation Controller NGINX web server host, check for existing or install AIDE:<br /><br />yum install -y aide<br /><br />Create or update the AIDE database immediately after initial installation of each Automation Controller NGINX web server host:<br /><br />aide --init && mv /var/lib/aide/aide.db.new.gz  /var/lib/aide/aide.db.gz<br /><br />Accept any expected changes to the host by updating the AIDE database:<br /><br />aide --update<br /><br />The output will provide checksums for the AIDE database. Save in a protected location.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

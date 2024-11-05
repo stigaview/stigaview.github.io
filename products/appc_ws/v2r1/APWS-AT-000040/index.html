@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000040 - V2R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Automation Controller NGINX web server must use cryptography on all remote connections.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000040 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000015-WSR-000014">SRG-APP-000015-WSR-000014</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001453&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-256942&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Nondisplayed data on a web page may expose information that could put the organization at risk and negatively affect data integrity.<br /><br />Automation Controller's web server must be configured such that all connections, regardless of their origin, between the server and the user are encrypted using cryptography.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       As any user, execute the following command, substituting "<controller_fqdn>" for the hostname of the Automation Controller:<br /><br />curl -s -w '%{redirect_url}\n' -o /dev/null http://<controller_fqdn>/api/v2/ping/  | grep '^https' >/dev/null || echo FAILED<br /><br />If "FAILED" is displayed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       As a System Administrator, locate the inventory file used to install Ansible Automation Platform (usually in the installer directory). Edit this file and ensure the "nginx_disable_https" variable is absent or is set to "false".<br /><br />Run the setup.sh command in the installer directory to reconfigure the controller to use the new setting:<br /><br />sudo ./setup.sh
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

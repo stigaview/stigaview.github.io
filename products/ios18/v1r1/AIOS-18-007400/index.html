@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-007400 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Apple iOS/iPadOS 18 allow list must be configured to not include applications with the following characteristics: - Backs up MD data to non-DOD cloud servers (including user and application access to cloud backup services);- Transmits MD diagnostic data to non-DOD servers;- Allows synchronization of data or applications between devices associated with user; and- Allows unencrypted (or encrypted but not FIPS 140-3 validated) data sharing with other MDs or printers.- Apps which backup their own data to a remote system.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-007400 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-333070">PP-MDF-333070</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000803&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-267997&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Requiring all authorized applications to be in an application allow list prevents the execution of any applications (e.g., unauthorized, malicious) that are not part of the allow list. Failure to configure an application allow list properly could allow unauthorized and malicious applications to be downloaded, installed, and executed on the mobile device, causing a compromise of DOD data accessible by these applications. Applications with the listed characteristics have features that can cause the compromise of sensitive DOD data or have features with no known application in the DOD environment.<br /><br />Application note: The application allow list, in addition to controlling the installation of applications on the MD, must control user access/execution of all core and preinstalled applications, or the MD must provide an alternate method of restricting user access/execution to core and preinstalled applications.<br /><br />Core application: Any application integrated into the OS by the OS or MD vendors.<br /><br />Preinstalled application: Additional noncore applications included in the OS build by the OS vendor, MD vendor, or wireless carrier.<br /><br />SFRID: FMT_SMF.1.1 #8
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify no apps with the following prohibited characteristics are included in the configuration profile:<br /><br />- Backs up MD data to non-DOD cloud servers (including user and application access to cloud backup services);<br />- Transmits MD diagnostic data to non-DOD servers;<br />- Allows synchronization of data or applications between devices associated with user; <br />- Allows unencrypted (or encrypted but not FIPS 140-3 validated) data sharing with other MDs or printers; and<br />- Backs up their own data to a remote system.<br /><br />This check procedure is performed on the Apple iOS/iPadOS management tool. <br /><br />Note: If an organization has multiple configuration profiles, the check procedure must be performed on the relevant configuration profiles applicable to the scope of the review. <br /><br />In the Apple iOS/iPadOS management tool, verify "Allow Listed App" (allowlistedAppBundleIDs) is configured and there are no apps with prohibited characteristics.<br /><br />If "Allow listed apps" is not configured and contains apps with prohibited characteristics, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install a configuration profile with an allow list of approved apps (allowlistedAppBundleIDs). Ensure the allow list does not include apps with the following characteristics:<br /><br />- Backs up MD data to non-DOD cloud servers (including user and application access to cloud backup services);<br />- Transmits MD diagnostic data to non-DOD servers;<br />- Allows synchronization of data or applications between devices associated with user;<br />- Allows unencrypted (or encrypted but not FIPS 140-3 validated) data sharing with other MDs or printers; and<br />- Backs up their own data to a remote system.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

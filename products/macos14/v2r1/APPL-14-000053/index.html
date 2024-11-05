@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-14-000053 - V2R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must set Login Grace Time to 30.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-14-000053 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000163-GPOS-00072">SRG-OS-000163-GPOS-00072</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001133&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-259437&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If SSHD is enabled, then it must be configured to wait only 30 seconds before timing out logon attempts.<br /><br />Note: /etc/ssh/sshd_config will be automatically modified to its original state following any update or major upgrade to the operating system.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to set Login Grace Time to 30 with the following command:<br /><br />/usr/sbin/sshd -G | /usr/bin/awk '/logingracetime/{print $2}'<br /><br />If the result is not "30", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to set Login Grace Time to 30 with the following command:<br /><br />include_dir=$(/usr/bin/awk '/^Include/ {print $2}' /etc/ssh/sshd_config | /usr/bin/tr -d '*')<br /><br />if [[ -z $include_dir ]]; then<br />  /usr/bin/sed -i.bk "1s/.*/Include \/etc\/ssh\/sshd_config.d\/\*/" /etc/ssh/sshd_config<br />fi<br /><br />/usr/bin/grep -qxF 'logingracetime 30' "${include_dir}01-mscp-sshd.conf" 2>/dev/null || echo "logingracetime 30" >> "${include_dir}01-mscp-sshd.conf"<br /><br />for file in $(ls ${include_dir}); do<br />  if [[ "$file" == "100-macos.conf" ]]; then<br />      continue<br />  fi<br />  if [[ "$file" == "01-mscp-sshd.conf" ]]; then<br />      break<br />  fi<br />  /bin/mv ${include_dir}${file} ${include_dir}20-${file}<br />done
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

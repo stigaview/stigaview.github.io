@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APWS-AT-000020 - V2R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The Automation Controller web server must manage sessions.</h2>
+  <p>
+  <b>STIG ID:</b> APWS-AT-000020 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-APP-000001-WSR-000002">SRG-APP-000001-WSR-000002</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000054,CCI-002361&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-256940&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Session management on client and server is required to protect identity and authorization information.<br /><br />Sessions for the Automation Controller web server, if compromised, could lead to execution of jobs on remote endpoints as if authenticated.<br /><br />Satisfies: SRG-APP-000001-WSR-000002, SRG-APP-000001-WSR-000001, SRG-APP-000295-WSR-000012, SRG-APP-000295-WSR-000134
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Log in to Automation Controller as an administrator and navigate to Settings >> System >> Miscellaneous Authentication.<br /><br />The following parameters must be set:<br /><br />OAuth 2 Timeout Settings < 1800 seconds (No more than 30 minutes). <br /><br />The maximum number of simultaneous logged session must not be less than 0 (The default is -1) and must not match the organizationally defined maximum.<br /><br />Disable the built-in authentication system = ON<br /><br />Enable HTTP Basic Auth = Off<br /><br />OAuth 2 Timeout settings: <br /><br />"ACCESS_TOKEN_EXPIRE_SECONDS": 31536000000,<br /> "AUTHORIZATION_CODE_EXPIRE_SECONDS": 600,<br /> "REFRESH_TOKEN_EXPIRE_SECONDS": 2628000<br /><br />Allow External Users to Create OAuth2 Tokens = Off<br /><br />Login redirect override URL = Not Configured or Blank<br /><br />Social Auth Organization Map = Null<br /><br />Social Auth Team Map = Null<br /><br />Social Auth User Fields = Null<br /><br />If any of these settings are incorrect, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Log in to Automation Controller as an administrator and navigate to Settings >> System >> Miscellaneous Authentication.<br /><br />Click "Edit".<br /><br />Set the following parameters:<br /><br />OAuth 2 Timeout Settings < 1800 seconds. <br /><br />The maximum number of simultaneous logged session must equal 0 or the organizationally defined maximum.<br /><br />Disable the built-in authentication system = ON<br /><br />Enable HTTP Basic Auth = Off<br /><br />Access Token Expiration = 31536000000<br /><br />Authorization Code Expiration = 600<br /><br />Refresh Token Expiration = 2628000<br /><br />Allow External Users to Create OAuth2 Tokens = Off<br /><br />Login redirect override URL = Not Configured or Blank<br /><br />Social Auth Organization Map = Null<br /><br />Social Auth Team Map = Null<br /><br />Social Auth User Fields = Null<br /><br />Click "Save".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

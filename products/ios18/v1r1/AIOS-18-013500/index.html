@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-013500 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Apple iOS must implement the management setting: not allow a user to remove Apple iOS configuration profiles that enforce DOD security requirements.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-013500 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-993300">PP-MDF-993300</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268058&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Configuration profiles define security policies on Apple iOS devices. If a user is able to remove a configuration profile, the user can then change the configuration that had been enforced by that policy. Relaxing security policies may introduce vulnerabilities the profiles had mitigated. Configuring a profile to never be removed mitigates this risk.<br /><br />SFRID: FMT_SMF.1.1 #47
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review configuration settings to confirm configuration profiles are not removable.<br /><br />This check procedure is performed on both the Apple iOS management tool and the Apple iOS device. The procedures below assume the site is not enrolled in Apple's Automatic Device Enrollment and are not applicable to devices under MDM management.<br /><br />Note: If an organization has multiple configuration profiles, the check procedure must be performed on the relevant configuration profiles applicable to the scope of the review. <br /><br />In the Apple iOS management tool, verify "Security" is set to "Never" and "Automatically Remove Profile" is set to "Never".<br /><br />On the Apple iOS device:<br />1. Open the Settings app.<br />2. Tap "General".<br />3. Tap "VPN & Device Management". <br />4. Tap each Configuration Profile from the Apple iOS management tool that contains the restrictions for the device.<br />5. Verify the "Remove Profile" button is not present.<br /><br />If on the Apple iOS management tool or the iOS device the "Remove Profile" button is available on the configuration profile, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the Apple iOS configuration profile so that it can never be removed.<br /><br />The procedure for implementing this control will vary depending on the MDM/EMM used by the mobile service provider.<br /><br />When using Apple Configurator, under "General Security", configure "Security" to "Never" and "Automatically Remove Profile" to "Never".
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

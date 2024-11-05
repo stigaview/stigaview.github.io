@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-009700 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Apple iOS/iPadOS 18 must not allow non-DOD applications to access DOD data.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-009700 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-333280">PP-MDF-333280</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002530,CCI-002233&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268017&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       App data sharing gives apps the ability to access the data of other apps for enhanced user functionality. However, sharing also poses a significant risk that unauthorized users or apps will obtain access to sensitive DOD information. To mitigate this risk, there are data sharing restrictions. If a user is allowed to make exceptions to the data sharing restriction policy, the user could enable unauthorized sharing of data, leaving it vulnerable to breach. Limiting the granting of exceptions to either the administrator or common application developer mitigates this risk.<br /><br />Copy/paste of data between applications in different application processes or groups of application processes is considered an exception to the access control policy; therefore, the administrator must be able to enable/disable the feature. Other exceptions include allowing any data or application sharing between process groups.<br /><br />SFRID: FMT_SMF.1.1 #42, FDP_ACF_EXT.1.2
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review configuration settings to confirm "Allow documents from managed apps in unmanaged apps" is disabled.<br /><br />This check procedure is performed on both the Apple iOS/iPadOS management tool and the iPhone and iPad.<br /><br />Note: If an organization has multiple configuration profiles, the check procedure must be performed on the relevant configuration profiles applicable to the scope of the review.<br /><br />In the iOS management tool, verify "Allow documents from managed apps in unmanaged apps" is unchecked.<br /><br />Alternatively, verify the text "<key>allowOpenFromManagedToUnmanaged</key><false/>" appears in the configuration profile (.mobileconfig file).<br /><br />On the iOS device:<br />1. Open the Settings app.<br />2. Tap "General".<br />3. Tap "VPN & Device Management".<br />4. Tap the Configuration Profile from the iOS management tool containing the restrictions policy.<br />5. Tap "Restrictions".<br />6. Verify "Opening documents from managed to unmanaged apps not allowed" is listed.<br /><br />If "Allow documents from managed apps in unmanaged apps" is checked in the iOS management tool, "<key>allowOpenFromManagedToUnmanaged</key><true/>" appears in the configuration profile, or the restrictions policy on the iPhone and iPad does not list "Opening documents from managed to unmanaged apps not allowed", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install a configuration profile to prevent non-DOD applications from accessing DOD data.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

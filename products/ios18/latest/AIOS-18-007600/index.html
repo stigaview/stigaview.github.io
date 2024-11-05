@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>AIOS-18-007600 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - b8c0460"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Apple iOS/iPadOS 18 must not display notifications (calendar information) when the device is locked.</h2>
+  <p>
+  <b>STIG ID:</b> AIOS-18-007600 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/PP-MDF-333080">PP-MDF-333080</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000060&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-267999&nbsp;|&nbsp;
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Many mobile devices display notifications on the lock screen so users can obtain relevant information in a timely manner without having to frequently unlock the phone to determine if there are new notifications. However, in many cases, these notifications can contain sensitive information. When they are available on the lock screen, an adversary can see them merely by being in close physical proximity to the device. Configuring the mobile operating system to not send notifications to the lock screen mitigates this risk.<br /><br />SFRID: FMT_SMF.1.1 #18
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Review configuration settings to confirm "Show Today view in Lock screen" is disabled.<br /><br />This check procedure is performed on both the Apple iOS/iPadOS management tool and the iPhone and iPad. <br /><br />Note: If an organization has multiple configuration profiles, the check procedure must be performed on the relevant configuration profiles applicable to the scope of the review. <br /><br />In the Apple iOS/iPadOS management tool, verify "Show Today view in Lock screen" is unchecked.<br /><br />Alternatively, verify the text "<key>allowLockScreenTodayView</key><false/>" appears in the configuration profile (.mobileconfig file).<br /><br />On the iPhone and iPad:<br />1. Open the Settings app.<br />2. Tap "General".<br />3. Tap "Profiles & Device Management" or Profiles".<br />4. Tap the Configuration Profile from the iOS management tool containing the management policy.<br />5. Tap "Restrictions".<br />6. Verify "Today view on lock screen not allowed" is present.<br /><br />If "Show Today view in Lock screen" is checked in the Apple iOS/iPadOS management tool, "<key>allowLockScreenTodayView</key><true/>" appears in the configuration profile, or the restrictions policy on the iPhone and iPad does not list "Today view on lock screen not allowed", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install a configuration profile to disable "Show Today view in Lock screen" from the device Lock screen.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>
