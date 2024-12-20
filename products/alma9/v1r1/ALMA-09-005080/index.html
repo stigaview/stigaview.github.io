@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-005080 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must generate audit records for all account creations, modifications, disabling, and termination events that affect /etc/group.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-005080 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000004-GPOS-00004">SRG-OS-000004-GPOS-00004</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000018,CCI-000130,CCI-000135,CCI-000169,CCI-000015,CCI-002884,CCI-000172,CCI-001403,CCI-001404,CCI-001405,CCI-002130&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269130
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Audit records provide a means to investigate events related to a security incident. Insufficient audit coverage will make identifying those responsible challenging or impossible.<br /><br />This auditd policy will watch for and alert the system administrators regarding any modifications to the "/etc/group" file such as adding/removing/disabling groups.<br /><br />Satisfies: SRG-OS-000004-GPOS-00004, SRG-OS-000037-GPOS-00015, SRG-OS-000042-GPOS-00020, SRG-OS-000062-GPOS-00031, SRG-OS-000304-GPOS-00121, SRG-OS-000392-GPOS-00172, SRG-OS-000462-GPOS-00206, SRG-OS-000470-GPOS-00214, SRG-OS-000471-GPOS-00215, SRG-OS-000239-GPOS-00089, SRG-OS-000240-GPOS-00090, SRG-OS-000241-GPOS-00091, SRG-OS-000303-GPOS-00120, SRG-OS-000466-GPOS-00210, SRG-OS-000476-GPOS-00221
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify AlmaLinux OS 9 generates audit records for all account creations, modifications, disabling, and termination events that affect the "/etc/group" file, with the following command: <br /> <br />$ grep /etc/group /etc/audit/audit.rules <br /> <br />-w /etc/group -p wa -k identity <br /> <br />If the command does not return a line or the line is commented out, this is a finding.<br /> <br />Note: The "-k" allows for specifying an arbitrary identifier, and the string after it does not need to match the example output above.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to generate audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group".<br /><br />Add the following to the "/etc/audit/rules.d/audit.rules" file:<br /><br />-w /etc/group -p wa -k identity<br /><br />Merge the rules into /etc/audit/audit.rules:<br /><br />$ augenrules --load<br /><br />Reboot the server so the changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

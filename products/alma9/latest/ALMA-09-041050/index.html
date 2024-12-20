@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-041050 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must restrict access to the kernel message buffer.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-041050 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000132-GPOS-00067">SRG-OS-000132-GPOS-00067</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001082,CCI-001090&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269425
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Restricting access to the kernel message buffer limits access to only root. This prevents attackers from gaining additional system information as a nonprivileged user.<br /><br />Satisfies: SRG-OS-000132-GPOS-00067, SRG-OS-000138-GPOS-00069
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify AlmaLinux OS 9 is configured to restrict access to the kernel message buffer with the following commands:<br /><br />Check the status of the kernel.dmesg_restrict kernel parameter.<br /><br />$ sysctl kernel.dmesg_restrict<br /><br />kernel.dmesg_restrict = 1<br /><br />If "kernel.dmesg_restrict" is not set to "1" or is missing, this is a finding.<br /><br />Check that the configuration files are present to enable this kernel parameter.<br /><br />$ /usr/lib/systemd/systemd-sysctl --cat-config | egrep -v '^(#|;)' | grep -F kernel.dmesg_restrict | tail -1<br /><br />kernel.dmesg_restrict = 1<br /><br />If "kernel.dmesg_restrict" is not set to "1" or is missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to restrict access to the kernel message buffer with the following command:<br /><br />$ echo "kernel.dmesg_restrict = 1 > /etc/sysctl.d/60-dmesg.conf"<br /><br />Load settings from all system configuration files with the following command:<br /><br />$ sysctl --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-004320 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must use the TuxCare FIPS packages and not the default encryption packages.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-004320 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000033-GPOS-00014">SRG-OS-000033-GPOS-00014</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000068,CCI-002450,CCI-000877&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269126
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       FIPS 140-3 validated packages are available from TuxCare.<br /><br />The original community packages must be replaced with the versions that have gone through the CMVP.<br /><br />Satisfies: SRG-OS-000033-GPOS-00014, SRG-OS-000478-GPOS-00223, SRG-OS-000396-GPOS-00176, SRG-OS-000125-GPOS-00065
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that AlmaLinux OS 9 is using the TuxCare FIPS packages with the following command:<br /><br />$ rpm -qa | grep -E '^(gnutls|nettle|nss|openssl|libgcrypt|kernel)-[0-9]+' | grep -v tuxcare<br /><br />If the command returns anything, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Ensure FIPS-validated packages are in use instead of OS defaults using the following commands:<br /><br />$ dnf -y install openssl-3.0.7-20.el9_2.tuxcare.1 kernel-5.14.0-284.11.1.el9_2.tuxcare.5 gnutls-3.7.6-23.el9_2.tuxcare.3 nettle-3.8-3.el9_2.tuxcare.1 libgcrypt-1.10.0-10.el9_2.tuxcare.3 nss-3.90.0-6.el9_2.tuxcare.1<br /><br />$ dnf -y upgrade<br /><br />$ grubby --set-default=/boot/vmlinuz-5.14.0-284.11.1.el9_2.tuxcare.5.$(uname -i)<br /><br />$ reboot<br /><br />After rebooting into a FIPS kernel, remove the OS default kernel packages, using for example:<br /><br />$ dnf remove kernel-5.14.0-284.11.1.el9_2.x86_64 kernel-5.14.0-284.30.1.el9_2.x86_64<br /><br />$ dnf autoremove
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

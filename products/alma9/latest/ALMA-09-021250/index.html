@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-021250 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 SSH daemon must display the date and time of the last successful account logon upon an SSH logon.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-021250 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269268
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Providing users feedback on when account accesses last occurred facilitates user recognition and reporting of unauthorized account use.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SSH daemon provides users with feedback on when account accesses last occurred with the following command:<br /><br />$ sshd -T | grep printlastlog<br /><br />printlastlog yes<br /><br />If the value is returned as "no", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SSH daemon to provide users with feedback on when account accesses last occurred.<br /><br />Add the following line to "/etc/ssh/sshd_config", or uncomment the line and set the value to "yes":<br /><br />PrintLastLog yes<br /><br />Alternatively, add the setting to an include file if the line "Include /etc/ssh/sshd_config.d/*.conf" is found at the top of the "/etc/ssh/sshd_config" file:<br /><br />$ echo 'PrintLastLog yes' > /etc/ssh/sshd_config.d/40-lastlog.conf<br /><br />Restart the SSH daemon for the settings to take effect:<br /><br />$ systemctl restart sshd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

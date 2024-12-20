@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-008380 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must configure the appropriate SELinux context on the nondefault faillock tally directory.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-008380 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000329-GPOS-00128">SRG-OS-000329-GPOS-00128</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002238&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269155
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-forcing, is reduced. Limits are imposed by locking the account.<br /><br />Not having the correct SELinux context on the faillock directory may lead to unauthorized access to the directory meaning that accounts could be unlocked by a nonadministrator.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: If the system does not have SELinux enabled and enforcing, a targeted policy, or if the pam_faillock module is not configured for use, this requirement is Not Applicable.<br /><br />Verify the location of the nondefault tally directory for the pam_faillock module with the following command:<br /><br />$ grep "dir =" /etc/security/faillock.conf<br /><br />dir = /var/log/faillock<br /><br />Check the security context type of the nondefault tally directory with the following command:<br /><br />$ ls -Zd /var/log/faillock<br /><br />system_u:object_r:faillog_t:s0 /var/log/faillock<br /><br />If the security context type of the nondefault tally directory is not "faillog_t", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to allow the use of a nondefault faillock tally directory while SELinux enforces a targeted policy.<br /><br />Create a nondefault faillock tally directory (if it does not already exist) using the following command:<br /><br />$ mkdir /var/log/faillock<br /><br />Update the /etc/selinux/targeted/contexts/files/file_contexts.local file with the "faillog_t" context type for the nondefault faillock tally directory using the following command:<br /><br />$ semanage fcontext -a -t faillog_t "/var/log/faillock(/.*)?"<br /><br />Update the context type of the nondefault faillock directory and files within using the following command:<br /><br />$ restorecon -RFv /var/log/faillock
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-020590 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The AlmaLinux OS 9 SSH server configuration file must be owned by root.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-020590 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269262
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Service configuration files enable or disable features of their respective services, which, if configured incorrectly, can lead to insecure and vulnerable configurations. Therefore, service configuration files must be owned by the correct group to prevent unauthorized changes.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the ownership of "/etc/ssh/sshd_config" and any "/etc/ssh/sshd_config.d/*.conf" files with the following command:<br /><br />$ find /etc/ssh/sshd_config /etc/ssh/sshd_config.d -exec stat -c "%U %n" {} \;<br /><br />root /etc/ssh/sshd_config<br />root /etc/ssh/sshd_config.d<br />root /etc/ssh/sshd_config.d/40-stig.conf<br />root /etc/ssh/sshd_config.d/50-redhat.conf<br />root /etc/ssh/sshd_config.d/clientalive.conf<br /><br />If any of the files do not have an owner of "root", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SSHD config files to be owned by root with the following command:<br /><br />$ chown root /etc/ssh/sshd_config /etc/ssh/sshd_config.d/*.conf
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-017620 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must define default permissions for all authenticated users in such a way that the user can only read and modify their own files.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-017620 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00228">SRG-OS-000480-GPOS-00228</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269235
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Setting the most restrictive default permissions ensures that when new accounts are created they do not have unnecessary access.<br /><br />With a UMASK of 077, files will be created with 0600 permissions (owner read/write only) and directories will have 0700 permissions (owner read/write/execute only).
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify AlmaLinux OS 9 defines default permissions for all authenticated users in such a way that the user can only read and modify their own files with the following command:<br /><br />Note: If the value of the "UMASK" parameter is set to "000" in the "/etc/login.defs" file, the severity is raised to a CAT I.<br /><br />$ grep UMASK /etc/login.defs<br /><br />UMASK 077<br /><br />If the value for the "UMASK" parameter is not "077", or the "UMASK" parameter is missing or is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to define default permissions for all authenticated users in such a way that the user can only read and modify their own files.<br /><br />Add or edit the lines for the "UMASK" parameter in the "/etc/login.defs" file to "077":<br /><br />UMASK 077
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

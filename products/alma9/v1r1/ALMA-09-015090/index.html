@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-015090 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All AlmaLinux OS 9 local interactive users must have a home directory assigned in the /etc/passwd file.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-015090 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00230">SRG-OS-000480-GPOS-00230</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269213
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If local interactive users are not assigned a valid home directory, there is no place for the storage and control of files they should own.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that interactive users on the system have a home directory assigned with the following command:<br /> <br />$ awk -F: '($3>=1000)&&($7 !~ /nologin/){print $1, $6}' /etc/passwd<br /><br />simon /home/simon<br />test /home/test<br />testdupe /home/testdupe<br /><br />Inspect the output and verify that all interactive users (normally users with a UID greater that 1000) have a home directory defined.<br /><br />If users home directory is not defined, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Create and assign home directories to all local interactive users on AlmaLinux OS 9 that currently do not have a home directory assigned.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-022130 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>All AlmaLinux OS 9 local initialization files must have mode 0740 or less permissive.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-022130 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269276
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Local initialization files are used to configure the user's shell environment upon logon. Malicious modification of these files could compromise accounts upon logon.<br /><br />World-readable "dot files" such as .bash_history or .netrc can reveal plaintext credentials, such files should be further protected (e.g., 0600).
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that all local initialization files have a mode of "0740" or less permissive with the following command:<br /><br />Note: The example will be for the "testuser" account, who has a home directory of "/home/testuser".<br /><br />$ find /home/testuser/.[^.]* -maxdepth 0 -perm -740 -exec stat -c "%a %n" {} \; | more<br /><br />755 /home/testuser/.cache<br />755 /home/testuser/.mozilla<br /><br />If any local initialization files have a mode more permissive than "0740", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Set the mode of the local initialization files to "0740" with the following command:<br /><br />Note: The example will be for the "testuser" account, who has a home directory of "/home/testuser".<br /><br />$ chmod 0740 /home/testuser/.<INIT_FILE>
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

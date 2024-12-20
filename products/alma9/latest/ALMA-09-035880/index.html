@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-035880 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must ensure the password complexity module is enabled in the password-auth file.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-035880 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000069-GPOS-00037">SRG-OS-000069-GPOS-00037</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-004066&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269386
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Enabling PAM password complexity permits enforcement of strong passwords and consequently makes the system less prone to dictionary attacks.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify AlmaLinux OS 9 uses "pwquality" to enforce the password complexity rules in the password-auth file with the following command:<br /><br />Check for the use of the "pwquality" module in the PAM auth files with the following command:<br /><br />$ grep pam_pwquality.so /etc/pam.d/system-auth /etc/pam.d/password-auth<br /><br />/etc/pam.d/system-auth:password    required                                     pam_pwquality.so retry=3<br />/etc/pam.d/password-auth:password    required                                     pam_pwquality.so retry=3<br /><br /><br />If the command does not return a line in each file containing the value "pam_pwquality.so", or the line is commented out, this is a finding.<br /><br />If the system administrator (SA) can demonstrate that the required configuration is contained in a PAM configuration file included or substacked from the system-auth file, this is not a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to use "pwquality" to enforce password complexity rules.<br /><br />Add the following line to the "/etc/pam.d/system-auth" and "/etc/pam.d/password-auth" files (or modify the line to have the required value):<br /><br />password required pam_pwquality.so retry=3
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

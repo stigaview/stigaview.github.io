@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-033020 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Duplicate User IDs (UIDs) must not exist for interactive users.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-033020 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000104-GPOS-00051">SRG-OS-000104-GPOS-00051</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000764,CCI-000804&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269365
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       To ensure accountability and prevent unauthenticated access, organizational users must be identified and authenticated to prevent potential misuse and compromise of the system.<br /><br />Organizational users include organizational employees or individuals the organization deems to have equivalent status of employees (e.g., contractors). Organizational users (and processes acting on behalf of users) must be uniquely identified and authenticated to all accesses, except for the following: <br /><br />1) Accesses explicitly identified and documented by the organization. Organizations document specific user actions that can be performed on the information system without identification or authentication; and<br /><br />2) Accesses that occur through authorized use of group authenticators without individual authentication. Organizations may require unique identification of individuals in group accounts (e.g., shared privilege accounts) or for detailed accountability of individual activity.<br /><br />Satisfies: SRG-OS-000104-GPOS-00051, SRG-OS-000121-GPOS-00062
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that AlmaLinux OS 9 contains no duplicate UIDs for interactive users with the following command:<br /><br />$ cut -f3 -d":" /etc/passwd | uniq -d<br /><br />If output is produced and the UIDs listed are for interactive user accounts, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Provide each interactive user that has a duplicate UID with a unique UID using the "usermod" command, for example:<br /><br />$ usermod -u 1002 myuser
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

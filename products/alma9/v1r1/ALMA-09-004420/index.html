@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-004420 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must enable FIPS mode.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-004420 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000033-GPOS-00014">SRG-OS-000033-GPOS-00014</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000068,CCI-002450,CCI-000877&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269127
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without confidentiality protection mechanisms, unauthorized individuals may gain access to sensitive information via a remote access session.<br /><br />Remote access is access to DOD nonpublic information systems by an authorized user (or an information system) communicating through an external, nonorganization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.<br /><br />Encryption provides a means to secure the remote connection to prevent unauthorized access to the data traversing the remote access connection (e.g., RDP), thereby providing a degree of confidentiality. The encryption strength of a mechanism is selected based on the security categorization of the information.<br /><br />The operating system must use cryptographic modules that have been validated by NIST's FIPS 140-3 program. Using weak or untested cryptography could compromise the confidentiality and integrity of data at rest and in transit.<br /><br />Satisfies: SRG-OS-000033-GPOS-00014, SRG-OS-000478-GPOS-00223, SRG-OS-000396-GPOS-00176, SRG-OS-000125-GPOS-00065
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that AlmaLinux OS 9 is in FIPS mode with the following command:<br /><br />$ fips-mode-setup --check<br /><br />FIPS mode is enabled.<br /><br />If FIPS mode is not enabled, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       FIPS-validated packages are available from TuxCare as part of the Enterprise Support for AlmaLinux product line. You will need to purchase an ESU license key.<br /><br />Configure the operating system to implement FIPS mode with the following commands:<br /><br />$ dnf install -y https://repo.tuxcare.com/tuxcare/tuxcare-release-latest-9.noarch.rpm<br /><br />$ tuxctl ---fips --license-key ESU-XXXXXXXXXXXXXXXXXXX<br /><br />$ dnf -y install openssl-3.0.7-20.el9_2.tuxcare.1 kernel-5.14.0-284.11.1.el9_2.tuxcare.5 gnutls-3.7.6-23.el9_2.tuxcare.3 nettle-3.8-3.el9_2.tuxcare.1 libgcrypt-1.10.0-10.el9_2.tuxcare.3 nss-3.90.0-6.el9_2.tuxcare.1<br /><br />$ grubby --set-default=/boot/vmlinuz-5.14.0-284.11.1.el9_2.tuxcare.5.$(uname -i)<br /><br />$ fips-mode-setup --enable<br /><br />$ reboot
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

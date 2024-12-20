@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-036100 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must enforce password complexity rules for the root account.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-036100 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000069-GPOS-00037">SRG-OS-000069-GPOS-00037</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-004066&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269388
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Use of a complex password helps to increase the time and resources required to compromise the password. Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks.<br /><br />Password complexity is one factor of several that determines how long it takes to crack a password. The more complex the password, the greater the number of possible combinations that need to be tested before the password is compromised.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that AlmaLinux OS 9 enforces password complexity rules for the root account.<br /><br />Check if root user is required to use complex passwords with the following command:<br /><br />$ grep enforce_for_root /etc/security/pwquality.conf /etc/security/pwquality.conf.d/*.conf<br /><br />/etc/security/pwquality.conf:# enforce_for_root<br />/etc/security/pwquality.conf.d/stig.conf:enforce_for_root<br /><br />If "enforce_for_root" is commented or missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to enforce password complexity on the root account.<br /><br />Add or update the following line in /etc/security/pwquality.conf:<br /><br />enforce_for_root<br /><br />Note: Unlike most Linux tools, pam_pwquality does not override its defaults with those in a drop-in file, so edit /etc/security/pwquality.conf and not use a file in /etc/security/pwquality.conf.d/ or comment out the setting in /etc/security/pwquality.conf if using a drop-in file.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

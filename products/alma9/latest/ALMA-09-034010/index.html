@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-034010 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must have the openssl-pkcs11 package installed.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-034010 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000377-GPOS-00162">SRG-OS-000377-GPOS-00162</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001954,CCI-001953,CCI-004046,CCI-000765&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269373
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The use of PIV credentials facilitates standardization and reduces the risk of unauthorized access.<br /><br />DOD has mandated the use of the CAC to support identity management and personal authentication for systems covered under Homeland Security Presidential Directive (HSPD) 12, as well as making the CAC a primary component of layered protection for national security systems.<br /><br />Satisfies: SRG-OS-000377-GPOS-00162, SRG-OS-000376-GPOS-00161, SRG-OS-000375-GPOS-00160, SRG-OS-000105-GPOS-00052
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: If the System Administrator demonstrates the use of an approved alternate multifactor authentication method, this requirement is Not Applicable.<br /><br />Verify that AlmaLinux OS 9 has the openssl-pkcs11 package installed with the following command:<br /><br />$ dnf list --installed openssl-pkcs11<br /><br />Installed Packages<br />openssl-pkcs11.x86_64                 0.4.11-7.el9            @baseos<br /><br />If the "openssl-pkcs11" package is not installed, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       The openssl-pkcs11 package can be installed with the following command:<br /> <br />$ dnf install openssl-pkcs11
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

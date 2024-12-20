@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-006290 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must require a boot loader password.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-006290 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000080-GPOS-00048">SRG-OS-000080-GPOS-00048</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000213&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269137
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Password protection on the boot loader configuration ensures users with physical access cannot trivially alter important bootloader settings. These include which kernel to use, and whether to enter single-user mode.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the boot loader superuser password is required using the following command:<br /><br />$ grep password /etc/grub2.cfg <br /><br />password_pbkdf2  superman   ${GRUB2_PASSWORD}  <br /><br />Verify the boot loader superuser password has been set and the password is encrypted using the following command:<br /><br />$ cat /boot/grub2/user.cfg<br /><br />GRUB2_PASSWORD=grub.pbkdf2.sha512.10000.5766DCE424DCD4F0A2F5AC774C044BE8B904BC<br />F0022B671CD5E522A3568C599F327EBA3F3F5AB30D69A9B9A4FD172B12435BC10BE0A9B40669FB<br />A5C5ECBE8D1B.EAC815AE6F8A3F79F800D2EC7F454933BC3D63282532AAB1C487CA25331DD359F<br />5BF61166EDB53FB33977E982A9F20327D988DA15CBF7E4238357E65C5AEAF3C<br /><br />If a "GRUB2_PASSWORD" is not set, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to require a grub bootloader password for the grub superuser account.<br /><br />Generate an encrypted grub2 password for the grub superuser account with the following command:<br /><br />$ grub2-setpassword<br />Enter password:<br />Confirm password:
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

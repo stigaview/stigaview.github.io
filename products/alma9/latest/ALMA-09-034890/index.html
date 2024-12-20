@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-034890 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must disable the graphical user interface automount function unless required.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-034890 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000378-GPOS-00163">SRG-OS-000378-GPOS-00163</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001958,CCI-000778&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269377
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Automatically mounting file systems permits easy introduction of unknown devices, thereby facilitating malicious activity.<br /><br />Satisfies: SRG-OS-000378-GPOS-00163, SRG-OS-000114-GPOS-00059
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: This requirement assumes the use of the AlmaLinux OS 9 default graphical user interface, the GNOME desktop environment. If the system does not have any graphical user interface installed, this requirement is Not Applicable.<br /><br />Verify AlmaLinux OS 9 disables the graphical user interface automount function with the following command:<br /><br />$ gsettings get org.gnome.desktop.media-handling automount-open <br /><br />false<br /><br />If "automount-open" is set to "true", and is not documented with the information system security officer (ISSO) as an operational requirement, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the GNOME desktop to disable automated mounting of removable media.<br /><br />The dconf settings can be edited in the /etc/dconf/db/* location.<br /><br />Update the [org/gnome/desktop/media-handling] section of the "/etc/dconf/db/local.d/00-security-settings" database file and add or update the following lines:<br /><br />[org/gnome/desktop/media-handling]<br />automount-open=false<br /><br />Then update the dconf system databases:<br /><br />$ dconf update
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

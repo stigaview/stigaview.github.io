@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-006950 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The AlmaLinux OS 9 debug-shell systemd service must be disabled.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-006950 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000324-GPOS-00125">SRG-OS-000324-GPOS-00125</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002235&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269143
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The debug-shell requires no authentication and provides root privileges to anyone who has physical access to the machine.<br /><br />While this feature is disabled by default, masking it adds an additional layer of assurance that it will not be enabled via a dependency in systemd. <br /><br />This also prevents attackers with physical access from easily bypassing security on the machine through valid troubleshooting configurations and gaining root access when the system is rebooted.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify AlmaLinux OS 9 is configured to mask the debug-shell systemd service with the following command:<br /><br />$ systemctl status debug-shell.service<br /><br />debug-shell.service<br />Loaded: masked (Reason: Unit debug-shell.service is masked.)<br />Active: inactive (dead)<br /><br />If the "debug-shell.service" is loaded and not masked, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to mask the debug-shell systemd service with the following command:<br /><br />$ systemctl mask --now debug-shell.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

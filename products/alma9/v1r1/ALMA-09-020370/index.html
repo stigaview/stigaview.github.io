@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-020370 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 SSH daemon must not allow compression or must only allow compression after successful authentication.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-020370 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269260
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If compression is allowed in an SSH connection prior to authentication, vulnerabilities in the compression software could result in compromise of the system from an unauthenticated connection, potentially with root privileges.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SSH daemon performs compression after a user successfully authenticates with the following command:<br /><br />$ sshd -T | grep compression<br /><br />Compression no<br /><br />If the "Compression" keyword is set to "yes", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SSH daemon to not allow compression.<br /><br />Add the following line to "/etc/ssh/sshd_config", or uncomment the line and set the value to "delayed" or preferably "no":<br /><br />Compression no<br /><br />Alternatively, add the setting to an include file if the line "Include /etc/ssh/sshd_config.d/*.conf" is found at the top of the "/etc/ssh/sshd_config" file:<br /><br />$ echo 'Compression no' > /etc/ssh/sshd_config.d/40-compression.conf<br /><br />Restart the SSH daemon for the settings to take effect:<br /><br />$ systemctl restart sshd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

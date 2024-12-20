@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-040170 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must be configured so that all network connections associated with SSH traffic are terminated after 10 minutes of becoming unresponsive.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-040170 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000395-GPOS-00175">SRG-OS-000395-GPOS-00175</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002891,CCI-001133,CCI-002361&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269419
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Terminating an unresponsive SSH session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle SSH session will also free up resources committed by the managed network element.<br /><br />Terminating network connections associated with communications sessions includes, for example, deallocating associated TCP/IP address/port pairs at the operating system level and deallocating networking assignments at the application level if multiple application sessions are using a single operating system-level network connection. This does not mean the operating system terminates all sessions or network access; it only ends the unresponsive session and releases the resources associated with that session.<br /><br />Satisfies: SRG-OS-000395-GPOS-00175, SRG-OS-000163-GPOS-00072, SRG-OS-000279-GPOS-00109
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that the "ClientAliveInterval" variable is set to a value of "600" or less and "ClientAliveCountMax" is set to "1" by performing the following command:<br /><br />$ sshd -T | grep clientalive<br /><br />clientaliveinterval 600<br />clientalivecountmax 1<br /><br />If "ClientAliveInterval" does not have a value of "600" or less, or "ClientAliveCountMax" is not set to "1", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       To configure the SSH server to terminate a user session automatically after the SSH client has become unresponsive, add or modify the following lines in "/etc/ssh/sshd_config":<br /><br />ClientAliveInterval 600<br />ClientAliveCountMax 1<br /><br />Alternatively, add the settings to an include file if the line "Include /etc/ssh/sshd_config.d/*.conf" is found at the top of the "/etc/ssh/sshd_config" file:<br /><br />$ cat << EOF | tee /etc/ssh/sshd_config.d/clientalive.conf<br />ClientAliveInterval 600<br />ClientAliveCountMax 1<br />EOF<br /><br />Restart the SSH daemon for the settings to take effect:<br /><br />$ systemctl restart sshd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

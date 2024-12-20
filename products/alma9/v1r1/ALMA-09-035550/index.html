@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-035550 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must not have the autofs package installed.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-035550 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000379-GPOS-00164">SRG-OS-000379-GPOS-00164</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001967,CCI-000778&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269383
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without authenticating devices, unidentified or unknown devices may be introduced, thereby facilitating malicious activity. Bidirectional authentication provides stronger safeguards to validate the identity of other devices for connections that are of greater risk.<br /><br />Bidirectional authentication solutions include, but are not limited to, IEEE 802.1x and Extensible Authentication Protocol (EAP), RADIUS server with EAP-Transport Layer Security (TLS) authentication, Kerberos, and SSL mutual authentication.<br /><br />A local connection is any connection with a device communicating without the use of a network. A network connection is any connection with a device that communicates through a network (e.g., local area network, wide area network, or the internet). A remote connection is any connection with a device communicating through an external network (e.g., the internet).<br /><br />Because of the challenges of applying this requirement on a large scale, organizations are encouraged to only apply this requirement to those limited number (and type) of devices that truly need to support this capability.<br /><br />Satisfies: SRG-OS-000379-GPOS-00164, SRG-OS-000114-GPOS-00059
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: If the autofs service is not installed, this requirement is Not Applicable.<br /><br />Verify that the autofs package is not installed with the following command:<br /><br />$ dnf list --installed autofs<br /><br />Error: No matching Packages to list<br /><br />If the "autofs" package is installed, and is not documented as an operational requirement with the information system security officer (ISSO), this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Remove the autofs package with the following command:<br /><br />$ dnf remove autofs
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-041600 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 local disk partitions must implement cryptographic mechanisms to prevent unauthorized disclosure or modification of all information that requires at rest protection.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-041600 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000405-GPOS-00184">SRG-OS-000405-GPOS-00184</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002476,CCI-002475,CCI-001199&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269429
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       AlmaLinux OS 9 systems handling data requiring "data at rest" protections must employ cryptographic mechanisms to prevent unauthorized disclosure and modification of the information at rest.<br /><br />Selection of a cryptographic mechanism is based on the need to protect the integrity of organizational information. The strength of the mechanism is commensurate with the security category and/or classification of the information. Organizations have the flexibility to either encrypt all information on storage devices (i.e., full disk encryption) or encrypt specific data structures (e.g., files, records, or fields).<br /><br />Satisfies: SRG-OS-000405-GPOS-00184, SRG-OS-000404-GPOS-00183, SRG-OS-000185-GPOS-00079
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: If there is a documented and approved reason for not having data-at-rest encryption at the operating system level, such as encryption provided by a hypervisor or a disk storage array in a virtualized environment, this requirement is Not Applicable.<br /><br />Verify AlmaLinux OS 9 prevents unauthorized disclosure or modification of all information requiring at-rest protection by using disk encryption. <br /><br />Verify all system partitions are encrypted with the following command:<br /><br />$ lsblk -e11 -oNAME,FSTYPE,FSVER,MOUNTPOINTS<br /><br />NAME                                            FSTYPE      FSVER    MOUNTPOINTS<br />sda                                                                  <br />+-sda1                                          vfat        FAT16    /boot/efi<br />+-sda2                                          xfs                  /boot<br />+-sda3                                          LVM2_member LVM2 001 <br />  +-rootvg-root                                 crypto_LUKS 2        <br />  ¦ +-luks-8a7154ec-8eeb-46c8-9d75-66fc4b81d665 xfs                  /<br />  +-rootvg-swap                                 crypto_LUKS 2        <br />  ¦ +-luks-89bf0df8-547f-4613-af07-215e5f63e9a9 swap        1        [SWAP]<br />  +-rootvg-home                                 crypto_LUKS 2        <br />  ¦ +-luks-10a20c46-483d-4d12-831f-5328eda28fd1 xfs                  /home<br />  +-rootvg-varlogaudit                          crypto_LUKS 2        <br />  ¦ +-luks-29b74747-2f82-4472-82f5-0b5eb764effc xfs                  /var/log/audit<br />  +-rootvg-varlog                               crypto_LUKS 2        <br />  ¦ +-luks-e0d162f5-fad8-463e-8e39-6bd09e682961 xfs                  /var/log<br />  +-rootvg-vartmp                               crypto_LUKS 2        <br />  ¦ +-luks-0e7206e7-bfb1-4a23-ae14-b9cea7cf46d5 xfs                  /var/tmp<br />  +-rootvg-var                                  crypto_LUKS 2        <br />    +-luks-b23d8276-7844-4e79-8a58-505150b4eb42 xfs                  /var<br /><br />Every persistent disk partition present must be of type "crypto_LUKS". If any partitions other than the /boot partitions are not type "crypto_LUKS", ask the administrator to indicate how the partitions are encrypted. If there is no evidence that these partitions are encrypted, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to prevent unauthorized modification of all information at rest by using disk encryption.<br /><br />Encrypting a partition in an already installed system is more difficult, because existing partitions will need to be resized and changed.<br /><br />To encrypt an entire partition, dedicate a partition for encryption in the partition layout.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

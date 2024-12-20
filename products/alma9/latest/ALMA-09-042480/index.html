@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-042480 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must be configured to use TCP syncookies.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-042480 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000420-GPOS-00186">SRG-OS-000420-GPOS-00186</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002385,CCI-001095&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269435
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Denial of Service (DoS) is a condition when a resource is not available for legitimate users. When this occurs, the organization either cannot accomplish its mission or must operate at degraded capacity.<br /><br />This requirement addresses the configuration of the operating system to mitigate the impact of DoS attacks that have occurred or are ongoing on system availability. For each system, known and potential DoS attacks must be identified and solutions for each type implemented. A variety of technologies exist to limit or, in some cases, eliminate the effects of DoS attacks (e.g., limiting processes or establishing memory partitions). Employing increased capacity and bandwidth, combined with service redundancy, may reduce the susceptibility to some DoS attacks.<br /><br />Satisfies: SRG-OS-000420-GPOS-00186, SRG-OS-000142-GPOS-00071
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify AlmaLinux OS 9 is configured to use IPv4 TCP syncookies with the following command:<br /><br />$ sysctl net.ipv4.tcp_syncookies<br /><br />net.ipv4.tcp_syncookies = 1<br /><br />Check that the configuration files are present to enable this kernel parameter.<br /><br />$ /usr/lib/systemd/systemd-sysctl --cat-config | egrep -v '^(#|;)' | grep -F net.ipv4.tcp_syncookies | tail -1<br /><br />net.ipv4.tcp_syncookies = 1<br /><br />If the network parameter "ipv4.tcp_syncookies" is not equal to "1" or nothing is returned, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to use TCP syncookies using the following command:<br /><br />$ echo 'net.ipv4.tcp_syncookies = 1' > /etc/sysctl.d/60-syncookies.conf <br /><br />Load settings from all system configuration files with the following command:<br /><br />$ sysctl --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

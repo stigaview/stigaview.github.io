@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-022020 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must be configured so that all system device files are correctly labeled to prevent unauthorized modification.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-022020 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269275
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If an unauthorized or modified device is allowed to exist on the system, there is the possibility the system may perform unintended or unauthorized operations.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that all system device files are correctly labeled to prevent unauthorized modification.<br /><br />List all device files on the system that are incorrectly labeled with the following commands:<br /><br />Note: Device files are normally found under "/dev", but applications may place device files in other directories and may necessitate a search of the entire system.<br /><br /># find /dev -context *:device_t:* \( -type c -o -type b \) -printf "%p %Z\n"<br /><br /># find /dev -context *:unlabeled_t:* \( -type c -o -type b \) -printf "%p %Z\n"<br /><br />Note: There are device files, such as "/dev/vmci", that are used when the operating system is a host virtual machine. They will not be owned by a user on the system and require the "device_t" label to operate. These device files are not a finding.<br /><br />If there is output from either of these commands, other than already noted, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Restore the SELinux policy for the affected device file from the system policy database using the following command:<br /><br />$ restorecon -v <device_path><br /><br />Substituting "<device_path>" with the path to the affected device file (from the output of the previous commands). An example device file path would be "/dev/ttyUSB0". If the output of the above command does not indicate that the device was relabeled to a more specific SELinux type label, then the SELinux policy of the system must be updated with more specific policy for the device class specified. If a package was used to install support for a device class, that package could be reinstalled using the following command:<br /><br />$ dnf reinstall <package_name><br /><br />If a package was not used to install the SELinux policy for a given device class, then it must be generated manually and provide specific type labels.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

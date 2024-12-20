@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-045340 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must have the Advanced Intrusion Detection Environment (AIDE) package installed.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-045340 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000445-GPOS-00199">SRG-OS-000445-GPOS-00199</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002696,CCI-002699,CCI-001744&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269456
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Without verification of the security functions, security functions may not operate correctly and the failure may go unnoticed. Security function is defined as the hardware, software, and/or firmware of the information system responsible for enforcing the system security policy and supporting the isolation of code and data on which the protection is based. Security functionality includes, but is not limited to, establishing system accounts, configuring access authorizations (i.e., permissions, privileges), setting events to be audited, and setting intrusion detection parameters.<br /><br />This requirement applies to operating systems performing security function verification/testing and/or systems and environments that require this functionality.<br /><br />Satisfies: SRG-OS-000445-GPOS-00199, SRG-OS-000446-GPOS-00200, SRG-OS-000363-GPOS-00150
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that AlmaLinux OS 9 has the AIDE package installed with the following command:<br /><br />$ dnf list --installed aide<br /><br />aide.x86_64     0.16-100.el9     @AppStream<br /><br />If AIDE is not installed, ask the system administrator (SA) how file integrity checks are performed on the system. <br /><br />If there is no application installed to perform integrity checks, this is a finding.<br /><br />If AIDE is installed, check if it has been initialized with the following command:<br /><br />$ /usr/sbin/aide --check<br /><br />If the output is "Couldn't open file /var/lib/aide/aide.db.gz for reading", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install AIDE, initialize it, and perform a manual check.<br /><br />Install AIDE:<br /><br />$ dnf install aide<br /><br />Initialize AIDE:<br /><br />$ /usr/sbin/aide --init<br /><br />Example output:<br /><br />Start timestamp: 2024-01-26 09:59:41 +0000 (AIDE 0.16)<br />AIDE initialized database at /var/lib/aide/aide.db.new.gz<br /><br />Number of entries: 27922<br /><br />---------------------------------------------------<br />The attributes of the (uncompressed) database(s):<br />---------------------------------------------------<br /><br />/var/lib/aide/aide.db.new.gz<br />  MD5      : p2o2MgLyXqLfsHGmHWR9nQ==<br />  SHA1     : C5R2JcZCSv3KRz0dMrcQ0JZdZV4=<br />  SHA256   : tUAG19G4gskBEfN+Z9pyVJi13rHA9f7P<br />             d9R5OivGk40=<br />  SHA512   : u26Um0w9hzsMmwZHNssCsmuxVqr9kBx+<br />             Qx+9UBNQCBXlmWFCbq2Yx88BPCU5s/qy<br />             njPIODmPRg4I09jxs5KYjw==<br /><br /><br />End timestamp: 2024-01-26 09:59:49 +0000 (run time: 0m 8s)<br /><br />The new database will need to be renamed to be read by AIDE:<br /><br />$ mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz<br /><br />Perform a manual check:<br /><br />$ /usr/sbin/aide --check<br /><br />Example output:<br /><br />Start timestamp: 2024-01-26 10:00:50 +0000 (AIDE 0.16)<br />AIDE found NO differences between database and filesystem. Looks okay!!
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-035660 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must disable account identifiers (individuals, groups, roles, and devices) after 35 days of inactivity.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-035660 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000118-GPOS-00060">SRG-OS-000118-GPOS-00060</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000795&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269384
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Inactive identifiers pose a risk to systems and applications because attackers may exploit an inactive identifier and potentially obtain undetected access to the system.<br /><br />Automatically disabling inactive accounts ensures that accounts which may not have been responsibly removed are not available to threat actors who may have compromised their credentials.<br /><br />Owners of inactive accounts will not notice if unauthorized access to their user account has been obtained.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that AlmaLinux OS 9 account identifiers (individuals, groups, roles, and devices) are disabled after 35 days of inactivity with the following command:<br /><br />$ useradd -D | grep INACTIVE<br /><br />INACTIVE=35<br /><br />If the value of "INACTIVE" is set to "-1", a value greater than "35", or is missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to disable account identifiers after 35 days of inactivity after the password expiration. <br /><br />Run the following command to change the configuration for useradd:<br /><br />$ useradd -D -f 35<br /><br />The recommendation is 35 days, but a lower value is acceptable.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

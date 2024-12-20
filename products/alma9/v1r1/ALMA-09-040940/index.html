@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-040940 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must restrict usage of ptrace to descendant processes.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-040940 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000132-GPOS-00067">SRG-OS-000132-GPOS-00067</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001082&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269424
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Unrestricted usage of ptrace allows compromised binaries to run ptrace on other processes of the user. Like this, the attacker can steal sensitive information from the target processes (e.g. SSH sessions, web browser etc.) without any additional assistance from the user (i.e. without resorting to phishing).
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify AlmaLinux OS 9 restricts usage of ptrace to descendant processes (1), admins only (2), or disables ptrace entirely (3) with the following command:<br /><br />$ sysctl kernel.yama.ptrace_scope<br /><br />kernel.yama.ptrace_scope = 1<br /><br />If the returned line has a value of "0" or a line is not returned, this is a finding.<br /><br />Check that the configuration files are present to enable this kernel parameter.<br /><br />$ /usr/lib/systemd/systemd-sysctl --cat-config | egrep -v '^(#|;)' | grep -F kernel.yama.ptrace_scope | tail -1<br /><br />kernel.yama.ptrace_scope = 1<br /><br />If "kernel.yama.ptrace_scope" is equal to "0" or nothing is returned, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to restrict usage of ptrace to with the following command:<br /><br />$ echo "kernel.yama.ptrace_scope = 1" > /etc/sysctl.d/60-ptrace.conf<br /><br />Load settings from all system configuration files with the following command:<br /><br />$ sysctl --system
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

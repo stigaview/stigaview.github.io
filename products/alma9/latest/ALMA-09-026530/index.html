@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-026530 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must mount /dev/shm with the nodev option.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-026530 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000368-GPOS-00154">SRG-OS-000368-GPOS-00154</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001764&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269314
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The "nodev" mount option causes the system to not interpret character or block special devices. Executing character or block special devices from untrusted file systems increases the opportunity for nonprivileged users to attain unauthorized administrative access.<br /><br />The only legitimate location for device files is the "/dev" directory located on the root partition, with the exception of chroot jails if implemented.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify "/dev/shm" is mounted with the "nodev" option with the following command:<br /><br />$ mount | grep /dev/shm<br /><br />tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,seclabel,size=2097152k,inode64)<br /><br />If the /dev/shm file system is mounted without the "nodev" option, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Modify "/etc/fstab" to use the "nodev" option on the "/dev/shm" file system.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

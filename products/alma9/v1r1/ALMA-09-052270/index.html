@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-052270 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must label all offloaded audit logs before sending them to the central log server.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-052270 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000479-GPOS-00224">SRG-OS-000479-GPOS-00224</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001851&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269510
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       When audit logs are not labelled before they are sent to a central log server, the audit data will not be able to be analyzed and tied back to the correct system.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that AlmaLinux OS 9 Audit Daemon is configured to label all offloaded audit logs, with the following command:<br /><br />$ grep name_format /etc/audit/auditd.conf<br /><br />name_format = HOSTNAME<br /><br />If the "name_format" option is not "HOSTNAME", "fqd", or "numeric", or the line is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Edit the /etc/audit/auditd.conf file and add or update the "name_format" option:<br /><br />name_format = HOSTNAME<br /><br />The audit daemon must be restarted for changes to take effect.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

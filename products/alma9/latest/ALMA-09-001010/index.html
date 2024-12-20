@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-001010 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must limit the number of concurrent sessions to ten for all accounts and/or account types.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-001010 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000027-GPOS-00008">SRG-OS-000027-GPOS-00008</a>&nbsp;|&nbsp;
+  <b>Severity: </b>low&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000054&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269102
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Operating system management includes the ability to control the number of users and user sessions that use an operating system. Limiting the number of allowed users and sessions per user is helpful in reducing the risks related to denial-of-service (DoS) attacks.<br /><br />This requirement addresses concurrent sessions for information system accounts and does not address concurrent sessions by single users via multiple system accounts. The maximum number of concurrent sessions should be defined based upon mission needs and the operational environment for each system.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify AlmaLinux OS 9 limits the number of concurrent sessions to "10" for all accounts and/or account types with the following command:<br /><br />$ grep -rs maxlogins /etc/security/limits.conf /etc/security/limits.d/*.conf<br /><br />/etc/security/limits.d/maxlogins.conf:* hard maxlogins 10<br /><br />This can be set as a global domain (with the * wildcard) but may be set differently for multiple domains.<br /><br />If the "maxlogins" item is missing, commented out, or the value is set greater than 10, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to limit the number of concurrent sessions to "10" for all accounts and/or account types.<br /><br />Add the following line to the top of the /etc/security/limits.conf or in a ".conf" file defined in /etc/security/limits.d/:<br /><br />* hard maxlogins 10
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

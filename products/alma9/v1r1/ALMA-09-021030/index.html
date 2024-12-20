@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-021030 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 SSH public host key files must have mode 0644 or less permissive.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-021030 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269266
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If a public host key file is modified by an unauthorized user, the SSH service may be compromised.<br /><br />Whilst public keys are publicly readable, they should not be writeable by nonowners.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the SSH public host key files have a mode of "0644" or less permissive with the following command:<br /><br />Note: SSH public key files may be found in other directories on the system depending on the installation.<br /><br />$ stat -c "%#a %n" /etc/ssh/ssh_host*key.pub<br /><br />0644 /etc/ssh/ssh_host_ecdsa_key.pub<br />0644 /etc/ssh/ssh_host_rsa_key.pub<br /><br />If any public key has a mode more permissive than "0644", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Change the mode of public host key files under "/etc/ssh" to "0644" with the following command:<br /><br />$ chmod 0644 /etc/ssh/*key.pub<br /><br />Restart the SSH daemon for the changes to take effect:<br /><br />$ systemctl restart sshd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

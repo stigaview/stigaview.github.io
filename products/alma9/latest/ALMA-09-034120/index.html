@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-034120 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 SSHD must not allow blank passwords.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-034120 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000106-GPOS-00053">SRG-OS-000106-GPOS-00053</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000766&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269374
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If an account has an empty password, anyone could log on and run commands with the privileges of that account. <br /><br />Accounts with empty passwords should never be used in operational environments.<br /><br />Satisfies: SRG-OS-000106-GPOS-00053, SRG-OS-000108-GPOS-00055
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify AlmaLinux OS 9 remote access using SSH prevents logging on with a blank password with the following command:<br /> <br />$ sshd -T | grep -i permitemptypasswords<br /><br />permitemptypasswords no<br /><br />If "PermitEmptyPasswords" is set to "yes", or the line is missing, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the SSH daemon to prevent users logging in with blank passwords.<br /><br />Add the following line to "/etc/ssh/sshd_config", or uncomment the line and set the value to "yes":<br /><br />PermitEmptyPasswords no<br /><br />Alternatively, add the setting to an include file if the line "Include /etc/ssh/sshd_config.d/*.conf" is found at the top of the "/etc/ssh/sshd_config" file:<br /><br />$ cat << EOF | tee /etc/ssh/sshd_config.d/emptypasswords.conf<br />PermitEmptyPasswords no<br />EOF<br /><br />Restart the SSH daemon for the settings to take effect:<br /><br />$ systemctl restart sshd.service
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

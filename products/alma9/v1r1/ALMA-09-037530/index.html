@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-037530 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must be configured so that the Pluggable Authentication Module is configured to store only encrypted representations of passwords.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-037530 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000073-GPOS-00041">SRG-OS-000073-GPOS-00041</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-004062&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269401
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Passwords must be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.<br /><br />The system must use a strong hashing algorithm to store the password.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that the pam_unix.so module is configured to use sha512 in /etc/pam.d/password-auth with the following command:<br /><br />$ grep -E "password.*pam_unix.so.*sha512" /etc/pam.d/password-auth<br /><br />password    sufficient      pam_unix.so sha512 shadow rounds=100000  use_authtok<br /><br />If "sha512" is missing, or the line is commented out, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 to use the SHA-512 algorithm for password hashing.<br /><br />Edit/modify the following line in the "/etc/pam.d/password-auth" file to include the sha512 option for pam_unix.so:<br /><br />password    sufficient      pam_unix.so sha512 shadow rounds=100000  use_authtok
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-009700 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must ensure cryptographic verification of vendor software packages.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-009700 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000366-GPOS-00153">SRG-OS-000366-GPOS-00153</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-003992&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269164
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Changes to any software components can have significant effects on the overall security of the operating system. This requirement ensures the software has not been tampered with and that it has been provided by a trusted vendor.<br /><br />Accordingly, patches, service packs, device drivers, or operating system components must be signed with a certificate recognized and approved by the organization.<br /><br />Verifying the authenticity of the software prior to installation validates the integrity of the patch or upgrade received from a vendor. This ensures the software has not been tampered with and that it has been provided by a trusted vendor. Self-signed certificates are not allowed by this requirement. The operating system should not have to verify the software again. This requirement does not mandate DOD certificates for this purpose; however, the certificate used to verify the software must be from an approved certificate authority (CA).
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Confirm AlmaLinux and TuxCare package-signing keys are installed on the system and verify their fingerprints match vendor values.<br /><br />The keys are stored as "RPM-GPG-KEY-AlmaLinux-9" and "RPM-GPG-KEY-TuxCare" inside the "/etc/pki/rpm-gpg/" directory.<br /><br />List GPG keys installed on the system using the following command:<br /><br />$ rpm -q --queryformat "%{SUMMARY}\n" gpg-pubkey<br /><br />TuxCare (Software Signing Key) <packager@tuxcare.com> public key<br />AlmaLinux OS 9 <packager@almalinux.org> public key<br /><br />If the AlmaLinux and TuxCare GPG keys are not installed, this is a finding.<br /><br />List key fingerprints of installed GPG keys using the following commands:<br /><br />$ gpg -q --keyid-format short --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux-9 <br /><br />pub   rsa4096/B86B3716 2022-01-18 [SC]<br />      Key fingerprint = BF18 AC28 7617 8908 D6E7  1267 D36C B86C B86B 3716<br />uid                   AlmaLinux OS 9 <packager@almalinux.org><br />sub   rsa4096/C9BA6CAA 2022-01-18 [E]<br /><br />$ gpg -q --keyid-format short --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-TuxCare<br /><br />pub   rsa4096/8D50EB66 2023-03-06 [SC]<br />      Key fingerprint = FAD7 8590 81D0 738B 7A82  8496 D07B F2A0 8D50 EB66<br />uid                   TuxCare (Software Signing Key) <packager@tuxcare.com><br />sub   rsa4096/A9C70659 2023-03-06 [E]<br /><br />If either "/etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux-9" or "/etc/pki/rpm-gpg/RPM-GPG-KEY-TuxCare" key files are missing, this is a finding.<br /><br />Compare key fingerprints of installed AlmaLinux and TuxCare GPG keys with fingerprints listed at <br /><br />https://almalinux.org/security/<br /><br />https://docs.tuxcare.com/enterprise-support-for-almalinux/#gnupg-keys<br /><br />If the key fingerprints do not match, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Install AlmaLinux and TuxCare package-signing keys on the system and verify their fingerprints match vendor values.<br /><br />$ curl https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-9 -o /etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux-9<br /><br />$ curl https://repo.tuxcare.com/tuxcare/RPM-GPG-KEY-TuxCare -o /etc/pki/rpm-gpg/RPM-GPG-KEY-TuxCare<br /><br />$ rpm --import https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-9<br /><br />$ rpm --import https://repo.tuxcare.com/tuxcare/RPM-GPG-KEY-TuxCare<br /><br />Using the steps listed in the Check, confirm the newly imported keys show as installed on the system and verify their fingerprints match vendor values.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-018830 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 firewall must employ a deny-all, allow-by-exception policy for allowing connections to other systems.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-018830 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269246
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Failure to restrict network connectivity only to authorized systems permits inbound connections from malicious systems. It also permits outbound connections that may facilitate exfiltration of DOD data.<br /><br />AlmaLinux OS 9 incorporates the "firewalld" daemon, which allows for many different configurations. One of these configurations is zones. Zones can be used to a deny-all, allow-by-exception approach. The default "drop" zone will drop all incoming network packets unless it is explicitly allowed by the configuration file or is related to an outgoing network connection.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the AlmaLinux OS 9 "firewalld" is configured to employ a deny-all, allow-by-exception policy for allowing connections to other systems.<br /><br />First ensure firewalld is running:<br /><br />$  firewall-cmd --state<br /><br />running<br /><br />Next, get the active zones:<br /><br />$ firewall-cmd --get-active-zones<br /><br />public<br />  interfaces: enp1s0<br /><br />Check the target of the zones returned from the previous command:<br /><br />$ firewall-cmd --info-zone=public | grep target<br /><br />   target: DROP<br /><br />Check the runtime and permanent rules match:<br /><br />$ firewall-cmd --permanent --info-zone=public | grep target<br /><br />   target: DROP<br /><br />If no zones are active on the AlmaLinux OS 9 interfaces or if runtime and permanent targets are set to a different option other than "DROP", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the "firewalld" daemon to employ a deny-all, allow-by-exception.<br /><br />Start by adding the exceptions that are required for mission functionality to the "drop" zone. If SSH access on port 22 is needed for example, run the following command:<br /><br />$ firewall-cmd --permanent --add-service=ssh --zone=drop<br /><br />Set the default zone to the "drop" zone:<br /><br />$ firewall-cmd --set-default-zone=drop<br /><br />Note: This is a runtime and a permanent change.<br /><br />Add any interfaces to the newly modified "drop" zone:<br /><br />$ firewall-cmd --permanent --zone=drop --change-interface=enp1s0<br /><br />Reload the firewall rules for changes to take effect:<br /><br />$ firewall-cmd --reload<br /><br />Check zones and interfaces:<br /><br />$ firewall-cmd --get-active-zones<br /><br />drop<br />  interfaces: enp1s0<br /><br />Check new default zone's target is set to "DROP":<br /><br />$ firewall-cmd --permanent --info-zone=drop | grep target<br /><br />  target: DROP<br /><br />The same outcome is achieved by creating a new zone, for example:<br /><br />$ firewall-cmd --permanent --new-zone=stig<br />$ firewall-cmd --reload<br />$ firewall-cmd --permanent --change-interface=enp1s0 --zone=stig <br />$ firewall-cmd --permanent --add-service=ssh --zone=stig<br />$ firewall-cmd --permanent --set-target=DROP --zone=stig<br />$ firewall-cmd --set-default-zone=stig
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

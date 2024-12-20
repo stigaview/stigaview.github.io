@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-024990 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 system accounts must not have an interactive login shell.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-024990 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269300
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Ensuring shells are not given to system accounts upon login makes it more difficult for attackers to make use of system accounts.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that system accounts must not have an interactive login shell with the following command:<br /><br />$ awk -F: '($3<1000){print $1 ":" $3 ":" $7}' /etc/passwd<br /><br />root:0:/bin/bash<br />bin:1:/sbin/nologin<br />daemon:2:/sbin/nologin<br />adm:3:/sbin/nologin<br />lp:4:/sbin/nologin<br />sync:5:/bin/sync<br />shutdown:6:/sbin/shutdown<br />halt:7:/sbin/halt<br />mail:8:/sbin/nologin<br />operator:11:/sbin/nologin<br />games:12:/sbin/nologin<br />ftp:14:/sbin/nologin<br />systemd-coredump:999:/sbin/nologin<br />dbus:81:/sbin/nologin<br />polkitd:998:/sbin/nologin<br />tss:59:/sbin/nologin<br />sssd:997:/sbin/nologin<br />unbound:996:/sbin/nologin<br />fapolicyd:995:/sbin/nologin<br />postfix:89:/sbin/nologin<br />sshd:74:/sbin/nologin<br />chrony:994:/sbin/nologin<br />systemd-oom:989:/usr/sbin/nologin<br /><br />Identify the system accounts from this listing that do not have a nologin shell.<br /><br />If any system account (other than the root account) has a login shell and it is not documented with the information system security officer (ISSO), this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure AlmaLinux OS 9 so that all noninteractive accounts on the system do not have an interactive shell assigned to them.<br /><br />If the system account needs a shell assigned for mission operations, document the need with the ISSO.<br /><br />Run the following command to disable the interactive shell for a specific noninteractive user account, replacing <user> with the user that has a login shell.<br /><br />$ usermod --shell /sbin/nologin <user><br /><br />Do not perform the steps in this section on the root account. Doing so will cause the system to become inaccessible.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

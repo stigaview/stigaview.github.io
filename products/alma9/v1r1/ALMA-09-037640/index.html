@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-037640 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>AlmaLinux OS 9 must be configured so that interactive user account passwords are using strong password hashes.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-037640 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000073-GPOS-00041">SRG-OS-000073-GPOS-00041</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-004062&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269402
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Passwords must be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.<br /><br />The system must use a strong hashing algorithm to store the password.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify that the interactive user account passwords are using a strong password hash with the following command:<br /><br />$ cut -d: -f1,2 /etc/shadow<br /><br />root:$6$88upzIIyml/6UEya$QMLbF.L6gMNnIhzcxRorHgubK6jl3CHZ.MZrMkrEApOlt/MP.N.BFea.ykhPnIS.EYICo6To42koq0DCH8AjB/<br />bin:*<br />daemon:*<br /><br />Password hashes "!" or "*" indicate inactive accounts not available for logon and are not evaluated.<br /><br />If any interactive user password hash does not begin with "$6", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Lock all interactive user accounts not using SHA-512 hashing until the passwords can be regenerated with SHA-512.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

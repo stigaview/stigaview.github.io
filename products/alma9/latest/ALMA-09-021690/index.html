@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-021690 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>If the Trivial File Transfer Protocol (TFTP) server is required, the TFTP daemon must be configured to operate in secure mode.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-021690 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000480-GPOS-00227">SRG-OS-000480-GPOS-00227</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000366&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269272
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Restricting TFTP to a specific directory prevents remote users from copying, transferring, or overwriting system files. Using the "-s" option causes the TFTP service to only serve files from the given directory.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Note: If a TFTP server is not installed, this requirement is Not Applicable.<br /><br />Verify the TFTP daemon is configured to operate in secure mode.<br /><br />Check if a TFTP server is installed with the following command:<br /><br />$ dnf list --installed tftp-server<br /><br />Installed Packages<br />tftp-server.x86_64        5.2-37.el9             @appstream<br /><br />If a TFTP server is installed, check for the server arguments with the following command: <br /><br />$ systemctl cat tftp | grep ExecStart=<br /><br />ExecStart=/usr/sbin/in.tftpd -s /var/lib/tftpboot<br /><br />If the "ExecStart" line does not have a "-s" option, and a subdirectory is not assigned, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the TFTP daemon to operate in secure mode with the following command:<br /><br />$ systemctl edit tftp.service<br /><br />Insert the following between the two sets of comments, making sure to add the "-s" option with a nonroot ("/") directory.<br /><br />[Service]<br />ExecStart=<br />ExecStart=/usr/sbin/in.tftpd -s /tftp
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

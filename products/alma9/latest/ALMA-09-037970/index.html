@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>ALMA-09-037970 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 239f033"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Passwords for existing users must have a 60-day maximum password lifetime restriction in /etc/shadow.</h2>
+  <p>
+  <b>STIG ID:</b> ALMA-09-037970 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000076-GPOS-00044">SRG-OS-000076-GPOS-00044</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000199&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-269405
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Any password, no matter how complex, can eventually be cracked. Therefore, Passwords must be changed periodically. If the operating system does not limit the lifetime of passwords and force users to change their passwords, there is the risk that the operating system passwords could be compromised.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Check whether the maximum time period for existing passwords is restricted to 60 days with the following command:<br /><br />$ awk -F: '$5 <= 0 || $5 > 60 {print $1 " " $5}' /etc/shadow<br /><br />If any results are returned that are not associated with a system account, this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure noncompliant accounts to enforce a 60-day maximum password lifetime restriction using the following command, substituting in the username:<br /><br />$ chage -M 60 [user]
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>
