@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-15-002069 - V1R2 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 38fcdaf"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must require an administrator password to modify systemwide preferences.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-15-002069 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000324-GPOS-00125">SRG-OS-000324-GPOS-00125</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-002235&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268514
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The system must be configured to require an administrator password to modify the systemwide preferences in System Settings.<br /><br />Some Preference Panes in System Settings contain settings that affect the entire system. Requiring a password to unlock these systemwide settings reduces the risk of an unauthorized user modifying system configurations.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to require administrator privileges to modify systemwide settings with the following command:<br /><br />authDBs=("system.preferences" "system.preferences.energysaver" "system.preferences.network" "system.preferences.printing" "system.preferences.sharing" "system.preferences.softwareupdate" "system.preferences.startupdisk" "system.preferences.timemachine")<br />result="1"<br />for section in ${authDBs[@]}; do<br />  if [[ $(/usr/bin/security -q authorizationdb read "$section" | /usr/bin/xmllint -xpath 'name(//*[contains(text(), "shared")]/following-sibling::*[1])' -) != "false" ]]; then<br />    result="0"<br />  fi<br />  if [[ $(security -q authorizationdb read "$section" | /usr/bin/xmllint -xpath '//*[contains(text(), "group")]/following-sibling::*[1]/text()' - ) != "admin" ]]; then<br />    result="0"<br />  fi<br />  if [[ $(/usr/bin/security -q authorizationdb read "$section" | /usr/bin/xmllint -xpath 'name(//*[contains(text(), "authenticate-user")]/following-sibling::*[1])' -) != "true" ]]; then<br />    result="0"<br />  fi<br />  if [[ $(/usr/bin/security -q authorizationdb read "$section" | /usr/bin/xmllint -xpath 'name(//*[contains(text(), "session-owner")]/following-sibling::*[1])' -) != "false" ]]; then<br />    result="0"<br />  fi<br />done<br />echo $result<br /><br />If the result is not "1", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to require administrator privileges to modify systemwide settings with the following command:<br /><br />authDBs=("system.preferences" "system.preferences.energysaver" "system.preferences.network" "system.preferences.printing" "system.preferences.sharing" "system.preferences.softwareupdate" "system.preferences.startupdisk" "system.preferences.timemachine")<br /><br />for section in ${authDBs[@]}; do<br />  /usr/bin/security -q authorizationdb read "$section" > "/tmp/$section.plist"<br /><br />  class_key_value=$(usr/libexec/PlistBuddy -c "Print :class" "/tmp/$section.plist" 2>&1)<br />  if [[ "$class_key_value" == *"Does Not Exist"* ]]; then<br />    /usr/libexec/PlistBuddy -c "Add :class string user" "/tmp/$section.plist"<br />  else<br />    /usr/libexec/PlistBuddy -c "Set :class user" "/tmp/$section.plist"<br />  fi<br /><br />  key_value=$(/usr/libexec/PlistBuddy -c "Print :shared" "/tmp/$section.plist" 2>&1)  <br />  if [[ "$key_value" == *"Does Not Exist"* ]]; then<br />    /usr/libexec/PlistBuddy -c "Add :shared bool false" "/tmp/$section.plist"<br />  else<br />    /usr/libexec/PlistBuddy -c "Set :shared false" "/tmp/$section.plist"<br />  fi<br /><br />  auth_user_key=$(/usr/libexec/PlistBuddy -c "Print :authenticate-user" "/tmp/$section.plist" 2>&1)  <br />  if [[ "$auth_user_key" == *"Does Not Exist"* ]]; then<br />    /usr/libexec/PlistBuddy -c "Add :authenticate-user bool true" "/tmp/$section.plist"<br />  else<br />    /usr/libexec/PlistBuddy -c "Set :authenticate-user true" "/tmp/$section.plist"<br />  fi<br /><br />  session_owner_key=$(/usr/libexec/PlistBuddy -c "Print :session-owner" "/tmp/$section.plist" 2>&1)  <br />  if [[ "$session_owner_key" == *"Does Not Exist"* ]]; then<br />    /usr/libexec/PlistBuddy -c "Add :session-owner bool false" "/tmp/$section.plist"<br />  else<br />    /usr/libexec/PlistBuddy -c "Set :session-owner false" "/tmp/$section.plist"<br />  fi<br /><br />  group_key=$(usr/libexec/PlistBuddy -c "Print :group" "/tmp/$section.plist" 2>&1)<br />  if [[ "$group_key" == *"Does Not Exist"* ]]; then<br />    /usr/libexec/PlistBuddy -c "Add :group string admin" "/tmp/$section.plist"<br />  else<br />    /usr/libexec/PlistBuddy -c "Set :group admin" "/tmp/$section.plist"<br />  fi<br /><br />  /usr/bin/security -q authorizationdb write "$section" < "/tmp/$section.plist"<br />done
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

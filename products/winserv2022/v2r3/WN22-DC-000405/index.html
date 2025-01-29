@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>WN22-DC-000405 - V2R3 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 38fcdaf"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>Windows Server 2022 must be configured for certificate-based authentication for domain controllers.</h2>
+  <p>
+  <b>STIG ID:</b> WN22-DC-000405 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000080-GPOS-00048">SRG-OS-000080-GPOS-00048</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000213&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-271426
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Active Directory domain services elevation of privilege vulnerability could allow a user rights to the system, such as administrative and other high-level capabilities.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       This applies to domain controllers. This is not applicable for member servers.<br /><br />If the following registry value does not exist or is not configured as specified, this is a finding:<br />Registry Hive: HKEY_LOCAL_MACHINE<br />Registry Path: SYSTEM\CurrentControlSet\Services\Kdc<br /> <br />Value Name: StrongCertificateBindingEnforcement<br /> <br />Value Type: REG_DWORD<br />Value: 0x00000001 (1) or 0x00000002 (2)
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the registry value.<br />Registry Hive: HKEY_LOCAL_MACHINE<br />Registry Path: SYSTEM\CurrentControlSet\Services\Kdc<br /> <br />Value Name: StrongCertificateBindingEnforcement<br /> <br />Value Type: REG_DWORD<br />Value: 0x00000001 (1) or 0x00000002 (2)
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

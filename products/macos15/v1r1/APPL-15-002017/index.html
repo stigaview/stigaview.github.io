@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-15-002017 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 38fcdaf"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must disable the camera.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-15-002017 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000095-GPOS-00049">SRG-OS-000095-GPOS-00049</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000381&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268492
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.<br /><br />Failing to disconnect from collaborative computing devices (i.e., cameras) can result in subsequent compromises of organizational information. Providing easy methods to physically disconnect from such devices after a collaborative computing session helps to ensure that participants carry out the disconnect activity without having to go through complex and tedious procedures.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       If the device or operating system does not have a camera installed, this requirement is not applicable.<br /><br />This requirement is not applicable to mobile devices (smartphones and tablets), where the use of the camera is a local authorizing official (AO) decision.<br /><br />This requirement is not applicable to dedicated video teleconference (VTC) suites in approved VTC locations that are centrally managed.<br /><br />For an external camera, if there is not a method for the operator to manually disconnect camera at the end of collaborative computing sessions, this is a finding.<br /><br />For a built-in camera, the camera must be protected by a camera cover (e.g., laptop camera cover slide) when not in use. <br /><br />If the built-in camera is not protected with a camera cover or is not physically disabled, this is a finding.<br /><br />If the camera is not disconnected, covered, or physically disabled, verify the macOS system is configured to disable the camera with the following command:<br /><br />/usr/bin/osascript -l JavaScript << EOS<br />$.NSUserDefaults.alloc.initWithSuiteName('com.apple.applicationaccess')\<br />.objectForKey('allowCamera').js<br />EOS<br /><br />If the result is not "false", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to disable the camera by installing the "com.apple.applicationaccess" configuration profile.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-15-003007 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 38fcdaf"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must require that passwords contain a minimum of one numeric character.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-15-003007 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000071-GPOS-00039">SRG-OS-000071-GPOS-00039</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-004066&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268535
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The macOS must be configured to require at least one numeric character be used when a password is created.<br /><br />This rule enforces password complexity by requiring users to set passwords that are less vulnerable to malicious users.<br /><br />NOTE: The guidance for password-based authentication in NIST 800-53 (Rev 5) and NIST 800-63B states that complexity rules should be organizationally defined. The values defined are based on common complexity values, but each organization may define its own password complexity rules.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to require that passwords contain a minimum of one numeric character with the following command:<br /><br />/usr/bin/pwpolicy -getaccountpolicies 2> /dev/null | /usr/bin/tail +2 | /usr/bin/xmllint --xpath '//dict/key[text()="policyIdentifier"]/following-sibling::*[1]/text()' - | /usr/bin/grep "requireAlphanumeric" -c<br /><br />If the result is not "1", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to require that passwords contain a minimum of one numeric character by installing the "com.apple.mobiledevice.passwordpolicy" configuration profile.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

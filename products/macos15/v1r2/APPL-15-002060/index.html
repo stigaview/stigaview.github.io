@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-15-002060 - V1R2 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 38fcdaf"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must apply gatekeeper settings to block applications from unidentified developers.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-15-002060 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000366-GPOS-00153">SRG-OS-000366-GPOS-00153</a>&nbsp;|&nbsp;
+  <b>Severity: </b>high&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-003992&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268508
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The information system implements cryptographic mechanisms to authenticate software prior to installation.<br /><br />Gatekeeper settings must be configured correctly to allow the system to run only applications downloaded from the Mac App Store or applications signed with a valid Apple Developer ID code. Administrator users will still have the option to override these settings on a per-app basis. Gatekeeper is a security feature that ensures that applications must be digitally signed by an Apple-issued certificate to run. Digital signatures allow the macOS to verify that the application has not been modified by a malicious third party.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to apply gatekeeper settings to block applications from unidentified developers with the following command:<br /><br />/usr/sbin/spctl --status --verbose | /usr/bin/grep -c "developer id enabled"<br /><br />If the result is not "1", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to apply gatekeeper settings to block applications from unidentified developers with the following command:<br /><br />/usr/sbin/spctl --global-enable; /usr/sbin/spctl --enable
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

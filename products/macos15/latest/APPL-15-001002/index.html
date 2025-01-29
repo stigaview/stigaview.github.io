@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-15-001002 - V1R2 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 38fcdaf"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must be configured to audit all login and logout events.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-15-001002 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000032-GPOS-00013">SRG-OS-000032-GPOS-00013</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000067,CCI-000172,CCI-002884&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268453
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       The audit system must be configured to record all attempts to log in and out of the system (lo).<br /><br />Frequently, an attacker that successfully gains access to a system has only gained access to an account with limited privileges, such as a guest account or service account. The attacker must attempt to change to another user account with normal or elevated privileges to proceed. Auditing both successful and unsuccessful attempts to switch to another user account (by way of monitoring login and logout events) mitigates this risk.<br /><br />The information system monitors login and logout events.<br /><br />Satisfies: SRG-OS-000032-GPOS-00013, SRG-OS-000064-GPOS-00033, SRG-OS-000392-GPOS-00172, SRG-OS-000458-GPOS-00203, SRG-OS-000470-GPOS-00214, SRG-OS-000471-GPOS-00215, SRG-OS-000471-GPOS-00216, SRG-OS-000472-GPOS-00217, SRG-OS-000473-GPOS-00218
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to audit all login and logout events with the following command:<br /><br />/usr/bin/awk -F':' '/^flags/ { print $NF }' /etc/security/audit_control | /usr/bin/tr ',' '\n' | /usr/bin/grep -Ec '^lo'<br /><br />If the result is not "1", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to audit all login and logout events with the following command:<br /><br />/usr/bin/grep -qE "^flags.*[^-]lo" /etc/security/audit_control || /usr/bin/sed -i.bak '/^flags/ s/$/,lo/' /etc/security/audit_control; /usr/sbin/audit -s<br /><br />A text editor may also be used to implement the required updates to the "/etc/security/audit_control" file.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

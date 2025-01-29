@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-15-000110 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 38fcdaf"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must configure the SSH ServerAliveInterval to 900.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-15-000110 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000163-GPOS-00072">SRG-OS-000163-GPOS-00072</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001133&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268444
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       SSH must be configured with an Active Server Alive Maximum Count set to 900.<br /><br />Setting the Active Server Alive Maximum Count to 900 will log users out after a 900-second interval of inactivity.<br /><br />NOTE: /etc/ssh/ssh_config will be automatically modified to its original state following any update or major upgrade to the operating system.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to set the SSH ServerAliveInterval to 900 with the following command:<br /><br />ret="pass"<br />for u in $(/usr/bin/dscl . -list /Users UniqueID | /usr/bin/awk '$2 > 500 {print $1}'); do<br />  sshCheck=$(/usr/bin/sudo -u $u /usr/bin/ssh -G . | /usr/bin/grep -c "^serveraliveinterval 900")<br />  if [[ "$sshCheck" == "0" ]]; then<br />    ret="fail"<br />    break<br />  fi<br />done<br />/bin/echo $ret<br /><br />If the result is not "pass", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to set the SSH ServerAliveInterval to 900 with the following command:<br /><br />include_dir=$(/usr/bin/awk '/^Include/ {print $2}' /etc/ssh/ssh_config | /usr/bin/tr -d '*')<br />  <br />  ssh_config_string=("ServerAliveInterval 900")<br />  for ssh_config in $ssh_config_string; do<br />    ssh_setting=$(echo $ssh_config | /usr/bin/cut -d " " -f1)<br />    /usr/bin/grep -qEi "^$ssh_setting" "${include_dir}01-mscp-ssh.conf" && /usr/bin/sed -i "" "s/^$ssh_setting.*/${ssh_config}/" "${include_dir}01-mscp-ssh.conf" || echo "$ssh_config" >> "${include_dir}01-mscp-ssh.conf"<br />    for u in $(/usr/bin/dscl . list /users shell | /usr/bin/egrep -v '(^_)|(root)|(/usr/bin/false)' | /usr/bin/awk '{print $1}'); do<br />      config=$(/usr/bin/sudo -u $u /usr/bin/ssh -Gv . 2>&1)<br />      configfiles=$(echo "$config" | /usr/bin/awk '/Reading configuration data/ {print $NF}'| /usr/bin/tr -d '\r')<br />      configarray=( ${(f)configfiles} )<br />      if ! echo $config | /usr/bin/grep -q -i "$ssh_config" ; then<br />        for c in $configarray; do<br />          if [[ "$c" == "/etc/ssh/crypto.conf" ]]; then<br />            continue<br />          fi<br />          <br />          /usr/bin/sudo -u $u /usr/bin/grep -qEi "^$ssh_setting" "$c" && /usr/bin/sed -i "" "s/^$ssh_setting.*/${ssh_config}/I" "$c"<br />          if [[ "$c" =~ ".ssh/config" ]]; then<br />            if /usr/bin/grep -qEi "$ssh_setting" "$c" 2> /dev/null; then<br />              old_file=$(cat ~$u/.ssh/config)<br />              echo "$ssh_config" > ~$u/.ssh/config<br />              echo "$old_file" >> ~$u/.ssh/config<br />            fi<br />          fi<br />        done<br />      fi<br />    done<br />  done
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-15-000190 - V1R1 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 38fcdaf"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must configure sudo to log events.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-15-000190 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000064-GPOS-00033">SRG-OS-000064-GPOS-00033</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-000172&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268451
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Sudo must be configured to log privilege escalation.<br /><br />Without logging privilege escalation, it is difficult to identify attempted attacks because no audit trail is available for forensic investigation.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to log privilege escalation with the following command:<br /><br />/usr/bin/sudo /usr/bin/sudo -V | /usr/bin/grep -c "Log when a command is allowed by sudoers"<br /><br />If the result is not "1", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to log privilege escalation with the following command:<br /><br />/usr/bin/find /etc/sudoers* -type f -exec sed -i '' '/Defaults \!log_allowed/d' '{}' \;<br />/bin/echo "Defaults log_allowed" >> /etc/sudoers.d/mscp
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

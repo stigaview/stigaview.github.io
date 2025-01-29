@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-15-002063 - V1R2 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 38fcdaf"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must disable the guest account.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-15-002063 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000364-GPOS-00151">SRG-OS-000364-GPOS-00151</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-001813&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268510
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       Guest access must be disabled.<br /><br />Turning off guest access prevents anonymous users from accessing files.
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to disable the guest account with the following command:<br /><br />/usr/bin/osascript -l JavaScript << EOS<br />function run() {<br />  let pref1 = ObjC.unwrap($.NSUserDefaults.alloc.initWithSuiteName('com.apple.MCX')\<br />.objectForKey('DisableGuestAccount'))<br />  let pref2 = ObjC.unwrap($.NSUserDefaults.alloc.initWithSuiteName('com.apple.MCX')\<br />.objectForKey('EnableGuestAccount'))<br />  if ( pref1 == true && pref2 == false ) {<br />    return("true")<br />  } else {<br />    return("false")<br />  }<br />}<br />EOS<br /><br />If the result is not "true", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to disable the guest account by installing the "com.apple.MCX" configuration profile.
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>

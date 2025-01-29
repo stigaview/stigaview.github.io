@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>APPL-15-001100 - V1R2 - STIG-A-View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Online STIG viewer"/>
+  <meta name="generator" content="STIG-A-View Static - 38fcdaf"/>
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="/favicon.png" rel="shortcut icon" />
+</head>
+<body>
+<nav class="navbar">
+  <a class="navbar-brand" href="/">STIG-A-View</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="nav-link" href="/stigs">STIGs</a></li>
+    <li><a class="nav-link" href="/products">Products</a></li>
+  </ul>
+</nav>
+<div class="container">
+
+  <h2>The macOS system must disable root login for SSH.</h2>
+  <p>
+  <b>STIG ID:</b> APPL-15-001100 &nbsp;|&nbsp;
+  <b>SRG: </b><a href="/srgs/SRG-OS-000109-GPOS-00056">SRG-OS-000109-GPOS-00056</a>&nbsp;|&nbsp;
+  <b>Severity: </b>medium&nbsp;|&nbsp;
+  <b>CCI: </b>CCI-004045,CCI-001813&nbsp;|&nbsp;
+  <b>Vulnerability Id:</b> V-268472
+  </p>
+  <div class="container-fluid">
+   <div class="row">
+     <div class="span1">
+       <h3>Vulnerability Discussion</h3>
+       If SSH is enabled to ensure individual accountability and prevent unauthorized access, logging in as root via SSH must be disabled.<br /><br />The macOS system MUST require individuals to be authenticated with an individual authenticator prior to using a group authenticator, and administrator users must never log in directly as root.<br /><br />NOTE: /etc/ssh/sshd_config will be automatically modified to its original state following any update or major upgrade to the operating system.<br /><br />Satisfies: SRG-OS-000109-GPOS-00056, SRG-OS-000364-GPOS-00151
+     </div>
+     <div class="span1">
+       <h3>Check</h3>
+       Verify the macOS system is configured to disable root login for SSH with the following command:<br /><br />/usr/sbin/sshd -G | /usr/bin/awk '/permitrootlogin/{print $2}'<br /><br />If the result is not "no", this is a finding.
+     </div>
+     <div class="span1">
+       <h3>Fix</h3>
+       Configure the macOS system to disable root login for SSH with the following command:<br /><br />include_dir=$(/usr/bin/awk '/^Include/ {print $2}' /etc/ssh/sshd_config | /usr/bin/tr -d '*')<br /><br />if [[ -z $include_dir ]]; then<br />  /usr/bin/sed -i.bk "1s/.*/Include \/etc\/ssh\/sshd_config.d\/\*/" /etc/ssh/sshd_config<br />fi<br /><br />/usr/bin/grep -qxF 'permitrootlogin no' "${include_dir}01-mscp-sshd.conf" 2>/dev/null || echo "permitrootlogin no" >> "${include_dir}01-mscp-sshd.conf"<br /><br />for file in $(ls ${include_dir}); do<br />  if [[ "$file" == "100-macos.conf" ]]; then<br />      continue<br />  fi<br />  if [[ "$file" == "01-mscp-sshd.conf" ]]; then<br />      break<br />  fi<br />  /bin/mv ${include_dir}${file} ${include_dir}20-${file}<br />done
+     </div>
+   </div>
+  </div>
+
+</div>
+<div class="footer">
+  <hr/>
+  This website is not created by, run, approved, or endorsed by the U.S. Department of Defense.
+  Use at your own risk. This website is created by
+  <a href="https://github.com/Mab879/stigaview-static" target="_blank">open-source</a> software.
+</div>
+</body>
+</html>
